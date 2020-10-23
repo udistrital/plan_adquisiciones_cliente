@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'ngx-general-table',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralTableComponent implements OnInit {
 
-  constructor() { }
+  @Input() config: any;
+  @Output() selectedAction: EventEmitter<any>;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

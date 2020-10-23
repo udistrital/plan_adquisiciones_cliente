@@ -13,12 +13,15 @@ import { GeneralTableComponent } from './components/general-table/general-table.
   exports: [
     CommonModule,
     TranslateModule,
+    GeneralTableComponent,
   ],
   imports: [
     StoreModule.forFeature(fromShared.sharedFeatureKey, fromShared.reducer),
     EffectsModule.forFeature([SharedEffects])
   ],
-  declarations: [GeneralTableComponent],
+  declarations: [
+    GeneralTableComponent,
+  ],
 })
 
 export class SharedModule { }
