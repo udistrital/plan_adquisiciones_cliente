@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -54,7 +54,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private menuService: NbMenuService,
     private themeService: NbThemeService,
     private router: Router,
-    private breakpointService: NbMediaBreakpointsService,
     public translate: TranslateService) {
     this.translate = translate;
     this.itemClick = this.menuService.onItemClick()
@@ -68,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    
+
     this.themeService.onThemeChange()
       .pipe(
         map(({ name }) => name),

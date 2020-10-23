@@ -5,7 +5,7 @@ import { ComponentePruebaComponent } from './componentes/componente-prueba/compo
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: ComponentePruebaComponent,
   }
 ];

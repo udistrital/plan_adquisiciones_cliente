@@ -7,8 +7,8 @@ export class FilterTablePipe implements PipeTransform {
 
   transform(value: any, args: string): any {
 
-    let encontrado: boolean = false
-    let resultado: any[] = [];
+    let encontrado: boolean = false;
+    const resultado: any[] = [];
 
     if (args === '') {
       return value;

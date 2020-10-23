@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { SharedEffects } from './shared.effects';
 
 describe('SharedEffects', () => {
-  let actions$: Observable<any>;
+
+  // let actions$: Observable<any>;
+  const actions$: Observable<any> = new Observable();
   let effects: SharedEffects;
 
   beforeEach(() => {

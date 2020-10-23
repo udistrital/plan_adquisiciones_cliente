@@ -1,6 +1,6 @@
-const configTable: any = {
+export const configTable: any = {
     title: {
-        name:'string',
+        name: 'string',
         class: 'string',
     },
     dataConfig: [
@@ -8,7 +8,7 @@ const configTable: any = {
             key: 'string',
             title: 'string',
             pipe: {
-                functionPipe: () => {},
+                functionPipe: () => { },
                 class: 'string'
             }
         }
@@ -31,10 +31,10 @@ const configTable: any = {
     ],
     sort: 'boolean',
     filter: 'boolean',
-}
+};
 export const CONFIGURACION_PRUEBA: any = {
     title: {
-        name:'Tabla de Prueba',
+        name: 'Tabla de Prueba',
         class: 'text-center',
     },
     dataConfig: [
@@ -58,7 +58,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-uppercase'
             }
         },
-        
+
     ],
     rowActions: [
         {
@@ -78,8 +78,8 @@ export const CONFIGURACION_PRUEBA: any = {
     ],
     sort: 'boolean',
     filter: true,
-}
-export const DATOS_PRUEBA : any = [
+};
+export const DATOS_PRUEBA: any = [
     {
         id: 1,
         nombre: 'Jhoan',
@@ -96,4 +96,4 @@ export const DATOS_PRUEBA : any = [
         id: 4,
         nombre: 'Yara',
     },
-]
+];

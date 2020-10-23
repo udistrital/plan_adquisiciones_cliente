@@ -18,7 +18,7 @@ export class GeneralTableComponent implements OnInit {
     this.selectedAction = new EventEmitter<any>();
     this.config = CONFIGURACION_PRUEBA;
     this.datosPrueba = DATOS_PRUEBA;
-    console.log(this.config, this.datosPrueba)
+    // console.log(this.config, this.datosPrueba)
   }
 
   ngOnInit() {
