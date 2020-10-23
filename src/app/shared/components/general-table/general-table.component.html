@@ -1,14 +1,33 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="config">
   <div class="row m-0 p-0">
     <div class="col m-0 p-0">
+      <div class="form-group" *ngIf="config.filter">
+        <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+          placeholder="Campo de Busqueda" [(ngModel)]="stringBusqueda">
+      </div>
       <div class="table-responsive">
-        
+
         <table class="table table-bordered table-hover">
           <thead class="bg-primary text-white">
-
+            <tr *ngIf="config.title">
+              <th scope="col" colspan="100" [class]="config.title.class">
+                {{config.title.name}}
+              </th>
+            </tr>
+            <tr>
+              <ng-container *ngFor="let element of config.dataConfig">
+                <th scope="col">{{element.title}}</th>
+              </ng-container>
+            </tr>
           </thead>
           <tbody>
-
+            <tr *ngFor="let items of datosPrueba | filterTable:stringBusqueda ">
+              <ng-container *ngFor="let data of config.dataConfig">
+                <td [class]="data.pipe.class">
+                  {{items[data.key]}}
+                </td>
+              </ng-container>
+            </tr>
           </tbody>
         </table>
       </div>
