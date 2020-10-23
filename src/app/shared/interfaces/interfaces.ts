@@ -40,7 +40,23 @@ export const CONFIGURACION_PRUEBA: any = {
     dataConfig: [
         {
             key: 'id',
-            title: 'Consecutivo',
+            title: {
+                name: 'Consecutivo',
+                class: 'text-center',
+            },
+            pipe: {
+                // functionPipe: (data: string) => {
+                //     return data + ' ' + data;
+                // },
+                class: 'text-uppercase'
+            }
+        },
+        {
+            key: 'nombre',
+            title: {
+                name: 'Nombre',
+                class: 'text-center',
+            },
             pipe: {
                 functionPipe: (data: string) => {
                     return data + ' ' + data;
@@ -49,13 +65,30 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'nombre',
-            title: 'Nombre',
+            key: 'others',
+            title: {
+                name: 'Otros',
+                class: 'text-center',
+            },
             pipe: {
-                functionPipe: (data: string) => {
-                    return data + ' ' + data;
+                functionPipe: (data: any) => {
+                    return data.org;
                 },
                 class: 'text-uppercase'
+            }
+        },
+        {
+            key: 'arrayTest',
+            title: {
+                name: 'Arreglo',
+                class: 'text-center',
+            },
+            pipe: {
+                functionPipe: (data: any) => {
+                    return data;
+                },
+                class: 'd-flex flex-column align-items-center',
+                isArray: true,
             }
         },
 
@@ -83,17 +116,53 @@ export const DATOS_PRUEBA: any = [
     {
         id: 1,
         nombre: 'Jhoan',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            'dasdfasdfasdf',
+            'asdfasdfasdfasdf',
+            'asdfasdfasdfasdf'
+        ]
     },
     {
         id: 2,
         nombre: 'Manuel',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            'dasdfasdfasdf',
+            'asdfasdfasdfasdf',
+            'asdfasdfasdfasdf'
+        ]
     },
     {
         id: 3,
         nombre: 'Murillo',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            'dasdfasdfasdf',
+            'asdfasdfasdfasdf',
+            'asdfasdfasdfasdf'
+        ]
     },
     {
         id: 4,
         nombre: 'Yara',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            'dasdfasdfasdf',
+            'asdfasdfasdfasdf',
+            'asdfasdfasdfasdf'
+        ]
     },
 ];

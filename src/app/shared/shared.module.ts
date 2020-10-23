@@ -10,6 +10,7 @@ import { SharedEffects } from './effects/shared.effects';
 import { GeneralTableComponent } from './components/general-table/general-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
+import { CustomTablePipe } from './pipes/custom-table.pipe';
 
 @NgModule({
   exports: [
@@ -26,6 +27,7 @@ import { FilterTablePipe } from './pipes/filter-table.pipe';
   declarations: [
     GeneralTableComponent,
     FilterTablePipe,
+    CustomTablePipe,
   ],
 })
 

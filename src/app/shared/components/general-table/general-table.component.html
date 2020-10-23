@@ -16,16 +16,26 @@
             </tr>
             <tr>
               <ng-container *ngFor="let element of config.dataConfig">
-                <th scope="col">{{element.title}}</th>
+                <th scope="col" [class]="element.title.class">{{element.title.name}}</th>
               </ng-container>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let items of datosPrueba | filterTable:stringBusqueda ">
               <ng-container *ngFor="let data of config.dataConfig">
-                <td [class]="data.pipe.class">
-                  {{items[data.key]}}
-                </td>
+                <ng-container *ngIf="!data.pipe.isArray">
+                  <td [class]="data.pipe.class" >
+                    {{  data.pipe.functionPipe ? (items[data.key] | customTable:data.pipe.functionPipe) : items[data.key] }}
+                  </td>
+                </ng-container>
+                <ng-container *ngIf="data.pipe.isArray">
+                  <td [class]="data.pipe.class" >
+                    <ng-container *ngFor="let value of items[data.key]">
+                      <span>{{value}}</span>
+                    </ng-container>
+                  </td>
+                </ng-container>
+
               </ng-container>
             </tr>
           </tbody>
