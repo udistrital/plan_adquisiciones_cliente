@@ -1,0 +1,30 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filterTable'
+})
+export class FilterTablePipe implements PipeTransform {
+
+  transform(value: any, args: string): any {
+
+    let encontrado: boolean = false
+    let resultado: any[] = [];
+
+    if (args === '') {
+      return value;
+    } else {
+      for (const item of value) {
+        // Si es un String
+        if (JSON.stringify(item).toString().toLowerCase().indexOf(args.toLowerCase()) > -1) {
+          encontrado = true;
+        }
+        if (encontrado) {
+          resultado.push(item);
+          encontrado = false;
+        }
+      }
+      return resultado;
+    }
+    return null;
+  }
+}
