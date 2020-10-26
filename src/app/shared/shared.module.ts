@@ -11,6 +11,7 @@ import { GeneralTableComponent } from './components/general-table/general-table.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { CustomTablePipe } from './pipes/custom-table.pipe';
+import { DatosGeneralesInicialesComponent } from './components/datos-generales-iniciales/datos-generales-iniciales.component';
 
 @NgModule({
   exports: [
@@ -28,6 +29,7 @@ import { CustomTablePipe } from './pipes/custom-table.pipe';
     GeneralTableComponent,
     FilterTablePipe,
     CustomTablePipe,
+    DatosGeneralesInicialesComponent,
   ],
 })
 
