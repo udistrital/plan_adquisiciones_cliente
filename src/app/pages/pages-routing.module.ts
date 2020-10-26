@@ -13,6 +13,11 @@ const routes: Routes = [{
       .then(m => m.PrimerModuloModule),
     },
     {
+      path: 'plan-adquisiciones',
+      loadChildren: () => import('./plan-adquisiciones/plan-adquisiciones.module')
+      .then(m => m.PlanAdquisicionesModule),
+    },
+    {
       path: '',
       redirectTo: 'prueba',
       pathMatch: 'full',
