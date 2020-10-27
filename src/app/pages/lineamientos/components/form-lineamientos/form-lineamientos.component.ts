@@ -10,7 +10,7 @@ export class FormLineamientosComponent implements OnInit {
   titulo: any;
 
   constructor() {
-    this.titulo = 'Crear / Editar Lineamiento'
+    this.titulo = 'Crear / Editar Lineamiento';
   }
 
   ngOnInit() {
