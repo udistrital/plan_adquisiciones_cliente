@@ -12,11 +12,11 @@ const routes: Routes = [{
       loadChildren: () => import('../lineamientos/lineamientos.module')
       .then(m => m.LineamientosModule),
     },
-    // {
-    //   path: 'metas',
-    //   loadChildren: () => import('../lineamientos/lineamientos.module')
-    //   .then(m => m.LineamientosModule),
-    // },
+    {
+      path: 'metas',
+      loadChildren: () => import('../metas/metas.module')
+      .then(m => m.MetasModule),
+    },
     // {
     //   path: 'actividades',
     //   loadChildren: () => import('../lineamientos/lineamientos.module')
