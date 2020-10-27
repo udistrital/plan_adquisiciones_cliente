@@ -13,14 +13,20 @@ export const configTable: any = {
             }
         }
     ],
-    rowActions: [
-        {
+    rowActions: {
+        title: {
             name: 'string',
-            icon: 'string',
             class: 'string',
-            title: 'string',
-        }
-    ],
+        },
+        actions: [
+            {
+                name: 'string',
+                icon: 'string',
+                class: 'string',
+                title: 'string',
+            }
+        ],
+    },
     tableActions: [
         {
             name: 'string',
@@ -29,26 +35,31 @@ export const configTable: any = {
             title: 'string',
         }
     ],
+    noData: {
+        name: 'string',
+        class: 'string',
+    },
     sort: 'boolean',
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
-    title: {
-        name: 'Tabla de Prueba',
-        class: 'text-center',
-    },
+    // title: {
+    //     name: 'Tabla de Prueba',
+    //     class: 'text-center',
+    // },
     dataConfig: [
         {
             key: 'id',
             title: {
-                name: 'Consecutivo',
+                name: 'Numero',
                 class: 'text-center',
             },
             pipe: {
                 // functionPipe: (data: string) => {
                 //     return data + ' ' + data;
                 // },
-                class: 'text-uppercase'
+                // class: 'text-uppercase'
+                class: '',
             }
         },
         {
@@ -58,58 +69,48 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                functionPipe: (data: string) => {
-                    return data + ' ' + data;
-                },
-                class: 'text-uppercase'
+                // functionPipe: (data: string) => {
+                //     return data + ' ' + data;
+                // },
+                // class: 'text-uppercase'
+                class: '',
             }
         },
-        {
-            key: 'others',
-            title: {
-                name: 'Otros',
-                class: 'text-center',
-            },
-            pipe: {
-                functionPipe: (data: any) => {
-                    return data.org;
-                },
-                class: 'text-uppercase'
-            }
-        },
-        {
-            key: 'arrayTest',
-            title: {
-                name: 'Arreglo',
-                class: 'text-center',
-            },
-            pipe: {
-                functionPipe: (data: any) => {
-                    return data;
-                },
-                class: 'd-flex flex-column align-items-center',
-                isArray: true,
-            }
-        },
-
     ],
-    rowActions: [
-        {
-            name: 'string',
-            icon: 'string',
-            class: 'string',
-            title: 'string',
-        }
-    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'editar',
+                icon: 'fas fa-pencil-alt',
+                class: 'p-2',
+                title: 'Editar',
+            },
+            {
+                name: 'metas',
+                icon: 'fas fa-list',
+                class: 'p-2',
+                title: 'Ver Metas',
+            }
+        ],
+    },
     tableActions: [
         {
-            name: 'string',
-            icon: 'string',
-            class: 'string',
-            title: 'string',
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Agregar Nuevo Lineamiento',
         }
     ],
-    sort: 'boolean',
+    noData: {
+        name: 'No Existen Elementos Asociados',
+        class: 'text-center',
+    },
+    sort: true,
     filter: true,
 };
 export const DATOS_PRUEBA: any = [

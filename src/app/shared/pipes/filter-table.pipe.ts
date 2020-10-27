@@ -14,7 +14,6 @@ export class FilterTablePipe implements PipeTransform {
       return value;
     } else {
       for (const item of value) {
-        // Si es un String
         if (JSON.stringify(item).toString().toLowerCase().indexOf(args.toLowerCase()) > -1) {
           encontrado = true;
         }
@@ -25,6 +24,5 @@ export class FilterTablePipe implements PipeTransform {
       }
       return resultado;
     }
-    return null;
   }
 }

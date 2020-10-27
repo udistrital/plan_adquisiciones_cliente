@@ -9,6 +9,7 @@ import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces'
 export class GeneralTableComponent implements OnInit {
 
   @Input() config: any;
+  @Input() datos: any;
   @Output() selectedAction: EventEmitter<any>;
   stringBusqueda: string;
   datosPrueba: any[];
@@ -16,9 +17,6 @@ export class GeneralTableComponent implements OnInit {
   constructor() {
     this.stringBusqueda = '';
     this.selectedAction = new EventEmitter<any>();
-    this.config = CONFIGURACION_PRUEBA;
-    this.datosPrueba = DATOS_PRUEBA;
-    // console.log(this.config, this.datosPrueba)
   }
 
   ngOnInit() {

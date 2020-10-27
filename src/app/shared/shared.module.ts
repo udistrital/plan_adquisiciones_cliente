@@ -12,12 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { CustomTablePipe } from './pipes/custom-table.pipe';
 import { DatosGeneralesInicialesComponent } from './components/datos-generales-iniciales/datos-generales-iniciales.component';
+import { MouseOverDirective } from './directives/mouse-over.directive';
 
 @NgModule({
   exports: [
     TranslateModule,
     GeneralTableComponent,
     DatosGeneralesInicialesComponent,
+    MouseOverDirective,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { DatosGeneralesInicialesComponent } from './components/datos-generales-i
     FilterTablePipe,
     CustomTablePipe,
     DatosGeneralesInicialesComponent,
+    MouseOverDirective,
   ],
 })
 
