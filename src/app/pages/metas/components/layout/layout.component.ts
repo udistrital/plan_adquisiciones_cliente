@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  titulo: any;
+  constructor() {
+    this.titulo = 'METAS';
+  }
 
   ngOnInit() {
   }

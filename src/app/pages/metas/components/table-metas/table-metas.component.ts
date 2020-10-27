@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DATOS_PRUEBA, CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'ngx-table-metas',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableMetasComponent implements OnInit {
 
-  constructor() { }
+  configuracion: any;
+  datosPrueba: any;
+  constructor() {
+    this.datosPrueba = DATOS_PRUEBA;
+    this.configuracion = CONFIGURACION_PRUEBA;
+  }
 
   ngOnInit() {
   }

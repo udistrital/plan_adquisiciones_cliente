@@ -103,7 +103,7 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nuevo Lineamiento',
+            title: 'Agregar Nueva Meta',
         }
     ],
     noData: {
@@ -115,7 +115,7 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 export const DATOS_PRUEBA: any = [
     {
-        id: 1,
+        id: 1.1,
         nombre: 'Jhoan',
         others: {
             label: 2,
@@ -128,7 +128,7 @@ export const DATOS_PRUEBA: any = [
         ]
     },
     {
-        id: 2,
+        id: 2.1,
         nombre: 'Manuel',
         others: {
             label: 2,
@@ -141,7 +141,7 @@ export const DATOS_PRUEBA: any = [
         ]
     },
     {
-        id: 3,
+        id: 3.1,
         nombre: 'Murillo',
         others: {
             label: 2,
@@ -154,7 +154,7 @@ export const DATOS_PRUEBA: any = [
         ]
     },
     {
-        id: 4,
+        id: 4.1,
         nombre: 'Yara',
         others: {
             label: 2,

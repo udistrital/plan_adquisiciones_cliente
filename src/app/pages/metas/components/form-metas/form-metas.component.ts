@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormMetasComponent implements OnInit {
 
-  constructor() { }
+  titulo: any;
+
+  constructor() {
+    this.titulo = 'Crear / Editar Meta';
+  }
+
 
   ngOnInit() {
   }
