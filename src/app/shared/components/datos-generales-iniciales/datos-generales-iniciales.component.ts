@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-datos-generales-iniciales',
@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatosGeneralesInicialesComponent implements OnInit {
 
-  constructor() { }
+  @Input() Title: any;
+
+  date: any;
+
+  constructor() {
+    this.date = Date.now();
+  }
 
   ngOnInit() {
   }

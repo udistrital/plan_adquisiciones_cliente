@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormLineamientosComponent implements OnInit {
 
-  constructor() { }
+  titulo: any;
+
+  constructor() {
+    this.titulo = 'Crear / Editar Lineamiento'
+  }
 
   ngOnInit() {
   }

@@ -17,6 +17,7 @@ import { DatosGeneralesInicialesComponent } from './components/datos-generales-i
   exports: [
     TranslateModule,
     GeneralTableComponent,
+    DatosGeneralesInicialesComponent,
   ],
   imports: [
     CommonModule,
