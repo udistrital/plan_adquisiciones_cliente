@@ -3,14 +3,21 @@ import * as SharedActions from '../actions/shared.actions';
 
 export const sharedFeatureKey = 'shared';
 
-export interface State {}
+export interface State {
+  ArbolRubro: any;
+}
 
-export const initialState: State = {};
+export const initialState: State = {
+  ArbolRubro: [],
+};
 
 const sharedReducer = createReducer(
   initialState,
 
   on(SharedActions.loadShareds, state => state),
+  on(SharedActions.LoadArbolRubro, (state, action) => ({
+    ...state, ArbolRubro: state.ArbolRubro = action
+  })),
 
 );
 

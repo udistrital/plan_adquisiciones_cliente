@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { concatMap } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import { EMPTY, of } from 'rxjs';
 
 import * as SharedActions from '../actions/shared.actions';
+import { SharedService } from '../services/shared.service';
 
 
 @Injectable()
 export class SharedEffects {
+
+  constructor(
+    private actions$: Actions,
+    private SharedService: SharedService,
+  ) { }
 
 
   loadShareds$ = createEffect(() => {
@@ -20,7 +26,19 @@ export class SharedEffects {
     );
   });
 
+  GetArbolRubro$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SharedActions.GetArbolRubro),
+      mergeMap((branch) =>
+        this.SharedService.getArbol(branch.branch)
+          .pipe(
+            map(data => SharedActions.LoadArbolRubro(data)),
+            catchError(data => of(SharedActions.CatchError(data))))
+      )
+    );
+  });
 
-  constructor(private actions$: Actions) { }
+
+  
 
 }
