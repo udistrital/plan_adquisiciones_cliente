@@ -1,18 +1,18 @@
-import { Directive, ElementRef, HostListener, Input, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[ngxSelectedRow]'
 })
-export class SelectedRowDirective {
+export class SelectedRowDirective implements OnChanges {
 
-  @Input() myRow: any
-  @Input() selectedRow: any
+  @Input() myRow: any;
+  @Input() selectedRow: any;
 
   constructor(private element: ElementRef, private renderer: Renderer2) {
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if(changes.selectedRow){
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.selectedRow) {
       this.highlightRow();
     }
   }

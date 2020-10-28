@@ -16,7 +16,7 @@ export class ArbolRubroComponent implements OnInit {
   }
 
   onSelect(row: any) {
-    console.log(row, this.selectedTreeRow)
+    // console.log(row, this.selectedTreeRow)
     this.selectedTreeRow = row;
   }
 
