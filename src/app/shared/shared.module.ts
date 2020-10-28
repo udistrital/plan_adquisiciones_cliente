@@ -13,6 +13,9 @@ import { FilterTablePipe } from './pipes/filter-table.pipe';
 import { CustomTablePipe } from './pipes/custom-table.pipe';
 import { DatosGeneralesInicialesComponent } from './components/datos-generales-iniciales/datos-generales-iniciales.component';
 import { MouseOverDirective } from './directives/mouse-over.directive';
+import { ArbolRubroComponent } from './components/arbol-rubro/arbol-rubro.component';
+import { NbTreeGridModule } from '@nebular/theme';
+import { SelectedRowDirective } from './directives/selected-row.directive';
 
 @NgModule({
   exports: [
@@ -20,11 +23,14 @@ import { MouseOverDirective } from './directives/mouse-over.directive';
     GeneralTableComponent,
     DatosGeneralesInicialesComponent,
     MouseOverDirective,
+    ArbolRubroComponent,
+    SelectedRowDirective,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NbTreeGridModule,
     StoreModule.forFeature(fromShared.sharedFeatureKey, fromShared.reducer),
     EffectsModule.forFeature([SharedEffects])
   ],
@@ -34,6 +40,8 @@ import { MouseOverDirective } from './directives/mouse-over.directive';
     CustomTablePipe,
     DatosGeneralesInicialesComponent,
     MouseOverDirective,
+    ArbolRubroComponent,
+    SelectedRowDirective,
   ],
 })
 
