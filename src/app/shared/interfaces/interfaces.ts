@@ -168,6 +168,24 @@ export const DATOS_PRUEBA: any = [
     },
 ];
 
+export interface ArbolRubros<T> {
+    Codigo: string;
+    data?: T;
+    children?: ArbolRubros<T>[];
+    expanded?: boolean;
+}
+export interface DatosNodo {
+    Codigo: string;
+    Descripcion?: string;
+    ValorInicial?: number;
+    Hijos?: any[];
+    Movimientos?: string[];
+    Padre?: string;
+    UnidadEjecutora?: number;
+    Estado?: string;
+    IsLeaf?: boolean;
+}
+
 export interface TreeNode<T> {
     data: T;
     children?: TreeNode<T>[];
