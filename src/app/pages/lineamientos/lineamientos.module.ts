@@ -6,6 +6,10 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { FormLineamientosComponent } from './components/form-lineamientos/form-lineamientos.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TableLineamientosComponent } from './components/table-lineamientos/table-lineamientos.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromLineamientos from './reducers/lineamientos.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { LineamientosEffects } from './effects/lineamientos.effects';
 
 
 @NgModule({
@@ -14,6 +18,8 @@ import { TableLineamientosComponent } from './components/table-lineamientos/tabl
     CommonModule,
     LineamientosRoutingModule,
     SharedModule,
+    StoreModule.forFeature(fromLineamientos.lineamientosFeatureKey, fromLineamientos.reducer),
+    EffectsModule.forFeature([LineamientosEffects]),
   ]
 })
 export class LineamientosModule { }
