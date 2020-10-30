@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { GetArbolRubro } from '../../actions/shared.actions';
+import { combineLatest, Observable } from 'rxjs';
+import { GetArbolRubro, LoadRubroSeleccionado } from '../../actions/shared.actions';
 import { ArbolRubros, DatosNodo } from '../../interfaces/interfaces';
-import { getArbolRubro } from '../../selectors/shared.selectors';
+import { getArbolRubro, getRubroSeleccionado } from '../../selectors/shared.selectors';
 import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridRowComponent } from '@nebular/theme';
 
 @Component({
@@ -13,7 +13,7 @@ import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTree
 })
 export class ArbolRubroComponent implements OnInit, OnDestroy {
 
-  selectedTreeRow: any;
+  selectedTreeRow: any = null;
   subscription$: any;
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
@@ -24,12 +24,15 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
 
   data: ArbolRubros<DatosNodo>[];
   dataSource: NbTreeGridDataSource<any>;
+  subscription2$: any;
 
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private store: Store<any>,
   ) {
     this.store.dispatch(GetArbolRubro({ branch: '3' }));
+    this.subscription$ = this.store.select(getArbolRubro);
+    this.subscription2$ = this.store.select(getRubroSeleccionado);
   }
 
   ngOnInit() {
@@ -38,10 +41,15 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
       childrenGetter: (node: ArbolRubros<DatosNodo>) => !!node.children && !!node.children.length ? node.children : [],
       expandedGetter: (node: ArbolRubros<DatosNodo>) => !!node.expanded,
     };
-    this.subscription$ = this.store.select(getArbolRubro).subscribe((data: any) => {
-      if (Object.keys(data).length !== 0) {
-        this.data = data[0];
+    this.subscription$.subscribe((arbol: any) => {
+      if (Object.keys(arbol).length !== 0) {
+        this.data = arbol[0];
         this.dataSource = this.dataSourceBuilder.create([this.data], getters);
+      }
+    });
+    this.subscription2$.subscribe((rubro: any) => {
+      if (rubro !== null) {
+        this.selectedTreeRow = rubro;
       }
     });
   }
@@ -61,11 +69,12 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   onSelect(row: any) {
     // console.log(row, this.selectedTreeRow)
-    this.selectedTreeRow = row;
+    this.store.dispatch(LoadRubroSeleccionado(row));
   }
 
 }

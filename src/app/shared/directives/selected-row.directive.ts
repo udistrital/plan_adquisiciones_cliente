@@ -27,7 +27,7 @@ export class SelectedRowDirective implements OnChanges {
   }
 
   private highlightRow() {
-    if (this.selectedRow !== undefined) {
+    if (this.selectedRow !== null) {
       if (this.myRow.data === this.selectedRow.data) {
         this.renderer.addClass(this.element.nativeElement, 'font-weight-bold');
         this.renderer.addClass(this.element.nativeElement, 'bg-primary-800');

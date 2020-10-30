@@ -13,7 +13,7 @@ export class SharedEffects {
 
   constructor(
     private actions$: Actions,
-    private SharedService: SharedService,
+    private sharedService: SharedService,
   ) { }
 
 
@@ -30,15 +30,11 @@ export class SharedEffects {
     return this.actions$.pipe(
       ofType(SharedActions.GetArbolRubro),
       mergeMap((branch) =>
-        this.SharedService.getArbol(branch.branch)
+        this.sharedService.getArbol(branch.branch)
           .pipe(
             map(data => SharedActions.LoadArbolRubro(data)),
             catchError(data => of(SharedActions.CatchError(data))))
       )
     );
   });
-
-
-  
-
 }

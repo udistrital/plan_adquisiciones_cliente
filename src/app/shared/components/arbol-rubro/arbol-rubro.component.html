@@ -1,3 +1,9 @@
+<ng-container *ngIf="!data">
+    <div class="d-flex justify-content-center py-3">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+</ng-container>
+
 <ng-container *ngIf="data">
     <table [nbTreeGrid]="dataSource" nbSort (sort)="changeSort($event)" equalColumnsWidth>
 

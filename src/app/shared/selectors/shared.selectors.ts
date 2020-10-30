@@ -9,3 +9,8 @@ export const getArbolRubro = createSelector(
   selectSharedState,
   (state: fromShared.State) => state.ArbolRubro
 );
+
+export const getRubroSeleccionado = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.RubroSeleccionado
+);
