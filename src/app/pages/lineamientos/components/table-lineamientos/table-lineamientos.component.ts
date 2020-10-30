@@ -23,7 +23,6 @@ export class TableLineamientosComponent implements OnInit {
   ) {
     this.datosPrueba = DATOS_PRUEBA;
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.store.dispatch(GetArbolRubro({ branch: '3' }));
   }
 
   ngOnInit() {

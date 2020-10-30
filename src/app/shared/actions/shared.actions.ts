@@ -25,11 +25,21 @@ export const LoadArbolRubro = createAction(
 
 // Nodo Seleccionado
 
-export const LoadRubroSeleccionado = createAction(
-  '[Shared] Load Rubro Seleccionado',
+export const LoadNodoSeleccionado = createAction(
+  '[Shared] Load Nodo Seleccionado',
   props()
 );
 
+// Fila Seleccionado
 
+export const LoadFilaSeleccionada = createAction(
+  '[Shared] Load Fila Seleccionada',
+  props()
+);
 
+// Fila Seleccionado
 
+export const LoadAccionTabla = createAction(
+  '[Shared] Load Accion Tabla',
+  props()
+);

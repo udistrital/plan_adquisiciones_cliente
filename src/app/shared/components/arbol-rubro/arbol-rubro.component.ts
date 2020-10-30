@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
-import { GetArbolRubro, LoadRubroSeleccionado } from '../../actions/shared.actions';
+import { GetArbolRubro, LoadNodoSeleccionado } from '../../actions/shared.actions';
 import { ArbolRubros, DatosNodo } from '../../interfaces/interfaces';
-import { getArbolRubro, getRubroSeleccionado } from '../../selectors/shared.selectors';
+import { getArbolRubro, getNodoSeleccionado } from '../../selectors/shared.selectors';
 import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridRowComponent } from '@nebular/theme';
 
 @Component({
@@ -32,7 +31,6 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private store: Store<any>,
   ) {
-    this.store.dispatch(GetArbolRubro({ branch: '3' }));
   }
 
   ngOnInit() {
@@ -45,9 +43,11 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
       if (Object.keys(arbol).length !== 0) {
         this.data = arbol[0];
         this.dataSource = this.dataSourceBuilder.create([this.data], getters);
+      } else {
+        this.store.dispatch(GetArbolRubro({ branch: '3' }));
       }
     });
-    this.subscription2$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
+    this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((rubro: any) => {
       if (rubro !== null) {
         this.selectedTreeRow = rubro;
       }
@@ -74,7 +74,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
 
   onSelect(row: any) {
     // console.log(row, this.selectedTreeRow)
-    this.store.dispatch(LoadRubroSeleccionado(row));
+    this.store.dispatch(LoadNodoSeleccionado(row));
   }
 
 }

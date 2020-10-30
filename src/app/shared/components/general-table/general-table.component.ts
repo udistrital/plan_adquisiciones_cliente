@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LoadAccionTabla, LoadFilaSeleccionada } from '../../actions/shared.actions';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
 
 @Component({
@@ -14,13 +16,32 @@ export class GeneralTableComponent implements OnInit {
   stringBusqueda: string;
   datosPrueba: any[];
 
-  constructor() {
+  constructor(
+    private store: Store<any>,
+  ) {
     this.stringBusqueda = '';
     this.selectedAction = new EventEmitter<any>();
   }
 
   ngOnInit() {
+  }
 
+  SelectedAction(action: any, row: any) {
+    console.log(this.config.title,action, row)
+    this.store.dispatch(LoadFilaSeleccionada({
+      titulo: this.config.title,
+      accion: action,
+      fila: row,
+    }))
+  }
+  
+  SelectedAllAction(action: any) {
+    console.log(this.config.title,action, this.datos);
+    this.store.dispatch(LoadAccionTabla({
+      titulo: this.config.title,
+      accion: action,
+    }))
+    
   }
 
 }

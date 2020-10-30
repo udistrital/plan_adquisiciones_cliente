@@ -5,12 +5,16 @@ export const sharedFeatureKey = 'shared';
 
 export interface State {
   ArbolRubro: any;
-  RubroSeleccionado: any;
+  NodoSeleccionado: any;
+  FilaSeleccionada: any;
+  AccionTabla: any;
 }
 
 export const initialState: State = {
   ArbolRubro: [],
-  RubroSeleccionado: null,
+  NodoSeleccionado: null,
+  FilaSeleccionada: null,
+  AccionTabla: null,
 };
 
 const sharedReducer = createReducer(
@@ -20,8 +24,14 @@ const sharedReducer = createReducer(
   on(SharedActions.LoadArbolRubro, (state, action) => ({
     ...state, ArbolRubro: state.ArbolRubro = action
   })),
-  on(SharedActions.LoadRubroSeleccionado, (state, action) => ({
-    ...state, RubroSeleccionado: state.RubroSeleccionado = action
+  on(SharedActions.LoadNodoSeleccionado, (state, action) => ({
+    ...state, NodoSeleccionado: state.NodoSeleccionado = action
+  })),
+  on(SharedActions.LoadFilaSeleccionada, (state, action) => ({
+    ...state, FilaSeleccionada: state.FilaSeleccionada = action
+  })),
+  on(SharedActions.LoadAccionTabla, (state, action) => ({
+    ...state, AccionTabla: state.AccionTabla = action
   })),
 
 );
