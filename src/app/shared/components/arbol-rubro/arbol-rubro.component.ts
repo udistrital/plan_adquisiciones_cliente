@@ -14,7 +14,7 @@ import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTree
 export class ArbolRubroComponent implements OnInit, OnDestroy {
 
   selectedTreeRow: any = null;
-  subscription$: any;
+
   sortColumn: string = '';
   sortDirection: NbSortDirection = NbSortDirection.NONE;
 
@@ -24,6 +24,8 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
 
   data: ArbolRubros<DatosNodo>[];
   dataSource: NbTreeGridDataSource<any>;
+
+  subscription$: any;
   subscription2$: any;
 
   constructor(
@@ -31,8 +33,6 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
     private store: Store<any>,
   ) {
     this.store.dispatch(GetArbolRubro({ branch: '3' }));
-    this.subscription$ = this.store.select(getArbolRubro);
-    this.subscription2$ = this.store.select(getRubroSeleccionado);
   }
 
   ngOnInit() {
@@ -41,13 +41,13 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
       childrenGetter: (node: ArbolRubros<DatosNodo>) => !!node.children && !!node.children.length ? node.children : [],
       expandedGetter: (node: ArbolRubros<DatosNodo>) => !!node.expanded,
     };
-    this.subscription$.subscribe((arbol: any) => {
+    this.subscription$ = this.store.select(getArbolRubro).subscribe((arbol: any) => {
       if (Object.keys(arbol).length !== 0) {
         this.data = arbol[0];
         this.dataSource = this.dataSourceBuilder.create([this.data], getters);
       }
     });
-    this.subscription2$.subscribe((rubro: any) => {
+    this.subscription2$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
       if (rubro !== null) {
         this.selectedTreeRow = rubro;
       }
