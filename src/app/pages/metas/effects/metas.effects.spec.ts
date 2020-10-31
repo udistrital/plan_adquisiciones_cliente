@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { MetasEffects } from './metas.effects';
 
 describe('MetasEffects', () => {
-  let actions$: Observable<any>;
+  // let actions$: Observable<any>;
+  const actions$: Observable<any> = new Observable();
   let effects: MetasEffects;
 
   beforeEach(() => {

@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { LineamientosEffects } from './lineamientos.effects';
 
 describe('LineamientosEffects', () => {
-  let actions$: Observable<any>;
+  // let actions$: Observable<any>;
+  const actions$: Observable<any> = new Observable();
   let effects: LineamientosEffects;
 
   beforeEach(() => {

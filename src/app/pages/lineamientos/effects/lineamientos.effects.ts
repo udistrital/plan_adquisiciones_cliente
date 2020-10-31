@@ -12,7 +12,7 @@ export class LineamientosEffects {
 
 
   loadLineamientoss$ = createEffect(() => {
-    return this.actions$.pipe( 
+    return this.actions$.pipe(
 
       ofType(LineamientosActions.loadLineamientoss),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
@@ -21,6 +21,6 @@ export class LineamientosEffects {
   });
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 
 }
