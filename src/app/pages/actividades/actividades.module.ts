@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ActividadesEffects } from './effects/actividades.effects';
 import { FormActividadesComponent } from './components/form-actividades/form-actividades.component';
 import { TableActividadesComponent } from './components/table-actividades/table-actividades.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { TableActividadesComponent } from './components/table-actividades/table-
   imports: [
     CommonModule,
     ActividadesRoutingModule,
+    SharedModule,
     StoreModule.forFeature(fromActividades.actividadesFeatureKey, fromActividades.reducer),
     EffectsModule.forFeature([ActividadesEffects])
   ]

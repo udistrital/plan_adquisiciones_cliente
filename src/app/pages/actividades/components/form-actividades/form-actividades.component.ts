@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormActividadesComponent implements OnInit {
 
-  constructor() { }
+  titulo: any;
+
+  constructor() {
+    this.titulo = 'Crear / Editar Actividad';
+  }
+
 
   ngOnInit() {
   }
