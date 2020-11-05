@@ -8,7 +8,6 @@ import * as fromActividades from './reducers/actividades.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ActividadesEffects } from './effects/actividades.effects';
 
-
 @NgModule({
   declarations: [LayoutComponent],
   imports: [
