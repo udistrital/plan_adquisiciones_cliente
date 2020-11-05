@@ -25,8 +25,8 @@ export class FormActividadesComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getActividadSeleccionada).subscribe((actividad: any) => {
-      console.log(actividad)
-      if (actividad){
+      // console.log(actividad)
+      if (actividad) {
         if (Object.keys(actividad)[0] === 'type') {
           this.CrearActividadesForm(null);
         } else {
@@ -35,24 +35,24 @@ export class FormActividadesComponent implements OnInit {
       } else {
         this.CrearActividadesForm(null);
       }
-    })
+    });
   }
 
   CrearActividadesForm(actividad: any) {
     if (actividad) {
       this.titulo = 'Editar Actividad';
-      this.boton = 'Editar'
+      this.boton = 'Editar';
       this.ActividadesForm = this.fb.group({
         Numero: [actividad.numero, [Validators.required]],
         Nombre: [actividad.nombre, [Validators.required]]
-      })
+      });
     } else {
       this.titulo = 'Crear Actividad';
-      this.boton = 'Crear'
+      this.boton = 'Crear';
       this.ActividadesForm = this.fb.group({
         Numero: ['', [Validators.required]],
         Nombre: ['', [Validators.required]]
-      })
+      });
     }
   }
 

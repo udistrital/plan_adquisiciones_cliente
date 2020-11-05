@@ -4,7 +4,7 @@ import * as ActividadesActions from '../actions/actividades.actions';
 export const actividadesFeatureKey = 'actividades';
 
 export interface State {
-  ActividadSeleccionada: any,
+  ActividadSeleccionada: any;
 }
 
 export const initialState: State = {
