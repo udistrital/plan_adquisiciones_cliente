@@ -7,9 +7,12 @@ import { StoreModule } from '@ngrx/store';
 import * as fromActividades from './reducers/actividades.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ActividadesEffects } from './effects/actividades.effects';
+import { FormActividadesComponent } from './components/form-actividades/form-actividades.component';
+import { TableActividadesComponent } from './components/table-actividades/table-actividades.component';
+
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, FormActividadesComponent, TableActividadesComponent],
   imports: [
     CommonModule,
     ActividadesRoutingModule,
