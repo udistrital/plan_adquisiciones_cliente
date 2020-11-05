@@ -10,10 +10,11 @@ import { ActividadesEffects } from './effects/actividades.effects';
 import { FormActividadesComponent } from './components/form-actividades/form-actividades.component';
 import { TableActividadesComponent } from './components/table-actividades/table-actividades.component';
 import { SharedModule } from '../../shared/shared.module';
+import { CardMetaComponent } from './components/card-meta/card-meta.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, FormActividadesComponent, TableActividadesComponent],
+  declarations: [LayoutComponent, FormActividadesComponent, TableActividadesComponent, CardMetaComponent],
   imports: [
     CommonModule,
     ActividadesRoutingModule,
