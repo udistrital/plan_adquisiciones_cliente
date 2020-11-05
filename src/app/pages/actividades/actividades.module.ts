@@ -11,6 +11,7 @@ import { FormActividadesComponent } from './components/form-actividades/form-act
 import { TableActividadesComponent } from './components/table-actividades/table-actividades.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CardMetaComponent } from './components/card-meta/card-meta.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,8 @@ import { CardMetaComponent } from './components/card-meta/card-meta.component';
     CommonModule,
     ActividadesRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forFeature(fromActividades.actividadesFeatureKey, fromActividades.reducer),
     EffectsModule.forFeature([ActividadesEffects])
   ]
