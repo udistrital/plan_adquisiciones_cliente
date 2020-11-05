@@ -43,13 +43,13 @@ export const configTable: any = {
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
-    // title: {
-    //     name: 'Tabla de Prueba',
-    //     class: 'text-center',
-    // },
+    title: {
+        name: 'Metas Asociadas',
+        class: 'text-center text-light',
+    },
     dataConfig: [
         {
-            key: 'id',
+            key: 'numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -73,7 +73,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 //     return data + ' ' + data;
                 // },
                 // class: 'text-uppercase'
-                class: '',
+                class: 'text-justify',
             }
         },
     ],
@@ -103,7 +103,7 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Meta',
+            title: 'Agregar Nueva Actividad',
         }
     ],
     noData: {
@@ -115,55 +115,23 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 export const DATOS_PRUEBA: any = [
     {
-        id: 1.1,
-        nombre: 'Jhoan',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '1.',
+        nombre: 'Mantener y elevar la acreditación institucional de alta calidad y alcanzar el reconocimiento internacional.',
     },
     {
-        id: 2.1,
-        nombre: 'Manuel',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '2.',
+        nombre: 'Aumentar en 34% el número de estudiantes de pregrado matriculados.',
     },
     {
-        id: 3.1,
-        nombre: 'Murillo',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '3.',
+        nombre: 'Aumentar el 65% de estudiantes matriculados en posgrado.',
     },
     {
-        id: 4.1,
-        nombre: 'Yara',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '4.1',
+        nombre: 'Aumentar en 28% el número de programas en todos los niveles y modalidades',
+    },
+    {
+        numero: '5.1',
+        nombre: 'Lograr homologación y transferencia del 100% de la oferta académica de la universidad entre sus diferentes niveles de formación.',
     },
 ];
