@@ -18,6 +18,6 @@ export class ParametricService {
       if (Object.keys(arbol).length === 0) {
         this.store.dispatch(GetArbolRubro({ branch: fuente }));
       }
-    })
+    });
   }
 }

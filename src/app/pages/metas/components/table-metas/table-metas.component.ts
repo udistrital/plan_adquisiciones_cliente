@@ -25,16 +25,16 @@ export class TableMetasComponent implements OnInit {
 
   ngOnInit() {
     this.store.select('lineamientos').subscribe((element: any) => {
-      console.log(element)
-      if(element) {
-        this.fuenteRecurso = element.FuenteRecursoSeleccionada.Codigo
+      // console.log(element)
+      if (element) {
+        this.fuenteRecurso = element.FuenteRecursoSeleccionada.Codigo;
       }
-    })
+    });
     this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (nodo && !nodo.children) {
         this.rubroSeleccionado = nodo;
       }
-    })
+    });
   }
 
 }

@@ -32,8 +32,8 @@ export class TableLineamientosComponent implements OnInit {
     this.datosPrueba = DATOS_PRUEBA;
     this.configuracion = CONFIGURACION_PRUEBA;
     this.LineamientoForm = this.fb.group({
-      FuenteSeleccionada: [null,[Validators.required]],
-    })
+      FuenteSeleccionada: [null, [Validators.required]],
+    });
     this.parametrics.CargarArbolRubros('3');
   }
 
@@ -52,12 +52,12 @@ export class TableLineamientosComponent implements OnInit {
     });
     this.subscription2$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
-        console.log(fila.accion)
-        this.route.navigate(['pages/plan-adquisiciones/metas'])
+        // console.log(fila.accion)
+        this.route.navigate(['pages/plan-adquisiciones/metas']);
       }
-    })
+    });
   }
   SeleccionarFuente(event: any) {
-    this.store.dispatch(LoadFuenteRecursoSeleccionada(event))
+    this.store.dispatch(LoadFuenteRecursoSeleccionada(event));
   }
 }
