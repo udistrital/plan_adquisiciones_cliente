@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { PrimerModuloRoutingModule } from './primer-modulo-routing.module';
 import { ComponentePruebaComponent } from './componentes/componente-prueba/componente-prueba.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
   declarations: [ComponentePruebaComponent],
   imports: [
     CommonModule,
-    PrimerModuloRoutingModule
+    PrimerModuloRoutingModule,
+    SharedModule,
   ]
 })
 export class PrimerModuloModule { }

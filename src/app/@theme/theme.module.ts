@@ -173,10 +173,10 @@ const NB_THEME_PROVIDERS = [
       // name: 'ud',
     },
     [
-      DEFAULT_THEME, 
-      COSMIC_THEME, 
-      CORPORATE_THEME, 
-      DARK_THEME, 
+      DEFAULT_THEME,
+      COSMIC_THEME,
+      CORPORATE_THEME,
+      DARK_THEME,
       KRONOS_THEME
     ],
   ).providers,
@@ -187,28 +187,28 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [
     SharedModule,
-    CommonModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    ...NB_MODULES, 
-    ...MAT_MODULES, 
-    Ng2SmartTableModule, 
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ...NB_MODULES,
+    ...MAT_MODULES,
+    Ng2SmartTableModule,
     CurrencyMaskModule
   ],
   exports: [
-    CommonModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    TranslateModule, 
-    ...PIPES, 
-    ...COMPONENTS, 
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule,
+    ...PIPES,
+    ...COMPONENTS,
     ...MAT_MODULES
   ],
   declarations: [
-    ...COMPONENTS, 
-    ...PIPES, 
-    DinamicformComponent, 
-    ListEntityComponent, 
+    ...COMPONENTS,
+    ...PIPES,
+    DinamicformComponent,
+    ListEntityComponent,
     CrudEntityComponent
   ],
 })

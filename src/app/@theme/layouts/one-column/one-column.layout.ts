@@ -34,7 +34,7 @@ export class OneColumnLayoutComponent {
   }
 
   toggleSidebar(event): boolean {
-    console.log(event.target.nextSibling)
+    // console.log(event.target.nextSibling)
     if (event.target.className !== null) {
       if (event.target.nextSibling === null &&
         (event.target.className === 'menu-title' || event.target.lastElementChild.className === 'menu-title')) {

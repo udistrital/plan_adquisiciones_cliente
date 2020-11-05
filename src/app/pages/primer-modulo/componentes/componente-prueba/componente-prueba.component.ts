@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../../../shared/interfaces/interfaces';
 
 @Component({
   selector: 'ngx-componente-prueba',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentePruebaComponent implements OnInit {
 
-  constructor() { }
-
+  configuracion: any;
+  datosPrueba: any;
+  constructor() {
+    this.datosPrueba = DATOS_PRUEBA;
+    this.configuracion = CONFIGURACION_PRUEBA;
+  }
   ngOnInit() {
   }
 
