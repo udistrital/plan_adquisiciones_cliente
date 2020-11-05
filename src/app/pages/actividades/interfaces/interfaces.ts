@@ -43,13 +43,13 @@ export const configTable: any = {
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
-    // title: {
-    //     name: 'Tabla de Prueba',
-    //     class: 'text-center',
-    // },
+    title: {
+        name: 'Actividades Asociadas',
+        class: 'text-center text-light',
+    },
     dataConfig: [
         {
-            key: 'id',
+            key: 'numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -73,7 +73,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 //     return data + ' ' + data;
                 // },
                 // class: 'text-uppercase'
-                class: '',
+                class: 'text-justify',
             }
         },
     ],
@@ -90,12 +90,12 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'p-2',
                 title: 'Editar',
             },
-            {
-                name: 'metas',
-                icon: 'fas fa-list',
-                class: 'p-2',
-                title: 'Ver Metas',
-            }
+            // {
+            //     name: 'metas',
+            //     icon: 'fas fa-list',
+            //     class: 'p-2',
+            //     title: 'Ver Metas',
+            // }
         ],
     },
     tableActions: [
@@ -103,7 +103,7 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nuevo Lineamiento',
+            title: 'Agregar Nueva Actividad',
         }
     ],
     noData: {
@@ -115,55 +115,43 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 export const DATOS_PRUEBA: any = [
     {
-        id: 1,
-        nombre: 'Jhoan',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '1.1',
+        nombre: 'Desarrollar diplomados y/o cursos certificados',
     },
     {
-        id: 2,
-        nombre: 'Manuel',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '2.1',
+        nombre: 'Apoyar el desarrollo y organización de eventos que permitan la visibilización de la investigación de la UD',
     },
     {
-        id: 3,
-        nombre: 'Murillo',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '3.1',
+        nombre: 'Apoyar el desarrollo de los proyectos de investigación de los grupos y semilleros de investigación institucionalizados y registrados en el sistema SICIUD',
     },
     {
-        id: 4,
-        nombre: 'Yara',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '4.1',
+        nombre: 'Apoyar los registros, patentes y demás procesos asociados a la protección de la propiedad intelectual',
+    },
+    {
+        numero: '5.1',
+        nombre: 'Lograr homologación y transferencia del 100% de la oferta académica de la universidad entre sus diferentes niveles de formación.',
+    },
+    {
+        numero: '6.1',
+        nombre: 'Gestionar la publicación de los resultados de investigación de acuerdo a lo establecido en la política editorial',
+    },
+    {
+        numero: '7.1',
+        nombre: 'Apoyar el proceso editorial de revistas institucionales',
+    },
+    {
+        numero: '8.1',
+        nombre: 'Generar el apoyo para el desarrollo de proyectos de investigación cofinanciados',
+    },
+    {
+        numero: '9.1',
+        nombre: 'Apoyar contrapartidas para Convocatorias de Jóvenes investigadores',
+    },
+    {
+        numero: '10.1',
+        nombre: 'Apoyar los a procesos estratégicos en sistemas de Información que apoyan el CIDC y las estructuras de Investigación',
     },
 ];
