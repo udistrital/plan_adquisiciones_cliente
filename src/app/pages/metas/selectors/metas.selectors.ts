@@ -4,3 +4,7 @@ import * as fromMetas from '../reducers/metas.reducer';
 export const selectMetasState = createFeatureSelector<fromMetas.State>(
   fromMetas.metasFeatureKey
 );
+export const getMetaSeleccionada = createSelector(
+  selectMetasState,
+  (state: fromMetas.State) => state.MetaSeleccionada
+);

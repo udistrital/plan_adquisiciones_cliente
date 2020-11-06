@@ -91,7 +91,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 title: 'Editar',
             },
             {
-                name: 'metas',
+                name: 'actividades',
                 icon: 'fas fa-list',
                 class: 'p-2',
                 title: 'Ver Metas',
@@ -103,7 +103,7 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Actividad',
+            title: 'Agregar Nueva Meta',
         }
     ],
     noData: {
@@ -127,11 +127,11 @@ export const DATOS_PRUEBA: any = [
         nombre: 'Aumentar el 65% de estudiantes matriculados en posgrado.',
     },
     {
-        numero: '4.1',
+        numero: '4.',
         nombre: 'Aumentar en 28% el número de programas en todos los niveles y modalidades',
     },
     {
-        numero: '5.1',
+        numero: '5.',
         nombre: 'Lograr homologación y transferencia del 100% de la oferta académica de la universidad entre sus diferentes niveles de formación.',
     },
 ];
