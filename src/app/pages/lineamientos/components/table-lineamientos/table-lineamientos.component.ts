@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
-import { LoadFuenteRecursoSeleccionada } from '../../actions/lineamientos.actions';
+import { LoadFuenteRecursoSeleccionada, LoadLineamientoSeleccionado } from '../../actions/lineamientos.actions';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
 
 @Component({
@@ -22,6 +22,7 @@ export class TableLineamientosComponent implements OnInit {
   subscription$: any;
   LineamientoForm: FormGroup;
   subscription2$: any;
+  subscription3$: any;
 
   constructor(
     private store: Store<any>,
@@ -52,10 +53,15 @@ export class TableLineamientosComponent implements OnInit {
     });
     this.subscription2$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
-        // console.log(fila.accion)
-        this.route.navigate(['pages/plan-adquisiciones/metas']);
+        this.store.dispatch(LoadLineamientoSeleccionado(fila.fila))
+        if (fila.accion.name === 'metas') {
+          this.route.navigate(['pages/plan-adquisiciones/metas']);
+        } 
       }
     });
+    this.subscription3$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
+      this.store.dispatch(LoadLineamientoSeleccionado(null));
+    })
   }
   SeleccionarFuente(event: any) {
     this.store.dispatch(LoadFuenteRecursoSeleccionada(event));

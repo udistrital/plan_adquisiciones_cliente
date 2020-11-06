@@ -103,7 +103,7 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Actividad',
+            title: 'Agregar Nuevo Lineamiento',
         }
     ],
     noData: {
