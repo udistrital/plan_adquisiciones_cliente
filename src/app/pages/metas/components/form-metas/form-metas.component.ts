@@ -25,8 +25,8 @@ export class FormMetasComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta: any) => {
-      console.log(meta)
-      if (meta){
+      // console.log(meta)
+      if (meta) {
         if (Object.keys(meta)[0] === 'type') {
           this.CrearMetaForm(null);
         } else {
@@ -35,24 +35,24 @@ export class FormMetasComponent implements OnInit {
       } else {
         this.CrearMetaForm(null);
       }
-    })
+    });
   }
 
   CrearMetaForm(meta: any) {
     if (meta) {
       this.titulo = 'Editar Meta';
-      this.boton = 'Editar'
+      this.boton = 'Editar';
       this.MetaForm = this.fb.group({
-        Numero: [meta.numero, [Validators.required]],  
+        Numero: [meta.numero, [Validators.required]],
         Nombre: [meta.nombre, [Validators.required]],
-      })
+      });
     } else {
       this.titulo = 'Crear Meta';
-      this.boton = 'Crear'
+      this.boton = 'Crear';
       this.MetaForm = this.fb.group({
-        Numero: ['', [Validators.required]],  
+        Numero: ['', [Validators.required]],
         Nombre: ['', [Validators.required]],
-      })
+      });
     }
   }
 }

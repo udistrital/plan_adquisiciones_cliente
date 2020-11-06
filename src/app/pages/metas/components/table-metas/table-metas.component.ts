@@ -42,15 +42,15 @@ export class TableMetasComponent implements OnInit {
     });
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
-        this.store.dispatch(loadMetaSeleccionada(fila.fila))
+        this.store.dispatch(loadMetaSeleccionada(fila.fila));
         if (fila.accion.name === 'actividades') {
           this.route.navigate(['pages/plan-adquisiciones/actividades']);
-        } 
+        }
       }
     });
     this.subscription4$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
       this.store.dispatch(loadMetaSeleccionada(null));
-    })
+    });
   }
 
 }

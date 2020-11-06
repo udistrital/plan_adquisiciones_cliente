@@ -53,15 +53,15 @@ export class TableLineamientosComponent implements OnInit {
     });
     this.subscription2$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
-        this.store.dispatch(LoadLineamientoSeleccionado(fila.fila))
+        this.store.dispatch(LoadLineamientoSeleccionado(fila.fila));
         if (fila.accion.name === 'metas') {
           this.route.navigate(['pages/plan-adquisiciones/metas']);
-        } 
+        }
       }
     });
     this.subscription3$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
       this.store.dispatch(LoadLineamientoSeleccionado(null));
-    })
+    });
   }
   SeleccionarFuente(event: any) {
     this.store.dispatch(LoadFuenteRecursoSeleccionada(event));
