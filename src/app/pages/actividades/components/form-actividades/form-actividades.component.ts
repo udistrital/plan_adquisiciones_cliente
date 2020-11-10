@@ -25,7 +25,7 @@ export class FormActividadesComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getActividadSeleccionada).subscribe((actividad: any) => {
-      // console.log(actividad)
+
       if (actividad) {
         if (Object.keys(actividad)[0] === 'type') {
           this.CrearActividadesForm(null);

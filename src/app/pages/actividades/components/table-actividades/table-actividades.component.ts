@@ -24,14 +24,14 @@ export class TableActividadesComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
-      // console.log(fila)
+
       if (fila) {
-        // console.log(fila.fila)
+
         this.store.dispatch(loadActividadSeleccionada(fila.fila));
       }
     });
     this.subscription$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
-      // console.log(accion)
+
       this.store.dispatch(loadActividadSeleccionada(null));
     });
   }

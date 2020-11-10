@@ -55,10 +55,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
                 class: '',
             }
         },
@@ -69,10 +65,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
                 class: 'text-justify',
             }
         },
@@ -90,12 +82,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'p-2',
                 title: 'Editar',
             },
-            // {
-            //     name: 'metas',
-            //     icon: 'fas fa-list',
-            //     class: 'p-2',
-            //     title: 'Ver Metas',
-            // }
         ],
     },
     tableActions: [
