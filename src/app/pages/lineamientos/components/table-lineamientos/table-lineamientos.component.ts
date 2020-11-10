@@ -48,7 +48,7 @@ export class TableLineamientosComponent implements OnInit {
         }
       }),
     ).subscribe((data: any) => {
-      // console.log(data);
+
       this.fuentesRecurso = data;
     });
     this.subscription2$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {

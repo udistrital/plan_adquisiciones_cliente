@@ -25,7 +25,7 @@ export class FormMetasComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta: any) => {
-      // console.log(meta)
+
       if (meta) {
         if (Object.keys(meta)[0] === 'type') {
           this.CrearMetaForm(null);

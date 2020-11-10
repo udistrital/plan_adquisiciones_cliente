@@ -81,7 +81,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
   }
 
   onSelect(row: any) {
-    // console.log(row, this.selectedTreeRow)
+
     this.store.dispatch(LoadNodoSeleccionado(row));
   }
 
@@ -90,7 +90,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
     const ArbolFuenteRecurso = Arbol[0].children.find(
       hijo => hijo.Codigo === Fuente
     );
-    // console.log(ArbolFuenteRecurso);
+
     return [ArbolFuenteRecurso];
   }
 }
