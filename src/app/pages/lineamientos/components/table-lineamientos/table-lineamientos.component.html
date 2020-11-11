@@ -6,20 +6,34 @@
     </div>
 
 
-    
+
     <div class="row">
         <div class="col-4">
-            <div class="form-group">
-                <label>Fuente de Recurso:</label>
-                <input type="text" class="form-control py-2" id="buscador-tabla"
-                    aria-describedby="search-table" placeholder="">
-            </div>
+            <form [formGroup]="LineamientoForm" *ngIf="LineamientoForm">
+                <ng-container *ngIf="!fuentesRecurso">
+                    <div class="d-flex justify-content-center py-3">
+                        <div class="spinner-grow text-primary" role="status"></div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="fuentesRecurso">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Fuente de Recurso:</label>
+                        <select class="form-control py-2" id="exampleFormControlSelect1"
+                            formControlName="FuenteSeleccionada" (ngModelChange)="SeleccionarFuente($event)">
+                            <ng-container *ngFor="let fuente of fuentesRecurso">
+                                <option [ngValue]="fuente">{{fuente.Codigo}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </ng-container>
+            </form>
         </div>
         <div class="col-8">
             <div class="form-group">
                 <label>Descripcion:</label>
-                <input type="text" disabled="true" class="form-control py-2" id="buscador-tabla"
-                    aria-describedby="search-table" placeholder="">
+                <span class="form-control py-2">
+                    {{LineamientoForm.get('FuenteSeleccionada').value ? LineamientoForm.get('FuenteSeleccionada').value.data.Nombre : '' }}
+                </span>
             </div>
         </div>
     </div>

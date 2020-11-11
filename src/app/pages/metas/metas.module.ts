@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromMetas from './reducers/metas.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MetasEffects } from './effects/metas.effects';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { MetasEffects } from './effects/metas.effects';
     CommonModule,
     MetasRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forFeature(fromMetas.metasFeatureKey, fromMetas.reducer),
     EffectsModule.forFeature([MetasEffects]),
   ]

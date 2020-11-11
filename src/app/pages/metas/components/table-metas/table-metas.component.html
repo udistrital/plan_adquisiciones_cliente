@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-12">
             <label>Rubro:</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -34,15 +34,13 @@
                     </button>
 
                 </div>
-                <input type="text" class="form-control" placeholder="" aria-label="Username"
-                    aria-describedby="basic-addon1">
+                <span class="form-control">{{rubroSeleccionado ? rubroSeleccionado.data.Codigo : ''}}</span>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-12">
             <div class="form-group">
                 <label>Descripcion:</label>
-                <input type="text" disabled="true" class="form-control py-2" id="buscador-tabla"
-                    aria-describedby="search-table" placeholder="">
+                <span class="form-control">{{rubroSeleccionado ? rubroSeleccionado.data.Nombre : ''}}</span>
             </div>
         </div>
     </div>
@@ -65,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ngx-arbol-rubro></ngx-arbol-rubro>
+                <ngx-arbol-rubro [FuenteRecurso]="fuenteRecurso"></ngx-arbol-rubro>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Cerrar</button>

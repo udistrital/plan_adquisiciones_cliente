@@ -43,10 +43,6 @@ export const configTable: any = {
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
-    // title: {
-    //     name: 'Tabla de Prueba',
-    //     class: 'text-center',
-    // },
     dataConfig: [
         {
             key: 'id',
@@ -55,10 +51,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
                 class: '',
             }
         },
@@ -69,10 +61,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
                 class: '',
             }
         },
@@ -184,19 +172,6 @@ export interface DatosNodo {
     UnidadEjecutora?: number;
     Estado?: string;
     IsLeaf?: boolean;
-}
-
-export interface TreeNode<T> {
-    data: T;
-    children?: TreeNode<T>[];
-    expanded?: boolean;
-}
-
-export interface FSEntry {
-    name: string;
-    size: string;
-    kind: string;
-    items?: number;
 }
 
 export const DATA_TREE_NODE: any = [
@@ -322,11 +297,4 @@ export const DATA_TREE_NODE: any = [
             },
         ],
     },
-    // {
-    //     data: { name: 'Other', kind: 'dir', size: '109 MB', items: 2 },
-    //     children: [
-    //         { data: { name: 'backup.bkp', kind: 'bkp', size: '107 MB' } },
-    //         { data: { name: 'secret-note.txt', kind: 'txt', size: '2 MB' } },
-    //     ],
-    // },
 ];

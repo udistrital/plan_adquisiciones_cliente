@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GetArbolRubro, LoadNodoSeleccionado } from '../../actions/shared.actions';
 import { ArbolRubros, DatosNodo } from '../../interfaces/interfaces';
 import { getArbolRubro, getNodoSeleccionado } from '../../selectors/shared.selectors';
 import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridRowComponent } from '@nebular/theme';
+import { ParametricService } from '../../services/parametric.service';
 
 @Component({
   selector: 'ngx-arbol-rubro',
@@ -11,6 +12,8 @@ import { NbGetters, NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTree
   styleUrls: ['./arbol-rubro.component.scss']
 })
 export class ArbolRubroComponent implements OnInit, OnDestroy {
+
+  @Input() FuenteRecurso: any;
 
   selectedTreeRow: any = null;
 
@@ -30,6 +33,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<any>,
     private store: Store<any>,
+    private parametric: ParametricService,
   ) {
   }
 
@@ -41,10 +45,14 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
     };
     this.subscription$ = this.store.select(getArbolRubro).subscribe((arbol: any) => {
       if (Object.keys(arbol).length !== 0) {
-        this.data = arbol[0];
-        this.dataSource = this.dataSourceBuilder.create([this.data], getters);
+        if (this.FuenteRecurso) {
+          this.data = this.CargarRubros(this.FuenteRecurso, arbol);
+        } else {
+          this.data = [arbol[0]];
+        }
+        this.dataSource = this.dataSourceBuilder.create(this.data, getters);
       } else {
-        this.store.dispatch(GetArbolRubro({ branch: '3' }));
+        this.parametric.CargarArbolRubros('3');
       }
     });
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((rubro: any) => {
@@ -73,8 +81,16 @@ export class ArbolRubroComponent implements OnInit, OnDestroy {
   }
 
   onSelect(row: any) {
-    // console.log(row, this.selectedTreeRow)
+
     this.store.dispatch(LoadNodoSeleccionado(row));
   }
 
+  CargarRubros(Fuente: any, Arbol: any) {
+    // console.log(Arbol[0]);
+    const ArbolFuenteRecurso = Arbol[0].children.find(
+      hijo => hijo.Codigo === Fuente
+    );
+
+    return [ArbolFuenteRecurso];
+  }
 }

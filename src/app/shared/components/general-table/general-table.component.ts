@@ -27,7 +27,7 @@ export class GeneralTableComponent implements OnInit {
   }
 
   SelectedAction(action: any, row: any) {
-    // console.log(this.config.title,action, row)
+
     this.store.dispatch(LoadFilaSeleccionada({
       titulo: this.config.title,
       accion: action,
@@ -36,7 +36,7 @@ export class GeneralTableComponent implements OnInit {
   }
 
   SelectedAllAction(action: any) {
-    // console.log(this.config.title, action, this.datos);
+
     this.store.dispatch(LoadAccionTabla({
       titulo: this.config.title,
       accion: action,

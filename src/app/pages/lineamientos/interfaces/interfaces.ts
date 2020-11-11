@@ -43,22 +43,18 @@ export const configTable: any = {
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
-    // title: {
-    //     name: 'Tabla de Prueba',
-    //     class: 'text-center',
-    // },
+    title: {
+        name: 'Lineamientos Asociadas',
+        class: 'text-center text-light',
+    },
     dataConfig: [
         {
-            key: 'id',
+            key: 'numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
                 class: '',
             }
         },
@@ -69,11 +65,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                // functionPipe: (data: string) => {
-                //     return data + ' ' + data;
-                // },
-                // class: 'text-uppercase'
-                class: '',
+                class: 'text-justify',
             }
         },
     ],
@@ -115,55 +107,24 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 export const DATOS_PRUEBA: any = [
     {
-        id: 1,
-        nombre: 'Jhoan',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '1',
+        objetivo: 'Objetivo de Prueba 1',
+        nombre: 'Formar ciudadanos, profesionales, investigadores, creadores e innovadores, íntegros con pensamiento crítico y cultura democrática, en contextos diferenciados inter y multiculturalespara la transformación de la sociedad',
     },
     {
-        id: 2,
-        nombre: 'Manuel',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '2',
+        objetivo: 'Objetivo de Prueba 2',
+        nombre: 'Establecer un diseño curricular dinámico y flexible que promueva el pluralismo y consolide una comunidad universitaria crítica transformadora y en armonía ambiental',
     },
     {
-        id: 3,
-        nombre: 'Murillo',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '3',
+        objetivo: 'Objetivo de Prueba 3',
+        nombre: 'Integrar las funciones universitarias por medio de la investigación, creación, innovación para la ampliación del conocimiento como bien público y para la solución de problemas de la ciudad',
     },
     {
-        id: 4,
-        nombre: 'Yara',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
+        numero: '4',
+        objetivo: 'Objetivo de Prueba 4',
+        nombre: 'Garantizar, gestionar y proveer las condiciones institucionales para el cumplimiento de las funciones universitarias y el bienestar de su comunidad',
     },
+
 ];
