@@ -49,7 +49,7 @@ export const CONFIGURACION_PRUEBA: any = {
     },
     dataConfig: [
         {
-            key: 'numero',
+            key: 'Numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -59,7 +59,7 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'nombre',
+            key: 'Nombre',
             title: {
                 name: 'Nombre',
                 class: 'text-center',
@@ -107,24 +107,24 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 export const DATOS_PRUEBA: any = [
     {
-        numero: '1',
-        objetivo: 'Objetivo de Prueba 1',
-        nombre: 'Formar ciudadanos, profesionales, investigadores, creadores e innovadores, íntegros con pensamiento crítico y cultura democrática, en contextos diferenciados inter y multiculturalespara la transformación de la sociedad',
+        Numero: '1',
+        Objetivo: 'Objetivo de Prueba 1',
+        Nombre: 'Formar ciudadanos, profesionales, investigadores, creadores e innovadores, íntegros con pensamiento crítico y cultura democrática, en contextos diferenciados inter y multiculturalespara la transformación de la sociedad',
     },
     {
-        numero: '2',
-        objetivo: 'Objetivo de Prueba 2',
-        nombre: 'Establecer un diseño curricular dinámico y flexible que promueva el pluralismo y consolide una comunidad universitaria crítica transformadora y en armonía ambiental',
+        Numero: '2',
+        Objetivo: 'Objetivo de Prueba 2',
+        Nombre: 'Establecer un diseño curricular dinámico y flexible que promueva el pluralismo y consolide una comunidad universitaria crítica transformadora y en armonía ambiental',
     },
     {
-        numero: '3',
-        objetivo: 'Objetivo de Prueba 3',
-        nombre: 'Integrar las funciones universitarias por medio de la investigación, creación, innovación para la ampliación del conocimiento como bien público y para la solución de problemas de la ciudad',
+        Numero: '3',
+        Objetivo: 'Objetivo de Prueba 3',
+        Nombre: 'Integrar las funciones universitarias por medio de la investigación, creación, innovación para la ampliación del conocimiento como bien público y para la solución de problemas de la ciudad',
     },
     {
-        numero: '4',
-        objetivo: 'Objetivo de Prueba 4',
-        nombre: 'Garantizar, gestionar y proveer las condiciones institucionales para el cumplimiento de las funciones universitarias y el bienestar de su comunidad',
+        Numero: '4',
+        Objetivo: 'Objetivo de Prueba 4',
+        Nombre: 'Garantizar, gestionar y proveer las condiciones institucionales para el cumplimiento de las funciones universitarias y el bienestar de su comunidad',
     },
 
 ];
