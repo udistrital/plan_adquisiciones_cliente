@@ -55,3 +55,17 @@ export const LoadVigenciaActual = createAction(
   '[Shared] Load Vigencia Actual',
   props()
 );
+
+// Area Funcional
+
+export const LoadAreaFuncional = createAction(
+  '[Shared] Load Area Funcional',
+  props()
+);
+
+// Centro Gestor
+
+export const LoadCentroGestor = createAction(
+  '[Shared] Load Centro Gestor',
+  props()
+);
