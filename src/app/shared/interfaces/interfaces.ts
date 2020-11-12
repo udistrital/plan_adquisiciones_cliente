@@ -301,12 +301,12 @@ export const DATA_TREE_NODE: any = [
 
 export const OPCIONES_AREA_FUNCIONAL = [
     {
-        label:'01 - Rector',
+        label: '01 - Rector',
         Nombre: 'Rector',
     },
     {
-        label:'02 - Convenio',
+        label: '02 - Convenio',
         Nombre: 'Convenio',
     }
-    
-]
+
+];

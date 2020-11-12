@@ -44,20 +44,7 @@ export class SharedService {
     if (offset) {
       query = `?offset=${offset}`;
     }
-    return this.rqManager.get(`vigencia/vigencia_actual_area/1${query}`, params)
-      // .pipe(
-      //   map(
-      //     (res) => {
-      //       if (res['Type'] === 'error') {
-      //         this.pUpManager
-      //           .showErrorAlert('No se puede obtener la información de la vigencia actual');
-      //         return undefined;
-      //       }
-      //       /* TODO: mejorare está función y el return*/
-      //       return res[0].valor;
-      //     }
-      //   )
-      // );
+    return this.rqManager.get(`vigencia/vigencia_actual_area/1${query}`, params);
   }
 
 

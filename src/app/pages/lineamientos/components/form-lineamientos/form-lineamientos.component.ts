@@ -24,7 +24,7 @@ export class FormLineamientosComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.titulo = 'Crear / Editar Lineamiento';
-    this.store.dispatch(GetVigenciaActual({offset: null}))
+    this.store.dispatch(GetVigenciaActual({ offset: null }));
   }
 
   ngOnInit() {
@@ -40,9 +40,9 @@ export class FormLineamientosComponent implements OnInit {
         this.CrearLineamientoForm(null);
       }
     });
-    this.subscription2$ = this.store.select(getVigenciaActual).subscribe((vigencia:any) => {
-      console.log(vigencia)
-    })
+    this.subscription2$ = this.store.select(getVigenciaActual).subscribe((vigencia: any) => {
+
+    });
   }
 
   CrearLineamientoForm(lineamiento: any) {

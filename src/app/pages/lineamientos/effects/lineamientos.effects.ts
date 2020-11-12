@@ -39,7 +39,7 @@ export class LineamientosEffects {
       if (fuente) {
         this.FuenteRecurso = fuente;
       }
-    })
+    });
 
   }
 

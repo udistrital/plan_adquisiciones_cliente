@@ -55,16 +55,13 @@ export class TableLineamientosComponent implements OnInit {
           FuenteRecurso: fuente.Codigo,
         }));
       }
-    })
+    });
     // Cargar Lineamientos Asociados
     this.subscription2$ = this.store.select(getLineamientos).subscribe((lineamientos: any) => {
       if (lineamientos) {
-        console.log(lineamientos);
-        console.log(lineamientos[0]);
-        console.log(Object.keys(lineamientos[0]));
-        console.log(Object.keys(lineamientos[0]).length);
-      } 
-    })
+
+      }
+    });
 
     // Cargar Fuentes de Recurso
     this.subscription2$ = this.store.select(getArbolRubro).pipe(
