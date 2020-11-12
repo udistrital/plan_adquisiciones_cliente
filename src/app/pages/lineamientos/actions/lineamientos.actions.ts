@@ -9,8 +9,28 @@ export const LoadFuenteRecursoSeleccionada = createAction(
   props()
 );
 
-export const LoadLineamientoSeleccionado = createAction(
-  '[Lineamientos] Load Lineamiento Seleccionado',
+export const SeleccionarLineamiento = createAction(
+  '[Lineamientos] Seleccionar Lineamiento',
+  props()
+);
+
+export const CargarLineamientos = createAction(
+  '[Lineamientos] Cargar Lineamientos',
+  props()
+);
+
+export const ConsultarLineamientos = createAction(
+  '[Lineamientos] Consultar Lineamientos',
+  props()
+);
+
+export const CrearLineamiento = createAction(
+  '[Lineamientos] Crear Lineamiento',
+  props()
+);
+
+export const ActualizarLineamiento = createAction(
+  '[Lineamientos] Actualizar Lineamiento',
   props()
 );
 
