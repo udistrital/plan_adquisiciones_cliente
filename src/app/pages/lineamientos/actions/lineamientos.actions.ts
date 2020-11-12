@@ -4,6 +4,11 @@ export const loadLineamientoss = createAction(
   '[Lineamientos] Load Lineamientoss'
 );
 
+export const CatchError = createAction(
+  '[Lineamientos] Catch Error',
+  props<{}>()
+);
+
 export const LoadFuenteRecursoSeleccionada = createAction(
   '[Lineamientos] Load Fuente Recurso Seleccionada',
   props()

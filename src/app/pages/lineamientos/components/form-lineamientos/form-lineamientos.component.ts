@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
+import { getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
 import { getLineamientoSeleccionado } from '../../selectors/lineamientos.selectors';
 
 @Component({
@@ -12,6 +14,7 @@ export class FormLineamientosComponent implements OnInit {
 
   titulo: any;
   subscription$: any;
+  subscription2$: any;
 
   LineamientoForm: FormGroup;
   boton: string;
@@ -21,6 +24,7 @@ export class FormLineamientosComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.titulo = 'Crear / Editar Lineamiento';
+    this.store.dispatch(GetVigenciaActual({offset: null}))
   }
 
   ngOnInit() {
@@ -36,6 +40,9 @@ export class FormLineamientosComponent implements OnInit {
         this.CrearLineamientoForm(null);
       }
     });
+    this.subscription2$ = this.store.select(getVigenciaActual).subscribe((vigencia:any) => {
+      console.log(vigencia)
+    })
   }
 
   CrearLineamientoForm(lineamiento: any) {
@@ -43,17 +50,33 @@ export class FormLineamientosComponent implements OnInit {
       this.titulo = 'Editar Lineamiento';
       this.boton = 'Editar';
       this.LineamientoForm = this.fb.group({
-        Numero: [lineamiento.numero, [Validators.required]],
-        Nombre: [lineamiento.nombre, [Validators.required]],
-        Objetivo: [lineamiento.objetivo, [Validators.required]]
+        Activo: [lineamiento.Activo, []],
+        AreaFuncionalId: [lineamiento.AreaFuncionalId, []],
+        CentroGestor: [lineamiento.CentroGestor, []],
+        FechaCreacion: [lineamiento.FechaCreacion, []],
+        FechaModificacion: [lineamiento.FechaModificacion, []],
+        FuenteRecursoId: [lineamiento.FuenteRecursoId, []],
+        Id: [lineamiento.Id, []],
+        Nombre: [lineamiento.Nombre, [Validators.required]],
+        Numero: [lineamiento.Numero, [Validators.required]],
+        Objetivo: [lineamiento.Objetivo, [Validators.required]],
+        Vigencia: [lineamiento.Vigencia, []],
       });
     } else {
       this.titulo = 'Crear Lineamiento';
       this.boton = 'Crear';
       this.LineamientoForm = this.fb.group({
-        Numero: ['', [Validators.required]],
+        Activo: [true, []],
+        AreaFuncionalId: ['', []],
+        CentroGestor: ['', []],
+        FechaCreacion: ['', []],
+        FechaModificacion: ['', []],
+        FuenteRecursoId: ['', []],
+        Id: ['', []],
         Nombre: ['', [Validators.required]],
-        Objetivo: ['', [Validators.required]]
+        Numero: ['', [Validators.required]],
+        Objetivo: ['', [Validators.required]],
+        Vigencia: ['', []],
       });
     }
   }
