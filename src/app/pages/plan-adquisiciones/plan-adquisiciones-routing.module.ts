@@ -17,11 +17,11 @@ const routes: Routes = [{
       loadChildren: () => import('../metas/metas.module')
       .then(m => m.MetasModule),
     },
-    // {
-    //   path: 'actividades',
-    //   loadChildren: () => import('../lineamientos/lineamientos.module')
-    //   .then(m => m.LineamientosModule),
-    // },
+    {
+      path: 'actividades',
+      loadChildren: () => import('../actividades/actividades.module')
+      .then(m => m.ActividadesModule),
+    },
     {
       path: '',
       redirectTo: 'lineamientos',
