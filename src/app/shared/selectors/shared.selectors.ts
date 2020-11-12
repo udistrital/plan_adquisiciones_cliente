@@ -25,3 +25,8 @@ export const getAccionTabla = createSelector(
   (state: fromShared.State) => state.AccionTabla
 );
 
+export const getVigenciaActual = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.VigenciaActual
+);
+

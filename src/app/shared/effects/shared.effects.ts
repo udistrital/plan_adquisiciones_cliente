@@ -37,4 +37,16 @@ export class SharedEffects {
       )
     );
   });
+
+  GetVigenciaActual$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SharedActions.GetVigenciaActual),
+      mergeMap((offset) =>
+        this.sharedService.getVigenciaActual(offset.offset)
+          .pipe(
+            map(data => SharedActions.LoadVigenciaActual(data)),
+            catchError(data => of(SharedActions.CatchError(data))))
+      )
+    );
+  });
 }

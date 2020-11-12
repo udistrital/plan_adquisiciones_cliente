@@ -8,6 +8,7 @@ export interface State {
   NodoSeleccionado: any;
   FilaSeleccionada: any;
   AccionTabla: any;
+  VigenciaActual: any;
 }
 
 export const initialState: State = {
@@ -15,6 +16,7 @@ export const initialState: State = {
   NodoSeleccionado: null,
   FilaSeleccionada: null,
   AccionTabla: null,
+  VigenciaActual: null,
 };
 
 const sharedReducer = createReducer(
@@ -32,6 +34,9 @@ const sharedReducer = createReducer(
   })),
   on(SharedActions.LoadAccionTabla, (state, action) => ({
     ...state, AccionTabla: state.AccionTabla = action
+  })),
+  on(SharedActions.LoadVigenciaActual, (state, action) => ({
+    ...state, VigenciaActual: state.VigenciaActual = action
   })),
 
 );
