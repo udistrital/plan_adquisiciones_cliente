@@ -25,7 +25,7 @@ export class LineamientosService {
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `lineamiento/` +
+      `Lineamiento/` +
       `?query=Activo:true,` +
       `CentroGestor:${CentroGestor},` +
       `AreaFuncionalId:${AreaFuncionalId},` +
@@ -42,8 +42,9 @@ export class LineamientosService {
     Lineamiento: any
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    console.log(Lineamiento)
     return this.rqManager.post(
-      `lineamiento/`,
+      `Lineamiento/`,
       Lineamiento
     );
   }
@@ -57,9 +58,10 @@ export class LineamientosService {
     Lineamiento: any
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
-    return this.rqManager.putParams(
-      `lineamiento/`,
-      Lineamiento
+    return this.rqManager.put(
+      `Lineamiento/`,
+      Lineamiento,
+      Lineamiento.Id
     );
   }
 

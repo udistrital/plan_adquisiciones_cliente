@@ -45,7 +45,6 @@ export class LineamientosEffects {
 
   loadLineamientoss$ = createEffect(() => {
     return this.actions$.pipe(
-
       ofType(LineamientosActions.loadLineamientoss),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
       concatMap(() => EMPTY)
@@ -61,7 +60,7 @@ export class LineamientosEffects {
           opciones.AreaFuncional,
           opciones.FuenteRecurso,
         ).pipe(
-          map(data => LineamientosActions.CargarLineamientos(data)),
+          map(data => LineamientosActions.CargarLineamientos([data])),
           catchError(data => of(LineamientosActions.CatchError(data))))
       )
     );
@@ -72,14 +71,14 @@ export class LineamientosEffects {
       ofType(LineamientosActions.CrearLineamiento),
       mergeMap((lineamiento: any) =>
         this.lineamientosService.crearLineamiento(
-          lineamiento[0],
+          lineamiento,
         ).pipe(
           map((data) => LineamientosActions.SeleccionarLineamiento(
             data
           )),
           map(() => LineamientosActions.ConsultarLineamientos({
             CentroGestor: this.CentroGestor.CentroGestor,
-            AreaFuncional: this.AreaFuncional.Nombre,
+            AreaFuncional: this.AreaFuncional.Id,
             FuenteRecurso: this.FuenteRecurso.Codigo,
           })),
           catchError(data => of(LineamientosActions.CatchError(data))))
@@ -92,14 +91,14 @@ export class LineamientosEffects {
       ofType(LineamientosActions.ActualizarLineamiento),
       mergeMap((lineamiento: any) =>
         this.lineamientosService.updateLineamiento(
-          lineamiento[0],
+          lineamiento,
         ).pipe(
           map((data) => LineamientosActions.SeleccionarLineamiento(
             data
           )),
           map(() => LineamientosActions.ConsultarLineamientos({
             CentroGestor: this.CentroGestor.CentroGestor,
-            AreaFuncional: this.AreaFuncional.Nombre,
+            AreaFuncional: this.AreaFuncional.Id,
             FuenteRecurso: this.FuenteRecurso.Codigo,
           })),
           catchError(data => of(LineamientosActions.CatchError(data))))

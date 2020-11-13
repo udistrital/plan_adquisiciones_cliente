@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { LoadAreaFuncional, LoadCentroGestor } from '../../actions/shared.actions';
 import { OPCIONES_AREA_FUNCIONAL } from '../../interfaces/interfaces';
+import { getAreaFuncional, getCentroGestor } from '../../selectors/shared.selectors';
 
 @Component({
   selector: 'ngx-datos-generales-iniciales',
@@ -16,6 +18,7 @@ export class DatosGeneralesInicialesComponent implements OnInit {
   AreaFuncional: any;
   CentroGestor: any;
   Opciones: any[];
+  subscription$: any;
 
 
 
@@ -26,6 +29,17 @@ export class DatosGeneralesInicialesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subscription$ = combineLatest([
+      this.store.select(getAreaFuncional),
+      this.store.select(getCentroGestor)
+    ]).subscribe(([area, centro]) => {
+      if (area) {
+        this.AreaFuncional = this.Opciones.find((opcion) => area.Id = opcion.Id);
+      }
+      if (centro) {
+        this.CentroGestor = centro.CentroGestor;
+      }
+    })
   }
 
   SeleccionarCentroGestor() {
