@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
-import { getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
-import { getLineamientoSeleccionado } from '../../selectors/lineamientos.selectors';
+import { getAreaFuncional, getCentroGestor, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
+import { ActualizarLineamiento, CrearLineamiento } from '../../actions/lineamientos.actions';
+import { getFuenteRecursoSeleccionada, getLineamientoSeleccionado } from '../../selectors/lineamientos.selectors';
 
 @Component({
   selector: 'ngx-form-lineamientos',
@@ -14,7 +16,7 @@ export class FormLineamientosComponent implements OnInit {
 
   titulo: any;
   subscription$: any;
-  subscription2$: any;
+  vigencia: any;
 
   LineamientoForm: FormGroup;
   boton: string;
@@ -28,24 +30,28 @@ export class FormLineamientosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getLineamientoSeleccionado).subscribe((lineamiento: any) => {
-      // console.log(lineamiento)
-      if (lineamiento) {
+    this.subscription$ = combineLatest([
+      this.store.select(getLineamientoSeleccionado),
+      this.store.select(getVigenciaActual),
+      this.store.select(getAreaFuncional),
+      this.store.select(getCentroGestor),
+      this.store.select(getFuenteRecursoSeleccionada),
+    ]).subscribe(([lineamiento, vigencia, area, centro, fuente]) => {
+      if (lineamiento && vigencia && area && centro && fuente) {
         if (Object.keys(lineamiento)[0] === 'type') {
-          this.CrearLineamientoForm(null);
+          this.CrearLineamientoForm(null, vigencia, area, centro, fuente);
         } else {
           this.CrearLineamientoForm(lineamiento);
         }
-      } else {
-        this.CrearLineamientoForm(null);
       }
-    });
-    this.subscription2$ = this.store.select(getVigenciaActual).subscribe((vigencia: any) => {
-
-    });
+      // else {
+      //   this.CrearLineamientoForm(null, vigencia, area, centro, fuente);
+      // }
+    })
+    // this.subscription2$ = this.store.select(getLineamientoSeleccionado),
   }
 
-  CrearLineamientoForm(lineamiento: any) {
+  CrearLineamientoForm(lineamiento: any, vigencia?: any, area?: any, centro?: any, fuente?: any) {
     if (lineamiento) {
       this.titulo = 'Editar Lineamiento';
       this.boton = 'Editar';
@@ -67,17 +73,28 @@ export class FormLineamientosComponent implements OnInit {
       this.boton = 'Crear';
       this.LineamientoForm = this.fb.group({
         Activo: [true, []],
-        AreaFuncionalId: ['', []],
-        CentroGestor: ['', []],
+        AreaFuncionalId: [area.Id, []],
+        CentroGestor: [centro.CentroGestor, []],
         FechaCreacion: ['', []],
         FechaModificacion: ['', []],
-        FuenteRecursoId: ['', []],
-        Id: ['', []],
+        FuenteRecursoId: [fuente.Codigo, []],
+        Id: [null, []],
         Nombre: ['', [Validators.required]],
         Numero: ['', [Validators.required]],
         Objetivo: ['', [Validators.required]],
-        Vigencia: ['', []],
+        Vigencia: [vigencia[0].valor, []],
       });
     }
+  }
+  OnSubmit() {
+    const lineamiento: any = this.LineamientoForm.value;
+    if (lineamiento.Id === null) {
+      this.store.dispatch(CrearLineamiento(lineamiento))
+    } else {
+      this.store.dispatch(ActualizarLineamiento(lineamiento))
+    }
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 }
