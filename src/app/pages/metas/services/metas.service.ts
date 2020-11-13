@@ -13,19 +13,19 @@ export class MetasService {
   /**
    * Get Metas
    *  retorna las metas asociados al Meta y al Rubro seleccionado
-   * @param [Meta] Meta Asociado
+   * @param [Lineamiento] Lineamiento Asociado
    * @param [Rubro] Rubro Asociado
    * @returns  Metas Asociadas.
    */
   public getMetasAsociadas(
-    MetaId: any,
+    LineamientoId: any,
     Rubro: any,
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `meta/` +
+      `Meta/` +
       `?query=Activo:true,` +
-      `MetaId:${MetaId},` +
+      `LineamientoId:${LineamientoId},` +
       `Rubro:${Rubro}`
     );
   }
@@ -40,7 +40,7 @@ export class MetasService {
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.post(
-      `meta/`,
+      `Meta/`,
       Meta
     );
   }
@@ -55,7 +55,7 @@ export class MetasService {
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.putParams(
-      `meta/`,
+      `Meta/`,
       Meta
     );
   }
