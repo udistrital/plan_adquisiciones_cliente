@@ -52,7 +52,7 @@ export class MetasEffects {
       mergeMap((opciones: any) =>
         this.metasService.getMetasAsociadas(
           opciones.Lineamiento.Id,
-          opciones.Rubro.Codigo,
+          opciones.Rubro.data.Codigo,
         ).pipe(
           map(data => MetasActions.CargarMetas([data])),
           catchError(data => of(MetasActions.CatchError(data))))
@@ -72,7 +72,7 @@ export class MetasEffects {
           )),
           map(() => MetasActions.ConsultarMetas({
             Lineamiento: this.Lineamiento.Id,
-            Rubro: this.Rubro.Codigo,
+            Rubro: this.Rubro.data.Codigo,
           })),
           catchError(data => of(MetasActions.CatchError(data))))
       )
@@ -91,7 +91,7 @@ export class MetasEffects {
           )),
           map(() => MetasActions.ConsultarMetas({
             Lineamiento: this.Lineamiento.Id,
-            Rubro: this.Rubro.Codigo,
+            Rubro: this.Rubro.data.Codigo,
           })),
           catchError(data => of(MetasActions.CatchError(data))))
       )

@@ -4,22 +4,24 @@
             <h5 class="card-title text-center text-primary">Metas</h5>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-4">
             <div class="form-group">
-                <label>lineamiento:</label>
-                <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
-                    placeholder="">
+                <label for="exampleFormControlSelect1">Lineamiento:</label>
+                <select class="form-control py-2" id="exampleFormControlSelect1" [(ngModel)]="LineamientoSeleccionado"
+                    (ngModelChange)="SeleccionarLineamiento($event)">
+                    <ng-container *ngFor="let lineamiento of Lineamientos">
+                        <option [ngValue]="lineamiento">{{lineamiento.Numero}}</option>
+                    </ng-container>
+                </select>
             </div>
         </div>
         <div class="col-8">
             <div class="form-group">
-                <label>Descripcion:</label>
-                <input type="text" disabled="true" class="form-control py-2" id="buscador-tabla"
-                    aria-describedby="search-table" placeholder="">
+                <label>Nombre:</label>
+                <span class="form-control py-2">
+                    {{ LineamientoSeleccionado ? LineamientoSeleccionado.Nombre : '' }}
+                </span>
             </div>
         </div>
     </div>
@@ -46,7 +48,7 @@
     </div>
     <div class="row">
         <div class="col px-0">
-            <ngx-general-table [config]="configuracion" [datos]="datosPrueba"></ngx-general-table>
+            <ngx-general-table [config]="configuracion" [datos]="Metas"></ngx-general-table>
         </div>
     </div>
 </div>
