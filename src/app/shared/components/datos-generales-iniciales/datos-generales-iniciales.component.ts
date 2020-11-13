@@ -39,7 +39,7 @@ export class DatosGeneralesInicialesComponent implements OnInit {
       if (centro) {
         this.CentroGestor = centro.CentroGestor;
       }
-    })
+    });
   }
 
   SeleccionarCentroGestor() {

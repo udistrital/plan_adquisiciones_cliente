@@ -42,7 +42,6 @@ export class LineamientosService {
     Lineamiento: any
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
-    console.log(Lineamiento)
     return this.rqManager.post(
       `Lineamiento/`,
       Lineamiento

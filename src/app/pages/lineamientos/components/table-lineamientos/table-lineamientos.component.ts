@@ -60,7 +60,7 @@ export class TableLineamientosComponent implements OnInit, OnDestroy {
       if (lineamientos) {
         if (Object.keys(lineamientos).length !== 0) {
           if (Object.keys(lineamientos[0][0]).length !== 0) {
-            this.Lineamientos = lineamientos[0]
+            this.Lineamientos = lineamientos[0];
           } else {
             this.Lineamientos = [];
           }

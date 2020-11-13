@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -12,7 +12,7 @@ import { getFuenteRecursoSeleccionada, getLineamientoSeleccionado } from '../../
   templateUrl: './form-lineamientos.component.html',
   styleUrls: ['./form-lineamientos.component.scss']
 })
-export class FormLineamientosComponent implements OnInit {
+export class FormLineamientosComponent implements OnInit, OnDestroy {
 
   titulo: any;
   subscription$: any;
@@ -47,7 +47,7 @@ export class FormLineamientosComponent implements OnInit {
       // else {
       //   this.CrearLineamientoForm(null, vigencia, area, centro, fuente);
       // }
-    })
+    });
     // this.subscription2$ = this.store.select(getLineamientoSeleccionado),
   }
 
@@ -89,9 +89,9 @@ export class FormLineamientosComponent implements OnInit {
   OnSubmit() {
     const lineamiento: any = this.LineamientoForm.value;
     if (lineamiento.Id === null) {
-      this.store.dispatch(CrearLineamiento(lineamiento))
+      this.store.dispatch(CrearLineamiento(lineamiento));
     } else {
-      this.store.dispatch(ActualizarLineamiento(lineamiento))
+      this.store.dispatch(ActualizarLineamiento(lineamiento));
     }
   }
   ngOnDestroy(): void {
