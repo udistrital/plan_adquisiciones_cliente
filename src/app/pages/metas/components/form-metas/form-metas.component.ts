@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { getMetaSeleccionada } from '../../selectors/metas.selectors';
+import { combineLatest } from 'rxjs';
+import { getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
+import { CrearMeta, ActualizarMeta } from '../../actions/metas.actions';
+import { getMetaSeleccionada, getRubroSeleccionado } from '../../selectors/metas.selectors';
 
 @Component({
   selector: 'ngx-form-metas',
@@ -20,39 +23,61 @@ export class FormMetasComponent implements OnInit {
     private store: Store<any>,
     private fb: FormBuilder,
   ) {
-    this.titulo = 'Crear / Editar Meta';
+    this.titulo = 'Crear Meta';
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta: any) => {
 
-      if (meta) {
+    this.subscription$ = combineLatest([
+      this.store.select(getRubroSeleccionado),
+      this.store.select(getLineamientoSeleccionado),
+      this.store.select(getMetaSeleccionada),
+    ]).subscribe(([rubro, lineamiento, meta]) => {
+      if (rubro && lineamiento && meta) {
         if (Object.keys(meta)[0] === 'type') {
-          this.CrearMetaForm(null);
+          this.CrearMetaForm(null, rubro, lineamiento);
         } else {
           this.CrearMetaForm(meta);
         }
-      } else {
-        this.CrearMetaForm(null);
       }
-    });
+    })
   }
 
-  CrearMetaForm(meta: any) {
+  CrearMetaForm(meta: any, rubro?: any, lineamiento?: any) {
     if (meta) {
       this.titulo = 'Editar Meta';
       this.boton = 'Editar';
       this.MetaForm = this.fb.group({
-        Numero: [meta.numero, [Validators.required]],
-        Nombre: [meta.nombre, [Validators.required]],
+        Activo: [meta.Activo, []],
+        FechaCreacion: [meta.FechaCreacion, []],
+        FechaModificacion: [meta.FechaModificacion, []],
+        Id: [meta.Id, []],
+        Nombre: [meta.Nombre, [Validators.required]],
+        Numero: [meta.Numero, [Validators.required]],
+        Rubro: [meta.Rubro, []],
+        LineamientoId: [meta.LineamientoId, []],
       });
     } else {
       this.titulo = 'Crear Meta';
       this.boton = 'Crear';
       this.MetaForm = this.fb.group({
-        Numero: ['', [Validators.required]],
+        Activo: [true, []],
+        FechaCreacion: ['', []],
+        FechaModificacion: ['', []],
+        Id: [null, []],
         Nombre: ['', [Validators.required]],
+        Numero: ['', [Validators.required]],
+        Rubro: [rubro.data.Codigo, []],
+        LineamientoId: [lineamiento, []],
       });
+    }
+  }
+  OnSubmit() {
+    const meta: any = this.MetaForm.value;
+    if (meta.Id === null) {
+      this.store.dispatch(CrearMeta(meta));
+    } else {
+      this.store.dispatch(ActualizarMeta(meta));
     }
   }
 }

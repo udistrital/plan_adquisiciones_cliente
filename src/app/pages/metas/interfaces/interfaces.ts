@@ -49,7 +49,7 @@ export const CONFIGURACION_PRUEBA: any = {
     },
     dataConfig: [
         {
-            key: 'numero',
+            key: 'Numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -59,7 +59,7 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'nombre',
+            key: 'Nombre',
             title: {
                 name: 'Nombre',
                 class: 'text-center',
@@ -86,7 +86,7 @@ export const CONFIGURACION_PRUEBA: any = {
                 name: 'actividades',
                 icon: 'fas fa-list',
                 class: 'p-2',
-                title: 'Ver Metas',
+                title: 'Ver Actividades',
             }
         ],
     },

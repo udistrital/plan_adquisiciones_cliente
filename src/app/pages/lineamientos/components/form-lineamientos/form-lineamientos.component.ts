@@ -25,7 +25,7 @@ export class FormLineamientosComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private fb: FormBuilder,
   ) {
-    this.titulo = 'Crear / Editar Lineamiento';
+    this.titulo = 'Crear Lineamiento';
     this.store.dispatch(GetVigenciaActual({ offset: null }));
   }
 
@@ -44,11 +44,7 @@ export class FormLineamientosComponent implements OnInit, OnDestroy {
           this.CrearLineamientoForm(lineamiento);
         }
       }
-      // else {
-      //   this.CrearLineamientoForm(null, vigencia, area, centro, fuente);
-      // }
     });
-    // this.subscription2$ = this.store.select(getLineamientoSeleccionado),
   }
 
   CrearLineamientoForm(lineamiento: any, vigencia?: any, area?: any, centro?: any, fuente?: any) {

@@ -54,9 +54,10 @@ export class MetasService {
     Meta: any
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
-    return this.rqManager.putParams(
+    return this.rqManager.put(
       `Meta/`,
-      Meta
+      Meta,
+      Meta.Id
     );
   }
 

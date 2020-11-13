@@ -71,8 +71,8 @@ export class MetasEffects {
             data
           )),
           map(() => MetasActions.ConsultarMetas({
-            Lineamiento: this.Lineamiento.Id,
-            Rubro: this.Rubro.data.Codigo,
+            Lineamiento: this.Lineamiento,
+            Rubro: this.Rubro,
           })),
           catchError(data => of(MetasActions.CatchError(data))))
       )
@@ -90,8 +90,8 @@ export class MetasEffects {
             data
           )),
           map(() => MetasActions.ConsultarMetas({
-            Lineamiento: this.Lineamiento.Id,
-            Rubro: this.Rubro.data.Codigo,
+            Lineamiento: this.Lineamiento,
+            Rubro: this.Rubro,
           })),
           catchError(data => of(MetasActions.CatchError(data))))
       )
