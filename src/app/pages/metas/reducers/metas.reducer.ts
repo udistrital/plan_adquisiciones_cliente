@@ -12,7 +12,7 @@ export interface State {
 export const initialState: State = {
   RubroSeleccionado: null,
   MetaSeleccionada: null,
-  Metas:[]
+  Metas: []
 };
 
 const metasReducer = createReducer(

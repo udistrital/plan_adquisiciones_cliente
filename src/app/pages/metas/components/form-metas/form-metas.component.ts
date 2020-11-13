@@ -40,7 +40,7 @@ export class FormMetasComponent implements OnInit {
           this.CrearMetaForm(meta);
         }
       }
-    })
+    });
   }
 
   CrearMetaForm(meta: any, rubro?: any, lineamiento?: any) {

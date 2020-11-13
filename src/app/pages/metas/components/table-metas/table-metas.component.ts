@@ -54,7 +54,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
           }
         }
       }
-    })
+    });
     // Cargar Lineamientos y fuente de recurso
     this.subscription2$ = combineLatest([
       this.store.select(getFuenteRecursoSeleccionada),
@@ -68,7 +68,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
           this.Lineamientos = [];
         }
       }
-    })
+    });
     // Consultar Metas, Cargar rubro y lineamiento seleccionado
     this.subscription3$ = combineLatest([
       this.store.select(getRubroSeleccionado),
@@ -78,15 +78,15 @@ export class TableMetasComponent implements OnInit, OnDestroy {
         this.store.dispatch(ConsultarMetas({
           Lineamiento: lineamiento,
           Rubro: rubro,
-        }))
+        }));
       }
       if (rubro) {
         this.rubroSeleccionado = rubro;
       }
       if (lineamiento) {
-        this.LineamientoSeleccionado = this.Lineamientos.find((elemento) => lineamiento.Id === elemento.Id)
+        this.LineamientoSeleccionado = this.Lineamientos.find((elemento) => lineamiento.Id === elemento.Id);
       }
-    })
+    });
 
     // Seleccionar Rubro
     this.subscription4$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {

@@ -29,12 +29,12 @@ export class MetasEffects {
       this.store.select(getRubroSeleccionado),
     ]).subscribe(([lineamiento, rubro]) => {
       if (lineamiento) {
-        this.Lineamiento = lineamiento
+        this.Lineamiento = lineamiento;
       }
       if (rubro) {
-        this.Rubro = rubro
+        this.Rubro = rubro;
       }
-    })
+    });
   }
 
   loadMetass$ = createEffect(() => {
