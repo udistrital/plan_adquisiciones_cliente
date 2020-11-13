@@ -16,7 +16,7 @@ export class ActividadesService {
    * @param [Meta] Meta Asociada
    * @returns  Actividades Asociadas.
    */
-  public getActividadsAsociadas(
+  public getActividadesAsociadas(
     MetaId: any,
     ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
