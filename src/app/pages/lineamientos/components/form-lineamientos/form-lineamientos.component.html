@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Numero:</label>
-                    <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+                    <input type="number" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
                         formControlName="Numero" placeholder="">
                 </div>
             </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="LineamientoForm.invalid && !LineamientoForm.touched" type="button"
-                    class="btn btn-primary px-3 py-2 my-3 text-light">{{boton}}</button>
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <button type="button" class="btn btn-light px-3 py-2 my-3 border">Cancelar</button>
