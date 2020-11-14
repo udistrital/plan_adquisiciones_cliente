@@ -12,7 +12,7 @@ import { getMetaSeleccionada } from '../../metas/selectors/metas.selectors';
 
 @Injectable()
 export class ActividadesEffects {
-  
+
   subscription$: any;
   Meta: any;
 
@@ -42,7 +42,7 @@ export class ActividadesEffects {
       ofType(ActividadesActions.ConsultarActividades),
       mergeMap((opciones: any) =>
         this.actividadesService.getActividadesAsociadas(
-          opciones.Actividad.Id,
+          opciones.Meta.Id,
         ).pipe(
           map(data => ActividadesActions.CargarActividades([data])),
           catchError(data => of(ActividadesActions.CatchError(data))))
@@ -57,9 +57,6 @@ export class ActividadesEffects {
         this.actividadesService.crearActividad(
           Actividad,
         ).pipe(
-          map((data) => ActividadesActions.SeleccionarActividad(
-            data
-          )),
           map(() => ActividadesActions.ConsultarActividades({
             Meta: this.Meta,
           })),
@@ -75,9 +72,6 @@ export class ActividadesEffects {
         this.actividadesService.updateActividad(
           Actividad,
         ).pipe(
-          map((data) => ActividadesActions.SeleccionarActividad(
-            data
-          )),
           map(() => ActividadesActions.ConsultarActividades({
             Meta: this.Meta,
           })),

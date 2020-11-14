@@ -67,9 +67,6 @@ export class MetasEffects {
         this.metasService.crearMeta(
           Meta,
         ).pipe(
-          map((data) => MetasActions.SeleccionarMeta(
-            data
-          )),
           map(() => MetasActions.ConsultarMetas({
             Lineamiento: this.Lineamiento,
             Rubro: this.Rubro,
@@ -86,9 +83,6 @@ export class MetasEffects {
         this.metasService.updateMeta(
           Meta,
         ).pipe(
-          map((data) => MetasActions.SeleccionarMeta(
-            data
-          )),
           map(() => MetasActions.ConsultarMetas({
             Lineamiento: this.Lineamiento,
             Rubro: this.Rubro,

@@ -73,9 +73,6 @@ export class LineamientosEffects {
         this.lineamientosService.crearLineamiento(
           lineamiento,
         ).pipe(
-          map((data) => LineamientosActions.SeleccionarLineamiento(
-            data
-          )),
           map(() => LineamientosActions.ConsultarLineamientos({
             CentroGestor: this.CentroGestor.CentroGestor,
             AreaFuncional: this.AreaFuncional.Id,
@@ -93,9 +90,6 @@ export class LineamientosEffects {
         this.lineamientosService.updateLineamiento(
           lineamiento,
         ).pipe(
-          map((data) => LineamientosActions.SeleccionarLineamiento(
-            data
-          )),
           map(() => LineamientosActions.ConsultarLineamientos({
             CentroGestor: this.CentroGestor.CentroGestor,
             AreaFuncional: this.AreaFuncional.Id,
