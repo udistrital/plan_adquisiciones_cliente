@@ -23,9 +23,9 @@ export class ActividadesEffects {
   ) {
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta) => {
       if (meta) {
-        this.Meta = meta
+        this.Meta = meta;
       }
-    })
+    });
   }
 
   loadActividadess$ = createEffect(() => {

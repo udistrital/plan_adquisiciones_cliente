@@ -32,7 +32,6 @@ export class FormActividadesComponent implements OnInit {
       this.store.select(getMetaSeleccionada),
     ]).subscribe(([actividad, meta]) => {
       if (actividad && meta) {
-        console.log(actividad)
         if (Object.keys(actividad)[0] === 'type') {
           this.CrearActividadesForm(null, meta);
         } else {
@@ -43,7 +42,6 @@ export class FormActividadesComponent implements OnInit {
   }
 
   CrearActividadesForm(actividad: any, meta?: any) {
-    console.log(meta)
     if (actividad) {
       this.titulo = 'Editar Actividad';
       this.boton = 'Editar';

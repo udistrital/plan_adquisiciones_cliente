@@ -14,9 +14,7 @@ import { getActividades } from '../../selectors/actividades.selectors';
 export class TableActividadesComponent implements OnInit {
 
   configuracion: any;
-  datosPrueba: any;
   subscription$: any;
-  
   Actividades: any = [];
   subscription3$: any;
   subscription2$: any;
@@ -25,7 +23,6 @@ export class TableActividadesComponent implements OnInit {
   constructor(
     private store: Store<any>,
   ) {
-    this.datosPrueba = DATOS_PRUEBA;
     this.configuracion = CONFIGURACION_PRUEBA;
   }
 
@@ -35,9 +32,9 @@ export class TableActividadesComponent implements OnInit {
       if (meta) {
         this.store.dispatch(ConsultarActividades({
           Meta: meta,
-        }))
+        }));
       }
-    })
+    });
     // Cargar Metas
     this.subscription2$ = this.store.select(getActividades).subscribe((actividades) => {
       if (actividades) {
@@ -49,15 +46,13 @@ export class TableActividadesComponent implements OnInit {
           }
         }
       }
-      
-    })
+    });
     // Seleccionar Actividad
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
         if (Object.keys(fila)[0] !== 'type') {
           this.store.dispatch(SeleccionarActividad(fila.fila));
         }
-        
       }
     });
     // Crear Actividad
