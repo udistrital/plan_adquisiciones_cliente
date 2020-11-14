@@ -125,5 +125,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
     this.subscription4$.unsubscribe();
+    this.subscription5$.unsubscribe();
+    this.subscription6$.unsubscribe();
   }
 }

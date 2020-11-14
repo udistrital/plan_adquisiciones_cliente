@@ -23,7 +23,7 @@ export class ActividadesService {
     return this.rqManager.get(
       `Actividad/` +
       `?query=Activo:true,` +
-      `MetaId:${MetaId},`
+      `MetaId:${MetaId}`
     );
   }
   /**
