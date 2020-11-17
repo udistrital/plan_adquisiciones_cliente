@@ -20,8 +20,8 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     if (Object.keys(this.state.getValue()).find(key => key === 'lineamientos') === undefined) {
-      this.route.navigate(['pages/plan-adquisiciones/lineamientos'])
-    } 
+      this.route.navigate(['pages/plan-adquisiciones/lineamientos']);
+    }
   }
 
 }

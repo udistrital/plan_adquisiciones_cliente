@@ -26,7 +26,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     this.titulo = 'Crear Actividad';
   }
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe()
+    this.subscription$.unsubscribe();
   }
 
   ngOnInit() {
