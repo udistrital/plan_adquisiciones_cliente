@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { State } from '@ngrx/store';
 
 @Component({
   selector: 'ngx-layout',
@@ -9,10 +11,17 @@ export class LayoutComponent implements OnInit {
 
 
   titulo: any;
-  constructor() {
+  constructor(
+    private state: State<any>,
+    private route: Router
+  ) {
     this.titulo = 'ACTIVIDADES';
   }
+
   ngOnInit() {
+    if (Object.keys(this.state.getValue()).find(key => key === 'lineamientos') === undefined) {
+      this.route.navigate(['pages/plan-adquisiciones/lineamientos'])
+    } 
   }
 
 }
