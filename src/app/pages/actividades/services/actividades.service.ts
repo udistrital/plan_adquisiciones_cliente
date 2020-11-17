@@ -26,6 +26,23 @@ export class ActividadesService {
       `MetaId:${MetaId}`
     );
   }
+
+  /**
+    * get Actividad
+    *  se crea una Actividad nueva
+    * @param [Actividad] Actividad por consultar
+    * @returns  Actividad creada.
+    */
+   public getActividad(
+    Actividad: any
+    ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Actividad/` +
+      `${Actividad}`
+    );
+  }
+
   /**
     * Post Actividad
     *  se crea una Actividad nueva

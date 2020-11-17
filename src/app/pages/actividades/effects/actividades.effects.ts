@@ -9,7 +9,7 @@ import { ActividadesService } from '../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { getMetaSeleccionada } from '../../metas/selectors/metas.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { SeleccionarActividad } from '../actions/actividades.actions';
+import { ConsultarActividad, SeleccionarActividad } from '../actions/actividades.actions';
 
 
 @Injectable()
@@ -58,6 +58,25 @@ export class ActividadesEffects {
     );
   });
 
+  GetActividad$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ActividadesActions.ConsultarActividad),
+      mergeMap((opciones: any) =>
+        this.actividadesService.getActividad(
+          opciones.Id,
+        ).pipe(
+          map(data => {
+            return ActividadesActions.SeleccionarActividad(data)
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(ActividadesActions.CatchError(data))
+          }))
+      )
+    );
+  });
+
+
   CrearActividad$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActividadesActions.CrearActividad),
@@ -66,7 +85,7 @@ export class ActividadesEffects {
           Actividad,
         ).pipe(
           map((data) => {
-            this.store.dispatch(SeleccionarActividad(data))
+            this.store.dispatch(ConsultarActividad(data));
             this.popupManager.showSuccessAlert('Actividad Creada')
             return ActividadesActions.ConsultarActividades({
               Meta: this.Meta,

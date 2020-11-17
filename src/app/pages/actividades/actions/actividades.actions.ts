@@ -24,6 +24,11 @@ export const ConsultarActividades = createAction(
   props()
 );
 
+export const ConsultarActividad = createAction(
+  '[Actividades] Consultar Actividad',
+  props()
+);
+
 export const CrearActividad = createAction(
   '[Actividades] Crear Actividad',
   props()

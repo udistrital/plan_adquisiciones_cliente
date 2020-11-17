@@ -39,7 +39,7 @@ export class TableActividadesComponent implements OnInit {
     this.subscription2$ = this.store.select(getActividades).subscribe((actividades) => {
       if (actividades) {
         if (Object.keys(actividades).length !== 0) {
-          if (Object.keys(actividades[0]).length !== 0) {
+          if (Object.keys(actividades[0][0]).length !== 0) {
             this.Actividades = actividades[0];
           } else {
             this.Actividades = [];
