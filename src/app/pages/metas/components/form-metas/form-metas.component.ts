@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -11,7 +11,7 @@ import { getMetaSeleccionada, getRubroSeleccionado } from '../../selectors/metas
   templateUrl: './form-metas.component.html',
   styleUrls: ['./form-metas.component.scss']
 })
-export class FormMetasComponent implements OnInit {
+export class FormMetasComponent implements OnInit, OnDestroy {
 
   titulo: any;
   subscription$: any;
@@ -79,5 +79,8 @@ export class FormMetasComponent implements OnInit {
     } else {
       this.store.dispatch(ActualizarMeta(meta));
     }
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe()
   }
 }

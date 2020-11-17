@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { getMetas, getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
@@ -11,7 +11,7 @@ import { getActividades } from '../../selectors/actividades.selectors';
   templateUrl: './table-actividades.component.html',
   styleUrls: ['./table-actividades.component.scss']
 })
-export class TableActividadesComponent implements OnInit {
+export class TableActividadesComponent implements OnInit, OnDestroy {
 
   configuracion: any;
   subscription$: any;
@@ -59,5 +59,12 @@ export class TableActividadesComponent implements OnInit {
     this.subscription4$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
       this.store.dispatch(SeleccionarActividad(null));
     });
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe()
+    this.subscription2$.unsubscribe()
+    this.subscription3$.unsubscribe()
+    this.subscription4$.unsubscribe()
   }
 }
