@@ -9,6 +9,8 @@ import { LineamientosService } from '../services/lineamientos.service';
 import { Store } from '@ngrx/store';
 import { getAreaFuncional, getCentroGestor } from '../../../shared/selectors/shared.selectors';
 import { getFuenteRecursoSeleccionada } from '../selectors/lineamientos.selectors';
+import { PopUpManager } from '../../../@core/managers/popUpManager';
+import { SeleccionarLineamiento } from '../actions/lineamientos.actions';
 
 
 @Injectable()
@@ -23,6 +25,7 @@ export class LineamientosEffects {
     private actions$: Actions,
     private lineamientosService: LineamientosService,
     private store: Store<any>,
+    private popupManager: PopUpManager,
   ) {
 
     this.subscription$ = combineLatest([
@@ -60,8 +63,13 @@ export class LineamientosEffects {
           opciones.AreaFuncional,
           opciones.FuenteRecurso,
         ).pipe(
-          map(data => LineamientosActions.CargarLineamientos([data])),
-          catchError(data => of(LineamientosActions.CatchError(data))))
+          map(data => {
+            return LineamientosActions.CargarLineamientos([data])
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(LineamientosActions.CatchError(data))
+          }))
       )
     );
   });
@@ -73,12 +81,19 @@ export class LineamientosEffects {
         this.lineamientosService.crearLineamiento(
           lineamiento,
         ).pipe(
-          map(() => LineamientosActions.ConsultarLineamientos({
-            CentroGestor: this.CentroGestor.CentroGestor,
-            AreaFuncional: this.AreaFuncional.Id,
-            FuenteRecurso: this.FuenteRecurso.Codigo,
-          })),
-          catchError(data => of(LineamientosActions.CatchError(data))))
+          map((data) => {
+            this.store.dispatch(SeleccionarLineamiento(data));
+            this.popupManager.showSuccessAlert('Lineamiento Creado')
+            return LineamientosActions.ConsultarLineamientos({
+              CentroGestor: this.CentroGestor.CentroGestor,
+              AreaFuncional: this.AreaFuncional.Id,
+              FuenteRecurso: this.FuenteRecurso.Codigo,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(LineamientosActions.CatchError(data))
+          }))
       )
     );
   });
@@ -90,17 +105,19 @@ export class LineamientosEffects {
         this.lineamientosService.updateLineamiento(
           lineamiento,
         ).pipe(
-          map(() => LineamientosActions.ConsultarLineamientos({
-            CentroGestor: this.CentroGestor.CentroGestor,
-            AreaFuncional: this.AreaFuncional.Id,
-            FuenteRecurso: this.FuenteRecurso.Codigo,
-          })),
-          catchError(data => of(LineamientosActions.CatchError(data))))
+          map(() => {
+            this.popupManager.showSuccessAlert('Lineamiento Actualizado')
+            return LineamientosActions.ConsultarLineamientos({
+              CentroGestor: this.CentroGestor.CentroGestor,
+              AreaFuncional: this.AreaFuncional.Id,
+              FuenteRecurso: this.FuenteRecurso.Codigo,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(LineamientosActions.CatchError(data))
+          }))
       )
     );
   });
-
-
-
-
 }

@@ -8,6 +8,8 @@ import * as ActividadesActions from '../actions/actividades.actions';
 import { ActividadesService } from '../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { getMetaSeleccionada } from '../../metas/selectors/metas.selectors';
+import { PopUpManager } from '../../../@core/managers/popUpManager';
+import { SeleccionarActividad } from '../actions/actividades.actions';
 
 
 @Injectable()
@@ -20,6 +22,7 @@ export class ActividadesEffects {
     private actions$: Actions,
     private store: Store<any>,
     private actividadesService: ActividadesService,
+    private popupManager: PopUpManager,
   ) {
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta) => {
       if (meta) {
@@ -44,8 +47,13 @@ export class ActividadesEffects {
         this.actividadesService.getActividadesAsociadas(
           opciones.Meta.Id,
         ).pipe(
-          map(data => ActividadesActions.CargarActividades([data])),
-          catchError(data => of(ActividadesActions.CatchError(data))))
+          map(data => {
+            return ActividadesActions.CargarActividades([data])
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(ActividadesActions.CatchError(data))
+          }))
       )
     );
   });
@@ -57,10 +65,17 @@ export class ActividadesEffects {
         this.actividadesService.crearActividad(
           Actividad,
         ).pipe(
-          map(() => ActividadesActions.ConsultarActividades({
-            Meta: this.Meta,
-          })),
-          catchError(data => of(ActividadesActions.CatchError(data))))
+          map((data) => {
+            this.store.dispatch(SeleccionarActividad(data))
+            this.popupManager.showSuccessAlert('Actividad Creada')
+            return ActividadesActions.ConsultarActividades({
+              Meta: this.Meta,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(ActividadesActions.CatchError(data))
+          }))
       )
     );
   });
@@ -72,14 +87,17 @@ export class ActividadesEffects {
         this.actividadesService.updateActividad(
           Actividad,
         ).pipe(
-          map(() => ActividadesActions.ConsultarActividades({
-            Meta: this.Meta,
-          })),
-          catchError(data => of(ActividadesActions.CatchError(data))))
+          map(() => {
+            this.popupManager.showSuccessAlert('Actividad Actualizada')
+            return ActividadesActions.ConsultarActividades({
+              Meta: this.Meta,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(ActividadesActions.CatchError(data))
+          }))
       )
     );
   });
-
-
-
 }

@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { MetasService } from '../services/metas.service';
 import { getLineamientoSeleccionado } from '../../lineamientos/selectors/lineamientos.selectors';
 import { getRubroSeleccionado } from '../selectors/metas.selectors';
+import { PopUpManager } from '../../../@core/managers/popUpManager';
+import { SeleccionarMeta } from '../actions/metas.actions';
 
 
 @Injectable()
@@ -22,12 +24,14 @@ export class MetasEffects {
   constructor(
     private actions$: Actions,
     private store: Store<any>,
-    private metasService: MetasService
+    private metasService: MetasService,
+    private popupManager: PopUpManager,
   ) {
     this.subscription$ = combineLatest([
       this.store.select(getLineamientoSeleccionado),
       this.store.select(getRubroSeleccionado),
     ]).subscribe(([lineamiento, rubro]) => {
+      console.log(lineamiento)
       if (lineamiento) {
         this.Lineamiento = lineamiento;
       }
@@ -54,8 +58,13 @@ export class MetasEffects {
           opciones.Lineamiento.Id,
           opciones.Rubro.data.Codigo,
         ).pipe(
-          map(data => MetasActions.CargarMetas([data])),
-          catchError(data => of(MetasActions.CatchError(data))))
+          map(data => {
+            return MetasActions.CargarMetas([data])
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(MetasActions.CatchError(data))
+          }))
       )
     );
   });
@@ -67,11 +76,18 @@ export class MetasEffects {
         this.metasService.crearMeta(
           Meta,
         ).pipe(
-          map(() => MetasActions.ConsultarMetas({
-            Lineamiento: this.Lineamiento,
-            Rubro: this.Rubro,
-          })),
-          catchError(data => of(MetasActions.CatchError(data))))
+          map((data) => {
+            this.store.dispatch(SeleccionarMeta(data))
+            this.popupManager.showSuccessAlert('Meta Creada')
+            return MetasActions.ConsultarMetas({
+              Lineamiento: this.Lineamiento,
+              Rubro: this.Rubro,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(MetasActions.CatchError(data))
+          }))
       )
     );
   });
@@ -83,15 +99,18 @@ export class MetasEffects {
         this.metasService.updateMeta(
           Meta,
         ).pipe(
-          map(() => MetasActions.ConsultarMetas({
-            Lineamiento: this.Lineamiento,
-            Rubro: this.Rubro,
-          })),
-          catchError(data => of(MetasActions.CatchError(data))))
+          map(() => {
+            this.popupManager.showSuccessAlert('Meta Actualizada')
+            return MetasActions.ConsultarMetas({
+              Lineamiento: this.Lineamiento,
+              Rubro: this.Rubro,
+            })
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(MetasActions.CatchError(data))
+          }))
       )
     );
   });
-
-
-
 }
