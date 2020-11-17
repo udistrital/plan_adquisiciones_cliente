@@ -64,11 +64,11 @@ export class LineamientosEffects {
           opciones.FuenteRecurso,
         ).pipe(
           map(data => {
-            return LineamientosActions.CargarLineamientos([data])
+            return LineamientosActions.CargarLineamientos([data]);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(LineamientosActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(LineamientosActions.CatchError(data));
           }))
       )
     );
@@ -82,11 +82,11 @@ export class LineamientosEffects {
           opciones.Id
         ).pipe(
           map(data => {
-            return LineamientosActions.SeleccionarLineamiento(data)
+            return LineamientosActions.SeleccionarLineamiento(data);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(LineamientosActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(LineamientosActions.CatchError(data));
           }))
       )
     );
@@ -101,16 +101,16 @@ export class LineamientosEffects {
         ).pipe(
           map((data) => {
             this.store.dispatch(ConsultarLineamiento(data));
-            this.popupManager.showSuccessAlert('Lineamiento Creado')
+            this.popupManager.showSuccessAlert('Lineamiento Creado');
             return LineamientosActions.ConsultarLineamientos({
               CentroGestor: this.CentroGestor.CentroGestor,
               AreaFuncional: this.AreaFuncional.Id,
               FuenteRecurso: this.FuenteRecurso.Codigo,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(LineamientosActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(LineamientosActions.CatchError(data));
           }))
       )
     );
@@ -124,16 +124,16 @@ export class LineamientosEffects {
           lineamiento,
         ).pipe(
           map(() => {
-            this.popupManager.showSuccessAlert('Lineamiento Actualizado')
+            this.popupManager.showSuccessAlert('Lineamiento Actualizado');
             return LineamientosActions.ConsultarLineamientos({
               CentroGestor: this.CentroGestor.CentroGestor,
               AreaFuncional: this.AreaFuncional.Id,
               FuenteRecurso: this.FuenteRecurso.Codigo,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(LineamientosActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(LineamientosActions.CatchError(data));
           }))
       )
     );

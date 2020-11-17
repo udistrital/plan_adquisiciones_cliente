@@ -48,11 +48,11 @@ export class ActividadesEffects {
           opciones.Meta.Id,
         ).pipe(
           map(data => {
-            return ActividadesActions.CargarActividades([data])
+            return ActividadesActions.CargarActividades([data]);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(ActividadesActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(ActividadesActions.CatchError(data));
           }))
       )
     );
@@ -66,11 +66,11 @@ export class ActividadesEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return ActividadesActions.SeleccionarActividad(data)
+            return ActividadesActions.SeleccionarActividad(data);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(ActividadesActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(ActividadesActions.CatchError(data));
           }))
       )
     );
@@ -86,14 +86,14 @@ export class ActividadesEffects {
         ).pipe(
           map((data) => {
             this.store.dispatch(ConsultarActividad(data));
-            this.popupManager.showSuccessAlert('Actividad Creada')
+            this.popupManager.showSuccessAlert('Actividad Creada');
             return ActividadesActions.ConsultarActividades({
               Meta: this.Meta,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(ActividadesActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(ActividadesActions.CatchError(data));
           }))
       )
     );
@@ -107,14 +107,14 @@ export class ActividadesEffects {
           Actividad,
         ).pipe(
           map(() => {
-            this.popupManager.showSuccessAlert('Actividad Actualizada')
+            this.popupManager.showSuccessAlert('Actividad Actualizada');
             return ActividadesActions.ConsultarActividades({
               Meta: this.Meta,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(ActividadesActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(ActividadesActions.CatchError(data));
           }))
       )
     );

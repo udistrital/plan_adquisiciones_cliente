@@ -31,7 +31,7 @@ export class MetasEffects {
       this.store.select(getLineamientoSeleccionado),
       this.store.select(getRubroSeleccionado),
     ]).subscribe(([lineamiento, rubro]) => {
-      console.log(lineamiento)
+
       if (lineamiento) {
         this.Lineamiento = lineamiento;
       }
@@ -59,11 +59,11 @@ export class MetasEffects {
           opciones.Rubro.data.Codigo,
         ).pipe(
           map(data => {
-            return MetasActions.CargarMetas([data])
+            return MetasActions.CargarMetas([data]);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(MetasActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(MetasActions.CatchError(data));
           }))
       )
     );
@@ -77,11 +77,11 @@ export class MetasEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return MetasActions.SeleccionarMeta(data)
+            return MetasActions.SeleccionarMeta(data);
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(MetasActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(MetasActions.CatchError(data));
           }))
       )
     );
@@ -95,16 +95,16 @@ export class MetasEffects {
           Meta,
         ).pipe(
           map((data) => {
-            this.store.dispatch(ConsultarMeta(data))
-            this.popupManager.showSuccessAlert('Meta Creada')
+            this.store.dispatch(ConsultarMeta(data));
+            this.popupManager.showSuccessAlert('Meta Creada');
             return MetasActions.ConsultarMetas({
               Lineamiento: this.Lineamiento,
               Rubro: this.Rubro,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(MetasActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(MetasActions.CatchError(data));
           }))
       )
     );
@@ -118,15 +118,15 @@ export class MetasEffects {
           Meta,
         ).pipe(
           map(() => {
-            this.popupManager.showSuccessAlert('Meta Actualizada')
+            this.popupManager.showSuccessAlert('Meta Actualizada');
             return MetasActions.ConsultarMetas({
               Lineamiento: this.Lineamiento,
               Rubro: this.Rubro,
-            })
+            });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error',data.status,data.statusText)
-            return of(MetasActions.CatchError(data))
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(MetasActions.CatchError(data));
           }))
       )
     );

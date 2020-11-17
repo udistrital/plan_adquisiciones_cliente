@@ -20,7 +20,7 @@ export class MetasService {
   public getMetasAsociadas(
     LineamientoId: any,
     Rubro: any,
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
       `Meta/` +
@@ -35,12 +35,12 @@ export class MetasService {
     * @param [Meta] Meta por consultar
     * @returns  Meta creado.
     */
-   public getMeta(
+  public getMeta(
     Meta: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `Meta/`+
+      `Meta/` +
       `${Meta}`
     );
   }
@@ -52,7 +52,7 @@ export class MetasService {
     */
   public crearMeta(
     Meta: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.post(
       `Meta/`,
@@ -65,9 +65,9 @@ export class MetasService {
     * @param [Meta] Meta por modificar
     * @returns  Meta creado.
     */
-   public updateMeta(
+  public updateMeta(
     Meta: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.put(
       `Meta/`,
