@@ -30,6 +30,21 @@ export class MetasService {
     );
   }
   /**
+    * get Meta
+    *  se crea una meta nueva
+    * @param [Meta] Meta por consultar
+    * @returns  Meta creado.
+    */
+   public getMeta(
+    Meta: any
+    ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Meta/`+
+      `${Meta}`
+    );
+  }
+  /**
     * Post Meta
     *  se crea una meta nueva
     * @param [Meta] Meta por crear

@@ -29,6 +29,11 @@ export const ConsultarMetas = createAction(
   props()
 );
 
+export const ConsultarMeta = createAction(
+  '[Metas] Consultar Meta',
+  props()
+);
+
 export const CrearMeta = createAction(
   '[Metas] Crear Meta',
   props()

@@ -10,7 +10,7 @@ import { MetasService } from '../services/metas.service';
 import { getLineamientoSeleccionado } from '../../lineamientos/selectors/lineamientos.selectors';
 import { getRubroSeleccionado } from '../selectors/metas.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { SeleccionarMeta } from '../actions/metas.actions';
+import { ConsultarMeta, SeleccionarMeta } from '../actions/metas.actions';
 
 
 @Injectable()
@@ -69,6 +69,24 @@ export class MetasEffects {
     );
   });
 
+  GetMeta$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(MetasActions.ConsultarMeta),
+      mergeMap((opciones: any) =>
+        this.metasService.getMeta(
+          opciones.Id,
+        ).pipe(
+          map(data => {
+            return MetasActions.SeleccionarMeta(data)
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(MetasActions.CatchError(data))
+          }))
+      )
+    );
+  });
+
   CrearMeta$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MetasActions.CrearMeta),
@@ -77,7 +95,7 @@ export class MetasEffects {
           Meta,
         ).pipe(
           map((data) => {
-            this.store.dispatch(SeleccionarMeta(data))
+            this.store.dispatch(ConsultarMeta(data))
             this.popupManager.showSuccessAlert('Meta Creada')
             return MetasActions.ConsultarMetas({
               Lineamiento: this.Lineamiento,
