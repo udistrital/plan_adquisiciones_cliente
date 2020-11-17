@@ -10,6 +10,7 @@ import { State, Store } from '@ngrx/store';
 export class LayoutComponent implements OnInit {
 
   titulo: any;
+  Mostrar: boolean;
   constructor(
     private state: State<any>,
     private route: Router
@@ -20,6 +21,9 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     if (Object.keys(this.state.getValue()).find(key => key === 'lineamientos') === undefined) {
       this.route.navigate(['pages/plan-adquisiciones/lineamientos']);
+    } else {
+      this.Mostrar = true;
     }
   }
+
 }
