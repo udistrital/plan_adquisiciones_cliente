@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { getAreaFuncional, getCentroGestor } from '../../../shared/selectors/shared.selectors';
 import { getFuenteRecursoSeleccionada } from '../selectors/lineamientos.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { SeleccionarLineamiento } from '../actions/lineamientos.actions';
+import { ConsultarLineamiento, SeleccionarLineamiento } from '../actions/lineamientos.actions';
 
 
 @Injectable()
@@ -74,6 +74,24 @@ export class LineamientosEffects {
     );
   });
 
+  GetLineamiento$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LineamientosActions.ConsultarLineamiento),
+      mergeMap((opciones: any) =>
+        this.lineamientosService.getLineamiento(
+          opciones.Id
+        ).pipe(
+          map(data => {
+            return LineamientosActions.SeleccionarLineamiento(data)
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error',data.status,data.statusText)
+            return of(LineamientosActions.CatchError(data))
+          }))
+      )
+    );
+  });
+
   CrearLineamiento$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LineamientosActions.CrearLineamiento),
@@ -82,7 +100,7 @@ export class LineamientosEffects {
           lineamiento,
         ).pipe(
           map((data) => {
-            this.store.dispatch(SeleccionarLineamiento(data));
+            this.store.dispatch(ConsultarLineamiento(data));
             this.popupManager.showSuccessAlert('Lineamiento Creado')
             return LineamientosActions.ConsultarLineamientos({
               CentroGestor: this.CentroGestor.CentroGestor,

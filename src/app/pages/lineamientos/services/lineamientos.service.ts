@@ -33,6 +33,21 @@ export class LineamientosService {
     );
   }
   /**
+    * Get Lineamiento
+    *  se crea un lineamiento nuevo
+    * @param [Lineamiento] lineamiento por consultar
+    * @returns  Lineamiento creado.
+    */
+   public getLineamiento(
+    Lineamiento: any
+    ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Lineamiento/` +
+      `${Lineamiento}`
+    );
+  }
+  /**
     * Post Lineamientos
     *  se crea un lineamiento nuevo
     * @param [Lineamiento] lineamiento por crear

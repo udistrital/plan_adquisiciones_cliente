@@ -24,6 +24,11 @@ export const CargarLineamientos = createAction(
   props()
 );
 
+export const ConsultarLineamiento = createAction(
+  '[Lineamientos] Consultar Lineamiento',
+  props()
+);
+
 export const ConsultarLineamientos = createAction(
   '[Lineamientos] Consultar Lineamientos',
   props()
