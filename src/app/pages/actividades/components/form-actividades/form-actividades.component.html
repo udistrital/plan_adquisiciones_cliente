@@ -1,10 +1,21 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="!ActividadesForm">
+        <div class="col py-2">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-1">Por favor selecciona:</li>
+                <li class="list-group-item">Meta</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" *ngIf="!ActividadesForm">
+        <div class="col py-2"></div>
+    </div>
+    <div class="row" *ngIf="ActividadesForm">
         <div class="col py-2">
             <h5 *ngIf="titulo" class="card-title text-center text-primary">{{titulo}}</h5>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="ActividadesForm">
         <div class="col py-2"></div>
     </div>
     <form [formGroup]="ActividadesForm" *ngIf="ActividadesForm">
