@@ -42,8 +42,8 @@ export class DatosGeneralesInicialesComponent implements OnInit {
     });
   }
 
-  SeleccionarCentroGestor() {
-    this.store.dispatch(LoadCentroGestor({ CentroGestor: this.CentroGestor }));
+  SeleccionarCentroGestor(centro: any) {
+    this.store.dispatch(LoadCentroGestor({ CentroGestor: centro }));
   }
 
   SeleccionarAreaFuncional(area: any) {
