@@ -10,7 +10,7 @@ import { MetasService } from '../services/metas.service';
 import { getLineamientoSeleccionado } from '../../lineamientos/selectors/lineamientos.selectors';
 import { getRubroSeleccionado } from '../selectors/metas.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { ConsultarMeta, SeleccionarMeta } from '../actions/metas.actions';
+import { ConsultarMeta } from '../actions/metas.actions';
 
 
 @Injectable()

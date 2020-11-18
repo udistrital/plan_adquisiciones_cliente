@@ -9,7 +9,7 @@ import { ActividadesService } from '../services/actividades.service';
 import { Store } from '@ngrx/store';
 import { getMetaSeleccionada } from '../../metas/selectors/metas.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { ConsultarActividad, SeleccionarActividad } from '../actions/actividades.actions';
+import { ConsultarActividad } from '../actions/actividades.actions';
 
 
 @Injectable()

@@ -7,7 +7,7 @@ import { getAccionTabla, getFilaSeleccionada, getNodoSeleccionado } from '../../
 import { SeleccionarLineamiento } from '../../../lineamientos/actions/lineamientos.actions';
 import { getFuenteRecursoSeleccionada, getLineamientos, getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
 import { ConsultarMetas, SeleccionarMeta, SeleccionarRubro } from '../../actions/metas.actions';
-import { DATOS_PRUEBA, CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
+import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
 import { getMetas, getRubroSeleccionado } from '../../selectors/metas.selectors';
 
 @Component({
@@ -108,7 +108,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
       }
     });
     // Crear Nueva Meta
-    this.subscription6$ = this.store.select(getAccionTabla).subscribe((accion: any) => {
+    this.subscription6$ = this.store.select(getAccionTabla).subscribe(() => {
       this.store.dispatch(SeleccionarMeta(null));
     });
   }

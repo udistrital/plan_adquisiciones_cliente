@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PopUpManager } from '../../../@core/managers/popUpManager';
 import { RequestManager } from '../../../@core/managers/requestManager';
 
 @Injectable({
@@ -7,8 +6,9 @@ import { RequestManager } from '../../../@core/managers/requestManager';
 })
 export class ActividadesService {
 
-  constructor(private rqManager: RequestManager,
-    private pUpManager: PopUpManager) { }
+  constructor(
+    private rqManager: RequestManager,
+  ) { }
 
   /**
    * Get Actividades
@@ -18,7 +18,7 @@ export class ActividadesService {
    */
   public getActividadesAsociadas(
     MetaId: any,
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
       `Actividad/` +
@@ -33,9 +33,9 @@ export class ActividadesService {
     * @param [Actividad] Actividad por consultar
     * @returns  Actividad creada.
     */
-   public getActividad(
+  public getActividad(
     Actividad: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
       `Actividad/` +
@@ -51,7 +51,7 @@ export class ActividadesService {
     */
   public crearActividad(
     Actividad: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.post(
       `Actividad/`,
@@ -64,9 +64,9 @@ export class ActividadesService {
     * @param [Actividad] Actividad por modificar
     * @returns  Actividad Modificada.
     */
-   public updateActividad(
+  public updateActividad(
     Actividad: any
-    ) {
+  ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.put(
       `Actividad/`,

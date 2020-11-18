@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PopUpManager } from '../../../@core/managers/popUpManager';
 import { RequestManager } from '../../../@core/managers/requestManager';
 
 @Injectable({
@@ -7,8 +6,9 @@ import { RequestManager } from '../../../@core/managers/requestManager';
 })
 export class MetasService {
 
-  constructor(private rqManager: RequestManager,
-    private pUpManager: PopUpManager) { }
+  constructor(
+    private rqManager: RequestManager,
+  ) { }
 
   /**
    * Get Metas

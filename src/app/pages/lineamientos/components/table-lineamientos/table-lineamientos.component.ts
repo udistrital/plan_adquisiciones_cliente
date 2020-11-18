@@ -8,7 +8,7 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import { getAccionTabla, getArbolRubro, getAreaFuncional, getCentroGestor, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { ConsultarLineamientos, LoadFuenteRecursoSeleccionada, SeleccionarLineamiento } from '../../actions/lineamientos.actions';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
+import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
 import { getFuenteRecursoSeleccionada, getLineamientos } from '../../selectors/lineamientos.selectors';
 
 @Component({

@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { getAreaFuncional, getCentroGestor } from '../../../shared/selectors/shared.selectors';
 import { getFuenteRecursoSeleccionada } from '../selectors/lineamientos.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { ConsultarLineamiento, SeleccionarLineamiento } from '../actions/lineamientos.actions';
+import { ConsultarLineamiento } from '../actions/lineamientos.actions';
 
 
 @Injectable()
