@@ -10,6 +10,7 @@
   },
   "MENU": {
     "dashboard": "Inicio",
+    "gestion de lineamientos": "Gestion de Lineamientos",
     "gestion_rubros": {
       "rubros": "Gestión de Rubros",
       "consulta-rubros": "Consulta de Rubros"

@@ -31,7 +31,7 @@ export class PagesComponent implements OnInit {
 
   url_presupuesto  = environment.CLIENTE_PRESUPUESTO;
   url_contabilidad = environment.CLIENTE_CONTABILIDAD;
-  application_conf = 'presupuesto_kronos';
+  application_conf = 'plan_adquicisiones';
 
   constructor(
     public  menuws: MenuService,
