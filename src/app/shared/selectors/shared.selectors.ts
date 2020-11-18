@@ -25,3 +25,18 @@ export const getAccionTabla = createSelector(
   (state: fromShared.State) => state.AccionTabla
 );
 
+export const getVigenciaActual = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.VigenciaActual
+);
+
+export const getAreaFuncional = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.AreaFuncional
+);
+
+export const getCentroGestor = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.CentroGestor
+);
+

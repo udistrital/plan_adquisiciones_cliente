@@ -6,11 +6,13 @@ export const lineamientosFeatureKey = 'lineamientos';
 export interface State {
   FuenteRecursoSeleccionada: any;
   LineamientoSeleccionado: any;
+  Lineamientos: any;
 }
 
 export const initialState: State = {
   FuenteRecursoSeleccionada: null,
   LineamientoSeleccionado: null,
+  Lineamientos: [],
 };
 
 const lineamientosReducer = createReducer(
@@ -20,8 +22,11 @@ const lineamientosReducer = createReducer(
   on(LineamientosActions.LoadFuenteRecursoSeleccionada, (state, action) => ({
     ...state, FuenteRecursoSeleccionada: state.FuenteRecursoSeleccionada = action
   })),
-  on(LineamientosActions.LoadLineamientoSeleccionado, (state, action) => ({
+  on(LineamientosActions.SeleccionarLineamiento, (state, action) => ({
     ...state, LineamientoSeleccionado: state.LineamientoSeleccionado = action
+  })),
+  on(LineamientosActions.CargarLineamientos, (state, action) => ({
+    ...state, Lineamientos: state.Lineamientos = action
   })),
 
 );

@@ -5,18 +5,23 @@ export const actividadesFeatureKey = 'actividades';
 
 export interface State {
   ActividadSeleccionada: any;
+  Actividades: any;
 }
 
 export const initialState: State = {
   ActividadSeleccionada: null,
+  Actividades: [],
 };
 
 const actividadesReducer = createReducer(
   initialState,
 
   on(ActividadesActions.loadActividadess, state => state),
-  on(ActividadesActions.loadActividadSeleccionada, (state, action) => ({
+  on(ActividadesActions.SeleccionarActividad, (state, action) => ({
     ...state, ActividadSeleccionada: state.ActividadSeleccionada = action
+  })),
+  on(ActividadesActions.CargarActividades, (state, action) => ({
+    ...state, Actividades: state.Actividades = action
   })),
 
 );

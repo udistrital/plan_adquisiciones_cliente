@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
+import { CrearActividad, ActualizarActividad } from '../../actions/actividades.actions';
 import { getActividadSeleccionada } from '../../selectors/actividades.selectors';
 
 @Component({
@@ -8,7 +11,7 @@ import { getActividadSeleccionada } from '../../selectors/actividades.selectors'
   templateUrl: './form-actividades.component.html',
   styleUrls: ['./form-actividades.component.scss']
 })
-export class FormActividadesComponent implements OnInit {
+export class FormActividadesComponent implements OnInit, OnDestroy {
 
   titulo: any;
   subscription$: any;
@@ -20,40 +23,61 @@ export class FormActividadesComponent implements OnInit {
     private store: Store<any>,
     private fb: FormBuilder,
   ) {
-    this.titulo = 'Crear / Editar Actividad';
+    this.titulo = 'Crear Actividad';
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getActividadSeleccionada).subscribe((actividad: any) => {
-
-      if (actividad) {
+    this.subscription$ = combineLatest([
+      this.store.select(getActividadSeleccionada),
+      this.store.select(getMetaSeleccionada),
+    ]).subscribe(([actividad, meta]) => {
+      if (actividad && meta) {
         if (Object.keys(actividad)[0] === 'type') {
-          this.CrearActividadesForm(null);
+          this.CrearActividadesForm(null, meta);
         } else {
           this.CrearActividadesForm(actividad);
         }
-      } else {
-        this.CrearActividadesForm(null);
       }
     });
   }
 
-  CrearActividadesForm(actividad: any) {
+  CrearActividadesForm(actividad: any, meta?: any) {
     if (actividad) {
       this.titulo = 'Editar Actividad';
       this.boton = 'Editar';
       this.ActividadesForm = this.fb.group({
-        Numero: [actividad.numero, [Validators.required]],
-        Nombre: [actividad.nombre, [Validators.required]]
+        Activo: [actividad.Activo, []],
+        FechaCreacion: [actividad.FechaCreacion, []],
+        FechaModificacion: [actividad.FechaModificacion, []],
+        Id: [actividad.Id, []],
+        Nombre: [actividad.Nombre, [Validators.required]],
+        Numero: [actividad.Numero, [Validators.required]],
+        MetaId: [actividad.MetaId, []],
       });
     } else {
       this.titulo = 'Crear Actividad';
       this.boton = 'Crear';
       this.ActividadesForm = this.fb.group({
+        Activo: [true, []],
+        FechaCreacion: ['', []],
+        FechaModificacion: ['', []],
+        Id: [null, []],
+        Nombre: ['', [Validators.required]],
         Numero: ['', [Validators.required]],
-        Nombre: ['', [Validators.required]]
+        MetaId: [meta, []],
       });
     }
   }
 
+  OnSubmit() {
+    const actividad: any = this.ActividadesForm.value;
+    if (actividad.Id === null) {
+      this.store.dispatch(CrearActividad(actividad));
+    } else {
+      this.store.dispatch(ActualizarActividad(actividad));
+    }
+  }
 }

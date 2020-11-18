@@ -49,7 +49,7 @@ export const CONFIGURACION_PRUEBA: any = {
     },
     dataConfig: [
         {
-            key: 'numero',
+            key: 'Numero',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -59,7 +59,7 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'nombre',
+            key: 'Nombre',
             title: {
                 name: 'Nombre',
                 class: 'text-center',

@@ -8,3 +8,12 @@ export const getLineamientoSeleccionado = createSelector(
   selectLineamientosState,
   (state: fromLineamientos.State) => state.LineamientoSeleccionado
 );
+
+export const getLineamientos = createSelector(
+  selectLineamientosState,
+  (state: fromLineamientos.State) => state.Lineamientos
+);
+export const getFuenteRecursoSeleccionada = createSelector(
+  selectLineamientosState,
+  (state: fromLineamientos.State) => state.FuenteRecursoSeleccionada
+);

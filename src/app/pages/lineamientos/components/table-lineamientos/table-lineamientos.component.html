@@ -8,7 +8,7 @@
 
 
     <div class="row">
-        <div class="col-4">
+        <div class="col-5">
             <form [formGroup]="LineamientoForm" *ngIf="LineamientoForm">
                 <ng-container *ngIf="!fuentesRecurso">
                     <div class="d-flex justify-content-center py-3">
@@ -28,7 +28,7 @@
                 </ng-container>
             </form>
         </div>
-        <div class="col-8">
+        <div class="col-7">
             <div class="form-group">
                 <label>Descripcion:</label>
                 <span class="form-control py-2">
@@ -39,7 +39,7 @@
     </div>
     <div class="row">
         <div class="col px-0">
-            <ngx-general-table [config]="configuracion" [datos]="datosPrueba"></ngx-general-table>
+            <ngx-general-table [config]="configuracion" [datos]="Lineamientos"></ngx-general-table>
         </div>
     </div>
 </div>

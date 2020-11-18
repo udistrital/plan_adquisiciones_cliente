@@ -1,10 +1,23 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="!LineamientoForm">
+        <div class="col py-2">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-1">Por favor selecciona:</li>
+                <li class="list-group-item">Centro Gestor</li>
+                <li class="list-group-item">Area Funcional</li>
+                <li class="list-group-item">Fuente de Recurso</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" *ngIf="!LineamientoForm">
+        <div class="col py-2"></div>
+    </div>
+    <div class="row" *ngIf="LineamientoForm">
         <div class="col py-2">
             <h5 class="card-title text-center text-primary">{{titulo}}</h5>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="LineamientoForm">
         <div class="col py-2"></div>
     </div>
     <form [formGroup]="LineamientoForm" *ngIf="LineamientoForm">
@@ -12,7 +25,7 @@
             <div class="col">
                 <div class="form-group">
                     <label>Numero:</label>
-                    <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+                    <input type="number" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
                         formControlName="Numero" placeholder="">
                 </div>
             </div>
@@ -32,7 +45,7 @@
             </div>
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="LineamientoForm.invalid && !LineamientoForm.touched" type="button"
-                    class="btn btn-primary px-3 py-2 my-3 text-light">{{boton}}</button>
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
             </div>
             <div class="col-6 d-flex justify-content-end">
                 <button type="button" class="btn btn-light px-3 py-2 my-3 border">Cancelar</button>

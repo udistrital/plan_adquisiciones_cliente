@@ -9,3 +9,8 @@ export const getActividadSeleccionada = createSelector(
   selectActividadesState,
   (state: fromActividades.State) => state.ActividadSeleccionada
 );
+
+export const getActividades = createSelector(
+  selectActividadesState,
+  (state: fromActividades.State) => state.Actividades
+);
