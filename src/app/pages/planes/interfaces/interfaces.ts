@@ -113,10 +113,16 @@ export const CONFIGURACION_PRUEBA: any = {
         },
         actions: [
             {
+                name: 'Editar',
+                icon: 'fas fa-pencil-alt',
+                class: 'p-2',
+                title: 'Editar Datos Iniciales',
+            },
+            {
                 name: 'Ver',
                 icon: 'fas fa-list',
                 class: 'p-2',
-                title: 'Ver Plan',
+                title: 'Ver Plan de Adquisiciones',
             }
         ],
     },

@@ -6,6 +6,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { TablaPlanesAdquisicionesComponent } from './components/tabla-planes-adquisiciones/tabla-planes-adquisiciones.component';
 import { CrearPlanAdquisicionComponent } from './components/crear-plan-adquisicion/crear-plan-adquisicion.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +15,8 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     PlanesRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class PlanesModule { }
