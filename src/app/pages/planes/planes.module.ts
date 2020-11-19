@@ -5,13 +5,15 @@ import { PlanesRoutingModule } from './planes-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { TablaPlanesAdquisicionesComponent } from './components/tabla-planes-adquisiciones/tabla-planes-adquisiciones.component';
 import { CrearPlanAdquisicionComponent } from './components/crear-plan-adquisicion/crear-plan-adquisicion.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
   declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent],
   imports: [
     CommonModule,
-    PlanesRoutingModule
+    PlanesRoutingModule,
+    SharedModule,
   ]
 })
 export class PlanesModule { }
