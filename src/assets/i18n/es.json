@@ -10,7 +10,8 @@
   },
   "MENU": {
     "dashboard": "Inicio",
-    "gestion de lineamientos": "Gestion de Lineamientos",
+    "gestion_lineamientos": "Gestion de Lineamientos",
+    "gestion_planes_adquisiciones": "Gestion de Planes",
     "gestion_rubros": {
       "rubros": "Gestión de Rubros",
       "consulta-rubros": "Consulta de Rubros"
