@@ -7,6 +7,10 @@ import { TablaPlanesAdquisicionesComponent } from './components/tabla-planes-adq
 import { CrearPlanAdquisicionComponent } from './components/crear-plan-adquisicion/crear-plan-adquisicion.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromPlanes from './reducers/planes.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { PlanesEffects } from './effects/planes.effects';
 
 
 @NgModule({
@@ -17,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(fromPlanes.planesFeatureKey, fromPlanes.reducer),
+    EffectsModule.forFeature([PlanesEffects]),
   ]
 })
 export class PlanesModule { }
