@@ -3,10 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoadAccionTabla } from '../../../../shared/actions/shared.actions';
-// import { combineLatest } from 'rxjs';
-// import { CrearActividad, ActualizarActividad } from '../../../actividades/actions/actividades.actions';
-// import { getActividadSeleccionada } from '../../../actividades/selectors/actividades.selectors';
-// import { getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
+import { getPlanSeleccionado } from '../../selectors/planes.selectors';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-crear-plan-adquisicion',
@@ -33,22 +31,20 @@ export class CrearPlanAdquisicionComponent implements OnInit {
   // }
 
   ngOnInit() {
-    // this.subscription$ = combineLatest([
-    //   this.store.select(getActividadSeleccionada),
-    //   this.store.select(getMetaSeleccionada),
-    // ]).subscribe(([actividad, meta]) => {
-    //   if (actividad && meta) {
-    //     if (Object.keys(actividad)[0] === 'type') {
-    //       this.CrearActividadesForm(null, meta);
-    //     } else {
-    //       this.CrearActividadesForm(actividad);
-    //     }
-    //   }
-    // });
-    this.CrearActividadesForm()
+    this.subscription$ = combineLatest([
+      this.store.select(getPlanSeleccionado),
+    ]).subscribe(([plan]) => {
+      if (plan) {
+        if (Object.keys(plan)[0] === 'type') {
+          this.CrearPlanForm(null);
+        } else {
+          this.CrearPlanForm(plan);
+        }
+      }
+    });
   }
 
-  CrearActividadesForm(plan?: any) {
+  CrearPlanForm(plan?: any) {
     if (plan) {
       this.titulo = 'Editar Datos Generales Plan de Adquisiciones';
       this.boton = 'Editar';
@@ -83,8 +79,8 @@ export class CrearPlanAdquisicionComponent implements OnInit {
     // }
   }
   OnCancel() {
-    this.store.dispatch(LoadAccionTabla(null))
-    this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general'])
+    this.store.dispatch(LoadAccionTabla(null));
+    this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
 
 }

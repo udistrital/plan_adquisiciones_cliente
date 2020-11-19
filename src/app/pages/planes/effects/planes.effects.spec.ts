@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { PlanesEffects } from './planes.effects';
 
 describe('PlanesEffects', () => {
-  let actions$: Observable<any>;
+  // let actions$: Observable<any>;
+  const actions$: Observable<any> = new Observable();
   let effects: PlanesEffects;
 
   beforeEach(() => {

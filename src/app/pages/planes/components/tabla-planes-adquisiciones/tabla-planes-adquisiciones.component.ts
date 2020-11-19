@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LoadAccionTabla } from '../../../../shared/actions/shared.actions';
-import { getAccionTabla } from '../../../../shared/selectors/shared.selectors';
+import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { SeleccionarPlan } from '../../actions/planes.actions';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
 
 @Component({
@@ -22,7 +23,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
     private route: Router,
   ) {
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.datosPrueba = DATOS_PRUEBA
+    this.datosPrueba = DATOS_PRUEBA;
     this.store.dispatch(LoadAccionTabla(null));
   }
   ngOnDestroy(): void {
@@ -31,14 +32,23 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      console.log(accion)
       if (accion) {
-        if (Object.keys(accion)[0] !== 'type'){
+        if (Object.keys(accion)[0] !== 'type') {
+          this.store.dispatch(SeleccionarPlan(null));
           this.route.navigate(['pages/plan-adquisiciones/planes/crear-plan-adquisiciones']);
         }
-        
       }
-    })
+    });
+    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
+      if (accion) {
+        if (Object.keys(accion)[0] !== 'type') {
+          this.store.dispatch(SeleccionarPlan(accion.fila));
+          if (accion.accion.name === 'Editar') {
+            this.route.navigate(['pages/plan-adquisiciones/planes/crear-plan-adquisiciones']);
+            this.store.dispatch(LoadFilaSeleccionada(null));
+          }
+        }
+      }
+    });
   }
-
 }
