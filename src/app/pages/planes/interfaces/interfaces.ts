@@ -1,52 +1,9 @@
-export const configTable: any = {
-    title: {
-        name: 'string',
-        class: 'string',
-    },
-    dataConfig: [
-        {
-            key: 'string',
-            title: 'string',
-            pipe: {
-                functionPipe: () => { },
-                class: 'string'
-            }
-        }
-    ],
-    rowActions: {
-        title: {
-            name: 'string',
-            class: 'string',
-        },
-        actions: [
-            {
-                name: 'string',
-                icon: 'string',
-                class: 'string',
-                title: 'string',
-            }
-        ],
-    },
-    tableActions: [
-        {
-            name: 'string',
-            icon: 'string',
-            class: 'string',
-            title: 'string',
-        }
-    ],
-    noData: {
-        name: 'string',
-        class: 'string',
-    },
-    sort: 'boolean',
-    filter: 'boolean',
-};
 export const CONFIGURACION_PRUEBA: any = {
     title: {
         name: 'PLANES DE ADQUISICIONES',
         class: 'text-center text-light',
     },
+    showColumnTitle: false,
     dataConfig: [
         {
             key: 'Id',
@@ -85,10 +42,11 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                functionPipe: (data: string) => {
-                    return data.split('T')[0];
-                },
-                class: 'text-center'
+                type: 'date',
+                config: [
+                    'shortDate'
+                ],
+                class: 'text-center',
             }
         },
         {
@@ -98,9 +56,9 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                functionPipe: (data: string) => {
-                    return data.split('T')[0];
-                },
+                type: 'currency',
+                config: [
+                ],
                 class: 'text-center',
             }
         },
@@ -130,13 +88,32 @@ export const CONFIGURACION_PRUEBA: any = {
         {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
-            class: 'px-2',
+            class: 'px-2 mx-2',
             title: 'Agregar Nuevo Plan de Adquisiciones',
-        }
+        },
     ],
     noData: {
         name: 'No Existen Planes Creados',
         class: 'text-center',
+    },
+    endSubtotal: {
+        property: 'FechaModificacion',
+        items: [
+            {
+                colspan: 4,
+                name: 'Subtotal: ',
+                class: 'text-right bg-light text-dark',
+            },
+        ],
+        last: {
+            class: 'text-left bg-light text-dark',
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: '',
+            }
+        }
     },
     sort: true,
     filter: true,
@@ -146,16 +123,16 @@ export const DATOS_PRUEBA: any = [
         Id: 1,
         Descripcion: 'Plan cosito',
         Vigencia: 2020,
-        FechaCreacion: '2020/01/01T1564',
-        FechaModificacion: '2020/01/01T1564',
+        FechaCreacion: '2020-11-20T02:18:54Z',
+        FechaModificacion: '2222222.3',
         Activo: true,
     },
     {
         Id: 2,
         Descripcion: 'Plan cosito 2',
         Vigencia: 2020,
-        FechaCreacion: '2020/01/01T1564',
-        FechaModificacion: '2020/01/01T1564',
+        FechaCreacion: '2020-11-20T02:18:54Z',
+        FechaModificacion: '2222222.3',
         Activo: true,
     },
 
@@ -163,8 +140,8 @@ export const DATOS_PRUEBA: any = [
         Id: 3,
         Descripcion: 'Plan cosito 3',
         Vigencia: 2020,
-        FechaCreacion: '2020/01/01T1564',
-        FechaModificacion: '2020/01/01T1564',
+        FechaCreacion: '2020-11-20T02:18:54Z',
+        FechaModificacion: '2222222.3',
         Activo: true,
     },
 
