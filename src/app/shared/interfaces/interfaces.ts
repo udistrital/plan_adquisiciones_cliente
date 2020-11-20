@@ -3,6 +3,7 @@ export const configTable: any = {
         name: 'string',
         class: 'string',
     },
+    showColumnTitle: true,
     dataConfig: [
         {
             key: 'string',
@@ -13,6 +14,10 @@ export const configTable: any = {
             }
         }
     ],
+    subtitle: {
+        name: 'string',
+        class: 'string',
+    },
     rowActions: {
         title: {
             name: 'string',
@@ -38,6 +43,27 @@ export const configTable: any = {
     noData: {
         name: 'string',
         class: 'string',
+    },
+    endSubtotal: {
+        property: 'string',
+        items: [
+            {
+                colspan: 'number',
+                name: 'string',
+                class: 'string',
+            },
+        ],
+        last: {
+            name: 'string',
+            class: 'string',
+            pipe: {
+                type: 'string',
+                config: [
+                    'string',
+                ],
+                class: 'string',
+            }
+        }
     },
     sort: 'boolean',
     filter: 'boolean',

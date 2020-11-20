@@ -13,6 +13,7 @@ export class GeneralTableComponent implements OnInit {
   @Input() config: any;
   @Input() datos: any;
   @Output() selectedAction: EventEmitter<any>;
+  Subtotal: any;
   stringBusqueda: string;
   datosPrueba: any[];
 
@@ -24,6 +25,13 @@ export class GeneralTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.config.endSubtotal.last.name) {
+      const arraySubtotal: any[] = []
+      this.datos.forEach((element: any) => {
+        arraySubtotal.push(parseFloat(element[this.config.endSubtotal.property]));
+      });
+      this.Subtotal = arraySubtotal.reduce((accumulator, currentValue) => accumulator + currentValue)
+    }
   }
 
   SelectedAction(action: any, row: any) {
