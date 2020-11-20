@@ -3,7 +3,7 @@ export const CONFIGURACION_PRUEBA: any = {
         name: 'PLANES DE ADQUISICIONES',
         class: 'text-center text-light',
     },
-    showColumnTitle: false,
+    showColumnTitle: true,
     dataConfig: [
         {
             key: 'Id',
@@ -56,8 +56,9 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             },
             pipe: {
-                type: 'currency',
+                type: 'date',
                 config: [
+                    'shortDate',
                 ],
                 class: 'text-center',
             }
@@ -96,25 +97,6 @@ export const CONFIGURACION_PRUEBA: any = {
         name: 'No Existen Planes Creados',
         class: 'text-center',
     },
-    endSubtotal: {
-        property: 'FechaModificacion',
-        items: [
-            {
-                colspan: 4,
-                name: 'Subtotal: ',
-                class: 'text-right bg-light text-dark',
-            },
-        ],
-        last: {
-            class: 'text-left bg-light text-dark',
-            pipe: {
-                type: 'currency',
-                config: [
-                ],
-                class: '',
-            }
-        }
-    },
     sort: true,
     filter: true,
 };
@@ -124,7 +106,7 @@ export const DATOS_PRUEBA: any = [
         Descripcion: 'Plan cosito',
         Vigencia: 2020,
         FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2222222.3',
+        FechaModificacion: '2020-11-20T02:18:54Z',
         Activo: true,
     },
     {
@@ -132,7 +114,7 @@ export const DATOS_PRUEBA: any = [
         Descripcion: 'Plan cosito 2',
         Vigencia: 2020,
         FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2222222.3',
+        FechaModificacion: '2020-11-20T02:18:54Z',
         Activo: true,
     },
 
@@ -141,7 +123,7 @@ export const DATOS_PRUEBA: any = [
         Descripcion: 'Plan cosito 3',
         Vigencia: 2020,
         FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2222222.3',
+        FechaModificacion: '2020-11-20T02:18:54Z',
         Activo: true,
     },
 
