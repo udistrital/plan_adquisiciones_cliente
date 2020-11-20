@@ -36,7 +36,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Cargar planes Asociados
     this.subscription$ = this.store.select(getPlanes).subscribe((planes: any) => {
-      console.log(planes)
+
       if (planes) {
         if (Object.keys(planes).length !== 0) {
           if (Object.keys(planes[0][0]).length !== 0) {

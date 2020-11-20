@@ -15,7 +15,7 @@ export class MultiPipePipe implements PipeTransform {
     private custom: CustomTablePipe
   ) {
   }
-  transform(value: any, type: any, args?: any[],): any {
+  transform(value: any, type: any, args?: any[]): any {
 
     switch (type) {
       case 'date':
