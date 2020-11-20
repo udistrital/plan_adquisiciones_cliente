@@ -1,52 +1,9 @@
-export const configTable: any = {
-    title: {
-        name: 'string',
-        class: 'string',
-    },
-    dataConfig: [
-        {
-            key: 'string',
-            title: 'string',
-            pipe: {
-                functionPipe: () => { },
-                class: 'string'
-            }
-        }
-    ],
-    rowActions: {
-        title: {
-            name: 'string',
-            class: 'string',
-        },
-        actions: [
-            {
-                name: 'string',
-                icon: 'string',
-                class: 'string',
-                title: 'string',
-            }
-        ],
-    },
-    tableActions: [
-        {
-            name: 'string',
-            icon: 'string',
-            class: 'string',
-            title: 'string',
-        }
-    ],
-    noData: {
-        name: 'string',
-        class: 'string',
-    },
-    sort: 'boolean',
-    filter: 'boolean',
-};
 export const CONFIGURACION_PRUEBA: any = {
     title: {
         name: 'Actividades Asociadas',
         class: 'text-center text-light',
     },
+    showColumnTitle: true,
     dataConfig: [
         {
             key: 'Numero',
