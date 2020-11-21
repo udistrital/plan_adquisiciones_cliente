@@ -25,12 +25,14 @@ export class GeneralTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.config.endSubtotal.last.name) {
-      const arraySubtotal: any[] = [];
-      this.datos.forEach((element: any) => {
-        arraySubtotal.push(parseFloat(element[this.config.endSubtotal.property]));
-      });
-      this.Subtotal = arraySubtotal.reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (this.config.endSubtotal) {
+      if (!this.config.endSubtotal.last.name) {
+        const arraySubtotal: any[] = [];
+        this.datos.forEach((element: any) => {
+          arraySubtotal.push(parseFloat(element[this.config.endSubtotal.property]));
+        });
+        this.Subtotal = arraySubtotal.reduce((accumulator, currentValue) => accumulator + currentValue);
+      }
     }
   }
 

@@ -64,6 +64,11 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
           if (accion.accion.name === 'Editar') {
             this.route.navigate(['pages/plan-adquisiciones/planes/crear-plan-adquisiciones']);
             this.store.dispatch(LoadFilaSeleccionada(null));
+          } else {
+            if (accion.accion.name === 'Ver') {
+              this.route.navigate(['pages/plan-adquisiciones/planes/detalle-plan-adquisiciones']);
+              this.store.dispatch(LoadFilaSeleccionada(null));
+            }
           }
         }
       }

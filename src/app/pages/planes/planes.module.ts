@@ -11,10 +11,11 @@ import { StoreModule } from '@ngrx/store';
 import * as fromPlanes from './reducers/planes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PlanesEffects } from './effects/planes.effects';
+import { DetallePlanComponent } from './components/detalle-plan/detalle-plan.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent],
+  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent, DetallePlanComponent],
   imports: [
     CommonModule,
     PlanesRoutingModule,
