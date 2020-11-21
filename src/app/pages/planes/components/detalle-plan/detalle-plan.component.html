@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">PLAN DE ADQUISICIONES</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col px-0">
+            <ngx-general-table [config]="configuracion" [datos]="datosPrueba"></ngx-general-table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">Cancelar</button>
+        </div>
+    </div>
+</div>
