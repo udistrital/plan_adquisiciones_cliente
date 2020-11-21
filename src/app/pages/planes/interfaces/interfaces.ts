@@ -318,4 +318,4 @@ export const DATOS_PRUEBA_2: any = [
         Valor: 57091000.0,
         FuenteRecurso: 'Funcionamiento',
     }
-]
+];
