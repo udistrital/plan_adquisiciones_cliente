@@ -13,7 +13,8 @@ import { getPlanDetallado } from '../../selectors/planes.selectors';
 })
 export class DetallePlanComponent implements OnInit {
 
-  configuracion: any;
+  configuracion: any[];
+  configTotal: any
   datosPrueba: any;
 
   subscription$: any;
@@ -24,7 +25,21 @@ export class DetallePlanComponent implements OnInit {
     private store: Store<any>,
     private route: Router
   ) {
-    this.configuracion = CONFIGURACION_PRUEBA_2;
+    this.configuracion = [
+      JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
+      JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
+    ];
+    
+    this.configuracion[0].title.name = 'Plan Funcionamiento 2020';
+    this.configuracion[1].title.name = 'Plan Inversion 2020';
+
+    this.configuracion[0].subtitle.name = 'Rubro Compra de Equipo';
+    this.configuracion[1].subtitle.name = '378 - Promocion del Desarrollo y la investigacion del Desarrollo Cientifico';
+
+    this.configuracion[0].endSubtotal.items[0].name = 'Total Rubro Compra de Equipo';
+    this.configuracion[1].endSubtotal.items[0].name = 'Total Rubro 378 - Promocion del Desarrollo y la investigacion del Desarrollo Cientifico';
+
+    console.log(this.configuracion)
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
   }
@@ -33,11 +48,7 @@ export class DetallePlanComponent implements OnInit {
     this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
       if (plan) {
         if (Object.keys(plan).length !== 0) {
-          if (Object.keys(plan[0][0]).length !== 0) {
-            this.datosPrueba = plan[0];
-          } else {
-            this.datosPrueba = [];
-          }
+          this.datosPrueba = plan[0];
         }
       }
     });

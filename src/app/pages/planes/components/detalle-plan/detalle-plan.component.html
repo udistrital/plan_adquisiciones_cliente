@@ -6,7 +6,23 @@
     </div>
     <div class="row">
         <div class="col px-0">
-            <ngx-general-table [config]="configuracion" [datos]="datosPrueba"></ngx-general-table>
+            <ng-container *ngFor="let table of configuracion">
+                <div class="py-2">
+                    <ngx-general-table [config]="table" [datos]="datosPrueba"></ngx-general-table>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8 border border-light bg-primary text-center text-light py-2 font-weight-bold">
+                        TOTAL PLAN DE ADQUISICIONES FUNCIONAMIENTO E INVERSION 2020:
+                    </div>
+                    <div class="col-4 border border-light bg-primary text-center text-light py-2 font-weight-bold">
+                        {{ '123421341234' | currency }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

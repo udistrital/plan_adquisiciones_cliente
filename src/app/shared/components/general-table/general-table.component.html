@@ -39,7 +39,7 @@
                 <ng-container *ngIf="data.pipe.isArray">
                   <td [class]="data.pipe.class">
                     <ng-container *ngFor="let value of items[data.key]">
-                      <span>{{value}}</span>
+                      <span class="my-2">{{value}}</span>
                     </ng-container>
                   </td>
                 </ng-container>
@@ -57,27 +57,33 @@
                 </td>
               </ng-container>
             </tr>
-            <ng-container *ngIf="(datos | filterTable:stringBusqueda).length === 0">
-              <th scope="col" colspan="100" [class]="config.noData.class">
-                {{config.noData.name}}
-              </th>
+            <ng-container *ngIf="config.noData">
+              <ng-container *ngIf="(datos | filterTable:stringBusqueda).length === 0">
+                <tr>
+                  <th scope="col" colspan="100" [class]="config.noData.class">
+                    {{config.noData.name}}
+                  </th>
+                </tr>
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="config.endSubtotal">
-              <ng-container *ngFor="let subsection of config.endSubtotal.items">
-                <th scope="col" [attr.colspan]="subsection.colspan" [class]="subsection.class">
-                  {{subsection.name}}
-                </th>
-              </ng-container>
-              <ng-container *ngIf="config.endSubtotal.last.name">
-                <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
-                  {{ config.endSubtotal.last.name | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
-                </th>
-              </ng-container>
-              <ng-container *ngIf="!config.endSubtotal.last.name">
-                <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
-                  {{ Subtotal | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
-                </th>
-              </ng-container>
+              <tr>
+                <ng-container *ngFor="let subsection of config.endSubtotal.items">
+                  <th scope="col" [attr.colspan]="subsection.colspan" [class]="subsection.class">
+                    {{subsection.name}}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="config.endSubtotal.last.name">
+                  <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
+                    {{ config.endSubtotal.last.name | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="!config.endSubtotal.last.name">
+                  <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
+                    {{ Subtotal | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
+                  </th>
+                </ng-container>
+              </tr>
             </ng-container>
 
           </tbody>

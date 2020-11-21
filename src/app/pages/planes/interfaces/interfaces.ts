@@ -140,87 +140,95 @@ export const CONFIGURACION_PRUEBA_2: any = {
             key: 'Rubro',
             title: {
                 name: 'Rubro Presupuestal',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: '',
+                class: 'text-center align-middle',
             }
         },
         {
             key: 'Descripcion',
             title: {
                 name: 'Descripcion',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-justify',
+                class: 'text-justify align-middle',
             }
         },
         {
             key: 'FechaEstimada',
             title: {
                 name: 'Fecha Estimada de Inicio de Proceso de Seleccion',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                class: 'text-center align-middle',
             }
         },
         {
             key: 'DuracionEstimada',
             title: {
                 name: 'Duracion Estimada de Contrato',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                class: 'text-center align-middle',
             }
         },
         {
             key: 'Responsable',
             title: {
                 name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                class: 'text-center align-middle',
             }
         },
         {
             key: 'ModalidadSeleccion',
             title: {
                 name: 'Modalidad de Seleccion',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                class: 'd-flex flex-column align-items-center text-center align-middle',
+                isArray: true,
             }
         },
         {
             key: 'Valor',
             title: {
                 name: 'Valor Asignado Año Vigente',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                type: 'currency',
+                config: [
+                ],
+                class: 'text-center align-middle',
             }
         },
         {
             key: 'FuenteRecurso',
             title: {
                 name: 'Fuente de Recurso',
-                class: 'text-center',
+                class: 'text-center align-middle',
             },
             pipe: {
-                class: 'text-center',
+                class: 'text-center align-middle',
             }
         },
     ],
+    subtitle: {
+        name: '',
+        class: 'text-center text-light',
+    },
     rowActions: {
         title: {
             name: 'Acciones',
-            class: 'text-center',
+            class: 'text-center align-middle',
             actionClass: 'd-flex flex-row justify-content-around align-middle'
         },
         actions: [
@@ -237,17 +245,77 @@ export const CONFIGURACION_PRUEBA_2: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2 mx-2',
-            title: 'Agregar Nuevo Plan de Adquisiciones',
+            title: 'Agregar Rubro',
         },
     ],
     noData: {
         name: 'No Existen Rubros Asociados',
         class: 'text-center',
     },
+    endSubtotal: {
+        property: 'Valor',
+        items: [
+            {
+                colspan: 6,
+                name: 'Total Plan',
+                class: 'text-center',
+            },
+        ],
+        last: {
+            class: 'text-left',
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: '',
+            }
+        }
+    },
     sort: true,
-    filter: true,
+    filter: false,
 };
 
 export const DATOS_PRUEBA_2: any = [
-
+    {
+        Rubro: '3-01-001-04-05-03-0123',
+        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
+        FechaEstimada: 'Mayo 2019 - Julio 2019',
+        DuracionEstimada: '1 Año',
+        Responsable: 'Jefe Oficina Asesora de Sistemas',
+        ModalidadSeleccion: [
+            'Subasta Inversa',
+            'Contratacion Directa',
+            'Convocatoria Publica'
+        ],
+        Valor: 57091000.0,
+        FuenteRecurso: 'Funcionamiento',
+    },
+    {
+        Rubro: '3-01-001-04-05-03-0123',
+        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
+        FechaEstimada: 'Mayo 2019 - Julio 2019',
+        DuracionEstimada: '1 Año',
+        Responsable: 'Jefe Oficina Asesora de Sistemas',
+        ModalidadSeleccion: [
+            'Subasta Inversa',
+            'Contratacion Directa',
+            'Convocatoria Publica'
+        ],
+        Valor: 57091000.0,
+        FuenteRecurso: 'Funcionamiento',
+    },
+    {
+        Rubro: '3-01-001-04-05-03-0123',
+        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
+        FechaEstimada: 'Mayo 2019 - Julio 2019',
+        DuracionEstimada: '1 Año',
+        Responsable: 'Jefe Oficina Asesora de Sistemas',
+        ModalidadSeleccion: [
+            'Subasta Inversa',
+            'Contratacion Directa',
+            'Convocatoria Publica'
+        ],
+        Valor: 57091000.0,
+        FuenteRecurso: 'Funcionamiento',
+    }
 ]
