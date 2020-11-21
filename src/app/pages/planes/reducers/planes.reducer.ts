@@ -6,11 +6,13 @@ export const planesFeatureKey = 'planes';
 export interface State {
   Planes: any;
   PlanSeleccionado: any;
+  PlanDetallado: any;
 }
 
 export const initialState: State = {
   Planes: [],
   PlanSeleccionado: null,
+  PlanDetallado: [],
 };
 
 const planesReducer = createReducer(
@@ -22,6 +24,9 @@ const planesReducer = createReducer(
   })),
   on(PlanesActions.CargarPlanes, (state, action) => ({
     ...state, Planes: state.Planes = action
+  })),
+  on(PlanesActions.CargarPlanDetallado, (state, action) => ({
+    ...state, PlanDetallado: state.PlanDetallado = action
   })),
 );
 

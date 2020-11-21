@@ -39,5 +39,13 @@ export const ActualizarPlan = createAction(
   props()
 );
 
+export const ConsultarPlanDetallado = createAction(
+  '[Planes] Consultar Plan Detallado',
+  props()
+);
 
+export const CargarPlanDetallado = createAction(
+  '[Planes] Cargar Plan Detallado',
+  props()
+);
 
