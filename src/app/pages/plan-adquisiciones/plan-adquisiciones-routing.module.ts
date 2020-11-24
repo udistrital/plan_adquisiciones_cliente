@@ -28,13 +28,18 @@ const routes: Routes = [{
       .then(m => m.PlanesModule),
     },
     {
+      path: 'registro-plan-adquisiciones',
+      loadChildren: () => import('../registro-plan-adquisiciones/registro-plan-adquisiciones.module')
+      .then(m => m.RegistroPlanAdquisicionesModule),
+    },
+    {
       path: '',
-      redirectTo: 'lineamientos',
+      redirectTo: 'registro-plan-adquisiciones',
       pathMatch: 'full',
     },
     {
       path: '**',
-      redirectTo: 'lineamientos',
+      redirectTo: 'registro-plan-adquisiciones',
       pathMatch: 'full',
     },
   ],
