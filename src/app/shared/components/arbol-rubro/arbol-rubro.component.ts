@@ -42,7 +42,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.FuenteRecurso)
+
     if (changes.FuenteRecurso) {
       this.FuenteRecurso$.next(this.FuenteRecurso);
       this.store.dispatch(LoadNodoSeleccionado(null));

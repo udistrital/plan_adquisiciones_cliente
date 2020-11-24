@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { getArbolRubro, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'ngx-seleccion-rubro',
@@ -46,13 +47,13 @@ export class SeleccionRubroComponent implements OnInit {
 
     // Seleccionar Rubro
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
-      console.log(nodo)
+
       if (nodo) {
         if (Object.keys(nodo)[0] === 'type') {
           // hay que crear un delay porque el cambio se efectua antes de renderizar la vista
           setTimeout(() => {
             this.RubroForm.get('RubroSeleccionado').setValue(null);
-          })
+          });
         } else {
           if (!nodo.children) {
             this.RubroForm.get('RubroSeleccionado').setValue(nodo);

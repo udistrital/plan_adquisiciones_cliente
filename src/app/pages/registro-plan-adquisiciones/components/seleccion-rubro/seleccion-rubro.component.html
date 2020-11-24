@@ -23,7 +23,7 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <span class="form-control py-2">
+                    <span class="form-control py-2 overflow">
                         {{RubroForm.get('FuenteSeleccionada').value ? RubroForm.get('FuenteSeleccionada').value.data.Nombre : '' }}
                     </span>
                 </div>
@@ -43,15 +43,15 @@
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                <span class="form-control">
-                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Codigo : ''}}
+                                <span class="form-control overflow">
+                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Codigo: ''}}
                                 </span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-lg-6">
                             <div class="form-group mb-0">
-                                <span class="form-control">
-                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Nombre : ''}}
+                                <span class="form-control overflow">
+                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Nombre: ''}}
                                 </span>
                             </div>
                         </div>

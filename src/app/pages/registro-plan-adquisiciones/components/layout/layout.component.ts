@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  titulo: any
+  titulo: any;
 
   constructor() {
-    this.titulo = 'Creacion Plan de Adquisiciones'
+    this.titulo = 'Creacion Plan de Adquisiciones';
   }
 
   ngOnInit() {
