@@ -23,6 +23,11 @@ const routes: Routes = [{
       .then(m => m.ActividadesModule),
     },
     {
+      path: 'planes',
+      loadChildren: () => import('../planes/planes.module')
+      .then(m => m.PlanesModule),
+    },
+    {
       path: '',
       redirectTo: 'lineamientos',
       pathMatch: 'full',

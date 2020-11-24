@@ -1,43 +1,74 @@
 export const configTable: any = {
     title: {
-        name: 'string',
-        class: 'string',
+        name: 'string', // name title
+        class: 'string', // bootstrap class
     },
+    showColumnTitle: true, // show / hide columns title
     dataConfig: [
         {
-            key: 'string',
-            title: 'string',
+            key: 'string', // object key
+            title: 'string', // column title
             pipe: {
-                functionPipe: () => { },
-                class: 'string'
+                type: 'string', // date, currency, decimal, percent, custom ( optional )
+                config: [
+                    'string', // array like pipe, no custom
+                    () => { }, // only custom pipe
+                ], //  ( optional )
+                class: 'string', // bootstrap class
             }
         }
     ],
+    subtitle: {
+        name: 'string', // name subtitle
+        class: 'string', // bootstrap class
+    },
     rowActions: {
         title: {
-            name: 'string',
-            class: 'string',
+            name: 'string', // Title Actions
+            class: 'string', // bootstrap class
         },
         actions: [
             {
-                name: 'string',
-                icon: 'string',
-                class: 'string',
-                title: 'string',
+                name: 'string', // name action
+                icon: 'string', // icon action (font-awesome icons)
+                class: 'string', // bootstrap class
+                title: 'string', // bootstrap tooltip name
             }
         ],
     },
     tableActions: [
         {
-            name: 'string',
-            icon: 'string',
-            class: 'string',
-            title: 'string',
+            name: 'string', // name action
+            icon: 'string', // icon action (font-awesome icons)
+            class: 'string', // bootstrap class
+            title: 'string', // bootstrap tooltip name
         }
     ],
     noData: {
-        name: 'string',
-        class: 'string',
+        name: 'string', // title no data
+        class: 'string', // bootstrap class
+    },
+    endSubtotal: {
+        property: 'string', // key object
+        items: [
+            {
+                colspan: 'number', // relative offset number
+                name: 'string', // title item
+                class: 'string', // bootstrap class
+            },
+        ],
+        last: {
+            name: 'string', // if fixed name ( optional )
+            class: 'string',
+            pipe: {
+                type: 'string', // date, currency, decimal, percent, custom ( optional )
+                config: [
+                    'string', // array like pipe, no custom
+                    () => { }, // only custom pipe
+                ], //  ( optional )
+                class: 'string', // bootstrap class
+            }
+        }
     },
     sort: 'boolean',
     filter: 'boolean',
