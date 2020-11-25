@@ -32,7 +32,6 @@ export class SharedService {
     ).subscribe((data) => {
       this.behavior.next(data);
     })
-    
   }
 
   /**
@@ -58,7 +57,12 @@ export class SharedService {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     return this.rqManager.get(`arbol_rubro/arbol/${codigo}`);
   }
-
+/**
+   * Gets Vigencia Actual
+   *  returns one tree level at once.
+   * @param [offset] 
+   * @returns  vigencia information.
+   */
   public getVigenciaActual(offset?: number) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     const params = {
@@ -70,6 +74,14 @@ export class SharedService {
     }
     return this.rqManager.get(`vigencia/vigencia_actual_area/1${query}`, params);
   }
+
+  
+
+/**
+   * getScreenSize
+   * capturar el tamaño de pantalla y el tamaño de bootstrap
+   * @returns  <Observable> data of the screen size
+   */
 
   public getScreenSize() {
     return this.behavior.asObservable()
