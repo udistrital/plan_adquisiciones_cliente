@@ -14,18 +14,18 @@ export class SeleccionFuenteComponent implements OnInit {
 
   constructor(
     private registroService: RegistroPlanAdquisicionesService,
-    private fb : FormBuilder,
+    private fb: FormBuilder,
   ) {
     this.FuenteForm = this.fb.group({
-      fuenteSeleccionada: [null,[Validators.required]],
-    })
+      fuenteSeleccionada: [null, [Validators.required]],
+    });
   }
 
   ngOnInit() {
     this.registroService.getFuentesFinanciamiento().subscribe((fuente: any) => {
-      console.log(fuente)
+      // console.log(fuente)
       this.FuentesFinanciamiento = fuente;
-    })
+    });
   }
 
 }

@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { RegistroPlanAdquisicionesEffects } from './registro-plan-adquisiciones.effects';
 
 describe('RegistroPlanAdquisicionesEffects', () => {
-  let actions$: Observable<any>;
+  // let actions$: Observable<any>;
+  const actions$: Observable<any> = new Observable();
   let effects: RegistroPlanAdquisicionesEffects;
 
   beforeEach(() => {

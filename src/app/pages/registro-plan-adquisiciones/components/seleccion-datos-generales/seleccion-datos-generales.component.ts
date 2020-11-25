@@ -15,13 +15,13 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
       FechaInicioSeleccion2: [null, [Validators.required]],
-    })
+    });
   }
 
   ngOnInit() {
   }
 
   ver() {
-    console.log(this.DatosGeneralesForm.value)
+    // console.log(this.DatosGeneralesForm.value)
   }
 }

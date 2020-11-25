@@ -12,7 +12,7 @@ export class RegistroPlanAdquisicionesEffects {
 
 
   loadRegistroPlanAdquisicioness$ = createEffect(() => {
-    return this.actions$.pipe( 
+    return this.actions$.pipe(
 
       ofType(RegistroPlanAdquisicionesActions.loadRegistroPlanAdquisicioness),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
@@ -21,6 +21,6 @@ export class RegistroPlanAdquisicionesEffects {
   });
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 
 }

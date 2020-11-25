@@ -21,7 +21,7 @@ export class RegistroPlanAdquisicionesService {
   public getProductos(id?: any) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     if (!id) {
-      id = ''
+      id = '';
     }
     return this.rqManager.get('producto/' + id);
   }
@@ -38,12 +38,12 @@ export class RegistroPlanAdquisicionesService {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     const query_params = {
       query: '',
-    }
+    };
     if (params) {
       query_params.query = id ? id + '/' + params.Vigencia + '/' + params.UnidadEjecutora : params.Vigencia + '/' + params.UnidadEjecutora;
     } else {
       query_params.query = '0/1';
     }
-    return this.rqManager.get('fuente_financiamiento/' + query_params.query)
+    return this.rqManager.get('fuente_financiamiento/' + query_params.query);
   }
 }

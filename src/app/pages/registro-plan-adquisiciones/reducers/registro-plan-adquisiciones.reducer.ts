@@ -4,9 +4,9 @@ import * as RegistroPlanAdquisicionesActions from '../actions/registro-plan-adqu
 export const registroPlanAdquisicionesFeatureKey = 'registroPlanAdquisiciones';
 
 export interface State {
-  Rubro: any,
-  Meta: any,
-  Producto: any,
+  Rubro: any;
+  Meta: any;
+  Producto: any;
 }
 
 export const initialState: State = {

@@ -32,7 +32,7 @@ export class SeleccionMetaProductoComponent implements OnInit {
     // Cargar Productos
     this.registroService.getProductos().subscribe((data: any) => {
       this.Productos = data;
-    })
+    });
     // Cargar metas seleccionando nodo
     this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (nodo) {
@@ -46,7 +46,7 @@ export class SeleccionMetaProductoComponent implements OnInit {
                 this.MetaForm.get('MetaSeleccionada').setValue(null);
                 this.Metas = undefined;
               }
-            })
+            });
           }
         } else {
           this.MetaForm.get('MetaSeleccionada').setValue(null);
@@ -54,6 +54,6 @@ export class SeleccionMetaProductoComponent implements OnInit {
           this.Metas = undefined;
         }
       }
-    })
+    });
   }
 }

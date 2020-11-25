@@ -9,7 +9,7 @@ import { RequestManager } from '../../@core/managers/requestManager';
 })
 export class SharedService {
 
-  behavior: BehaviorSubject<any>
+  behavior: BehaviorSubject<any>;
 
   constructor(
     private rqManager: RequestManager,
@@ -19,7 +19,7 @@ export class SharedService {
       width: window.innerWidth,
       height: window.innerHeight,
       size: this.catchSize(window.innerWidth),
-    })
+    });
 
     fromEvent(window, 'resize').pipe(
       map((event: any) => {
@@ -27,11 +27,11 @@ export class SharedService {
           width: event.target.innerWidth,
           height: event.target.innerHeight,
           size: this.catchSize(event.target.innerWidth),
-        }
+        };
       }),
     ).subscribe((data) => {
       this.behavior.next(data);
-    })
+    });
   }
 
   /**
@@ -57,12 +57,12 @@ export class SharedService {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     return this.rqManager.get(`arbol_rubro/arbol/${codigo}`);
   }
-/**
-   * Gets Vigencia Actual
-   *  returns one tree level at once.
-   * @param [offset] 
-   * @returns  vigencia information.
-   */
+  /**
+     * Gets Vigencia Actual
+     *  returns one tree level at once.
+     * @param [offset]
+     * @returns  vigencia information.
+     */
   public getVigenciaActual(offset?: number) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     const params = {
@@ -75,16 +75,16 @@ export class SharedService {
     return this.rqManager.get(`vigencia/vigencia_actual_area/1${query}`, params);
   }
 
-  
 
-/**
-   * getScreenSize
-   * capturar el tamaño de pantalla y el tamaño de bootstrap
-   * @returns  <Observable> data of the screen size
-   */
+
+  /**
+     * getScreenSize
+     * capturar el tamaño de pantalla y el tamaño de bootstrap
+     * @returns  <Observable> data of the screen size
+     */
 
   public getScreenSize() {
-    return this.behavior.asObservable()
+    return this.behavior.asObservable();
   }
 
   private catchSize(width: any) {
