@@ -1,1 +1,29 @@
-<p>seleccion-fuente works!</p>
+<form [formGroup]="FuenteForm" *ngIf="FuenteForm">
+    <fieldset [attr.disabled]="FuentesFinanciamiento ? null: 'disabled'">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                    <p>Fuente de Financiamiento:</p>
+                </div>
+                <div class="col-3">
+                    <ng-container>
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1" formControlName="fuenteSeleccionada" >
+                                <ng-container *ngFor="let fuente of FuentesFinanciamiento">
+                                    <option [ngValue]="fuente">{{fuente.Codigo}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <span class="form-control py-2 overflow">
+                            {{FuenteForm.get('fuenteSeleccionada').value ? FuenteForm.get('fuenteSeleccionada').value.Nombre : '' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

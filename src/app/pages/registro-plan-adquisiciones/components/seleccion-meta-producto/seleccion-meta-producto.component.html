@@ -1,1 +1,56 @@
-<p>seleccion-meta-producto works!</p>
+<form [formGroup]="MetaForm" *ngIf="MetaForm">
+    <fieldset [attr.disabled]="Metas ? null: 'disabled'">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                    <p>Meta:</p>
+                </div>
+                <div class="col-3">
+                    <ng-container>
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1" formControlName="MetaSeleccionada" >
+                                <ng-container *ngFor="let meta of Metas">
+                                    <option [ngValue]="meta">{{meta.LineamientoId.Numero + '.' + meta.Numero}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <span class="form-control py-2 overflow">
+                            {{MetaForm.get('MetaSeleccionada').value ? MetaForm.get('MetaSeleccionada').value.Nombre : '' }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                    <p>Producto:</p>
+                </div>
+                <div class="col-3">
+                    <ng-container *ngIf="!Productos">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-grow text-primary" role="status"></div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="Productos">
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1"
+                                formControlName="ProductoSeleccionado">
+                                <ng-container *ngFor="let producto of Productos">
+                                    <option [ngValue]="producto">{{producto.Codigo}}</option>
+                                </ng-container>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <span class="form-control py-2 overflow">
+                            {{MetaForm.get('ProductoSeleccionado').value ? MetaForm.get('ProductoSeleccionado').value.Nombre : '' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

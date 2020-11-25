@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
   selector: 'ngx-seleccion-fuente',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeleccionFuenteComponent implements OnInit {
 
-  constructor() { }
+  FuentesFinanciamiento: any;
+  FuenteForm: any;
+
+  constructor(
+    private registroService: RegistroPlanAdquisicionesService,
+    private fb : FormBuilder,
+  ) {
+    this.FuenteForm = this.fb.group({
+      fuenteSeleccionada: [null,[Validators.required]],
+    })
+  }
 
   ngOnInit() {
+    this.registroService.getFuentesFinanciamiento().subscribe((fuente: any) => {
+      console.log(fuente)
+      this.FuentesFinanciamiento = fuente;
+    })
   }
 
 }
