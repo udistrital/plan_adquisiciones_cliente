@@ -4,17 +4,30 @@ import * as RegistroPlanAdquisicionesActions from '../actions/registro-plan-adqu
 export const registroPlanAdquisicionesFeatureKey = 'registroPlanAdquisiciones';
 
 export interface State {
-
+  Rubro: any,
+  Meta: any,
+  Producto: any,
 }
 
 export const initialState: State = {
-
+  Rubro: null,
+  Meta: null,
+  Producto: null,
 };
 
 const registroPlanAdquisicionesReducer = createReducer(
   initialState,
 
   on(RegistroPlanAdquisicionesActions.loadRegistroPlanAdquisicioness, state => state),
+  on(RegistroPlanAdquisicionesActions.CargarRubro, (state, action) => ({
+    ...state, Rubro: state.Rubro = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarMeta, (state, action) => ({
+    ...state, Meta: state.Meta = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarProducto, (state, action) => ({
+    ...state, Producto: state.Producto = action
+  })),
 
 );
 

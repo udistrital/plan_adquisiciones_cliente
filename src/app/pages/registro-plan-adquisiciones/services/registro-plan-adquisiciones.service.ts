@@ -34,7 +34,7 @@ export class RegistroPlanAdquisicionesService {
    * @param param object with the params to get in the DB
    * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
    */
-  public getFuentes(id?: any, params?: any) {
+  public getFuentesFinanciamiento(id?: any, params?: any) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     const query_params = {
       query: '',
