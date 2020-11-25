@@ -9,6 +9,10 @@ import { SeleccionFuenteComponent } from './components/seleccion-fuente/seleccio
 import { SeleccionDatosGeneralesComponent } from './components/seleccion-datos-generales/seleccion-datos-generales.component';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromRegistroPlanAdquisiciones from './reducers/registro-plan-adquisiciones.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquisiciones.effects';
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RegistroPlanAdquisicionesRoutingModule
+    RegistroPlanAdquisicionesRoutingModule,
+    StoreModule.forFeature(fromRegistroPlanAdquisiciones.registroPlanAdquisicionesFeatureKey, fromRegistroPlanAdquisiciones.reducer),
+    EffectsModule.forFeature([RegistroPlanAdquisicionesEffects])
   ]
 })
 export class RegistroPlanAdquisicionesModule { }
