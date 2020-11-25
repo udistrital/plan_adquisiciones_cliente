@@ -1,1 +1,17 @@
-<p>seleccion-datos-generales works!</p>
+<form [formGroup]="DatosGeneralesForm" *ngIf="DatosGeneralesForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>Fecha Estimada de Inicio de Proceso de Seleccion:</p>
+            </div>
+            <div class="col-9">
+                <input class="form-control" [nbDatepicker]="rangepicker" formControlName="FechaInicioSeleccion"
+                    (ngModelChange)="ver()">
+                <nb-rangepicker #rangepicker></nb-rangepicker>
+                <input class="form-control" [nbDatepicker]="datepicker" formControlName="FechaInicioSeleccion2"
+                    (ngModelChange)="ver()">
+                <nb-datepicker #datepicker></nb-datepicker>
+            </div>
+        </div>
+    </div>
+</form>

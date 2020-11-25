@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromRegistroPlanAdquisiciones from './reducers/registro-plan-adquisiciones.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquisiciones.effects';
+import { NbDatepickerModule } from '@nebular/theme';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquis
     FormsModule,
     ReactiveFormsModule,
     RegistroPlanAdquisicionesRoutingModule,
+    NbDatepickerModule,
     StoreModule.forFeature(fromRegistroPlanAdquisiciones.registroPlanAdquisicionesFeatureKey, fromRegistroPlanAdquisiciones.reducer),
     EffectsModule.forFeature([RegistroPlanAdquisicionesEffects])
   ]
