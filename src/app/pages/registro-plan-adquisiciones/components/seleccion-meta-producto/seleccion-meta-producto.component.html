@@ -2,10 +2,10 @@
     <fieldset [attr.disabled]="Metas ? null: 'disabled'">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
                     <p>Meta:</p>
                 </div>
-                <div class="col-3">
+                <div class="col-3 pt-3">
                     <ng-container>
                         <div class="form-group">
                             <select class="form-control" id="exampleFormControlSelect1" formControlName="MetaSeleccionada" >
@@ -16,9 +16,9 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="col-6">
+                <div class="col-6 pt-3">
                     <div class="form-group">
-                        <span class="form-control py-2 overflow">
+                        <span class="form-control overflow">
                             {{MetaForm.get('MetaSeleccionada').value ? MetaForm.get('MetaSeleccionada').value.Nombre : '' }}
                         </span>
                     </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <span class="form-control py-2 overflow">
+                        <span class="form-control overflow">
                             {{MetaForm.get('ProductoSeleccionado').value ? MetaForm.get('ProductoSeleccionado').value.Nombre : '' }}
                         </span>
                     </div>

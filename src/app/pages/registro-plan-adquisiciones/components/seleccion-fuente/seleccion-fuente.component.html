@@ -2,10 +2,10 @@
     <fieldset [attr.disabled]="FuentesFinanciamiento ? null: 'disabled'">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
                     <p>Fuente de Financiamiento:</p>
                 </div>
-                <div class="col-3">
+                <div class="col-3 pt-3">
                     <ng-container>
                         <div class="form-group">
                             <select class="form-control" id="exampleFormControlSelect1" formControlName="fuenteSeleccionada" >
@@ -16,9 +16,9 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="col-6">
+                <div class="col-6 pt-3">
                     <div class="form-group">
-                        <span class="form-control py-2 overflow">
+                        <span class="form-control overflow">
                             {{FuenteForm.get('fuenteSeleccionada').value ? FuenteForm.get('fuenteSeleccionada').value.Nombre : '' }}
                         </span>
                     </div>
