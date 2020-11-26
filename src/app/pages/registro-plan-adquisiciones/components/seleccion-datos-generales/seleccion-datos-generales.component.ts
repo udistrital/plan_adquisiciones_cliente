@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
   selector: 'ngx-seleccion-datos-generales',
@@ -7,10 +8,15 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./seleccion-datos-generales.component.scss']
 })
 export class SeleccionDatosGeneralesComponent implements OnInit {
+
   DatosGeneralesForm: any;
+
+  ModalidadSeleccion: any;
+  Responsables: any;
 
   constructor(
     private fb: FormBuilder,
+    private registroService : RegistroPlanAdquisicionesService,
   ) {
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
@@ -19,6 +25,14 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
+      console.log(data)
+      this.ModalidadSeleccion = data;
+    })
+    this.registroService.getResponsables().subscribe((data) => {
+      console.log(data)
+      this.Responsables = data;
+    })
   }
 
   ver() {
