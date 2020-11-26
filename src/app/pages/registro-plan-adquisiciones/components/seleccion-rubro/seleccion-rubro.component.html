@@ -12,12 +12,13 @@
                 </ng-container>
                 <ng-container *ngIf="fuentesRecurso">
                     <div class="form-group">
-                        <select class="form-control" id="exampleFormControlSelect1"
-                            formControlName="FuenteSeleccionada">
-                            <ng-container *ngFor="let fuente of fuentesRecurso">
-                                <option [ngValue]="fuente">{{fuente.Codigo}}</option>
-                            </ng-container>
-                        </select>
+                        <mat-select class="form-control" formControlName="FuenteSeleccionada">
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                <mat-option *cdkVirtualFor="let fuente of fuentesRecurso" class="example-item" [value]="fuente">
+                                    {{fuente.Codigo}}
+                                </mat-option>
+                            </cdk-virtual-scroll-viewport>
+                        </mat-select>
                     </div>
                 </ng-container>
             </div>

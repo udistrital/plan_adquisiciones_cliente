@@ -8,11 +8,13 @@
                 <div class="col-3 pt-3">
                     <ng-container>
                         <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1" formControlName="fuenteSeleccionada" >
-                                <ng-container *ngFor="let fuente of FuentesFinanciamiento">
-                                    <option [ngValue]="fuente">{{fuente.Codigo}}</option>
-                                </ng-container>
-                            </select>
+                            <mat-select class="form-control" formControlName="fuenteSeleccionada">
+                                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                    <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item" [value]="fuente">
+                                        {{fuente.Codigo}}
+                                    </mat-option>
+                                </cdk-virtual-scroll-viewport>
+                            </mat-select>
                         </div>
                     </ng-container>
                 </div>

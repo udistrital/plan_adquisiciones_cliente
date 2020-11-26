@@ -70,7 +70,7 @@ export class RegistroPlanAdquisicionesService {
   public getResponsables() {
     this.rqManager.setPath('OIKOS_SERVICE');
     const query_params = {
-      query: '?limit=-1&sortby=Nombre&order=asc&query=Nombre__contains:ACA',
+      query: '?limit=-1&sortby=Nombre&order=asc',
     };
     return this.rqManager.get('dependencia/' + query_params.query);
   }

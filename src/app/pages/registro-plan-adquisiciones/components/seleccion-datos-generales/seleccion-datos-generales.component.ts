@@ -21,21 +21,16 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
       FechaInicioSeleccion2: [null, [Validators.required]],
+      Responsable: [null, [Validators.required]],
     });
   }
 
   ngOnInit() {
     this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
-
       this.ModalidadSeleccion = data;
     });
     this.registroService.getResponsables().subscribe((data) => {
-
       this.Responsables = data;
     });
-  }
-
-  ver() {
-    // console.log(this.DatosGeneralesForm.value)
   }
 }

@@ -39,7 +39,6 @@ export class SeleccionFuenteComponent implements OnInit {
           UnidadEjecutora: area.Id,
         };
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuente: any) => {
-          // console.log(fuente)
           this.FuentesFinanciamiento = fuente;
         });
       }

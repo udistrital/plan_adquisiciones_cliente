@@ -14,6 +14,8 @@ import * as fromRegistroPlanAdquisiciones from './reducers/registro-plan-adquisi
 import { EffectsModule } from '@ngrx/effects';
 import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquisiciones.effects';
 import { NbDatepickerModule } from '@nebular/theme';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatSelectModule } from '@angular/material';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { NbDatepickerModule } from '@nebular/theme';
     ReactiveFormsModule,
     RegistroPlanAdquisicionesRoutingModule,
     NbDatepickerModule,
+    ScrollingModule,
+    MatSelectModule,
     StoreModule.forFeature(fromRegistroPlanAdquisiciones.registroPlanAdquisicionesFeatureKey, fromRegistroPlanAdquisiciones.reducer),
     EffectsModule.forFeature([RegistroPlanAdquisicionesEffects])
   ]

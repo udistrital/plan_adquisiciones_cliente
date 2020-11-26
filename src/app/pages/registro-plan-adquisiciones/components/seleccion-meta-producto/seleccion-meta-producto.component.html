@@ -8,11 +8,13 @@
                 <div class="col-3 pt-3">
                     <ng-container>
                         <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1" formControlName="MetaSeleccionada" >
-                                <ng-container *ngFor="let meta of Metas">
-                                    <option [ngValue]="meta">{{meta.LineamientoId.Numero + '.' + meta.Numero}}</option>
-                                </ng-container>
-                            </select>
+                            <mat-select class="form-control" formControlName="MetaSeleccionada">
+                                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                    <mat-option *cdkVirtualFor="let meta of Metas" class="example-item" [value]="meta">
+                                        {{meta.LineamientoId.Numero + '.' + meta.Numero}}
+                                    </mat-option>
+                                </cdk-virtual-scroll-viewport>
+                            </mat-select>
                         </div>
                     </ng-container>
                 </div>
@@ -34,12 +36,13 @@
                     </ng-container>
                     <ng-container *ngIf="Productos">
                         <div class="form-group">
-                            <select class="form-control" id="exampleFormControlSelect1"
-                                formControlName="ProductoSeleccionado">
-                                <ng-container *ngFor="let producto of Productos">
-                                    <option [ngValue]="producto">{{producto.Codigo}}</option>
-                                </ng-container>
-                            </select>
+                            <mat-select class="form-control" formControlName="ProductoSeleccionado">
+                                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                    <mat-option *cdkVirtualFor="let producto of Productos" class="example-item" [value]="producto">
+                                        {{producto.Codigo}}
+                                    </mat-option>
+                                </cdk-virtual-scroll-viewport>
+                            </mat-select>
                         </div>
                     </ng-container>
                 </div>
