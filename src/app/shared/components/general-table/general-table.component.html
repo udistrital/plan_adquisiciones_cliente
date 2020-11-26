@@ -14,13 +14,15 @@
               </th>
             </tr>
             <tr *ngIf="config.showColumnTitle">
+              <ng-container *ngIf="config.checkElement">
+                <th scope="col" [class]="config.checkElement.title.class">{{config.checkElement.title.name}}</th>
+              </ng-container>
               <ng-container *ngFor="let element of config.dataConfig">
                 <th scope="col" [class]="element.title.class">{{element.title.name}}</th>
               </ng-container>
               <ng-container *ngIf="config.rowActions">
                 <th scope="col" [class]="config.rowActions.title.class">{{config.rowActions.title.name}}</th>
               </ng-container>
-
             </tr>
             <tr *ngIf="config.subtitle">
               <th scope="col" colspan="100" [class]="config.subtitle.class">
@@ -30,6 +32,13 @@
           </thead>
           <tbody>
             <tr *ngFor="let items of datos | filterTable:stringBusqueda; index as i">
+              <ng-container *ngIf="config.checkElement">
+                <td [class]="config.checkElement.pipe.class">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  </div>
+                </td>
+              </ng-container>
               <ng-container *ngFor="let data of config.dataConfig">
                 <ng-container *ngIf="!data.pipe.isArray">
                   <td [class]="data.pipe.class">
