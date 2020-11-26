@@ -48,7 +48,7 @@ export class RegistroPlanAdquisicionesService {
   }
 
   /**
-   * get Modalidades de seleccion 
+   * get Modalidades de seleccion
    * If the response has errors in the OAS API it should show a popup message with an error.
    * If the response suceed, it returns the data of the object.
    * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
@@ -62,7 +62,7 @@ export class RegistroPlanAdquisicionesService {
   }
 
   /**
-   * get Modalidades de seleccion 
+   * get Modalidades de seleccion
    * If the response has errors in the OAS API it should show a popup message with an error.
    * If the response suceed, it returns the data of the object.
    * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors

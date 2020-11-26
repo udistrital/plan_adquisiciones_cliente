@@ -22,7 +22,7 @@ export class SeleccionFuenteComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store<any>,
   ) {
-    this.store.dispatch(GetVigenciaActual({offset: null}));
+    this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.FuenteForm = this.fb.group({
       fuenteSeleccionada: [null, [Validators.required]],
     });
@@ -37,14 +37,14 @@ export class SeleccionFuenteComponent implements OnInit {
         const query = {
           Vigencia: vigencia[0].valor,
           UnidadEjecutora: area.Id,
-        }
-        this.registroService.getFuentesFinanciamiento(null,query).subscribe((fuente: any) => {
+        };
+        this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuente: any) => {
           // console.log(fuente)
           this.FuentesFinanciamiento = fuente;
         });
       }
-    })
-    
+    });
+
   }
 
 }

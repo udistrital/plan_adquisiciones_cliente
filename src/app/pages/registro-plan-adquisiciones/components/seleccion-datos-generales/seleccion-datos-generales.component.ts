@@ -16,7 +16,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private registroService : RegistroPlanAdquisicionesService,
+    private registroService: RegistroPlanAdquisicionesService,
   ) {
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
@@ -26,13 +26,13 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
 
   ngOnInit() {
     this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
-      console.log(data)
+
       this.ModalidadSeleccion = data;
-    })
+    });
     this.registroService.getResponsables().subscribe((data) => {
-      console.log(data)
+
       this.Responsables = data;
-    })
+    });
   }
 
   ver() {
