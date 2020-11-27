@@ -13,7 +13,7 @@
                 <p>Duracion Estimada del Contrato:</p>
             </div>
             <div class="col-9 pt-3">
-                <span class="form-control">1 año</span>
+                <span class="form-control">{{DatosGeneralesForm.value.FechaInicioSeleccion | timeRange }}</span>
             </div>
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
                 <p>Responsable Formulacion del Estudio de Conveniencia y Oportunidad:</p>
@@ -22,8 +22,10 @@
                 <ng-container *ngIf="Responsables">
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="Responsable">
-                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-                                <mat-option *cdkVirtualFor="let state of Responsables" class="example-item" [value]="state">{{state.Nombre}}</mat-option>
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                                class="example-viewport">
+                                <mat-option *cdkVirtualFor="let state of Responsables" class="example-item"
+                                    [value]="state">{{state.Nombre}}</mat-option>
                             </cdk-virtual-scroll-viewport>
                         </mat-select>
                     </div>
@@ -33,7 +35,7 @@
                 <p>Modalidad de Seleccion:</p>
             </div>
             <div class="col-9">
-                
+
             </div>
         </div>
     </div>

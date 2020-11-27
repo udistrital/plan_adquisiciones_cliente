@@ -20,7 +20,6 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   ) {
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
-      FechaInicioSeleccion2: [null, [Validators.required]],
       Responsable: [null, [Validators.required]],
     });
   }
@@ -32,5 +31,32 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     this.registroService.getResponsables().subscribe((data) => {
       this.Responsables = data;
     });
+  }
+
+  ver() {
+    const start: Date = this.DatosGeneralesForm.value.FechaInicioSeleccion.start;
+    console.log(start)
+    console.log(this.getDays(start));
+
+  }
+
+  getDays(date: Date) {
+
+    const m = date.getMonth()
+    const y = date.getFullYear()
+    console.log(m, y)
+
+    switch (true) {
+      case m === 0 || m === 2 || m === 4 || m === 6 || m === 7 || m === 9 || m === 11:
+        return 31;
+      case m === 3 || m === 5 || m === 8 || m === 10:
+        return 30;
+      case m === 1:
+        if (((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0)) {
+          return 29;
+        } else {
+          return 28;
+        }
+    }
   }
 }
