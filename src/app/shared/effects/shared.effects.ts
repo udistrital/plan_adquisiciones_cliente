@@ -49,4 +49,16 @@ export class SharedEffects {
       )
     );
   });
+
+  GetModalidadesSeleccion$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SharedActions.GetModalidadesSeleccion),
+      mergeMap(() =>
+        this.sharedService.getModalidadesDeSeleccion()
+          .pipe(
+            map(data => SharedActions.LoadModalidadesSeleccion([data])),
+            catchError(data => of(SharedActions.CatchError(data))))
+      )
+    );
+  });
 }

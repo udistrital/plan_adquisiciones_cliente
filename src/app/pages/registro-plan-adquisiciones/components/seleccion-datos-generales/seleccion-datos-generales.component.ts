@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
+import { ParametricService } from '../../../../shared/services/parametric.service';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -17,7 +20,10 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registroService: RegistroPlanAdquisicionesService,
+    private store: Store<any>,
+    private parametricService: ParametricService,
   ) {
+    this.parametricService.CargarModalidadesDeSeleccion();
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
       Responsable: [null, [Validators.required]],
@@ -25,9 +31,16 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
-      this.ModalidadSeleccion = data;
-    });
+    this.store.select(getModalidadesSeleccion).subscribe((modalidades: any) => {
+      if (modalidades) {
+        this.ModalidadSeleccion = modalidades[0];
+      }
+      
+      console.log(modalidades)
+    })
+    // this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
+    //   this.ModalidadSeleccion = data;
+    // });
     this.registroService.getResponsables().subscribe((data) => {
       this.Responsables = data;
     });

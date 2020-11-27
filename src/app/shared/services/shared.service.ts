@@ -102,6 +102,20 @@ export class SharedService {
     }
   }
 
+  /**
+   * get Modalidades de seleccion
+   * If the response has errors in the OAS API it should show a popup message with an error.
+   * If the response suceed, it returns the data of the object.
+   * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
+   */
+  public getModalidadesDeSeleccion() {
+    this.rqManager.setPath('ADMINISTRATIVA_SERVICE');
+    const query_params = {
+      query: '?limit=-1&sortby=NumeroOrden&order=asc',
+    };
+    return this.rqManager.get('modalidad_seleccion/' + query_params.query);
+  }
+
 
 
 }

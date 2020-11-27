@@ -40,3 +40,8 @@ export const getCentroGestor = createSelector(
   (state: fromShared.State) => state.CentroGestor
 );
 
+export const getModalidadesSeleccion = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.ModalidadesSeleccion
+);
+

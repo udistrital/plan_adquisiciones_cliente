@@ -69,3 +69,15 @@ export const LoadCentroGestor = createAction(
   '[Shared] Load Centro Gestor',
   props()
 );
+
+// Modalidad de Seleccion
+
+export const GetModalidadesSeleccion = createAction(
+  '[Shared] Get Modalidad Seleccion',
+  props()
+);
+
+export const LoadModalidadesSeleccion = createAction(
+  '[Shared] Load Modalidad Seleccion',
+  props()
+);
