@@ -19,3 +19,8 @@ export const getProducto = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.Producto
 );
+
+export const getModalidades = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.Modalidades
+);

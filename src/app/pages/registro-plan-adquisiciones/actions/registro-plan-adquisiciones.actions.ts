@@ -18,3 +18,8 @@ export const CargarProducto = createAction(
   '[RegistroPlanAdquisiciones] Cargar Producto',
   props(),
 );
+
+export const CargarModalidades = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Modalidades',
+  props(),
+);
