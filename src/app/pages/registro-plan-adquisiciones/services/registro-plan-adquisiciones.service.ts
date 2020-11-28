@@ -47,7 +47,7 @@ export class RegistroPlanAdquisicionesService {
     return this.rqManager.get('fuente_financiamiento/' + query_params.query);
   }
 
-  
+
   /**
    * get Modalidades de seleccion
    * If the response has errors in the OAS API it should show a popup message with an error.

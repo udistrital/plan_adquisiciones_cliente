@@ -13,9 +13,8 @@ export class TimeRangePipe implements PipeTransform {
 
   getDaysMonth(date: Date) {
 
-    const m = date.getMonth()
-    const y = date.getFullYear()
-    console.log(m, y)
+    const m = date.getMonth();
+    const y = date.getFullYear();
 
     switch (true) {
       case m === 0 || m === 2 || m === 4 || m === 6 || m === 7 || m === 9 || m === 11:
@@ -32,7 +31,6 @@ export class TimeRangePipe implements PipeTransform {
   }
 
   transform(value: any, ...args: any[]): any {
-    console.log(value)
 
     if (value && value.start && value.end) {
 

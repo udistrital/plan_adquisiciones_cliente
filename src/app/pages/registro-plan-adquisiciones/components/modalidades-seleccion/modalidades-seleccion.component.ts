@@ -37,7 +37,7 @@ export class ModalidadesSeleccionComponent implements OnInit {
     ]).subscribe(([modalidades, datos]) => {
 
       if (modalidades && datos) {
-        this.Datos = datos[0]
+        this.Datos = datos[0];
         this.Parametros = [];
         this.ModalidadesSeleccionForm = undefined;
         modalidades[0].forEach((element: any) => {
@@ -47,20 +47,20 @@ export class ModalidadesSeleccionComponent implements OnInit {
         });
         this.ModalidadesSeleccionForm = this.fb.group({
           Valor: [null, [Validators.required]]
-        })
+        });
       }
-    })
+    });
   }
 
   AgregarModalidad() {
     if (this.ModalidadesSeleccionForm.valid) {
-      this.Datos.push(this.ModalidadesSeleccionForm.value.Valor)
-      this.store.dispatch(CargarModalidades([this.Datos]))
+      this.Datos.push(this.ModalidadesSeleccionForm.value.Valor);
+      this.store.dispatch(CargarModalidades([this.Datos]));
     }
   }
 
   RemoverModalidad(index: any) {
     this.Datos.splice(index, 1);
-    this.store.dispatch(CargarModalidades([this.Datos]))
+    this.store.dispatch(CargarModalidades([this.Datos]));
   }
 }

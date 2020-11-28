@@ -22,7 +22,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     private registroService: RegistroPlanAdquisicionesService,
 
   ) {
-    
+
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
       Responsable: [null, [Validators.required]],
@@ -30,28 +30,15 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-    // this.registroService.getModalidadesDeSeleccion().subscribe((data) => {
-    //   this.ModalidadSeleccion = data;
-    // });
     this.registroService.getResponsables().subscribe((data) => {
       this.Responsables = data;
     });
   }
 
-  ver() {
-    const start: Date = this.DatosGeneralesForm.value.FechaInicioSeleccion.start;
-    console.log(start)
-    console.log(this.getDays(start));
-
-  }
-
   getDays(date: Date) {
 
-    const m = date.getMonth()
-    const y = date.getFullYear()
-    console.log(m, y)
-
+    const m = date.getMonth();
+    const y = date.getFullYear();
     switch (true) {
       case m === 0 || m === 2 || m === 4 || m === 6 || m === 7 || m === 9 || m === 11:
         return 31;

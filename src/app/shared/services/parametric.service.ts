@@ -26,6 +26,6 @@ export class ParametricService {
       if (!modalidades) {
         this.store.dispatch(GetModalidadesSeleccion({}));
       }
-    })
+    });
   }
 }

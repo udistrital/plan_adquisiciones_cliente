@@ -25,7 +25,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.datosPrueba = DATOS_PRUEBA_2
+    this.datosPrueba = DATOS_PRUEBA_2;
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          this.OpenModal()
+          this.OpenModal();
         }
       }
     });
@@ -41,14 +41,14 @@ export class TablaCodificacionArkaComponent implements OnInit {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          this.OpenModal()
+          this.OpenModal();
         }
       }
     });
   }
 
   OpenModal() {
-    this.display = true
+    this.display = true;
     setTimeout(() => {
       this.renderer.selectRootElement(this.contentRef.nativeElement).click();
       this.display =  false;
