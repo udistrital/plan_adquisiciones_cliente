@@ -16,6 +16,7 @@ import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquis
 import { NbDatepickerModule } from '@nebular/theme';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatSelectModule } from '@angular/material';
+import { ModalidadesSeleccionComponent } from './components/modalidades-seleccion/modalidades-seleccion.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatSelectModule } from '@angular/material';
     SeleccionRubroComponent,
     SeleccionMetaProductoComponent,
     SeleccionFuenteComponent,
-    SeleccionDatosGeneralesComponent
+    SeleccionDatosGeneralesComponent,
+    ModalidadesSeleccionComponent
   ],
   imports: [
     CommonModule,
