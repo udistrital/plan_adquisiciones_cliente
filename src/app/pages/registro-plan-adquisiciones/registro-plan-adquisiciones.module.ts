@@ -17,6 +17,8 @@ import { NbDatepickerModule } from '@nebular/theme';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatSelectModule } from '@angular/material';
 import { ModalidadesSeleccionComponent } from './components/modalidades-seleccion/modalidades-seleccion.component';
+import { TablaCodificacionArkaComponent } from './components/tabla-codificacion-arka/tabla-codificacion-arka.component';
+import { FormCodificacionArkaComponent } from './components/form-codificacion-arka/form-codificacion-arka.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ModalidadesSeleccionComponent } from './components/modalidades-seleccio
     SeleccionMetaProductoComponent,
     SeleccionFuenteComponent,
     SeleccionDatosGeneralesComponent,
-    ModalidadesSeleccionComponent
+    ModalidadesSeleccionComponent,
+    TablaCodificacionArkaComponent,
+    FormCodificacionArkaComponent
   ],
   imports: [
     CommonModule,
