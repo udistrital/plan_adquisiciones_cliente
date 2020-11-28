@@ -1,34 +1,14 @@
 export const CONFIGURACION_PRUEBA: any = {
     title: {
-        name: 'PLANES DE ADQUISICIONES',
+        name: 'Codificacion ARKA (UNSPSC)',
         class: 'text-center text-light',
     },
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'Id',
+            key: 'Codigo',
             title: {
-                name: 'Consecutivo',
-                class: 'text-center',
-            },
-            pipe: {
-                class: '',
-            }
-        },
-        {
-            key: 'Descripcion',
-            title: {
-                name: 'Nombre',
-                class: 'text-center',
-            },
-            pipe: {
-                class: 'text-justify',
-            }
-        },
-        {
-            key: 'Vigencia',
-            title: {
-                name: 'Vigencia',
+                name: 'Codigo',
                 class: 'text-center',
             },
             pipe: {
@@ -36,33 +16,16 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'FechaCreacion',
+            key: 'Nombre',
             title: {
-                name: 'Fecha de Creacion',
+                name: 'Descripcion',
                 class: 'text-center',
             },
             pipe: {
-                type: 'date',
-                config: [
-                    'shortDate'
-                ],
                 class: 'text-center',
             }
         },
-        {
-            key: 'FechaModificacion',
-            title: {
-                name: 'Ultima Modificacion',
-                class: 'text-center',
-            },
-            pipe: {
-                type: 'date',
-                config: [
-                    'shortDate',
-                ],
-                class: 'text-center',
-            }
-        },
+
     ],
     rowActions: {
         title: {
@@ -75,13 +38,13 @@ export const CONFIGURACION_PRUEBA: any = {
                 name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: 'p-2',
-                title: 'Editar Datos Iniciales',
+                title: 'Editar Elemento',
             },
             {
-                name: 'Ver',
-                icon: 'fas fa-list',
+                name: 'Eliminar',
+                icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Ver Plan de Adquisiciones',
+                title: 'Eliminar Elemento',
             }
         ],
     },
@@ -90,15 +53,15 @@ export const CONFIGURACION_PRUEBA: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2 mx-2',
-            title: 'Agregar Nuevo Plan de Adquisiciones',
+            title: 'Agregar Elemento',
         },
     ],
     noData: {
-        name: 'No Existen Planes Creados',
+        name: 'No Existen Productos Asociados',
         class: 'text-center',
     },
     sort: true,
-    filter: true,
+    filter: false,
 };
 export const DATOS_PRUEBA: any = [
     {
@@ -116,6 +79,21 @@ export const DATOS_PRUEBA: any = [
         CodigoAbreviacion: '',
         Estado: true,
         NumeroOrden: '2.00'
+    },
+];
+
+export const DATOS_PRUEBA_2: any = [
+    {
+        Codigo: '43211507',
+        Nombre: 'Computadores de Escritorio',
+    },
+    {
+        Codigo: '43212104',
+        Nombre: 'Impresoras de Inyeccion de Tinta',
+    },
+    {
+        Codigo: '43212114',
+        Nombre: 'Impresoras de Inyeccion',
     },
 ];
 
