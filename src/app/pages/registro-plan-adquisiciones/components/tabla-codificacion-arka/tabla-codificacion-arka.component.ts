@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA_2 } from '../../interfaces/interfaces';
@@ -14,13 +14,16 @@ export class TablaCodificacionArkaComponent implements OnInit {
   datosPrueba: any;
   subscription2$: any;
   subscription3$: any;
+  display: boolean;
 
-  @ViewChild('content', { static: false }) contentRef: ElementRef;
+  @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
 
   constructor(
     private store: Store<any>,
     private modalService: NgbModal,
+    private renderer: Renderer2,
   ) {
+    this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA;
     this.datosPrueba = DATOS_PRUEBA_2
   }
@@ -45,8 +48,11 @@ export class TablaCodificacionArkaComponent implements OnInit {
   }
 
   OpenModal() {
-    console.log(this.contentRef);
-    this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
+    this.display = true
+    setTimeout(() => {
+      this.renderer.selectRootElement(this.contentRef.nativeElement).click();
+      this.display =  false;
+    }, 0);
+    // this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
   }
-
 }
