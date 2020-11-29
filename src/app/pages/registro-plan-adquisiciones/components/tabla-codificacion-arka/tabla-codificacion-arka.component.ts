@@ -30,7 +30,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.store.dispatch(CargarElementosARKA([DATOS_PRUEBA_2]))
+    this.store.dispatch(CargarElementosARKA([DATOS_PRUEBA_2]));
   }
 
   ngOnInit() {
@@ -39,12 +39,12 @@ export class TablaCodificacionArkaComponent implements OnInit {
       if (elementos) {
         this.Datos = elementos[0];
       }
-    })
+    });
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          this.store.dispatch(LoadFilaSeleccionada(null))
+          this.store.dispatch(LoadFilaSeleccionada(null));
           this.OpenModal();
         }
       }
@@ -85,9 +85,9 @@ export class TablaCodificacionArkaComponent implements OnInit {
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
-        this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo ),1)
-        console.log(this.Datos)
-        this.store.dispatch(CargarElementosARKA([this.Datos]))
+        this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo), 1);
+
+        this.store.dispatch(CargarElementosARKA([this.Datos]));
       }
     });
   }

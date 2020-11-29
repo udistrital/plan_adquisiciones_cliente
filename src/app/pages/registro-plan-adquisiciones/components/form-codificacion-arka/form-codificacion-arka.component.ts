@@ -37,41 +37,41 @@ export class FormCodificacionArkaComponent implements OnInit {
       this.store.select(getFilaSeleccionada),
       this.store.select(getElementosARKA),
     ]).subscribe(([fila, elementos]) => {
-      console.log(fila)
+
       this.index = null;
       if (fila) {
         if (Object.keys(fila)[0] !== 'type') {
           this.titulo = 'Editar Elemento ARKA';
           this.boton = 'Editar';
           this.index = fila.index;
-          this.CrearElementoARKAForm(fila.fila)
+          this.CrearElementoARKAForm(fila.fila);
         } else {
           this.titulo = 'Agregar Elemento ARKA';
           this.boton = 'Crear';
-          this.CrearElementoARKAForm(null)
+          this.CrearElementoARKAForm(null);
         }
       } else {
         this.titulo = 'Agregar Elemento ARKA';
         this.boton = 'Crear';
-        this.CrearElementoARKAForm(null)
+        this.CrearElementoARKAForm(null);
       }
       if (elementos) {
         if (Object.keys(elementos)[0] !== 'type') {
           this.ElementosTabla = elementos[0];
         }
       }
-    })
+    });
   }
 
   CrearElementoARKAForm(data: any) {
     if (data) {
       this.ElementoARKAForm = this.fb.group({
         Elemento: [this.Elementos.find((element: any) => element.Id === data.Id), [Validators.required]]
-      })
+      });
     } else {
       this.ElementoARKAForm = this.fb.group({
         Elemento: [null, [Validators.required]]
-      })
+      });
     }
   }
 
