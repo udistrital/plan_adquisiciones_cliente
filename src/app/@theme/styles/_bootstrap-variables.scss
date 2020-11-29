@@ -28,6 +28,10 @@ $light-gray: #dee2e6;
     }
 }
 
+.cdk-overlay-container {
+    z-index: 1052 !important;
+}
+
 $theme-colors:("primary": $primary-900,
     "color-success": $color-success,
     "primary-100": $primary-100,
