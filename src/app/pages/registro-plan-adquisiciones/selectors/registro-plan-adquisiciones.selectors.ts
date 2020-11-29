@@ -24,3 +24,9 @@ export const getModalidades = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.Modalidades
 );
+
+export const getElementosARKA = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.ElementosARKA
+);
+

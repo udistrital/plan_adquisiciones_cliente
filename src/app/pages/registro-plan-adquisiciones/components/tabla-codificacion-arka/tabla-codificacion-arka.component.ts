@@ -5,6 +5,8 @@ import { CONFIGURACION_PRUEBA, DATOS_PRUEBA_2 } from '../../interfaces/interface
 // import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import Swal from 'sweetalert2';
+import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
+import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-tabla-codificacion-arka',
@@ -13,12 +15,13 @@ import Swal from 'sweetalert2';
 })
 export class TablaCodificacionArkaComponent implements OnInit {
   configuracion: any;
-  datosPrueba: any;
+  Datos: any;
   subscription2$: any;
   subscription3$: any;
   display: boolean;
 
   @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
+  subscription$: any;
 
   constructor(
     private store: Store<any>,
@@ -27,10 +30,16 @@ export class TablaCodificacionArkaComponent implements OnInit {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.datosPrueba = DATOS_PRUEBA_2;
+    this.store.dispatch(CargarElementosARKA([DATOS_PRUEBA_2]))
   }
 
   ngOnInit() {
+
+    this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
+      if (elementos) {
+        this.Datos = elementos[0];
+      }
+    })
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
@@ -68,14 +77,17 @@ export class TablaCodificacionArkaComponent implements OnInit {
   LaunchDeleteModal(data: any) {
     Swal.fire({
       type: 'error',
-      title: 'Eliminar?',
-      text: `Esta Seguro de eliminar el siguiente elemento?: ${data.Codigo} ${data.Nombre}`,
+      title: 'Esta Seguro de Eliminar',
+      text: `El siguiente elemento?: ${data.Codigo} ${data.Nombre}`,
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
+        this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo ),1)
+        console.log(this.Datos)
+        this.store.dispatch(CargarElementosARKA([this.Datos]))
       }
     });
   }

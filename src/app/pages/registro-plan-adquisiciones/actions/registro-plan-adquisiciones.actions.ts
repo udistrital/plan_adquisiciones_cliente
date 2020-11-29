@@ -23,3 +23,8 @@ export const CargarModalidades = createAction(
   '[RegistroPlanAdquisiciones] Cargar Modalidades',
   props(),
 );
+
+export const CargarElementosARKA = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Elementos ARKA',
+  props(),
+);

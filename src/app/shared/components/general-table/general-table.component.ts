@@ -36,12 +36,13 @@ export class GeneralTableComponent implements OnInit {
     }
   }
 
-  SelectedAction(action: any, row: any) {
+  SelectedAction(action: any, row: any, index: any) {
 
     this.store.dispatch(LoadFilaSeleccionada({
       titulo: this.config.title,
       accion: action,
       fila: row,
+      index: index,
     }));
   }
 
