@@ -44,7 +44,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
   }
-  
+
   ngOnInit() {
     // Cargar plan detallado Asociados
     this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
@@ -82,7 +82,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
   }
-  
+
   OnCancel() {
     this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
