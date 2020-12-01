@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LoadAccionTabla } from '../../../../shared/actions/shared.actions';
+import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { CargarPlanDetallado } from '../../actions/planes.actions';
 import { CONFIGURACION_PRUEBA_2, DATOS_PRUEBA_2 } from '../../interfaces/interfaces';
 import { getPlanDetallado } from '../../selectors/planes.selectors';
@@ -11,7 +12,7 @@ import { getPlanDetallado } from '../../selectors/planes.selectors';
   templateUrl: './detalle-plan.component.html',
   styleUrls: ['./detalle-plan.component.scss']
 })
-export class DetallePlanComponent implements OnInit {
+export class DetallePlanComponent implements OnInit, OnDestroy {
 
   configuracion: any[];
   configTotal: any;
@@ -43,6 +44,7 @@ export class DetallePlanComponent implements OnInit {
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
   }
+  
   ngOnInit() {
     // Cargar plan detallado Asociados
     this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
@@ -52,8 +54,35 @@ export class DetallePlanComponent implements OnInit {
         }
       }
     });
+    // Seleccionar Nuevo Plan
+    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
+      if (accion) {
+        if (Object.keys(accion)[0] !== 'type') {
+
+          this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisicoines']);
+        }
+      }
+    });
+    // Seleccionar Fila Tabla
+    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
+      if (accion) {
+        if (Object.keys(accion)[0] !== 'type') {
+          if (accion.accion.name === 'Editar') {
+            this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisicoines']);
+            this.store.dispatch(LoadFilaSeleccionada(null));
+          }
+        }
+      }
+
+    });
   }
 
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+    this.subscription3$.unsubscribe();
+  }
+  
   OnCancel() {
     this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
