@@ -99,6 +99,11 @@ export const configTable: any = {
     filter: 'boolean',
 };
 export const CONFIGURACION_PRUEBA: any = {
+    title: {
+        name: 'Titulo de Prueba',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
     dataConfig: [
         {
             key: 'id',
@@ -120,6 +125,39 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: '',
             }
         },
+        {
+            key: 'arrayTest',
+            title: {
+                name: 'Array Object Test',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            },
+            compound: [
+                {
+                    key: 'label', // object key
+                    title: {
+                        name: 'Label',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                },
+                {
+                    key: 'org', // object key
+                    title: {
+                        name: 'Org',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                }
+            ]
+        },
+        
     ],
     rowActions: {
         title: {
@@ -131,13 +169,13 @@ export const CONFIGURACION_PRUEBA: any = {
             {
                 name: 'editar',
                 icon: 'fas fa-pencil-alt',
-                class: 'p-2',
+                class: '',
                 title: 'Editar',
             },
             {
                 name: 'metas',
                 icon: 'fas fa-list',
-                class: 'p-2',
+                class: '',
                 title: 'Ver Metas',
             }
         ],
@@ -166,9 +204,10 @@ export const DATOS_PRUEBA: any = [
             org: 'asdfasdfasdf'
         },
         arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
         ]
     },
     {
@@ -179,9 +218,18 @@ export const DATOS_PRUEBA: any = [
             org: 'asdfasdfasdf'
         },
         arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
         ]
     },
     {
@@ -192,179 +240,19 @@ export const DATOS_PRUEBA: any = [
             org: 'asdfasdfasdf'
         },
         arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
-        ]
-    },
-    {
-        id: 4,
-        nombre: 'Yara',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            'dasdfasdfasdf',
-            'asdfasdfasdfasdf',
-            'asdfasdfasdfasdf'
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
         ]
     },
 ];
 
-export interface ArbolRubros<T> {
-    Codigo: string;
-    data?: T;
-    children?: ArbolRubros<T>[];
-    expanded?: boolean;
-}
-export interface DatosNodo {
-    Codigo: string;
-    Descripcion?: string;
-    ValorInicial?: number;
-    Hijos?: any[];
-    Movimientos?: string[];
-    Padre?: string;
-    UnidadEjecutora?: number;
-    Estado?: string;
-    IsLeaf?: boolean;
-}
-
-export const DATA_TREE_NODE: any = [
-    {
-        data: {
-            name: 'Projects',
-            size: '1.8 MB',
-            items: 5,
-            kind: 'dir'
-        },
-        children: [
-            {
-                data: {
-                    name: 'project-1.doc',
-                    kind: 'doc',
-                    size: '240 KB'
-                },
-                children: [],
-            },
-            {
-                data: {
-                    name: 'project-2.doc',
-                    kind: 'doc',
-                    size: '290 KB'
-                },
-                children: [],
-            },
-            {
-                data: {
-                    name: 'project-3',
-                    kind: 'dir',
-                    size: '466 KB',
-                    items: 3
-                },
-                children: [
-                    {
-                        data: {
-                            name: 'project-3A.doc',
-                            kind: 'doc',
-                            size: '200 KB'
-                        },
-                        children: [],
-                    },
-                    {
-                        data: {
-                            name: 'project-3B.doc',
-                            kind: 'doc',
-                            size: '266 KB'
-                        },
-                        children: [],
-                    },
-                    {
-                        data: {
-                            name: 'project-3C.doc',
-                            kind: 'doc',
-                            size: '0'
-                        },
-                        children: [],
-                    },
-                ],
-            },
-            {
-                data: {
-                    name: 'project-4.docx',
-                    kind: 'docx',
-                    size: '900 KB'
-                },
-                children: [],
-            },
-        ],
-    },
-    {
-        data: {
-            name: 'Reports',
-            kind: 'dir',
-            size: '400 KB',
-            items: 2
-        },
-        children: [
-            {
-                data: {
-                    name: 'Report 1',
-                    kind: 'dir',
-                    size: '100 KB',
-                    items: 1
-                },
-                children: [
-                    {
-                        data: {
-                            name: 'report-1.doc',
-                            kind: 'doc',
-                            size: '100 KB'
-                        },
-                        children: [],
-                    },
-                ],
-            },
-            {
-                data: {
-                    name: 'Report 2',
-                    kind: 'dir',
-                    size: '300 KB',
-                    items: 2
-                },
-                children: [
-                    {
-                        data: {
-                            name: 'report-2.doc',
-                            kind: 'doc',
-                            size: '290 KB'
-                        },
-                        children: [],
-                    },
-                    {
-                        data: {
-                            name: 'report-2-note.txt',
-                            kind: 'txt',
-                            size: '10 KB'
-                        },
-                        children: [],
-                    },
-                ],
-            },
-        ],
-    },
-];
-
-export const OPCIONES_AREA_FUNCIONAL = [
-    {
-        Id: 1,
-        Nombre: 'Rector',
-        label: '01 - Rector',
-    },
-    {
-        Id: 2,
-        Nombre: 'Convenio',
-        label: '02 - Convenio',
-    }
-
-];
