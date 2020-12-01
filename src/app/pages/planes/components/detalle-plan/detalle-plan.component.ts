@@ -60,6 +60,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         if (Object.keys(accion)[0] !== 'type') {
 
           this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisicoines']);
+          this.store.dispatch(LoadAccionTabla(null))
         }
       }
     });
