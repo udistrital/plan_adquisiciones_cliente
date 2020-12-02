@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetArbolRubro } from '../actions/shared.actions';
-import { getArbolRubro } from '../selectors/shared.selectors';
+import { GetArbolRubro, GetModalidadesSeleccion } from '../actions/shared.actions';
+import { getArbolRubro, getModalidadesSeleccion } from '../selectors/shared.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,14 @@ export class ParametricService {
     this.store.select(getArbolRubro).subscribe((arbol: any) => {
       if (Object.keys(arbol).length === 0) {
         this.store.dispatch(GetArbolRubro({ branch: fuente }));
+      }
+    });
+  }
+
+  CargarModalidadesDeSeleccion() {
+    this.store.select(getModalidadesSeleccion).subscribe((modalidades: any) => {
+      if (!modalidades) {
+        this.store.dispatch(GetModalidadesSeleccion({}));
       }
     });
   }

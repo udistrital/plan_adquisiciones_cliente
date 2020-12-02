@@ -11,6 +11,7 @@ export interface State {
   VigenciaActual: any;
   AreaFuncional: any;
   CentroGestor: any;
+  ModalidadesSeleccion: any;
 }
 
 export const initialState: State = {
@@ -20,7 +21,8 @@ export const initialState: State = {
   AccionTabla: null,
   VigenciaActual: null,
   AreaFuncional: null,
-  CentroGestor: null
+  CentroGestor: null,
+  ModalidadesSeleccion: null,
 };
 
 const sharedReducer = createReducer(
@@ -47,6 +49,9 @@ const sharedReducer = createReducer(
   })),
   on(SharedActions.LoadCentroGestor, (state, action) => ({
     ...state, CentroGestor: state.CentroGestor = action
+  })),
+  on(SharedActions.LoadModalidadesSeleccion, (state, action) => ({
+    ...state, ModalidadesSeleccion: state.ModalidadesSeleccion = action
   })),
 );
 

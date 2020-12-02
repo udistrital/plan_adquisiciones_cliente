@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <ng-container *ngIf="Datos">
+        <div class="row py-2" *ngFor="let item of Datos; index as i">
+            <div class="col-9">
+                <span class="form-control overflow">{{item.Nombre}}</span>
+            </div>
+            <div class="col-3">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-danger text-light" type="button" (click)="RemoverModalidad(i)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="row py-2" *ngIf="Parametros">
+        <div class="col-12 d-flex justify-content-center">
+            <p>Agregar Modalidad</p>
+        </div>
+        <div class="col-9">
+            <form novalidate [formGroup]="ModalidadesSeleccionForm" *ngIf="ModalidadesSeleccionForm">
+                <div class="form-group">
+                    <mat-select class="form-control" formControlName="Valor">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *cdkVirtualFor="let state of Parametros" class="example-item" [value]="state">
+                                {{state.Nombre}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                </div>
+            </form>
+        </div>
+        <div class="col-3">
+            <div class="d-flex justify-content-center" *ngIf="ModalidadesSeleccionForm">
+                <button [disabled]="!ModalidadesSeleccionForm.valid" class="btn btn-primary text-light" type="button"
+                    (click)="AgregarModalidad()">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

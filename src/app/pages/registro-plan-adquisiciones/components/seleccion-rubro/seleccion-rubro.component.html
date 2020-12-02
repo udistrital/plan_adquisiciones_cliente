@@ -1,0 +1,87 @@
+<form [formGroup]="RubroForm" *ngIf="RubroForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>Fuente de Recurso:</p>
+            </div>
+            <div class="col-3 pt-3">
+                <ng-container *ngIf="!fuentesRecurso">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-grow text-primary" role="status"></div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="fuentesRecurso">
+                    <div class="form-group">
+                        <mat-select class="form-control" formControlName="FuenteSeleccionada">
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                <mat-option *cdkVirtualFor="let fuente of fuentesRecurso" class="example-item" [value]="fuente">
+                                    {{fuente.Codigo}}
+                                </mat-option>
+                            </cdk-virtual-scroll-viewport>
+                        </mat-select>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-6 pt-3">
+                <div class="form-group">
+                    <span class="form-control overflow">
+                        {{RubroForm.get('FuenteSeleccionada').value ? RubroForm.get('FuenteSeleccionada').value.data.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>Rubro:</p>
+            </div>
+            <div class="col-9">
+                <div class="container-fluid px-0">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-lg-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#ModalRubro">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <span class="form-control overflow">
+                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Codigo: ''}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-lg-6">
+                            <div class="form-group mb-0">
+                                <span class="form-control overflow">
+                                    {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Nombre: ''}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Modal -->
+<div *ngIf="RubroForm.get('FuenteSeleccionada').value" class="modal fade" id="ModalRubro" tabindex="-1" role="dialog"
+    aria-labelledby="ModalRubroLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalRubroLabel">Seleccione Rubro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ngx-arbol-rubro [FuenteRecurso]="RubroForm.get('FuenteSeleccionada').value.Codigo"></ngx-arbol-rubro>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>

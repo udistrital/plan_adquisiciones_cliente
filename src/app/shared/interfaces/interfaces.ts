@@ -4,6 +4,17 @@ export const configTable: any = {
         class: 'string', // bootstrap class
     },
     showColumnTitle: true, // show / hide columns title
+    checkElement: {
+        title: 'string', // column title
+        pipe: {
+            type: 'string', // date, currency, decimal, percent, custom ( optional )
+            config: [
+                'string', // array like pipe, no custom
+                () => { }, // only custom pipe
+            ], //  ( optional )
+            class: 'string', // bootstrap class
+        }
+    },
     dataConfig: [
         {
             key: 'string', // object key

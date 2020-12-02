@@ -90,8 +90,12 @@ export class TableMetasComponent implements OnInit, OnDestroy {
 
     // Seleccionar Rubro
     this.subscription4$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
-      if (nodo && !nodo.children) {
-        this.SeleccionarRubro(nodo);
+      if (nodo) {
+        if (Object.keys(nodo)[0] !== 'type') {
+          if (nodo && !nodo.children) {
+            this.SeleccionarRubro(nodo);
+          }
+        }
       }
     });
 

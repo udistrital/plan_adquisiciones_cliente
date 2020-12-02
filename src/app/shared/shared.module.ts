@@ -17,6 +17,7 @@ import { ArbolRubroComponent } from './components/arbol-rubro/arbol-rubro.compon
 import { NbTreeGridModule } from '@nebular/theme';
 import { SelectedRowDirective } from './directives/selected-row.directive';
 import { MultiPipePipe } from './pipes/multi-pipe.pipe';
+import { TimeRangePipe } from './pipes/time-range.pipe';
 
 @NgModule({
   exports: [
@@ -26,6 +27,7 @@ import { MultiPipePipe } from './pipes/multi-pipe.pipe';
     MouseOverDirective,
     ArbolRubroComponent,
     SelectedRowDirective,
+    TimeRangePipe,
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { MultiPipePipe } from './pipes/multi-pipe.pipe';
     ArbolRubroComponent,
     SelectedRowDirective,
     MultiPipePipe,
+    TimeRangePipe,
   ],
   providers: [
     DatePipe,

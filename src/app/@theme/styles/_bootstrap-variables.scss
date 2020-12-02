@@ -11,10 +11,28 @@ $primary-800: #faad0b;
 $primary-900: #dd9900;
 $light-gray: #dee2e6;
 
+// modal ngBootstrap
 
+.modal-holder {
+    animation-name: example;
+    animation-duration: 0.3s;
+}
 
-$theme-colors:(
-    "primary": $primary-900,
+@keyframes example {
+    0% {
+        transform: scale(0.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.cdk-overlay-container {
+    z-index: 1052 !important;
+}
+
+$theme-colors:("primary": $primary-900,
     "color-success": $color-success,
     "primary-100": $primary-100,
     "primary-200": $primary-200,

@@ -31,6 +31,8 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+    this.subscription3$.unsubscribe();
   }
 
   ngOnInit() {

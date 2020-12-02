@@ -29,6 +29,23 @@ export class MetasService {
       `Rubro:${Rubro}`
     );
   }
+
+  /**
+   * Get Metas
+   *  retorna las metas asociados al Rubro seleccionado
+   * @param [Rubro] Rubro Asociado
+   * @returns  Metas Asociadas.
+   */
+  public getMetasRubro(
+    Rubro: any,
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Meta/` +
+      `?query=Activo:true,` +
+      `Rubro:${Rubro}`
+    );
+  }
   /**
     * get Meta
     *  se crea una meta nueva
