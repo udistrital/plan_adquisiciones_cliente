@@ -19,6 +19,9 @@ import { MatSelectModule } from '@angular/material';
 import { ModalidadesSeleccionComponent } from './components/modalidades-seleccion/modalidades-seleccion.component';
 import { TablaCodificacionArkaComponent } from './components/tabla-codificacion-arka/tabla-codificacion-arka.component';
 import { FormCodificacionArkaComponent } from './components/form-codificacion-arka/form-codificacion-arka.component';
+import { TablaActividadesFuentesComponent } from './components/tabla-actividades-fuentes/tabla-actividades-fuentes.component';
+import { FormActividadFuentesComponent } from './components/form-actividad-fuentes/form-actividad-fuentes.component';
+import { FormFuentesFinanciamientoComponent } from './components/form-fuentes-financiamiento/form-fuentes-financiamiento.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { FormCodificacionArkaComponent } from './components/form-codificacion-ar
     SeleccionDatosGeneralesComponent,
     ModalidadesSeleccionComponent,
     TablaCodificacionArkaComponent,
-    FormCodificacionArkaComponent
+    FormCodificacionArkaComponent,
+    TablaActividadesFuentesComponent,
+    FormActividadFuentesComponent,
+    FormFuentesFinanciamientoComponent
   ],
   imports: [
     CommonModule,

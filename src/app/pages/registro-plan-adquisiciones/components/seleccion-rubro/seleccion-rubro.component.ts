@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { getArbolRubro, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarRubro } from '../../actions/registro-plan-adquisiciones.actions';
 
 @Component({
   selector: 'ngx-seleccion-rubro',
@@ -28,6 +29,10 @@ export class SeleccionRubroComponent implements OnInit {
       RubroSeleccionado: [null, [Validators.required]],
     });
     this.parametrics.CargarArbolRubros('3');
+    this.RubroForm.get('RubroSeleccionado').valueChanges.subscribe((data: any) => {
+      console.log(data)
+      this.store.dispatch(CargarRubro(data));
+    })
   }
 
   ngOnInit() {

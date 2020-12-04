@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { MetasService } from '../../../metas/services/metas.service';
+import { CargarMeta, CargarProducto } from '../../actions/registro-plan-adquisiciones.actions';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
 })
 export class SeleccionMetaProductoComponent implements OnInit {
 
-  MetaForm: any;
+  MetaForm: FormGroup;
   Productos: any;
   Metas: any;
 
@@ -26,6 +27,12 @@ export class SeleccionMetaProductoComponent implements OnInit {
       MetaSeleccionada: [null, [Validators.required]],
       ProductoSeleccionado: [null, [Validators.required]],
     });
+    this.MetaForm.get('MetaSeleccionada').valueChanges.subscribe((data: any) => {
+      this.store.dispatch(CargarMeta(data));
+    })
+    this.MetaForm.get('ProductoSeleccionado').valueChanges.subscribe((data: any) => {
+      this.store.dispatch(CargarProducto(data));
+    })
   }
 
   ngOnInit() {
@@ -56,4 +63,6 @@ export class SeleccionMetaProductoComponent implements OnInit {
       }
     });
   }
+
+
 }

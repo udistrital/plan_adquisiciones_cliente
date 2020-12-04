@@ -63,6 +63,165 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: false,
 };
+
+export const CONFIGURACION_PRUEBA_2: any = {
+    title: {
+        name: 'Titulo de Prueba',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'id',
+            title: {
+                name: 'Numero',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'nombre',
+            title: {
+                name: 'Nombre',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'arrayTest',
+            title: {
+                name: 'Array Object Test',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            },
+            compound: [
+                {
+                    key: 'label', // object key
+                    title: {
+                        name: 'Label',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                },
+                {
+                    key: 'org', // object key
+                    title: {
+                        name: 'Org',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                }
+            ]
+        },
+        
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'editar',
+                icon: 'fas fa-pencil-alt',
+                class: '',
+                title: 'Editar',
+            },
+            {
+                name: 'metas',
+                icon: 'fas fa-list',
+                class: '',
+                title: 'Ver Metas',
+            }
+        ],
+    },
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Agregar Actividad',
+        }
+    ],
+    noData: {
+        name: 'No Existen Elementos Asociados',
+        class: 'text-center',
+    },
+    sort: true,
+    filter: false,
+};
+export const DATOS_PRUEBA_3: any = [
+    {
+        id: 1,
+        nombre: 'Jhoan',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+        ]
+    },
+    {
+        id: 2,
+        nombre: 'Manuel',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+        ]
+    },
+    {
+        id: 3,
+        nombre: 'Murillo',
+        others: {
+            label: 2,
+            org: 'asdfasdfasdf'
+        },
+        arrayTest: [
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+            {
+                label: 2,
+                org: 'asdfasdfasdf'
+            },
+        ]
+    },
+];
+
 export const DATOS_PRUEBA: any = [
     {
         Id: 1,
