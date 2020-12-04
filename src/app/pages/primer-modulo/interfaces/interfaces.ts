@@ -157,7 +157,6 @@ export const CONFIGURACION_PRUEBA: any = {
                 }
             ]
         },
-        
     ],
     rowActions: {
         title: {

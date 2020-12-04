@@ -37,7 +37,6 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.CrearFuenteFinanciamientoForm(null);
-    
     this.subscription$ = combineLatest([
       this.store.select(getVigenciaActual),
       this.store.select(getAreaFuncional),
@@ -54,8 +53,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     });
 
     this.FuenteFinanciamientoForm.valueChanges.subscribe((data: any) => {
-      console.log(data)
-    })
+    });
   }
   CrearFuenteFinanciamientoForm(data: any) {
     if (data) {
@@ -76,7 +74,5 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   }
 
   OnSubmit() {
-    console.log(this.FuenteFinanciamientoForm.value)
   }
-
 }

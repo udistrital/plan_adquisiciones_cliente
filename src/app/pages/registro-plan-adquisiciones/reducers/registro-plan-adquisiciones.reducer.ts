@@ -43,7 +43,7 @@ const registroPlanAdquisicionesReducer = createReducer(
     ...state, ElementosARKA: state.ElementosARKA = action
   })),
   on(RegistroPlanAdquisicionesActions.CargarActividades, (state, action) => ({
-    ...state, Actividades: state.Actividades= action
+    ...state, Actividades: state.Actividades = action
   })),
   on(RegistroPlanAdquisicionesActions.SeleccionarActividad, (state, action) => ({
     ...state, ActividadSeleccionada: state.ActividadSeleccionada = action

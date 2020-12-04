@@ -41,23 +41,19 @@ export class GeneralTableComponent implements OnInit {
         this.Subtotal = arraySubtotal.reduce((accumulator, currentValue) => accumulator + currentValue);
       }
     }
-    let tablespan: any = [];
+    const tablespan: any = [];
     this.config.dataConfig.forEach((element: any) => {
-      console.log(element.compound)
       if (element.compound !== undefined) {
         this.rowspanTitle = 2;
         this.keyCompound = element.key;
       }
     });
-    console.log(this.keyCompound)
     if (this.keyCompound !== undefined) {
       this.datos.forEach(element => {
         tablespan.push(element[this.keyCompound].length + 1);
       });
     }
-    console.log(tablespan)
     this.rowspanTable = tablespan;
-
   }
 
   SelectedAction(action: any, row: any, index: any) {

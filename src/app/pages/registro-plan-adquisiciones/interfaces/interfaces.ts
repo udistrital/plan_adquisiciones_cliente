@@ -157,7 +157,6 @@ export const CONFIGURACION_PRUEBA_2: any = {
                 }
             ]
         },
-        
     ],
     rowActions: {
         title: {
@@ -347,4 +346,4 @@ export const DATOS_PRUEBA_4: any = [
         Porcentaje: 50,
         Valor: 1000000,
     },
-]
+];

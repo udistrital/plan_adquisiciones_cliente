@@ -30,9 +30,8 @@ export class SeleccionRubroComponent implements OnInit {
     });
     this.parametrics.CargarArbolRubros('3');
     this.RubroForm.get('RubroSeleccionado').valueChanges.subscribe((data: any) => {
-      console.log(data)
       this.store.dispatch(CargarRubro(data));
-    })
+    });
   }
 
   ngOnInit() {

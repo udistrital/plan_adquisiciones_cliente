@@ -29,10 +29,10 @@ export class SeleccionMetaProductoComponent implements OnInit {
     });
     this.MetaForm.get('MetaSeleccionada').valueChanges.subscribe((data: any) => {
       this.store.dispatch(CargarMeta(data));
-    })
+    });
     this.MetaForm.get('ProductoSeleccionado').valueChanges.subscribe((data: any) => {
       this.store.dispatch(CargarProducto(data));
-    })
+    });
   }
 
   ngOnInit() {

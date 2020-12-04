@@ -54,14 +54,13 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getMeta).subscribe((meta: any) => {
-      console.log(meta)
       if (meta) {
         if (Object.keys(meta)[0] !== 'type') {
           this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
             if (Object.keys(actividades[0]).length !== 0) {
               this.Actividades = actividades;
             }
-          })
+          });
         }
       }
     });
@@ -91,12 +90,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         }
       }
     });
-
     this.CrearActividadFuentesForm(null);
-
-    this.ActividadFuentesForm.valueChanges.subscribe((data: any) => {
-      console.log(data)
-    })
   }
   CrearActividadFuentesForm(data: any) {
     if (data) {
@@ -135,6 +129,5 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     });
   }
   OnSubmit() {
-    console.log(this.ActividadFuentesForm.value)
   }
 }
