@@ -1,26 +1,25 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { resultMemoize, Store } from '@ngrx/store';
-import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA_2 } from '../../interfaces/interfaces';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
-import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
-import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { CargarActividades } from '../../actions/registro-plan-adquisiciones.actions';
+import { CONFIGURACION_PRUEBA_2, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
+import { getActividades } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
-  selector: 'ngx-tabla-codificacion-arka',
-  templateUrl: './tabla-codificacion-arka.component.html',
-  styleUrls: ['./tabla-codificacion-arka.component.scss']
+  selector: 'ngx-tabla-actividades-fuentes',
+  templateUrl: './tabla-actividades-fuentes.component.html',
+  styleUrls: ['./tabla-actividades-fuentes.component.scss']
 })
-export class TablaCodificacionArkaComponent implements OnInit {
+export class TablaActividadesFuentesComponent implements OnInit {
   configuracion: any;
   Datos: any;
   subscription2$: any;
   subscription3$: any;
   display: boolean;
 
-  @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
+  @ViewChild('formActividadesFuentes', { static: false }) contentRef: ElementRef;
   subscription$: any;
 
   constructor(
@@ -29,13 +28,13 @@ export class TablaCodificacionArkaComponent implements OnInit {
     private renderer: Renderer2,
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_PRUEBA;
-    this.store.dispatch(CargarElementosARKA([DATOS_PRUEBA_2]));
+    this.configuracion = CONFIGURACION_PRUEBA_2;
+    this.store.dispatch(CargarActividades([DATOS_PRUEBA_3]));
   }
 
   ngOnInit() {
 
-    this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
+    this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
       if (elementos) {
         this.Datos = elementos[0];
       }
@@ -43,7 +42,8 @@ export class TablaCodificacionArkaComponent implements OnInit {
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
-        if (Object.keys(accion)[0] !== 'type' && accion.accion.title === 'Agregar Elemento') {
+        if (Object.keys(accion)[0] !== 'type' && accion.accion.title === 'Agregar Actividad') {
+          console.log(accion)
           this.store.dispatch(LoadFilaSeleccionada(null));
           this.OpenModal();
         }
@@ -52,7 +52,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
     // Nuevo Elemento
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
-        if (Object.keys(accion)[0] !== 'type' && accion.accion.title === 'Agregar Elemento') {
+        if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.name === 'Eliminar') {
             this.LaunchDeleteModal(accion.fila);
           } else {
@@ -86,9 +86,9 @@ export class TablaCodificacionArkaComponent implements OnInit {
       if (value.value) {
         // Quitar Elemento
         this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo), 1);
-
-        this.store.dispatch(CargarElementosARKA([this.Datos]));
+        this.store.dispatch(CargarActividades([this.Datos]));
       }
     });
   }
+
 }
