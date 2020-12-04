@@ -9,6 +9,8 @@ export interface State {
   Producto: any;
   Modalidades: any;
   ElementosARKA: any;
+  Actividades: any;
+  ActividadSeleccionada: any;
 }
 
 export const initialState: State = {
@@ -17,6 +19,8 @@ export const initialState: State = {
   Producto: null,
   Modalidades: null,
   ElementosARKA: null,
+  Actividades: null,
+  ActividadSeleccionada: null,
 };
 
 const registroPlanAdquisicionesReducer = createReducer(
@@ -38,6 +42,13 @@ const registroPlanAdquisicionesReducer = createReducer(
   on(RegistroPlanAdquisicionesActions.CargarElementosARKA, (state, action) => ({
     ...state, ElementosARKA: state.ElementosARKA = action
   })),
+  on(RegistroPlanAdquisicionesActions.CargarActividades, (state, action) => ({
+    ...state, Actividades: state.Actividades= action
+  })),
+  on(RegistroPlanAdquisicionesActions.SeleccionarActividad, (state, action) => ({
+    ...state, ActividadSeleccionada: state.ActividadSeleccionada = action
+  })),
+
 
 
 );

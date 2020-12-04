@@ -30,3 +30,12 @@ export const getElementosARKA = createSelector(
   (state: fromRegistroPlanAdquisiciones.State) => state.ElementosARKA
 );
 
+export const getActividades = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.Actividades
+);
+
+export const getActividadSeleccionada = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.ActividadSeleccionada
+);
