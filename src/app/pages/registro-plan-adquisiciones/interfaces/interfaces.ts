@@ -66,13 +66,13 @@ export const CONFIGURACION_PRUEBA: any = {
 
 export const CONFIGURACION_PRUEBA_2: any = {
     title: {
-        name: 'Titulo de Prueba',
+        name: 'Actividades Relacionadas',
         class: 'text-center text-light',
     },
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'id',
+            key: 'Codigo',
             title: {
                 name: 'Numero',
                 class: 'text-center',
@@ -82,7 +82,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
             }
         },
         {
-            key: 'nombre',
+            key: 'Nombre',
             title: {
                 name: 'Nombre',
                 class: 'text-center',
@@ -92,9 +92,21 @@ export const CONFIGURACION_PRUEBA_2: any = {
             }
         },
         {
-            key: 'arrayTest',
+            key: 'Valor',
             title: {
-                name: 'Array Object Test',
+                name: 'Valor',
+                class: 'text-center',
+            },
+            pipe: {
+                type: 'currency',
+                config: [],
+                class: '',
+            }
+        },
+        {
+            key: 'FuentesFinanciamiento',
+            title: {
+                name: 'Fuentes de Funcionamiento',
                 class: 'text-center',
             },
             pipe: {
@@ -102,9 +114,9 @@ export const CONFIGURACION_PRUEBA_2: any = {
             },
             compound: [
                 {
-                    key: 'label', // object key
+                    key: 'Id', // object key
                     title: {
-                        name: 'Label',
+                        name: 'Codigo',
                         class: 'text-center',
                     },
                     pipe: {
@@ -112,14 +124,36 @@ export const CONFIGURACION_PRUEBA_2: any = {
                     },
                 },
                 {
-                    key: 'org', // object key
+                    key: 'Nombre', // object key
                     title: {
-                        name: 'Org',
+                        name: 'Nombre',
                         class: 'text-center',
                     },
                     pipe: {
                         class: ''
                     },
+                },
+                {
+                    key: 'Porcentaje', // object key
+                    title: {
+                        name: '%',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                },
+                {
+                    key: 'Valor', // object key
+                    title: {
+                        name: 'Nombre',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        type: 'currency',
+                        config: [],
+                        class: '',
+                    }
                 }
             ]
         },
@@ -133,17 +167,11 @@ export const CONFIGURACION_PRUEBA_2: any = {
         },
         actions: [
             {
-                name: 'editar',
+                name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: '',
-                title: 'Editar',
+                title: 'Editar Actividad y Fuentes Asociadas',
             },
-            {
-                name: 'metas',
-                icon: 'fas fa-list',
-                class: '',
-                title: 'Ver Metas',
-            }
         ],
     },
     tableActions: [
@@ -151,7 +179,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Actividad',
+            title: 'Agregar Actividad y Fuentes Asociadas',
         }
     ],
     noData: {
@@ -161,62 +189,112 @@ export const CONFIGURACION_PRUEBA_2: any = {
     sort: true,
     filter: false,
 };
+
+export const CONFIGURACION_PRUEBA_4: any = {
+    title: {
+        name: 'Fuentes de Financiamiento',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Id',
+            title: {
+                name: 'Codigo',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'Nombre',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'Porcentaje',
+            title: {
+                name: '%',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'Valor',
+            title: {
+                name: 'Valor',
+                class: 'text-center',
+            },
+            pipe: {
+                type: 'currency',
+                config: [],
+                class: 'text-center',
+            }
+        },
+
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'Editar',
+                icon: 'fas fa-pencil-alt',
+                class: 'p-2',
+                title: 'Editar Fuente de Financiamiento',
+            },
+            {
+                name: 'Eliminar',
+                icon: 'fas fa-trash',
+                class: 'p-2',
+                title: 'Eliminar Fuente de Financiamiento',
+            }
+        ],
+    },
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2 mx-2',
+            title: 'Agregar Fuente de Financiamiento',
+        },
+    ],
+    noData: {
+        name: 'No Existen Fuentes Asociados',
+        class: 'text-center',
+    },
+    sort: true,
+    filter: false,
+};
+
 export const DATOS_PRUEBA_3: any = [
     {
-        id: 1,
-        nombre: 'Jhoan',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
+        Codigo: 1,
+        Nombre: 'Actividad 1',
+        Valor: 2000000,
+        FuentesFinanciamiento: [
             {
-                label: 2,
-                org: 'asdfasdfasdf'
-            },
-        ]
-    },
-    {
-        id: 2,
-        nombre: 'Manuel',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            {
-                label: 2,
-                org: 'asdfasdfasdf'
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
             },
             {
-                label: 2,
-                org: 'asdfasdfasdf'
-            },
-            {
-                label: 2,
-                org: 'asdfasdfasdf'
-            },
-        ]
-    },
-    {
-        id: 3,
-        nombre: 'Murillo',
-        others: {
-            label: 2,
-            org: 'asdfasdfasdf'
-        },
-        arrayTest: [
-            {
-                label: 2,
-                org: 'asdfasdfasdf'
-            },
-            {
-                label: 2,
-                org: 'asdfasdfasdf'
-            },
-            {
-                label: 2,
-                org: 'asdfasdfasdf'
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
             },
         ]
     },
@@ -256,3 +334,17 @@ export const DATOS_PRUEBA_2: any = [
     },
 ];
 
+export const DATOS_PRUEBA_4: any = [
+    {
+        Id: 12,
+        Nombre: 'Estampilla Universidad Distrital',
+        Porcentaje: 50,
+        Valor: 1000000,
+    },
+    {
+        Id: 12,
+        Nombre: 'Estampilla Universidad Distrital',
+        Porcentaje: 50,
+        Valor: 1000000,
+    },
+]

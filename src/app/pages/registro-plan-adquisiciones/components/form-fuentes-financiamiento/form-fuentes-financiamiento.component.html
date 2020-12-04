@@ -1,1 +1,65 @@
-<p>form-fuentes-financiamiento works!</p>
+<div class="container-fluid">
+    <div class="row" *ngIf="FuenteFinanciamientoForm">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="FuenteFinanciamientoForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="FuenteFinanciamientoForm" *ngIf="FuenteFinanciamientoForm">
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <div class="form-group">
+                    <label>Codigo:</label>
+                    <mat-select class="form-control" formControlName="FuenteSeleccionada">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item"
+                                [value]="fuente">
+                                {{fuente.Codigo}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-8">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <span class="form-control overflow">
+                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ? FuenteFinanciamientoForm.get('FuenteSeleccionada').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-12">
+                
+                <div class="form-group">
+                    <label>Porcentaje:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control text-left" placeholder="" formControlName="Porcentaje">
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <span class="form-control overflow">
+                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ? (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorInicial | currency) : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="FuenteFinanciamientoForm.invalid && !FuenteFinanciamientoForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">
+                    {{boton}}
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)=OnClose()>Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

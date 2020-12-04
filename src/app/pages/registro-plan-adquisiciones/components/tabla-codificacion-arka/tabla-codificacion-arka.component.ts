@@ -43,19 +43,22 @@ export class TablaCodificacionArkaComponent implements OnInit {
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
-        if (Object.keys(accion)[0] !== 'type' && accion.accion.title === 'Agregar Elemento') {
-          this.store.dispatch(LoadFilaSeleccionada(null));
-          this.OpenModal();
+        if (Object.keys(accion)[0] !== 'type') {
+          if (accion.accion.title === 'Agregar Elemento') {
+            this.store.dispatch(LoadFilaSeleccionada(null));
+            this.OpenModal();
+          }
         }
       }
     });
     // Nuevo Elemento
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
-        if (Object.keys(accion)[0] !== 'type' && accion.accion.title === 'Agregar Elemento') {
-          if (accion.accion.name === 'Eliminar') {
+        if (Object.keys(accion)[0] !== 'type') {
+          if (accion.accion.title === 'Eliminar Elemento') {
             this.LaunchDeleteModal(accion.fila);
-          } else {
+          }
+          if (accion.accion.title === 'Editar Elemento') {
             this.OpenModal();
           }
 

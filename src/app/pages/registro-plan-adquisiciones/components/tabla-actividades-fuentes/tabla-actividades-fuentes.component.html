@@ -1,18 +1,7 @@
 <div class="container">
-    <div class="row">
-      <div class="col px-0">
-        <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
-        <a *ngIf="display" [hidden]="true" #formActividadesFuentes data-toggle="modal" data-target="#formActividadesFuentes"></a>
-      </div>
+  <div class="row">
+    <div class="col px-0">
+      <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
     </div>
   </div>
-  
-  <div class="modal fade" id="formActividadesFuentes" tabindex="-1" role="dialog" aria-labelledby="formActividadesFuenteslabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <ngx-form-actividad-fuentes></ngx-form-actividad-fuentes>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
