@@ -27,10 +27,15 @@
                   <th scope="col" [attr.colspan]="element.compound.length" [class]="element.title.class">
                     {{element.title.name}}</th>
                 </ng-container>
-                <ng-container *ngIf="!element.compound">
+                <ng-container *ngIf="!element.compound && !element.objectKeys">
                   <th scope="col" [attr.rowspan]="rowspanTitle" [class]="element.title.class">{{element.title.name}}
                   </th>
                 </ng-container>
+                <ng-container *ngIf="element.objectKeys">
+                  <th scope="col" [attr.colspan]="element.objectKeys.length" [class]="element.title.class">
+                    {{element.title.name}}</th>
+                </ng-container>
+
               </ng-container>
               <!-- Acciones -->
               <ng-container *ngIf="config.rowActions">
@@ -38,8 +43,16 @@
                   {{config.rowActions.title.name}}</th>
               </ng-container>
             </tr>
-            <!-- Titulos de Datos Compuestos -->
+
+            <!-- Titulos de Datos Compuestos y Objeto -->
             <tr *ngIf="config.showColumnTitle">
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.objectKeys">
+                  <ng-container *ngFor="let titles of element.objectKeys">
+                    <th scope="col" [class]="titles.title.class">{{titles.title.name}}</th>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
               <ng-container *ngFor="let element of config.dataConfig">
                 <ng-container *ngIf="element.compound">
                   <ng-container *ngFor="let titles of element.compound">
@@ -69,16 +82,26 @@
                 </ng-container>
                 <ng-container *ngFor="let data of config.dataConfig">
                   <ng-container *ngIf="!data.pipe.isArray">
-                    <ng-container *ngIf="!data.compound">
+                    <ng-container *ngIf="!data.compound && !data.objectKeys">
                       <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[i]">
                         {{  data.pipe.type ? (items[data.key] | multiPipe:data.pipe.type:data.pipe.config) : items[data.key] }}
                       </td>
                     </ng-container>
-                    <ng-container *ngIf="data.compound">
-                      <ng-container *ngFor="let element2 of data.compound">
+                    <ng-container *ngIf="data.compound && !data.objectKeys">
+                      <ng-container *ngFor="let element3 of data.compound">
                         <td class="p-0 m-0 border-0"></td>
                       </ng-container>
-                      
+                    </ng-container>
+                    <ng-container *ngIf="!data.compound && data.objectKeys">
+                      <ng-container *ngFor="let element of items[data.key] | keyvalue">
+                        <ng-container *ngFor="let element3 of data.objectKeys">
+                          <ng-container *ngIf="element3.key === element.key">
+                            <td [class]="element3.pipe.class" [attr.rowspan]="rowspanTable[i]">
+                              {{  element3.pipe.type ? (element.value | multiPipe:element3.pipe.type:element3.pipe.config) : element.value }}
+                            </td>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
                     </ng-container>
                   </ng-container>
                   <ng-container *ngIf="data.pipe.isArray">
@@ -115,9 +138,6 @@
                   </ng-container>
                 </ng-container>
               </ng-container>
-              <tr>
-
-              </tr>
             </ng-container>
 
             <ng-container *ngIf="config.noData">

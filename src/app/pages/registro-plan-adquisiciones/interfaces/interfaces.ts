@@ -65,43 +65,51 @@ export const CONFIGURACION_PRUEBA: any = {
 };
 
 export const CONFIGURACION_PRUEBA_2: any = {
-    title: {
-        name: 'Actividades Relacionadas',
-        class: 'text-center text-light',
-    },
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'Codigo',
+            key: 'ActividadId',
             title: {
-                name: 'Numero',
+                name: 'Actividades',
                 class: 'text-center',
             },
             pipe: {
                 class: '',
-            }
-        },
-        {
-            key: 'Nombre',
-            title: {
-                name: 'Nombre',
-                class: 'text-center',
             },
-            pipe: {
-                class: '',
-            }
-        },
-        {
-            key: 'Valor',
-            title: {
-                name: 'Valor',
-                class: 'text-center',
-            },
-            pipe: {
-                type: 'currency',
-                config: [],
-                class: '',
-            }
+            objectKeys: [
+                {
+                    key: 'Id',
+                    title: {
+                        name: 'Numero',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: '',
+                    }
+                },
+                {
+                    key: 'Nombre',
+                    title: {
+                        name: 'Nombre',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: '',
+                    }
+                },
+                {
+                    key: 'Valor',
+                    title: {
+                        name: 'Valor',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        type: 'currency',
+                        config: [],
+                        class: '',
+                    }
+                },
+            ]
         },
         {
             key: 'FuentesFinanciamiento',
@@ -279,9 +287,53 @@ export const CONFIGURACION_PRUEBA_4: any = {
 
 export const DATOS_PRUEBA_3: any = [
     {
-        Codigo: 1,
-        Nombre: 'Actividad 1',
-        Valor: 2000000,
+        ActividadId: {
+            Id: 1,
+            Nombre: 'Actividad 1',
+            Valor: 2000000,
+        },
+        FuentesFinanciamiento: [
+            {
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
+            },
+            {
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
+            },
+        ]
+    },
+    {
+        ActividadId: {
+            Id: 1,
+            Nombre: 'Actividad 1',
+            Valor: 2000000,
+        },
+        FuentesFinanciamiento: [
+            {
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
+            },
+            {
+                Id: 12,
+                Nombre: 'Estampilla Universidad Distrital',
+                Porcentaje: 50,
+                Valor: 1000000,
+            },
+        ]
+    },
+    {
+        ActividadId: {
+            Id: 1,
+            Nombre: 'Actividad 1',
+            Valor: 2000000,
+        },
         FuentesFinanciamiento: [
             {
                 Id: 12,

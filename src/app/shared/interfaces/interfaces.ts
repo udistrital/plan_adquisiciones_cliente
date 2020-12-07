@@ -40,6 +40,20 @@ export const configTable: any = {
                         class: 'string', // bootstrap class
                     },
                 }
+            ],
+            objectKeys: [
+                {
+                    key: 'string', // object key
+                    title: 'string', // column title
+                    pipe: {
+                        type: 'string', // date, currency, decimal, percent, custom ( optional )
+                        config: [
+                            'string', // array like pipe, no custom
+                            () => { }, // only custom pipe
+                        ], //  ( optional )
+                        class: 'string', // bootstrap class
+                    },
+                }
             ]
         }
     ],

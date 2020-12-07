@@ -40,6 +40,20 @@ export const configTable: any = {
                         class: 'string', // bootstrap class
                     },
                 }
+            ],
+            objectKeys: [
+                {
+                    key: 'string', // object key
+                    title: 'string', // column title
+                    pipe: {
+                        type: 'string', // date, currency, decimal, percent, custom ( optional )
+                        config: [
+                            'string', // array like pipe, no custom
+                            () => { }, // only custom pipe
+                        ], //  ( optional )
+                        class: 'string', // bootstrap class
+                    },
+                }
             ]
         }
     ],
@@ -116,14 +130,36 @@ export const CONFIGURACION_PRUEBA: any = {
             }
         },
         {
-            key: 'nombre',
+            key: 'others',
             title: {
-                name: 'Nombre',
+                name: 'others',
                 class: 'text-center',
             },
             pipe: {
                 class: '',
-            }
+            },
+            objectKeys: [
+                {
+                    key: 'label', // object key
+                    title: {
+                        name: 'Label',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                },
+                {
+                    key: 'org', // object key
+                    title: {
+                        name: 'Org',
+                        class: 'text-center',
+                    },
+                    pipe: {
+                        class: ''
+                    },
+                }
+            ]
         },
         {
             key: 'arrayTest',
@@ -155,7 +191,7 @@ export const CONFIGURACION_PRUEBA: any = {
                         class: ''
                     },
                 }
-            ]
+            ],
         },
     ],
     rowActions: {

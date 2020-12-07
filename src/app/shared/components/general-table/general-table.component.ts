@@ -19,6 +19,7 @@ export class GeneralTableComponent implements OnInit {
   rowspanTitle: number;
   rowspanTable: any[];
   keyCompound: any;
+  keyObject: any;
 
   constructor(
     private store: Store<any>,
@@ -46,6 +47,10 @@ export class GeneralTableComponent implements OnInit {
       if (element.compound !== undefined) {
         this.rowspanTitle = 2;
         this.keyCompound = element.key;
+      }
+      if (element.objectKeys !== undefined) {
+        this.rowspanTitle = 2;
+        this.keyObject = element.key;
       }
     });
     if (this.keyCompound !== undefined) {
