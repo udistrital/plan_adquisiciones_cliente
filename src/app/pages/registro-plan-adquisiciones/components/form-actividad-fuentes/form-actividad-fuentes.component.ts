@@ -1,15 +1,16 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
-import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
-import { CONFIGURACION_PRUEBA, CONFIGURACION_PRUEBA_4, DATOS_PRUEBA, DATOS_PRUEBA_4 } from '../../interfaces/interfaces';
+import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { CONFIGURACION_PRUEBA_4 } from '../../interfaces/interfaces';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
-import { getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getActividadSeleccionada, getFuentes, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormFuentesFinanciamientoComponent } from '../form-fuentes-financiamiento/form-fuentes-financiamiento.component';
+import { SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'ngx-form-actividad-fuentes',
@@ -28,6 +29,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   subscription2$: any;
   subscription3$: any;
   display: boolean;
+  subscription4$: any;
 
 
 
@@ -35,14 +37,12 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private store: Store<any>,
     private actividadesService: ActividadesService,
-    private currencyPipe: CurrencyPipe,
-    private renderer: Renderer2,
     private matDialogRef: MatDialogRef<FormActividadFuentesComponent>,
     private matDialog: MatDialog,
   ) {
     this.titulo = 'Agregar Actividad';
     this.boton = 'Crear';
-    this.Datos = DATOS_PRUEBA_4;
+    // this.Datos = DATOS_PRUEBA_4;
     this.configuracion = CONFIGURACION_PRUEBA_4;
   }
 
@@ -53,18 +53,31 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getMeta).subscribe((meta: any) => {
+    // Traer Actividades y montar Actividad Seleccionada
+    this.subscription$ = combineLatest([
+      this.store.select(getMeta),
+      this.store.select(getActividadSeleccionada),
+    ]).subscribe(([meta, actividad]) => {
       if (meta) {
         if (Object.keys(meta)[0] !== 'type') {
           this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
             if (Object.keys(actividades[0]).length !== 0) {
               this.Actividades = actividades;
+              console.log(actividades);
+              if (actividad) {
+                if (Object.keys(actividad)[0] !== 'type') {
+                  this.CrearActividadFuentesForm(actividad);
+                } else {
+                  this.CrearActividadFuentesForm(null);
+                }
+              } else {
+                this.CrearActividadFuentesForm(null);
+              }
             }
           });
         }
       }
     });
-
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
@@ -84,32 +97,57 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
             this.LaunchDeleteModal(accion.fila);
           }
           if (accion.accion.title === 'Editar Fuente de Financiamiento') {
+            this.store.dispatch(SeleccionarFuente(accion.fila))
             this.OpenModal();
           }
-
         }
       }
     });
-    this.CrearActividadFuentesForm(null);
+    this.store.select(getFuentes).subscribe((fuentes: any) => {
+      console.log(fuentes);
+      if (fuentes) {
+        if (Object.keys(fuentes)[0] !== 'type') {
+          this.Datos = fuentes[0];
+        } else {
+          this.Datos = [];
+        }
+      } else {
+        this.Datos = [];
+      }
+    })
   }
   CrearActividadFuentesForm(data: any) {
+    console.log(data);
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
-        Actividad: [null, []],
-        RegistroPlanAdquisicionesId: [null, []],
-        Valor: [null, []],
+        Actividad: [this.Actividades.find((element: any) => element.Id === data.ActividadId.Id), []],
+        Valor: [data.Valor, []],
       });
     } else {
       this.ActividadFuentesForm = this.fb.group({
         Actividad: [null, []],
-        RegistroPlanAdquisicionesId: [null, []],
         Valor: [null, []],
       });
     }
+    this.ActividadFuentesForm.valueChanges.subscribe((data: any) => {
+      console.log(data);
+    })
   }
 
   OpenModal() {
-    this.matDialog.open(FormFuentesFinanciamientoComponent);
+    if (this.ActividadFuentesForm.value.Valor) {
+      this.matDialog.open(FormFuentesFinanciamientoComponent, {
+        data: this.ActividadFuentesForm.value,
+      });
+    } else {
+      Swal.fire({
+        type: 'error',
+        title: 'No Existen Datos',
+        text: `Es necesario el valor de la actividad`,
+        confirmButtonText: 'Aceptar',
+      })
+    }
+
   }
   OnClose() {
     this.matDialogRef.close();

@@ -292,48 +292,7 @@ export const DATOS_PRUEBA_3: any = [
             Nombre: 'Actividad 1',
             Valor: 2000000,
         },
-        FuentesFinanciamiento: [
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-        ]
-    },
-    {
-        ActividadId: {
-            Id: 1,
-            Nombre: 'Actividad 1',
-            Valor: 2000000,
-        },
-        FuentesFinanciamiento: [
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-        ]
-    },
-    {
-        ActividadId: {
-            Id: 1,
-            Nombre: 'Actividad 1',
-            Valor: 2000000,
-        },
+        Valor: 2000000,
         FuentesFinanciamiento: [
             {
                 Id: 12,

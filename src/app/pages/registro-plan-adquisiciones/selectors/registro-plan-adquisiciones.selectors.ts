@@ -39,3 +39,13 @@ export const getActividadSeleccionada = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.ActividadSeleccionada
 );
+
+export const getFuentes = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.Fuentes
+);
+
+export const getFuenteSeleccionada = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.FuenteSeleccionada
+);

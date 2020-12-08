@@ -1,4 +1,12 @@
 <div mat-dialog-content class="container-fluid m-0">
+    <div class="row" *ngIf="!ActividadFuentesForm">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row" *ngIf="ActividadFuentesForm">
         <div class="col py-2">
             <h5 class="card-title text-center text-primary">{{titulo}}</h5>
