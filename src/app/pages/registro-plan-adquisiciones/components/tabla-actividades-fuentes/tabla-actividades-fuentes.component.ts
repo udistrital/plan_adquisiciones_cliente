@@ -47,7 +47,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
           this.Meta = meta;
         }
       }
-    })
+    });
 
     this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
       if (elementos) {
@@ -71,7 +71,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Editar Actividad y Fuentes Asociadas') {
-            this.store.dispatch(SeleccionarActividad(accion.fila))
+            this.store.dispatch(SeleccionarActividad(accion.fila));
             this.store.dispatch(CargarFuentes([accion.fila.FuentesFinanciamiento]));
             this.OpenModal();
           }
@@ -89,7 +89,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         title: 'No Existen Datos',
         text: 'Es Necesario seleccionar una Meta',
         confirmButtonText: 'Aceptar',
-      })
+      });
     }
 
   }

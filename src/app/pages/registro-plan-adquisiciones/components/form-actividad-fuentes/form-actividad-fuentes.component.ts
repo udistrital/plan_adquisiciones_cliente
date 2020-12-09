@@ -63,7 +63,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
           this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
             if (Object.keys(actividades[0]).length !== 0) {
               this.Actividades = actividades;
-              console.log(actividades);
+
               if (actividad) {
                 if (Object.keys(actividad)[0] !== 'type') {
                   this.CrearActividadFuentesForm(actividad);
@@ -97,14 +97,14 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
             this.LaunchDeleteModal(accion.fila);
           }
           if (accion.accion.title === 'Editar Fuente de Financiamiento') {
-            this.store.dispatch(SeleccionarFuente(accion.fila))
+            this.store.dispatch(SeleccionarFuente(accion.fila));
             this.OpenModal();
           }
         }
       }
     });
     this.store.select(getFuentes).subscribe((fuentes: any) => {
-      console.log(fuentes);
+
       if (fuentes) {
         if (Object.keys(fuentes)[0] !== 'type') {
           this.Datos = fuentes[0];
@@ -114,10 +114,10 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       } else {
         this.Datos = [];
       }
-    })
+    });
   }
   CrearActividadFuentesForm(data: any) {
-    console.log(data);
+
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
         Actividad: [this.Actividades.find((element: any) => element.Id === data.ActividadId.Id), []],
@@ -129,9 +129,6 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         Valor: [null, []],
       });
     }
-    this.ActividadFuentesForm.valueChanges.subscribe((data: any) => {
-      console.log(data);
-    })
   }
 
   OpenModal() {
@@ -145,9 +142,8 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         title: 'No Existen Datos',
         text: `Es necesario el valor de la actividad`,
         confirmButtonText: 'Aceptar',
-      })
+      });
     }
-
   }
   OnClose() {
     this.matDialogRef.close();

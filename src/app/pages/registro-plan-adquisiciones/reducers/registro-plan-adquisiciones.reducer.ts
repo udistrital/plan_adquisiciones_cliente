@@ -12,7 +12,7 @@ export interface State {
   Actividades: any;
   ActividadSeleccionada: any;
   Fuentes: any;
-  FuenteSeleccionada:any ;
+  FuenteSeleccionada: any;
 }
 
 export const initialState: State = {

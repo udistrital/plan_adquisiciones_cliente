@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -36,45 +36,54 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   ngOnInit() {
-    this.CrearFuenteFinanciamientoForm(null);
     this.subscription$ = combineLatest([
       this.store.select(getVigenciaActual),
       this.store.select(getAreaFuncional),
-    ]).subscribe(([vigencia, area]) => {
+      this.store.select(getFuentes),
+      this.store.select(getFuenteSeleccionada),
+    ]).subscribe(([vigencia, area, fuentes, fuente]) => {
+      console.log([vigencia, area, fuentes, fuente])
       if (vigencia && area) {
         const query = {
           Vigencia: vigencia[0].valor,
           UnidadEjecutora: area.Id,
         };
-        this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuente: any) => {
-          this.FuentesFinanciamiento = fuente;
+        this.CalcularValorMaximo(fuente, fuentes);
+        this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
+          console.log(fuentesAsociadas)
+          this.FuentesFinanciamiento = fuentesAsociadas;
+          if (fuente) {
+            if (Object.keys(fuente)[0] !== 'type') {
+              this.CrearFuenteFinanciamientoForm(fuente);
+            } else {
+              this.CrearFuenteFinanciamientoForm(null);
+            }
+          } else {
+            this.CrearFuenteFinanciamientoForm(null);
+          }
         });
       }
     });
-
-    // Valor maximo disponible para financiar
-    this.subscription2$ = combineLatest([
-      this.store.select(getFuentes),
-      this.store.select(getFuenteSeleccionada),
-    ]).subscribe(([fuentes, fuente]) => {
-      this.CalcularValorMaximo(fuente, fuentes);
-    })
   }
   CrearFuenteFinanciamientoForm(data: any) {
     if (data) {
       this.FuenteFinanciamientoForm = this.fb.group({
-        FuenteSeleccionada: [null, []],
-        Valor: [null, []],
+        FuenteSeleccionada: [
+          this.FuentesFinanciamiento.find((element: any) => element.Id === data.Id), [Validators.required]
+        ],
+        Valor: [data.Valor, [Validators.max(this.ValorDisponible), Validators.required]],
       });
     } else {
       this.FuenteFinanciamientoForm = this.fb.group({
-        FuenteSeleccionada: [null, []],
-        Valor: [null, []],
+        FuenteSeleccionada: [null, [Validators.required]],
+        Valor: [null, [Validators.max(this.ValorDisponible), Validators.required]],
       });
     }
+    console.log(this.FuenteFinanciamientoForm)
   }
 
   OnClose() {
@@ -90,7 +99,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         valoresFuentes = fuentes[0].reduce((acc: any, value: any) => acc + value.Valor, 0);
       }
     }
-    
+
     if (fuente) {
       if (Object.keys(fuente)[0] !== 'type') {
         if (fuentes) {
@@ -125,7 +134,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         this.ValorDisponible = this.data.Valor;
       }
     }
-    console.log(this.ValorDisponible);
+
   }
 
   OnSubmit() {

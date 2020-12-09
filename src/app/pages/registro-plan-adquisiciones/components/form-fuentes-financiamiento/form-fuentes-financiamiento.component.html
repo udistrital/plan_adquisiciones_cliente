@@ -1,4 +1,11 @@
-<div class="container-fluid">
+<div mat-dialog-content class="container-fluid m-0">
+    <div class="row" *ngIf="!FuenteFinanciamientoForm">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+        </div>
+    </div>
     <div class="row" *ngIf="FuenteFinanciamientoForm">
         <div class="col py-2">
             <h5 class="card-title text-center text-primary">{{titulo}}</h5>
@@ -36,6 +43,10 @@
                     <label>Valor:</label>
                     <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="text"
                         class="form-control text-left" placeholder="" formControlName="Valor">
+                    <ng-container *ngIf="FuenteFinanciamientoForm.controls.Valor.errors">
+                        <small *ngIf="FuenteFinanciamientoForm.controls.Valor.errors.max" class="text-danger">
+                            El valor no debe pasar el maximo valor registrado {{ ValorDisponible | currency }}</small>
+                    </ng-container>
 
                 </div>
             </div>
@@ -52,9 +63,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-6 d-flex justify-content-start">
-                <button [disabled]="FuenteFinanciamientoForm.invalid && !FuenteFinanciamientoForm.touched" type="button"
+                <button [disabled]="FuenteFinanciamientoForm.invalid || !FuenteFinanciamientoForm.touched" type="button"
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">
                     {{boton}}
                 </button>
