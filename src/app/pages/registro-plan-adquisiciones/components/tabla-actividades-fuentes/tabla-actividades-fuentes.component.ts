@@ -65,7 +65,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
             setTimeout(() => {
               this.OpenModal();
             }, 0);
-            
+
           }
         }
       }

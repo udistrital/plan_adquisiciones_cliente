@@ -47,7 +47,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     this.boton = 'Crear';
     // this.Datos = DATOS_PRUEBA_4;
     this.configuracion = CONFIGURACION_PRUEBA_4;
-    this.ActividadesAsociadas= [];
+    this.ActividadesAsociadas = [];
   }
 
   ngOnDestroy(): void {
@@ -65,10 +65,9 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       this.store.select(getActividades),
     ]).subscribe(([meta, actividad, actividades]) => {
       if (this.sharedService.IfStore(meta)) {
-        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
-          if (Object.keys(actividades[0]).length !== 0) {
-            this.Actividades = actividades;
-            console.log(actividades);
+        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
+          if (Object.keys(actividades2[0]).length !== 0) {
+            this.Actividades = actividades2;
             if (this.sharedService.IfStore(actividad)) {
               this.CrearActividadFuentesForm(actividad);
               this.titulo = 'Editar Actividad';
@@ -165,7 +164,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
   OnSubmit() {
     let Creacion = true;
-    let Actividad = this.ActividadFuentesForm.value;
+    const Actividad = this.ActividadFuentesForm.value;
     Actividad.Actividad.Valor = Actividad.Valor;
     this.ActividadesAsociadas.forEach((element: any) => {
       if (Actividad.Actividad.Id === element.ActividadId.Id) {

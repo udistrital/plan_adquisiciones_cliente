@@ -29,14 +29,8 @@ export class GeneralTableComponent implements OnInit, OnChanges {
     this.rowspanTitle = 1;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    if (this.keyCompound !== undefined) {
-      const tablespan: any = [];
-      this.datos.forEach((element: any) => {
-        tablespan.push(element[this.keyCompound].length + 1);
-      });
-      this.rowspanTable = tablespan;
-      console.log(this.rowspanTable, 'datosssss');
+    if (changes) {
+      this.ConfiguracionTabla();
     }
   }
 

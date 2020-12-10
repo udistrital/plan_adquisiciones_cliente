@@ -37,7 +37,7 @@ export class FormCodificacionArkaComponent implements OnInit {
       this.store.select(getFilaSeleccionada),
       this.store.select(getElementosARKA),
     ]).subscribe(([fila, elementos]) => {
-      console.log(fila)
+
       this.index = null;
       if (fila) {
         if (Object.keys(fila)[0] !== 'type' && fila.accion.title === 'Editar Elemento') {

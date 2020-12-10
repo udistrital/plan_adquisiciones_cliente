@@ -85,7 +85,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
           {
             value: this.FuentesFinanciamiento.find((element: any) => element.Codigo === data.Codigo),
             disabled: true,
-          }, 
+          },
           [Validators.required]
         ],
         Valor: [data.Valor, [Validators.max(this.ValorDisponible), Validators.required]],
@@ -132,7 +132,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     Fuente.FuenteSeleccionada.Porcentaje = Fuente.Valor / this.data.Valor;
 
     // Revisar las Fuentes ya asociadas, y si existe cambiar los valores
-    console.log(this.FuentesAsociadas);
+
     this.FuentesAsociadas.forEach((element: any) => {
       if (Fuente.FuenteSeleccionada.Codigo === element.Codigo) {
         element.Valor = Fuente.Valor;
@@ -140,12 +140,12 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         Creacion = false;
       }
     });
-    console.log(this.FuentesAsociadas);
+
     // Si existe una creacion, agregar el emenemto creado
     if (Creacion) {
       this.FuentesAsociadas.push(Fuente.FuenteSeleccionada);
     }
-    console.log(this.FuentesAsociadas);
+
     // Actualizar Fuente y enviar datos
     this.store.dispatch(CargarFuentes([this.FuentesAsociadas]));
     this.store.dispatch(SeleccionarFuente(null));

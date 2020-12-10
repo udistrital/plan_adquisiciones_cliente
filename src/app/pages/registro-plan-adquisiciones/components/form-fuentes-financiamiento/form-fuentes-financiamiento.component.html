@@ -43,7 +43,7 @@
                     <label>Valor:</label>
                     <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="text"
                         class="form-control text-left" placeholder="" formControlName="Valor">
-                    <ng-container *ngIf="FuenteFinanciamientoForm && !FuenteFinanciamientoForm.controls.Valor.errors">
+                    <ng-container *ngIf="FuenteFinanciamientoForm && !(FuenteFinanciamientoForm.controls.Valor.errors)">
                         <small>Valor Disponible: {{ ValorDisponible | currency }}</small>
                     </ng-container>
                     <ng-container *ngIf="FuenteFinanciamientoForm.controls.Valor.errors">
