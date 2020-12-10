@@ -6,16 +6,15 @@
             </div>
         </div>
     </div>
-    
-    <div class="row" *ngIf="ActividadFuentesForm">
-        <div class="col py-2">
-            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
-        </div>
-    </div>
-    <div class="row" *ngIf="ActividadFuentesForm">
-        <div class="col py-2"></div>
-    </div>
     <form [formGroup]="ActividadFuentesForm" *ngIf="ActividadFuentesForm">
+        <div class="row">
+            <div class="col py-2">
+                <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col py-2"></div>
+        </div>
         <div class="row">
             <div class="col-12 col-sm-4">
                 <div class="form-group">
@@ -48,11 +47,10 @@
             </div>
             <div class="col-12">
                 <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
-                <a *ngIf="display" [hidden]="true" #formFuentes data-toggle="modal" data-target="#formFuentes"></a>
             </div>
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="ActividadFuentesForm.invalid || !ActividadFuentesForm.touched" type="button"
-                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">
                     {{boton}}
                 </button>
             </div>

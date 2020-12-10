@@ -115,7 +115,21 @@ export class SharedService {
     };
     return this.rqManager.get('modalidad_seleccion/' + query_params.query);
   }
-
-
-
+/**
+   * If para Datos del Store
+   * Si el elemento es null o es { type: '[Store] Action' } regresa false
+   * Si el elemento es diferente de lo anterior regresa true
+   * @returns  Boolean Informacion si existe el elemento o no
+   */
+  public IfStore(data: any) {
+    if (data) {
+      if (Object.keys(data)[0] !== 'type') {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

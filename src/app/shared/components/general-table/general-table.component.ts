@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../actions/shared.actions';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
@@ -8,7 +8,7 @@ import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces'
   templateUrl: './general-table.component.html',
   styleUrls: ['./general-table.component.scss']
 })
-export class GeneralTableComponent implements OnInit {
+export class GeneralTableComponent implements OnInit, OnChanges {
 
   @Input() config: any;
   @Input() datos: any;
@@ -28,8 +28,23 @@ export class GeneralTableComponent implements OnInit {
     this.selectedAction = new EventEmitter<any>();
     this.rowspanTitle = 1;
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    if (this.keyCompound !== undefined) {
+      const tablespan: any = [];
+      this.datos.forEach((element: any) => {
+        tablespan.push(element[this.keyCompound].length + 1);
+      });
+      this.rowspanTable = tablespan;
+      console.log(this.rowspanTable, 'datosssss');
+    }
+  }
 
   ngOnInit() {
+    this.ConfiguracionTabla();
+  }
+
+  ConfiguracionTabla() {
     if (this.config.endSubtotal) {
       if (!this.config.endSubtotal.last.name) {
         const arraySubtotal: any[] = [];
@@ -42,6 +57,7 @@ export class GeneralTableComponent implements OnInit {
         this.Subtotal = arraySubtotal.reduce((accumulator, currentValue) => accumulator + currentValue);
       }
     }
+
     const tablespan: any = [];
     this.config.dataConfig.forEach((element: any) => {
       if (element.compound !== undefined) {
@@ -54,7 +70,7 @@ export class GeneralTableComponent implements OnInit {
       }
     });
     if (this.keyCompound !== undefined) {
-      this.datos.forEach(element => {
+      this.datos.forEach((element: any) => {
         tablespan.push(element[this.keyCompound].length + 1);
       });
     }

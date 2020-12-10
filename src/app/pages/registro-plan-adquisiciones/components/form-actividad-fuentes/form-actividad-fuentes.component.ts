@@ -6,11 +6,12 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import { CONFIGURACION_PRUEBA_4 } from '../../interfaces/interfaces';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
-import { getActividadSeleccionada, getFuentes, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getActividades, getActividadSeleccionada, getFuentes, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormFuentesFinanciamientoComponent } from '../form-fuentes-financiamiento/form-fuentes-financiamiento.component';
-import { SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
+import { CargarActividades, CargarFuentes, SeleccionarActividad, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
 import { combineLatest } from 'rxjs';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'ngx-form-actividad-fuentes',
@@ -30,6 +31,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   subscription3$: any;
   display: boolean;
   subscription4$: any;
+  ActividadesAsociadas: any;
 
 
 
@@ -39,17 +41,20 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     private actividadesService: ActividadesService,
     private matDialogRef: MatDialogRef<FormActividadFuentesComponent>,
     private matDialog: MatDialog,
+    private sharedService: SharedService,
   ) {
     this.titulo = 'Agregar Actividad';
     this.boton = 'Crear';
     // this.Datos = DATOS_PRUEBA_4;
     this.configuracion = CONFIGURACION_PRUEBA_4;
+    this.ActividadesAsociadas= [];
   }
 
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
+    this.subscription4$.unsubscribe();
   }
 
   ngOnInit() {
@@ -57,60 +62,53 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     this.subscription$ = combineLatest([
       this.store.select(getMeta),
       this.store.select(getActividadSeleccionada),
-    ]).subscribe(([meta, actividad]) => {
-      if (meta) {
-        if (Object.keys(meta)[0] !== 'type') {
-          this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
-            if (Object.keys(actividades[0]).length !== 0) {
-              this.Actividades = actividades;
-
-              if (actividad) {
-                if (Object.keys(actividad)[0] !== 'type') {
-                  this.CrearActividadFuentesForm(actividad);
-                } else {
-                  this.CrearActividadFuentesForm(null);
-                }
-              } else {
-                this.CrearActividadFuentesForm(null);
-              }
+      this.store.select(getActividades),
+    ]).subscribe(([meta, actividad, actividades]) => {
+      if (this.sharedService.IfStore(meta)) {
+        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades: any) => {
+          if (Object.keys(actividades[0]).length !== 0) {
+            this.Actividades = actividades;
+            console.log(actividades);
+            if (this.sharedService.IfStore(actividad)) {
+              this.CrearActividadFuentesForm(actividad);
+              this.titulo = 'Editar Actividad';
+              this.boton = 'Editar';
+            } else {
+              this.CrearActividadFuentesForm(null);
+              this.titulo = 'Agregar Actividad';
+              this.boton = 'Crear';
             }
-          });
-        }
+          }
+        });
+      }
+      if (this.sharedService.IfStore(actividades)) {
+        this.ActividadesAsociadas = actividades[0];
       }
     });
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      if (accion) {
-        if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Agregar Fuente de Financiamiento') {
-            this.store.dispatch(LoadFilaSeleccionada(null));
-            this.OpenModal();
-          }
+      if (this.sharedService.IfStore(accion)) {
+        if (accion.accion.title === 'Agregar Fuente de Financiamiento') {
+          this.store.dispatch(SeleccionarFuente(null));
+          this.OpenModal();
         }
       }
     });
     // Nuevo Elemento
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
-      if (accion) {
-        if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Eliminar Fuente de Financiamiento') {
-            this.LaunchDeleteModal(accion.fila);
-          }
-          if (accion.accion.title === 'Editar Fuente de Financiamiento') {
-            this.store.dispatch(SeleccionarFuente(accion.fila));
-            this.OpenModal();
-          }
+      if (this.sharedService.IfStore(accion)) {
+        if (accion.accion.title === 'Eliminar Fuente de Financiamiento') {
+          this.LaunchDeleteModal(accion.fila);
+        }
+        if (accion.accion.title === 'Editar Fuente de Financiamiento') {
+          this.store.dispatch(SeleccionarFuente(accion.fila));
+          this.OpenModal();
         }
       }
     });
-    this.store.select(getFuentes).subscribe((fuentes: any) => {
-
-      if (fuentes) {
-        if (Object.keys(fuentes)[0] !== 'type') {
-          this.Datos = fuentes[0];
-        } else {
-          this.Datos = [];
-        }
+    this.subscription4$ = this.store.select(getFuentes).subscribe((fuentes: any) => {
+      if (this.sharedService.IfStore(fuentes)) {
+        this.Datos = fuentes[0];
       } else {
         this.Datos = [];
       }
@@ -132,19 +130,22 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
 
   OpenModal() {
-    if (this.ActividadFuentesForm.value.Valor) {
-      this.matDialog.open(FormFuentesFinanciamientoComponent, {
-        data: this.ActividadFuentesForm.value,
-      });
-    } else {
-      Swal.fire({
-        type: 'error',
-        title: 'No Existen Datos',
-        text: `Es necesario el valor de la actividad`,
-        confirmButtonText: 'Aceptar',
-      });
+    if (this.ActividadFuentesForm) {
+      if (this.ActividadFuentesForm.value.Valor) {
+        this.matDialog.open(FormFuentesFinanciamientoComponent, {
+          data: this.ActividadFuentesForm.value,
+        });
+      } else {
+        Swal.fire({
+          type: 'error',
+          title: 'No Existen Datos',
+          text: `Es necesario el valor de la actividad`,
+          confirmButtonText: 'Aceptar',
+        });
+      }
     }
   }
+
   OnClose() {
     this.matDialogRef.close();
   }
@@ -163,5 +164,25 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     });
   }
   OnSubmit() {
+    let Creacion = true;
+    let Actividad = this.ActividadFuentesForm.value;
+    Actividad.Actividad.Valor = Actividad.Valor;
+    this.ActividadesAsociadas.forEach((element: any) => {
+      if (Actividad.Actividad.Id === element.ActividadId.Id) {
+        element.ActividadId.Valor = Actividad.Valor;
+        element.Valor = Actividad.Valor;
+        element.FuentesFinanciamiento = this.Datos;
+        Creacion = false;
+      }
+    });
+    if (Creacion) {
+      this.ActividadesAsociadas.push({
+        ActividadId: Actividad.Actividad,
+        Valor: Actividad.Valor,
+        FuentesFinanciamiento: this.Datos,
+      });
+    }
+    this.store.dispatch(CargarActividades([this.ActividadesAsociadas]));
+    this.OnClose();
   }
 }

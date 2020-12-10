@@ -122,7 +122,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
             },
             compound: [
                 {
-                    key: 'Id', // object key
+                    key: 'Codigo', // object key
                     title: {
                         name: 'Codigo',
                         class: 'text-center',
@@ -148,6 +148,10 @@ export const CONFIGURACION_PRUEBA_2: any = {
                         class: 'text-center',
                     },
                     pipe: {
+                        type: 'percent',
+                        config: [
+                            '1.2-2'
+                        ],
                         class: ''
                     },
                 },
@@ -205,7 +209,7 @@ export const CONFIGURACION_PRUEBA_4: any = {
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'Id',
+            key: 'Codigo',
             title: {
                 name: 'Codigo',
                 class: 'text-center',
@@ -231,6 +235,10 @@ export const CONFIGURACION_PRUEBA_4: any = {
                 class: 'text-center',
             },
             pipe: {
+                type: 'percent',
+                config: [
+                    '1.2-2'
+                ],
                 class: 'text-center',
             }
         },
@@ -286,6 +294,63 @@ export const CONFIGURACION_PRUEBA_4: any = {
 };
 
 export const DATOS_PRUEBA_3: any = [
+
+    {
+        ActividadId: {
+            Id: 6,
+            Numero: 3,
+            Nombre: 'Actividad de Prueba para Registro de Fuentes 3',
+            FechaCreacion: '2020-12-08 21:11:58.241699 +0000 +0000',
+            FechaModificacion: '2020-12-08 21:11:58.241811 +0000 +0000',
+            Activo: true,
+            MetaId: {
+                Id: 3,
+                Numero: 1,
+                Nombre: 'Meta 1 asociadaghfhg',
+                FechaCreacion: '2020-11-17 15:08:55.764593 +0000 +0000',
+                FechaModificacion: '2020-11-17 17:46:07.2147 +0000 +0000',
+                Activo: true,
+                Rubro: '3-01-001-04-05-03-0123',
+                LineamientoId: {
+                    Id: 1,
+                    Numero: 1,
+                    Nombre: 'prueba 1',
+                    Objetivo: 'objetivo de prueba',
+                    FuenteRecursoId: '3-01',
+                    CentroGestor: 230,
+                    AreaFuncionalId: 1,
+                    Vigencia: 2020,
+                    FechaCreacion: '2020-11-12 18:47:40.078717 +0000 +0000',
+                    FechaModificacion: '2020-11-12 19:27:43.392857 +0000 +0000',
+                    Activo: true
+                }
+            },
+            Valor: 23000
+        },
+        Valor: 23000,
+        FuentesFinanciamiento: [
+            {
+                Vigencia: 2020,
+                Nombre: 'Recursos del Balance Estampilla UD Ley 1825 de 2020',
+                Descripcion: 'Recursos del Balance Estampilla UD Ley 1825 de 2020',
+                FechaCreacion: '0001-01-01T00:00:00Z',
+                FechaModificacion: '0001-01-01T00:00:00Z',
+                Activo: true,
+                Codigo: '2414',
+                TipoFuente: null,
+                ValorInicial: 20000000000,
+                ValorActual: 0,
+                Estado: 'distribuida',
+                Rubros: {},
+                NumeroDocumento: '34689',
+                TipoDocumento: 'RESOLUCION',
+                UnidadEjecutora: '1',
+                Movimientos: {},
+                Valor: 23000,
+                Porcentaje: 1
+            }
+        ]
+    },
     {
         ActividadId: {
             Id: 1,

@@ -32,7 +32,8 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA_2;
-    this.store.dispatch(CargarActividades([DATOS_PRUEBA_3]));
+    this.Datos = [];
+    // this.store.dispatch(CargarActividades([DATOS_PRUEBA_3]));
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -51,7 +52,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
       if (elementos) {
-        this.Datos = elementos[0];
+        this.Datos = JSON.parse(JSON.stringify(elementos[0]));
       }
     });
     // Seleccionar Elemento
@@ -61,7 +62,10 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
           if (accion.accion.title === 'Agregar Actividad y Fuentes Asociadas') {
             this.store.dispatch(SeleccionarActividad(null));
             this.store.dispatch(CargarFuentes(null));
-            this.OpenModal();
+            setTimeout(() => {
+              this.OpenModal();
+            }, 0);
+            
           }
         }
       }
@@ -73,7 +77,9 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
           if (accion.accion.title === 'Editar Actividad y Fuentes Asociadas') {
             this.store.dispatch(SeleccionarActividad(accion.fila));
             this.store.dispatch(CargarFuentes([accion.fila.FuentesFinanciamiento]));
-            this.OpenModal();
+            setTimeout(() => {
+              this.OpenModal();
+            }, 0);
           }
         }
       }

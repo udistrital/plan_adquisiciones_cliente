@@ -1,10 +1,11 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { getVigenciaActual, getAreaFuncional } from '../../../../shared/selectors/shared.selectors';
-import { CONFIGURACION_PRUEBA_4, DATOS_PRUEBA } from '../../interfaces/interfaces';
+import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarFuentes, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
 import { getFuentes, getFuenteSeleccionada } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
@@ -22,17 +23,20 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   subscription$: any;
   ValorDisponible: any;
   subscription2$: any;
+  FuentesAsociadas: any;
+  valoresFuentes: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private store: Store<any>,
-    private renderer: Renderer2,
     private matDialogRef: MatDialogRef<FormFuentesFinanciamientoComponent>,
     private registroService: RegistroPlanAdquisicionesService,
+    private sharedService: SharedService,
   ) {
     this.titulo = 'Agregar Fuente';
     this.boton = 'Crear';
+    this.FuentesAsociadas = [];
   }
 
   ngOnDestroy(): void {
@@ -46,7 +50,12 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
       this.store.select(getFuentes),
       this.store.select(getFuenteSeleccionada),
     ]).subscribe(([vigencia, area, fuentes, fuente]) => {
-      console.log([vigencia, area, fuentes, fuente])
+
+      if (this.sharedService.IfStore(fuentes)) {
+        this.FuentesAsociadas = fuentes[0];
+        this.valoresFuentes = fuentes[0].reduce((acc: any, value: any) => acc + value.Valor, 0);
+      }
+
       if (vigencia && area) {
         const query = {
           Vigencia: vigencia[0].valor,
@@ -54,16 +63,15 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         };
         this.CalcularValorMaximo(fuente, fuentes);
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
-          console.log(fuentesAsociadas)
           this.FuentesFinanciamiento = fuentesAsociadas;
-          if (fuente) {
-            if (Object.keys(fuente)[0] !== 'type') {
-              this.CrearFuenteFinanciamientoForm(fuente);
-            } else {
-              this.CrearFuenteFinanciamientoForm(null);
-            }
+          if (this.sharedService.IfStore(fuente)) {
+            this.CrearFuenteFinanciamientoForm(fuente);
+            this.titulo = 'Editar Fuente';
+            this.boton = 'Editar';
           } else {
             this.CrearFuenteFinanciamientoForm(null);
+            this.titulo = 'Agregar Fuente';
+            this.boton = 'Crear';
           }
         });
       }
@@ -71,9 +79,14 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   }
   CrearFuenteFinanciamientoForm(data: any) {
     if (data) {
+      this.FuenteFinanciamientoForm = this.fb.group({});
       this.FuenteFinanciamientoForm = this.fb.group({
         FuenteSeleccionada: [
-          this.FuentesFinanciamiento.find((element: any) => element.Id === data.Id), [Validators.required]
+          {
+            value: this.FuentesFinanciamiento.find((element: any) => element.Codigo === data.Codigo),
+            disabled: true,
+          }, 
+          [Validators.required]
         ],
         Valor: [data.Valor, [Validators.max(this.ValorDisponible), Validators.required]],
       });
@@ -83,7 +96,6 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         Valor: [null, [Validators.max(this.ValorDisponible), Validators.required]],
       });
     }
-    console.log(this.FuenteFinanciamientoForm)
   }
 
   OnClose() {
@@ -92,52 +104,50 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
 
   CalcularValorMaximo(fuente: any, fuentes: any) {
 
-    let valoresFuentes: any;
-    // Acumulado
-    if (fuentes) {
-      if (Object.keys(fuentes)[0] !== 'type') {
-        valoresFuentes = fuentes[0].reduce((acc: any, value: any) => acc + value.Valor, 0);
-      }
-    }
-
-    if (fuente) {
-      if (Object.keys(fuente)[0] !== 'type') {
-        if (fuentes) {
-          if (Object.keys(fuentes)[0] !== 'type') {
-            // Edicion con fuentes Adicionales
-            this.ValorDisponible = this.data.Valor - valoresFuentes + fuente.Valor;
-          }
-        }
-      } else {
-        if (fuentes) {
-          if (Object.keys(fuentes)[0] !== 'type') {
-            // Creacion con fuentes
-            this.ValorDisponible = this.data.Valor - valoresFuentes;
-          } else {
-            // Creacion sin fuentes
-            this.ValorDisponible = this.data.Valor;
-          }
-        } else {
-          this.ValorDisponible = this.data.Valor;
-        }
+    if (this.sharedService.IfStore(fuente)) {
+      if (this.sharedService.IfStore(fuentes)) {
+        // Edicion con fuentes Adicionales
+        this.ValorDisponible = this.data.Valor - this.valoresFuentes + fuente.Valor;
       }
     } else {
-      if (fuentes) {
-        if (Object.keys(fuentes)[0] !== 'type') {
-          // Creacion con fuentes
-          this.ValorDisponible = this.data.Valor - valoresFuentes;
-        } else {
-          // Creacion sin fuentes
-          this.ValorDisponible = this.data.Valor;
-        }
+      if (this.sharedService.IfStore(fuentes)) {
+        // Creacion con fuentes
+        this.ValorDisponible = this.data.Valor - this.valoresFuentes;
       } else {
+        // Creacion sin fuentes
         this.ValorDisponible = this.data.Valor;
       }
     }
+  }
 
+  EnableFuente() {
+    this.FuenteFinanciamientoForm.get('FuenteSeleccionada').enable();
   }
 
   OnSubmit() {
+    this.EnableFuente();
+    let Creacion = true;
+    const Fuente: any = this.FuenteFinanciamientoForm.value;
+    Fuente.FuenteSeleccionada.Valor = Fuente.Valor;
+    Fuente.FuenteSeleccionada.Porcentaje = Fuente.Valor / this.data.Valor;
 
+    // Revisar las Fuentes ya asociadas, y si existe cambiar los valores
+    console.log(this.FuentesAsociadas);
+    this.FuentesAsociadas.forEach((element: any) => {
+      if (Fuente.FuenteSeleccionada.Codigo === element.Codigo) {
+        element.Valor = Fuente.Valor;
+        element.Porcentaje = Fuente.FuenteSeleccionada.Porcentaje;
+        Creacion = false;
+      }
+    });
+    console.log(this.FuentesAsociadas);
+    // Si existe una creacion, agregar el emenemto creado
+    if (Creacion) {
+      this.FuentesAsociadas.push(Fuente.FuenteSeleccionada);
+    }
+    console.log(this.FuentesAsociadas);
+    // Actualizar Fuente y enviar datos
+    this.store.dispatch(CargarFuentes([this.FuentesAsociadas]));
+    this.store.dispatch(SeleccionarFuente(null));
   }
 }
