@@ -18,6 +18,8 @@ import { NbTreeGridModule } from '@nebular/theme';
 import { SelectedRowDirective } from './directives/selected-row.directive';
 import { MultiPipePipe } from './pipes/multi-pipe.pipe';
 import { TimeRangePipe } from './pipes/time-range.pipe';
+import { CellViewComponent } from './components/cell-view/cell-view.component';
+import { CompoundCellComponent } from './components/compound-cell/compound-cell.component';
 
 @NgModule({
   exports: [
@@ -47,6 +49,8 @@ import { TimeRangePipe } from './pipes/time-range.pipe';
     SelectedRowDirective,
     MultiPipePipe,
     TimeRangePipe,
+    CellViewComponent,
+    CompoundCellComponent,
   ],
   providers: [
     DatePipe,
