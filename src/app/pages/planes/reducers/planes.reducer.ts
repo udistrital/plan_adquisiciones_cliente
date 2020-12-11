@@ -10,7 +10,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  Planes: [],
+  Planes: null,
   PlanSeleccionado: null,
   PlanDetallado: [],
 };
