@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getVigenciaActual, getAreaFuncional } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarFuentes, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
@@ -34,6 +35,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     private registroService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
   ) {
+    this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.titulo = 'Agregar Fuente';
     this.boton = 'Crear';
     this.FuentesAsociadas = [];
@@ -63,6 +65,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         };
         this.CalcularValorMaximo(fuente, fuentes);
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
+          console.log(fuentesAsociadas)
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);
@@ -117,6 +120,9 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         // Creacion sin fuentes
         this.ValorDisponible = this.data.Valor;
       }
+    }
+    if (this.ValorDisponible === 0) {
+      this.OnClose();
     }
   }
 
