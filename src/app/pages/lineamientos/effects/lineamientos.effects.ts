@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import { catchError, concatMap, map, exhaustMap } from 'rxjs/operators';
 import { combineLatest, EMPTY, of } from 'rxjs';
 
 import * as LineamientosActions from '../actions/lineamientos.actions';
@@ -57,7 +57,7 @@ export class LineamientosEffects {
   GetLineamientos$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LineamientosActions.ConsultarLineamientos),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.lineamientosService.getLineamientosAsociados(
           opciones.CentroGestor,
           opciones.AreaFuncional,
@@ -77,7 +77,7 @@ export class LineamientosEffects {
   GetLineamiento$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LineamientosActions.ConsultarLineamiento),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.lineamientosService.getLineamiento(
           opciones.Id
         ).pipe(
@@ -95,7 +95,7 @@ export class LineamientosEffects {
   CrearLineamiento$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LineamientosActions.CrearLineamiento),
-      mergeMap((lineamiento: any) =>
+      exhaustMap((lineamiento: any) =>
         this.lineamientosService.crearLineamiento(
           lineamiento,
         ).pipe(
@@ -119,7 +119,7 @@ export class LineamientosEffects {
   ActualizarLineamiento$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LineamientosActions.ActualizarLineamiento),
-      mergeMap((lineamiento: any) =>
+      exhaustMap((lineamiento: any) =>
         this.lineamientosService.updateLineamiento(
           lineamiento,
         ).pipe(
