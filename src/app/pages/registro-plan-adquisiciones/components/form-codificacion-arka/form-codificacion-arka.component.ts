@@ -40,7 +40,7 @@ export class FormCodificacionArkaComponent implements OnInit {
 
       this.index = null;
       if (fila) {
-        if (Object.keys(fila)[0] !== 'type') {
+        if (Object.keys(fila)[0] !== 'type' && fila.accion.title === 'Editar Elemento') {
           this.titulo = 'Editar Elemento ARKA';
           this.boton = 'Editar';
           this.index = fila.index;
@@ -66,7 +66,7 @@ export class FormCodificacionArkaComponent implements OnInit {
   CrearElementoARKAForm(data: any) {
     if (data) {
       this.ElementoARKAForm = this.fb.group({
-        Elemento: [this.Elementos.find((element: any) => element.Id === data.Id), [Validators.required]]
+        Elemento: [this.Elementos.find((element: any) => element.Codigo === data.Codigo), [Validators.required]]
       });
     } else {
       this.ElementoARKAForm = this.fb.group({

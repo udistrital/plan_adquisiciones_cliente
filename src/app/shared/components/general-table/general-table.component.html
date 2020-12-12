@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="config && datos">
+<div class="container-fluid" *ngIf="config && datos && rowspanTable">
   <div class="row">
     <div class="col-12">
       <div class="form-group mt-3" *ngIf="config.filter">
@@ -8,64 +8,138 @@
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead class="bg-primary text-white">
+            <!-- Titulo General -->
             <tr *ngIf="config.title">
               <th scope="col" colspan="100" [class]="config.title.class">
                 {{config.title.name}}
               </th>
             </tr>
+            <!-- Titulos Principales -->
             <tr *ngIf="config.showColumnTitle">
+              <!-- Select / Checkbox -->
               <ng-container *ngIf="config.checkElement">
-                <th scope="col" [class]="config.checkElement.title.class">{{config.checkElement.title.name}}</th>
+                <th scope="col" [attr.rowspan]="rowspanTitle" [class]="config.checkElement.title.class">
+                  {{config.checkElement.title.name}}</th>
               </ng-container>
+              <!-- Llaves de Objetos -->
               <ng-container *ngFor="let element of config.dataConfig">
-                <th scope="col" [class]="element.title.class">{{element.title.name}}</th>
+                <ng-container *ngIf="element.compound">
+                  <th scope="col" [attr.colspan]="element.compound.length" [class]="element.title.class">
+                    {{element.title.name}}</th>
+                </ng-container>
+                <ng-container *ngIf="!element.compound && !element.objectKeys">
+                  <th scope="col" [attr.rowspan]="rowspanTitle" [class]="element.title.class">{{element.title.name}}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="element.objectKeys">
+                  <th scope="col" [attr.colspan]="element.objectKeys.length" [class]="element.title.class">
+                    {{element.title.name}}</th>
+                </ng-container>
+
               </ng-container>
+              <!-- Acciones -->
               <ng-container *ngIf="config.rowActions">
-                <th scope="col" [class]="config.rowActions.title.class">{{config.rowActions.title.name}}</th>
+                <th scope="col" [attr.rowspan]="rowspanTitle" [class]="config.rowActions.title.class">
+                  {{config.rowActions.title.name}}</th>
               </ng-container>
             </tr>
+
+            <!-- Titulos de Datos Compuestos y Objeto -->
+            <tr *ngIf="config.showColumnTitle">
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.objectKeys">
+                  <ng-container *ngFor="let titles of element.objectKeys">
+                    <th scope="col" [class]="titles.title.class">{{titles.title.name}}</th>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.compound">
+                  <ng-container *ngFor="let titles of element.compound">
+                    <th scope="col" [class]="titles.title.class">{{titles.title.name}}</th>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <!-- Subtitulo -->
             <tr *ngIf="config.subtitle">
               <th scope="col" colspan="100" [class]="config.subtitle.class">
                 {{config.subtitle.name}}
               </th>
             </tr>
           </thead>
+          <!-- Elementos Relacionados -->
           <tbody>
-            <tr *ngFor="let items of datos | filterTable:stringBusqueda; index as i">
-              <ng-container *ngIf="config.checkElement">
-                <td [class]="config.checkElement.pipe.class">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  </div>
-                </td>
-              </ng-container>
+            <ng-container *ngFor="let items of datos | filterTable:stringBusqueda; index as i">
+              <tr>
+                <ng-container *ngIf="config.checkElement">
+                  <td [class]="config.checkElement.pipe.class">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    </div>
+                  </td>
+                </ng-container>
+                <ng-container *ngFor="let data of config.dataConfig">
+                  <ng-container *ngIf="!data.pipe.isArray">
+                    <ng-container *ngIf="!data.compound && !data.objectKeys">
+                      <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[i]">
+                        {{  data.pipe.type ? (items[data.key] | multiPipe:data.pipe.type:data.pipe.config) : items[data.key] }}
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="data.compound && !data.objectKeys">
+                      <ng-container *ngFor="let element3 of data.compound">
+                        <td class="p-0 m-0 border-0"></td>
+                      </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!data.compound && data.objectKeys">
+                      <ng-container *ngFor="let element of items[data.key] | keyvalue">
+                        <ng-container *ngFor="let element3 of data.objectKeys">
+                          <ng-container *ngIf="element3.key === element.key">
+                            <td [class]="element3.pipe.class" [attr.rowspan]="rowspanTable[i]">
+                              {{  element3.pipe.type ? (element.value | multiPipe:element3.pipe.type:element3.pipe.config) : element.value }}
+                            </td>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="data.pipe.isArray">
+                    <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[i]">
+                      <ng-container *ngFor="let value of items[data.key]">
+                        <span class="my-2">{{value}}</span>
+                      </ng-container>
+                    </td>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="config.rowActions">
+                  <td class="align-middle" [attr.rowspan]="rowspanTable[i]">
+                    <div [class]="config.rowActions.title.actionClass">
+                      <ng-container *ngFor="let actions of config.rowActions.actions">
+                        <div ngxMouseOver [class]="actions.class" data-toggle="tooltip" data-placement="top"
+                          (click)="SelectedAction(actions, items, i)" title="{{actions.title}}">
+                          <i [class]="actions.icon"></i>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </td>
+                </ng-container>
+              </tr>
               <ng-container *ngFor="let data of config.dataConfig">
-                <ng-container *ngIf="!data.pipe.isArray">
-                  <td [class]="data.pipe.class">
-                    {{  data.pipe.type ? (items[data.key] | multiPipe:data.pipe.type:data.pipe.config) : items[data.key] }}
-                  </td>
-                </ng-container>
-                <ng-container *ngIf="data.pipe.isArray">
-                  <td [class]="data.pipe.class">
-                    <ng-container *ngFor="let value of items[data.key]">
-                      <span class="my-2">{{value}}</span>
-                    </ng-container>
-                  </td>
+                <ng-container *ngIf="data.compound">
+                  <ng-container *ngFor="let element of items[data.key]">
+                    <tr>
+                      <ng-container *ngFor="let element2 of data.compound">
+                        <td [class]="element2.pipe.class">
+                          {{  element2.pipe.type ? (element[element2.key] | multiPipe:element2.pipe.type:element2.pipe.config) : element[element2.key] }}
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </ng-container>
                 </ng-container>
               </ng-container>
-              <ng-container *ngIf="config.rowActions">
-                <td class="align-middle">
-                  <div [class]="config.rowActions.title.actionClass">
-                    <ng-container *ngFor="let actions of config.rowActions.actions">
-                      <div ngxMouseOver [class]="actions.class" data-toggle="tooltip" data-placement="top"
-                        (click)="SelectedAction(actions, items, i)" title="{{actions.title}}">
-                        <i [class]="actions.icon"></i>
-                      </div>
-                    </ng-container>
-                  </div>
-                </td>
-              </ng-container>
-            </tr>
+            </ng-container>
+
             <ng-container *ngIf="config.noData">
               <ng-container *ngIf="(datos | filterTable:stringBusqueda).length === 0">
                 <tr>
@@ -101,8 +175,8 @@
     </div>
     <div *ngIf="config.tableActions" class="col-12 d-flex justify-content-around">
       <ng-container *ngFor="let allAction of config.tableActions">
-        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light">
-          <div class="d-flex flex-row justify-content-around align-middle" (click)="SelectedAllAction(allAction)">
+        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="SelectedAllAction(allAction)">
+          <div class="d-flex flex-row justify-content-around align-middle" >
             <i [class]="allAction.icon"></i>
             <span [class]="allAction.class">{{allAction.title}}</span>
           </div>

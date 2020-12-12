@@ -28,3 +28,23 @@ export const CargarElementosARKA = createAction(
   '[RegistroPlanAdquisiciones] Cargar Elementos ARKA',
   props(),
 );
+
+export const CargarActividades = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Actividades',
+  props(),
+);
+
+export const SeleccionarActividad = createAction(
+  '[RegistroPlanAdquisiciones] Seleccionar Actividad',
+  props(),
+);
+
+export const CargarFuentes = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Fuentes de Financiamiento',
+  props(),
+);
+
+export const SeleccionarFuente = createAction(
+  '[RegistroPlanAdquisiciones] Seleccionar Fuente de Financiamiento',
+  props(),
+);

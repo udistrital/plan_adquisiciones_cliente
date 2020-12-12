@@ -11,7 +11,7 @@
                             <mat-select class="form-control" formControlName="MetaSeleccionada">
                                 <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
                                     <mat-option *cdkVirtualFor="let meta of Metas" class="example-item" [value]="meta">
-                                        {{meta.LineamientoId.Numero + '.' + meta.Numero}}
+                                        {{meta.Numero}}.{{meta.LineamientoId.Numero}}
                                     </mat-option>
                                 </cdk-virtual-scroll-viewport>
                             </mat-select>
