@@ -175,8 +175,8 @@
     </div>
     <div *ngIf="config.tableActions" class="col-12 d-flex justify-content-around">
       <ng-container *ngFor="let allAction of config.tableActions">
-        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light">
-          <div class="d-flex flex-row justify-content-around align-middle" (click)="SelectedAllAction(allAction)">
+        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="SelectedAllAction(allAction)">
+          <div class="d-flex flex-row justify-content-around align-middle" >
             <i [class]="allAction.icon"></i>
             <span [class]="allAction.class">{{allAction.title}}</span>
           </div>
