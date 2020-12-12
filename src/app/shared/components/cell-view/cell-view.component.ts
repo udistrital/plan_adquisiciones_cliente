@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LoadFilaSeleccionada } from '../../actions/shared.actions';
 
+/* tslint:disable:component-selector */
 @Component({
   selector: '[ngx-cell-view]',
   templateUrl: './cell-view.component.html',
@@ -10,7 +11,7 @@ import { LoadFilaSeleccionada } from '../../actions/shared.actions';
 export class CellViewComponent implements OnInit {
 
   @Input() config: any;
-  @Input() items: any
+  @Input() items: any;
   @Input() rowspanTable: any;
   @Input() index: any;
 

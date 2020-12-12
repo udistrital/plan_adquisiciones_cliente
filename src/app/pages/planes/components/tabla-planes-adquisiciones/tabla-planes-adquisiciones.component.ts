@@ -50,7 +50,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
     });
     // Seleccionar Nuevo Plan
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      console.log(accion)
+
       if (this.sharedService.IfStore(accion)) {
         this.store.dispatch(SeleccionarPlan(null));
         this.route.navigate(['pages/plan-adquisiciones/planes/crear-plan-adquisiciones']);

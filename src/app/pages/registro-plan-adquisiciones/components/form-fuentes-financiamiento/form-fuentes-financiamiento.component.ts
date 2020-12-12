@@ -65,7 +65,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         };
         this.CalcularValorMaximo(fuente, fuentes);
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
-          console.log(fuentesAsociadas)
+
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);

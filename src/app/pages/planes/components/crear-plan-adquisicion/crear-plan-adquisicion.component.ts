@@ -28,7 +28,7 @@ export class CrearPlanAdquisicionComponent implements OnInit, OnDestroy {
     private route: Router,
   ) {
     this.titulo = 'Crear Nuevo Plan de Adquisiciones';
-    this.store.dispatch(GetVigenciaActual({offset: null}));
+    this.store.dispatch(GetVigenciaActual({ offset: null }));
   }
 
   ngOnDestroy(): void {
@@ -40,9 +40,9 @@ export class CrearPlanAdquisicionComponent implements OnInit, OnDestroy {
       this.store.select(getPlanSeleccionado),
       this.store.select(getVigenciaActual),
     ]).subscribe(([plan, vigencia]) => {
-      
+
       if (plan && vigencia) {
-        console.log(plan, vigencia.Valor);
+
         this.Vigencia = vigencia;
         if (Object.keys(plan)[0] === 'type') {
           this.CrearPlanForm(null);
@@ -64,7 +64,7 @@ export class CrearPlanAdquisicionComponent implements OnInit, OnDestroy {
         Id: [plan.Id, []],
         Descripcion: [plan.Descripcion, [Validators.required]],
         Vigencia: [plan.Vigencia, [Validators.required]],
-        Publicado: [plan.Publicado,[]],
+        Publicado: [plan.Publicado, []],
       });
     } else {
       this.titulo = 'Crear Nuevo Plan de Adquisiciones';
@@ -76,7 +76,7 @@ export class CrearPlanAdquisicionComponent implements OnInit, OnDestroy {
         Id: [null, []],
         Descripcion: ['', [Validators.required]],
         Vigencia: [this.Vigencia.Valor, [Validators.required]],
-        Publicado: [false,[]]
+        Publicado: [false, []]
       });
     }
   }

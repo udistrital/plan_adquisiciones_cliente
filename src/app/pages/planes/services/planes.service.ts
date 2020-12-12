@@ -12,7 +12,7 @@ export class PlanesService {
 
   /**
    * Get Planes
-   *  retorna las Planes 
+   *  retorna las Planes
    * @returns  Planes Asociadas.
    */
   public getPlanes() {

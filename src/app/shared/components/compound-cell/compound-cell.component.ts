@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+/* tslint:disable:component-selector */
 @Component({
   selector: '[ngx-compound-cell]',
   templateUrl: './compound-cell.component.html',
@@ -7,8 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CompoundCellComponent implements OnInit {
 
-  @Input() dataConfig: any
-  @Input() items: any
+  @Input() dataConfig: any;
+  @Input() items: any;
 
   constructor() { }
 
