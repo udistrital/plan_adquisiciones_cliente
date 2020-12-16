@@ -7,6 +7,7 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import Swal from 'sweetalert2';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
 import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
   selector: 'ngx-tabla-codificacion-arka',
@@ -25,19 +26,21 @@ export class TablaCodificacionArkaComponent implements OnInit {
 
   constructor(
     private store: Store<any>,
-    // private modalService: NgbModal,
+    private sharedService: SharedService,
     private renderer: Renderer2,
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA;
-    this.store.dispatch(CargarElementosARKA([DATOS_PRUEBA_2]));
+    this.store.dispatch(CargarElementosARKA([]));
   }
 
   ngOnInit() {
 
     this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
-      if (elementos) {
+      if (this.sharedService.IfStore(elementos)) {
         this.Datos = elementos[0];
+      } else {
+        this.Datos = [];
       }
     });
     // Seleccionar Elemento

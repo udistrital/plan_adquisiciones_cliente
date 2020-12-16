@@ -12,14 +12,17 @@
             <div class="col-12">
                 <div class="form-group">
                     <label>Codigo:</label>
-                    <mat-select class="form-control" formControlName="Elemento">
+                    <input type="text" class="form-control" placeholder="" [matAutocomplete]="auto"
+                        formControlName="Elemento">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                             class="example-viewport">
-                            <mat-option *cdkVirtualFor="let fuente of Elementos" class="example-item" [value]="fuente">
-                                {{fuente.Codigo}}
+                            <mat-option *cdkVirtualFor="let fuente of Elementos" class="example-item"
+                                [value]="fuente">
+                                {{fuente.Descripcion}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
-                    </mat-select>
+                    </mat-autocomplete>
                 </div>
             </div>
             <div class="col-12">

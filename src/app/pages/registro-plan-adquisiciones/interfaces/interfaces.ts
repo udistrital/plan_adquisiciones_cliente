@@ -6,12 +6,18 @@ export const CONFIGURACION_PRUEBA: any = {
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'Codigo',
+            key: 'Descripcion',
             title: {
                 name: 'Codigo',
                 class: 'text-center',
             },
             pipe: {
+                type: 'custom',
+                config: [
+                    (data: any) => {
+                        return data.split('-')[0];
+                    }
+                ],
                 class: 'text-center',
             }
         },
