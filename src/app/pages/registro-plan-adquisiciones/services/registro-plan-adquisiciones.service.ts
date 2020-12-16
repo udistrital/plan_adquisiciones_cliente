@@ -61,4 +61,17 @@ export class RegistroPlanAdquisicionesService {
     };
     return this.rqManager.get('dependencia/' + query_params.query);
   }
+
+  /**
+   * getElementosARKA
+   * If the response has errors in the OAS API it should show a popup message with an error.
+   * If the response suceed, it returns the data of the object.
+   * @param searchString string para busqueda
+   * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
+   */
+  public getElementosARKA(searchString: any) {
+    this.rqManager.setPath('CATALOGO_ELEMENTOS_ARKA_SERVICE');
+    return this.rqManager.get('elemento/?limit=-1&query=Descripcion__contains:'+searchString+'&fields=Id,Nombre,Descripcion');
+  }
+
 }
