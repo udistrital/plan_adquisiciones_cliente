@@ -26,6 +26,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private route: Router
   ) {
+    this.datosPrueba = [];
     this.configuracion = [
       JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
       JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
@@ -40,9 +41,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.configuracion[0].endSubtotal.items[0].name = 'Total Rubro Compra de Equipo';
     this.configuracion[1].endSubtotal.items[0].name = 'Total Rubro 378 - Promocion del Desarrollo y la investigacion del Desarrollo Cientifico';
 
-
-    this.store.dispatch(LoadAccionTabla(null));
-    this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
+    // this.store.dispatch(LoadAccionTabla(null));
+    // this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
   }
 
   ngOnInit() {
@@ -50,7 +50,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
       if (plan) {
         if (Object.keys(plan).length !== 0) {
-          this.datosPrueba = plan[0];
+          // console.log(plan[0]);
+          // this.datosPrueba = DATOS_PRUEBA_2;
         }
       }
     });

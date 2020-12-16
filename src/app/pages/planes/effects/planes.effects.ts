@@ -104,4 +104,23 @@ export class PlanesEffects {
     );
   });
 
+
+  GetPlanDetallado$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PlanesActions.ConsultarPlanDetallado),
+      exhaustMap((opciones: any) =>
+        this.planesService.getPlanDetallado(
+          opciones.Id,
+        ).pipe(
+          map(data => {
+            return PlanesActions.CargarPlanDetallado(data);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(PlanesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
 }
