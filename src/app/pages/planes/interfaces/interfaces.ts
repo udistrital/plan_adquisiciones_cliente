@@ -63,6 +63,17 @@ export const CONFIGURACION_PRUEBA: any = {
                 class: 'text-center',
             }
         },
+        {
+            key: 'Publicado',
+            title: {
+                name: 'Publicado',
+                class: 'text-center',
+            },
+            pipe: {
+                isBoolean: true,
+                class: 'text-center',
+            }
+        },
     ],
     rowActions: {
         title: {

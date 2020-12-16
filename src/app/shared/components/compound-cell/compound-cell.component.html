@@ -1,0 +1,29 @@
+<ng-container *ngFor="let data of dataConfig.compound">
+    <ng-container *ngIf="data.pipe.isBoolean">
+        <td [class]="data.pipe.class">
+            <ng-container *ngIf=" items[data.key]; else DatoFalse">
+                <i class="fas fa-check"></i>
+            </ng-container>
+            <ng-template #DatoFalse>
+                <i class="fas fa-minus"></i>
+            </ng-template>
+        </td>
+    </ng-container>
+    <!-- Si el Dato es un Arreglo (No Objetos) -->
+    <ng-container *ngIf="data.pipe.isArray">
+        <td [class]="data.pipe.class">
+            <ng-container *ngFor="let value of items[data.key]">
+                <span class="my-2">{{value}}</span>
+            </ng-container>
+        </td>
+    </ng-container>
+    
+    <!-- Si es otro tipo de dato -->
+    <ng-container *ngIf="!data.pipe.isArray && !data.pipe.isBoolean">
+        <!-- Si es un Dato Sencillo (string, number, Date...) -->
+        <td [class]="data.pipe.class">
+            {{  data.pipe.type ? (items[data.key] | multiPipe:data.pipe.type:data.pipe.config) : items[data.key] }}
+        </td>
+    </ng-container>
+</ng-container>
+

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import { catchError, concatMap, map, exhaustMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
 import * as ActividadesActions from '../actions/actividades.actions';
@@ -43,7 +43,7 @@ export class ActividadesEffects {
   GetActividades$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActividadesActions.ConsultarActividades),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.actividadesService.getActividadesAsociadas(
           opciones.Meta.Id,
         ).pipe(
@@ -61,7 +61,7 @@ export class ActividadesEffects {
   GetActividad$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActividadesActions.ConsultarActividad),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.actividadesService.getActividad(
           opciones.Id,
         ).pipe(
@@ -80,7 +80,7 @@ export class ActividadesEffects {
   CrearActividad$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActividadesActions.CrearActividad),
-      mergeMap((Actividad: any) =>
+      exhaustMap((Actividad: any) =>
         this.actividadesService.crearActividad(
           Actividad,
         ).pipe(
@@ -102,7 +102,7 @@ export class ActividadesEffects {
   ActualizarActividad$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ActividadesActions.ActualizarActividad),
-      mergeMap((Actividad: any) =>
+      exhaustMap((Actividad: any) =>
         this.actividadesService.updateActividad(
           Actividad,
         ).pipe(

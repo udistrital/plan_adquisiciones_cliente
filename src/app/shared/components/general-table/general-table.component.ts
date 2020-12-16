@@ -71,16 +71,6 @@ export class GeneralTableComponent implements OnInit, OnChanges {
     this.rowspanTable = tablespan;
   }
 
-  SelectedAction(action: any, row: any, index: any) {
-
-    this.store.dispatch(LoadFilaSeleccionada({
-      titulo: this.config.title,
-      accion: action,
-      fila: row,
-      index: index,
-    }));
-  }
-
   SelectedAllAction(action: any) {
 
     this.store.dispatch(LoadAccionTabla({

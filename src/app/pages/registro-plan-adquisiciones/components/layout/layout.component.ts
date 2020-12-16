@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'ngx-layout',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit {
 
   titulo: any;
+  TipoDePlan: any;
 
-  constructor() {
+  constructor(
+    private store: Store<any>,
+  ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
+    this.TipoDePlan = true;
   }
 
   ngOnInit() {

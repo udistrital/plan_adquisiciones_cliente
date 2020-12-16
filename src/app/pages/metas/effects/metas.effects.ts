@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import { catchError, concatMap, map, exhaustMap } from 'rxjs/operators';
 import { combineLatest, EMPTY, of } from 'rxjs';
 
 import * as MetasActions from '../actions/metas.actions';
@@ -53,7 +53,7 @@ export class MetasEffects {
   GetMetas$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MetasActions.ConsultarMetas),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.metasService.getMetasAsociadas(
           opciones.Lineamiento.Id,
           opciones.Rubro.data.Codigo,
@@ -72,7 +72,7 @@ export class MetasEffects {
   GetMeta$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MetasActions.ConsultarMeta),
-      mergeMap((opciones: any) =>
+      exhaustMap((opciones: any) =>
         this.metasService.getMeta(
           opciones.Id,
         ).pipe(
@@ -90,7 +90,7 @@ export class MetasEffects {
   CrearMeta$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MetasActions.CrearMeta),
-      mergeMap((Meta: any) =>
+      exhaustMap((Meta: any) =>
         this.metasService.crearMeta(
           Meta,
         ).pipe(
@@ -113,7 +113,7 @@ export class MetasEffects {
   ActualizarMeta$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(MetasActions.ActualizarMeta),
-      mergeMap((Meta: any) =>
+      exhaustMap((Meta: any) =>
         this.metasService.updateMeta(
           Meta,
         ).pipe(
