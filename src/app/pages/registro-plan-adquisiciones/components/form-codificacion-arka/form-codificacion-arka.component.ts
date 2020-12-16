@@ -73,14 +73,10 @@ export class FormCodificacionArkaComponent implements OnInit {
         Elemento: [null, [Validators.required]]
       });
     }
-    this.ElementoARKAForm.get('Elemento').valueChanges.pipe(
+    this.Elementos = this.ElementoARKAForm.get('Elemento').valueChanges.pipe(
       map(value => typeof value === 'string' ? value : value.Descripcion),
       switchMap(value => iif(() => value.length > 3, this.registroPlanService.getElementosARKA(value), of([])))
-    ).subscribe((elements: any) => {
-      console.log(elements);
-      this.Elementos = elements
-    });
-    this.ElementoARKAForm.get('Elemento').valueChanges.subscribe(value => console.log(value))
+    );
   }
 
   getOptionText(valor: any): string | undefined {

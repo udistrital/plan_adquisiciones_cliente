@@ -71,7 +71,7 @@ export class RegistroPlanAdquisicionesService {
    */
   public getElementosARKA(searchString: any) {
     this.rqManager.setPath('CATALOGO_ELEMENTOS_ARKA_SERVICE');
-    return this.rqManager.get('elemento/?limit=-1&query=Descripcion__contains:'+searchString+'&fields=Id,Nombre,Descripcion');
+    return this.rqManager.get('elemento/?limit=-1&query=Descripcion__contains:' + searchString + '&fields=Id,Nombre,Descripcion');
   }
 
 }

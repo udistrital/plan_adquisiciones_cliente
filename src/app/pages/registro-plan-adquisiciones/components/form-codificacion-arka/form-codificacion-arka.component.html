@@ -17,7 +17,7 @@
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                             class="example-viewport">
-                            <mat-option *cdkVirtualFor="let fuente of Elementos" class="example-item"
+                            <mat-option *cdkVirtualFor="let fuente of Elementos | async" class="example-item"
                                 [value]="fuente">
                                 {{fuente.Descripcion}}
                             </mat-option>
