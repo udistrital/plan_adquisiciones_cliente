@@ -44,11 +44,11 @@ export class LayoutComponent implements OnInit {
       } else {
         this.Guardar = false;
       }
-    })
+    });
   }
 
   OnSubmit() {
-    console.log(this.Registro);
+    // console.log(this.Registro);
     this.store.dispatch(CrearRenglonPlan(this.Registro));
   }
 
@@ -73,19 +73,19 @@ export class LayoutComponent implements OnInit {
   }
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
 
-    const NuevoRegistro: any = {}
+    const NuevoRegistro: any = {};
 
     NuevoRegistro.AreaFuncional = area.Id;
     NuevoRegistro.CentroGestor = centro.CentroGestor;
     // NuevoRegistro.CentroGestor = 1;
-    NuevoRegistro.ResponsableId = data.Responsable.Id
+    NuevoRegistro.ResponsableId = data.Responsable.Id;
     NuevoRegistro.Activo = true;
-    NuevoRegistro.MetaId = data.Meta.Id.toString()
-    NuevoRegistro.ProductoId = data.Producto.Codigo.toString()
-    NuevoRegistro.RubroId = data.Rubro.data.Codigo
-    NuevoRegistro.FechaEstimadaInicio = data.FechaSeleccion.start
-    NuevoRegistro.FechaEstimadaFin = data.FechaSeleccion.end
-    NuevoRegistro.PlanAdquisicionesId = plan.Id
+    NuevoRegistro.MetaId = data.Meta.Id.toString();
+    NuevoRegistro.ProductoId = data.Producto.Codigo.toString();
+    NuevoRegistro.RubroId = data.Rubro.data.Codigo;
+    NuevoRegistro.FechaEstimadaInicio = data.FechaSeleccion.start;
+    NuevoRegistro.FechaEstimadaFin = data.FechaSeleccion.end;
+    NuevoRegistro.PlanAdquisicionesId = plan.Id;
     NuevoRegistro.ModalidadSeleccion = this.CrearModalidades(data);
     NuevoRegistro.CodigoArka = this.CrearElementosARKA(data);
     NuevoRegistro.RegistroPlanAdquisicionActividad = this.CrearActividades(data);
@@ -99,7 +99,7 @@ export class LayoutComponent implements OnInit {
       modalidades.push({
         IdModalidadSeleccion: element.Id,
         Activo: true,
-      })
+      });
     });
     return modalidades;
   }
@@ -109,7 +109,7 @@ export class LayoutComponent implements OnInit {
       elementosARKA.push({
         CodigoARKA: element.Id.toString(),
         Activo: true,
-      })
+      });
     });
     return elementosARKA;
   }
@@ -121,7 +121,7 @@ export class LayoutComponent implements OnInit {
         ValorAsignado: element.Valor,
         Activo: true,
         FuentesFinanciamiento: this.CrearFuentes(element),
-      })
+      });
     });
     return actividades;
   }
@@ -132,7 +132,7 @@ export class LayoutComponent implements OnInit {
         FuenteFinanciamientoId: fuente.Codigo,
         Activo: true,
         ValorAsignado: fuente.Valor,
-      })
+      });
     });
     return fuentes;
   }

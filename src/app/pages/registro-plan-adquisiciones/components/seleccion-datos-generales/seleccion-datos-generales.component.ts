@@ -33,7 +33,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     });
     this.DatosGeneralesForm.get('Responsable').valueChanges.subscribe((value: any) => {
       this.store.dispatch(SeleccionarResponsable(value));
-    })
+    });
   }
 
   ngOnInit() {

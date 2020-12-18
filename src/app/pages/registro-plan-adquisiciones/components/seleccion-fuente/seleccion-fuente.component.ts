@@ -29,7 +29,7 @@ export class SeleccionFuenteComponent implements OnInit {
     });
     this.FuenteForm.get('fuenteSeleccionada').valueChanges.subscribe((value: any) => {
       this.store.dispatch(SeleccionarFuente(value));
-    })
+    });
   }
 
   ngOnInit() {

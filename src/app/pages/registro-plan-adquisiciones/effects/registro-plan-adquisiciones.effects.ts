@@ -16,7 +16,7 @@ export class RegistroPlanAdquisicionesEffects {
 
   constructor(
     private actions$: Actions,
-    private popupManager:PopUpManager,
+    private popupManager: PopUpManager,
     private registroPlanService: RegistroPlanAdquisicionesService,
     private router: Router,
     private store: Store<any>,

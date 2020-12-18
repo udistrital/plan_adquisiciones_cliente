@@ -69,7 +69,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       this.store.select(getPlanDetallado),
     ]).subscribe(([fuentesRecurso, plan]) => {
       if (this.sharedService.IfStore(plan) && fuentesRecurso) {
-        this.AjustarDatos(plan[0], fuentesRecurso)
+        this.AjustarDatos(plan[0], fuentesRecurso);
       } else {
         this.datos = [];
       }
@@ -96,7 +96,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
     this.configuracion = [];
     this.datos = [];
-    let llavesAjustadas = [];
+    const llavesAjustadas = [];
 
     Object.keys(datos).forEach((key: any, index: any) => {
 
@@ -110,7 +110,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2));
       ajusteConfiguracion.title.name = fuentesRecurso.find(
         (fuente: any) => fuente.Codigo === llavesAjustadas[index]
-      ).data.Nombre
+      ).data.Nombre;
       ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + ajusteConfiguracion.title.name;
       this.configuracion.push(ajusteConfiguracion);
     });
@@ -122,7 +122,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       };
       element.FechaEstimada = fechas;
       element.DuracionEstimada = fechas;
-      //element.FuenteRecurso = fuentesRecurso.find((fuente: any) => fuente.Codigo === llavesAjustadas[index]);
+      // element.FuenteRecurso = fuentesRecurso.find((fuente: any) => fuente.Codigo === llavesAjustadas[index]);
     });
 
   }

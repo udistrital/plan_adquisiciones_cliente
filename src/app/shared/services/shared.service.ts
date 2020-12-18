@@ -145,7 +145,7 @@ export class SharedService {
         } else {
           if (element.Children) {
             dato = this.BuscarNodo(element.Children, codigo);
-          } 
+          }
         }
       }
     });
