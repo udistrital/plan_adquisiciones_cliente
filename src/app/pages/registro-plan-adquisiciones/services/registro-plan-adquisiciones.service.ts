@@ -73,5 +73,50 @@ export class RegistroPlanAdquisicionesService {
     this.rqManager.setPath('CATALOGO_ELEMENTOS_ARKA_SERVICE');
     return this.rqManager.get('elemento/?limit=-1&query=Descripcion__contains:' + searchString + '&fields=Id,Nombre,Descripcion');
   }
-
+  /**
+    * get Plan
+    *  se crea una Plan nueva
+    * @param [Plan] Plan por consultar
+    * @returns  Plan creada.
+    */
+   public getRenglonPlan(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
+    return this.rqManager.get(
+      `RegistrosPlanAdquisicion/` +
+      `${Plan}`
+    );
+  }
+  /**
+    * Post Plan
+    *  se crea una Plan nueva
+    * @param [Plan] Plan por crear
+    * @returns  Plan creada.
+    */
+  public CrearRenglonPlan(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
+    return this.rqManager.post(
+      `RegistrosPlanAdquisicion`,
+      Plan
+    );
+  }
+  /**
+    * Put Plan
+    *  se modifica un Plan
+    * @param [Plan] Plan por modificar
+    * @returns  Plan Modificada.
+    */
+  public UpdateRenglonPlan(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
+    return this.rqManager.put(
+      `RegistrosPlanAdquisicion/`,
+      Plan,
+      Plan.Id
+    );
+  }
 }
