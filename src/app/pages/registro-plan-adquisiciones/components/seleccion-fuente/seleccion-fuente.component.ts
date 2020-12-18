@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
+import { SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -26,6 +27,9 @@ export class SeleccionFuenteComponent implements OnInit {
     this.FuenteForm = this.fb.group({
       fuenteSeleccionada: [null, [Validators.required]],
     });
+    this.FuenteForm.get('fuenteSeleccionada').valueChanges.subscribe((value: any) => {
+      this.store.dispatch(SeleccionarFuente(value));
+    })
   }
 
   ngOnInit() {

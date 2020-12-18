@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../@core/managers/popUpManager';
 import { RequestManager } from '../../@core/managers/requestManager';
+import { getArbolRubro } from '../selectors/shared.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class SharedService {
 
   constructor(
     private rqManager: RequestManager,
+    private store: Store<any>,
   ) {
 
     this.behavior = new BehaviorSubject({
@@ -115,12 +118,12 @@ export class SharedService {
     };
     return this.rqManager.get('modalidad_seleccion/' + query_params.query);
   }
-/**
-   * If para Datos del Store
-   * Si el elemento es null o es { type: '[Store] Action' } regresa false
-   * Si el elemento es diferente de lo anterior regresa true
-   * @returns  Boolean Informacion si existe el elemento o no
-   */
+  /**
+     * If para Datos del Store
+     * Si el elemento es null o es { type: '[Store] Action' } regresa false
+     * Si el elemento es diferente de lo anterior regresa true
+     * @returns  Boolean Informacion si existe el elemento o no
+     */
   public IfStore(data: any) {
     if (data) {
       if (Object.keys(data)[0] !== 'type') {
@@ -131,5 +134,21 @@ export class SharedService {
     } else {
       return false;
     }
+  }
+
+  BuscarNodo(arbol: any, codigo: any) {
+    let dato: any = null;
+    arbol.forEach((element: any) => {
+      if (codigo.toString().toLowerCase().indexOf(element.Codigo.toLowerCase()) > -1) {
+        if (element.Codigo === codigo) {
+          dato = element;
+        } else {
+          if (element.Children) {
+            dato = this.BuscarNodo(element.Children, codigo);
+          } 
+        }
+      }
+    });
+    return dato;
   }
 }

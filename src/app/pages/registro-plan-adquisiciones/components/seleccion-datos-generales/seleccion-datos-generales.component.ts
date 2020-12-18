@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
+import { SeleccionarFechaSeleccion, SeleccionarResponsable } from '../../actions/registro-plan-adquisiciones.actions';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
 })
 export class SeleccionDatosGeneralesComponent implements OnInit {
 
-  DatosGeneralesForm: any;
+  DatosGeneralesForm: FormGroup;
 
   ModalidadSeleccion: any;
   Responsables: any;
@@ -20,13 +21,19 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private registroService: RegistroPlanAdquisicionesService,
-
+    private store: Store<any>,
   ) {
 
     this.DatosGeneralesForm = this.fb.group({
       FechaInicioSeleccion: [null, [Validators.required]],
       Responsable: [null, [Validators.required]],
     });
+    this.DatosGeneralesForm.get('FechaInicioSeleccion').valueChanges.subscribe((value: any) => {
+      this.store.dispatch(SeleccionarFechaSeleccion(value));
+    });
+    this.DatosGeneralesForm.get('Responsable').valueChanges.subscribe((value: any) => {
+      this.store.dispatch(SeleccionarResponsable(value));
+    })
   }
 
   ngOnInit() {

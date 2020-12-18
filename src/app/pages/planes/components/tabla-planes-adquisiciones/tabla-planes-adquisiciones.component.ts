@@ -65,6 +65,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
           this.store.dispatch(LoadFilaSeleccionada(null));
         }
         if (accion.accion.name === 'Ver') {
+          this.store.dispatch(SeleccionarPlan(accion.fila));
           this.store.dispatch(ConsultarPlanDetallado(accion.fila));
           this.route.navigate(['pages/plan-adquisiciones/planes/detalle-plan-adquisiciones']);
           this.store.dispatch(LoadFilaSeleccionada(null));
