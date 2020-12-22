@@ -48,7 +48,6 @@ export class LayoutComponent implements OnInit {
   }
 
   OnSubmit() {
-    // console.log(this.Registro);
     this.store.dispatch(CrearRenglonPlan(this.Registro));
   }
 
@@ -83,8 +82,8 @@ export class LayoutComponent implements OnInit {
     NuevoRegistro.MetaId = data.Meta.Id.toString();
     NuevoRegistro.ProductoId = data.Producto.Codigo.toString();
     NuevoRegistro.RubroId = data.Rubro.data.Codigo;
-    NuevoRegistro.FechaEstimadaInicio = data.FechaSeleccion.start;
-    NuevoRegistro.FechaEstimadaFin = data.FechaSeleccion.end;
+    NuevoRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start.toISOString());
+    NuevoRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end.toISOString());
     NuevoRegistro.PlanAdquisicionesId = plan.Id;
     NuevoRegistro.ModalidadSeleccion = this.CrearModalidades(data);
     NuevoRegistro.CodigoArka = this.CrearElementosARKA(data);
@@ -97,7 +96,7 @@ export class LayoutComponent implements OnInit {
     const modalidades: any[] = [];
     data.Modalidades[0].forEach((element: any) => {
       modalidades.push({
-        IdModalidadSeleccion: element.Id,
+        IdModalidadSeleccion: element.Id.toString(),
         Activo: true,
       });
     });

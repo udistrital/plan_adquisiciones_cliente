@@ -174,16 +174,20 @@ export const CONFIGURACION_PRUEBA_2: any = {
                 class: 'text-center align-middle',
             },
             pipe: {
+                type: 'time-range',
+                config: ['limits'],
                 class: 'text-center align-middle',
             }
         },
         {
-            key: 'DuracionEstimada',
+            key: 'FechaEstimada',
             title: {
                 name: 'Duracion Estimada de Contrato',
                 class: 'text-center align-middle',
             },
             pipe: {
+                type: 'time-range',
+                config: ['range'],
                 class: 'text-center align-middle',
             }
         },

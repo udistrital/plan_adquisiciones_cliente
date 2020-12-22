@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarPlanes, ConsultarPlanDetallado, ConsultarPlanes, SeleccionarPlan } from '../../actions/planes.actions';
 import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
@@ -26,10 +27,12 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private route: Router,
     private sharedService: SharedService,
+    private parametrics: ParametricService,
   ) {
     this.configuracion = CONFIGURACION_PRUEBA;
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(ConsultarPlanes({}));
+    this.parametrics.CargarArbolRubros('3');
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
