@@ -113,7 +113,7 @@ export class PlanesEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return PlanesActions.CargarPlanDetallado(data);
+            return PlanesActions.CargarPlanDetallado([data]);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);

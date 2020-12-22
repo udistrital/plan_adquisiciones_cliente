@@ -34,8 +34,8 @@ export class RegistroPlanAdquisicionesEffects {
   GetRenglonPlan$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(RegistroPlanAdquisicionesActions.ConsultarRenglonPlan),
-      exhaustMap((opciones: any) =>
-        this.registroPlanService.getRenglonPlan(
+      exhaustMap((opciones: any) => {
+        return this.registroPlanService.getRenglonPlan(
           opciones.Id,
         ).pipe(
           map((data: any) => {
@@ -44,7 +44,8 @@ export class RegistroPlanAdquisicionesEffects {
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);
             return of(RegistroPlanAdquisicionesActions.CatchError(data));
-          }))
+          }));
+      }
       )
     );
   });
@@ -58,7 +59,8 @@ export class RegistroPlanAdquisicionesEffects {
         ).pipe(
           map((data: any) => {
             this.popupManager.showSuccessAlert('Rubro Agregado');
-            return RegistroPlanAdquisicionesActions.ConsultarRenglonPlan(data);
+            return RegistroPlanAdquisicionesActions.ConsultarRenglonPlan(data[0]);
+            // return RegistroPlanAdquisicionesActions.CatchError(data);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);

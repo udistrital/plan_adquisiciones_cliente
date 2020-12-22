@@ -7,6 +7,19 @@ import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/action
 import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarActividades } from '../../../actividades/actions/actividades.actions';
+import {
+  CargarElementosARKA,
+  CargarMeta,
+  CargarModalidades,
+  CargarProducto,
+  CargarRenglonPlan,
+  CargarRubro,
+  ConsultarRenglonPlan,
+  SeleccionarFechaSeleccion,
+  SeleccionarFuente,
+  SeleccionarResponsable
+} from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
 import { CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
 import { getPlanDetallado } from '../../selectors/planes.selectors';
 
@@ -32,25 +45,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private parametrics: ParametricService,
   ) {
-    this.parametrics.CargarArbolRubros('3');
-
-    // this.datosPrueba = [];
-    // this.configuracion = [
-    //   JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
-    //   JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2)),
-    // ];
-
-    // this.configuracion[0].title.name = 'Plan Funcionamiento 2020';
-    // this.configuracion[1].title.name = 'Plan Inversion 2020';
-
-    // this.configuracion[0].subtitle.name = 'Rubro Compra de Equipo';
-    // this.configuracion[1].subtitle.name = '378 - Promocion del Desarrollo y la investigacion del Desarrollo Cientifico';
-
-    // this.configuracion[0].endSubtotal.items[0].name = 'Total Rubro Compra de Equipo';
-    // this.configuracion[1].endSubtotal.items[0].name = 'Total Rubro 378 - Promocion del Desarrollo y la investigacion del Desarrollo Cientifico';
-
-    // this.store.dispatch(LoadAccionTabla(null));
-    // this.store.dispatch(CargarPlanDetallado([DATOS_PRUEBA_2]));
+    // this.parametrics.CargarArbolRubros('3');
   }
 
   ngOnInit() {
@@ -68,6 +63,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       ),
       this.store.select(getPlanDetallado),
     ]).subscribe(([fuentesRecurso, plan]) => {
+
       if (this.sharedService.IfStore(plan) && fuentesRecurso) {
         this.AjustarDatos(plan[0], fuentesRecurso);
       } else {
@@ -84,8 +80,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Editar') {
-          this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones']);
-          this.store.dispatch(LoadFilaSeleccionada(null));
+          this.ActualizarRenglon(accion.fila);
         }
       }
     });
@@ -96,40 +91,49 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
     this.configuracion = [];
     this.datos = [];
-    const llavesAjustadas = [];
+    const llaves = [];
 
     Object.keys(datos).forEach((key: any, index: any) => {
 
-      // Monto los Datos
-      this.datos.push(datos[key]);
-      // ajusto la llave para coincidir con las fuentes de recurso
-      const llave = key.split(' ')[1];
-      llavesAjustadas.push(llave.substring(0, 1) + '-' + llave.substring(1, 3));
+      llaves.push(key.split(' ')[1]);
 
-      // Organizo la configuracion de la tabla
       const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2));
       ajusteConfiguracion.title.name = fuentesRecurso.find(
-        (fuente: any) => fuente.Codigo === llavesAjustadas[index]
+        (fuente: any) => fuente.Codigo === llaves[index]
       ).data.Nombre;
-      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + ajusteConfiguracion.title.name;
       this.configuracion.push(ajusteConfiguracion);
-    });
 
-    this.datos.forEach((element: any) => {
-      const fechas: any = {
-        start: element.FechaEstimadaInicio,
-        end: element.FechaEstimadaFin,
-      };
-      element.FechaEstimada = fechas;
-      element.DuracionEstimada = fechas;
-      // element.FuenteRecurso = fuentesRecurso.find((fuente: any) => fuente.Codigo === llavesAjustadas[index]);
+      datos[key].forEach((element: any) => {
+        const fechas: any = {
+          start: new Date(element.FechaEstimadaInicio),
+          end: new Date(element.FechaEstimadaFin),
+        };
+        element.FechaEstimada = fechas;
+      });
+      this.datos.push(datos[key]);
     });
-
   }
 
   CrearRenglon() {
-    this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisicoines']);
-    this.store.dispatch(LoadAccionTabla(null));
+    this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones']).then(() => {
+      this.store.dispatch(LoadAccionTabla(null));
+      this.store.dispatch(CargarRubro(null));
+      this.store.dispatch(CargarMeta(null));
+      this.store.dispatch(CargarProducto(null));
+      this.store.dispatch(CargarModalidades(null));
+      this.store.dispatch(CargarElementosARKA(null));
+      this.store.dispatch(CargarActividades(null));
+      this.store.dispatch(SeleccionarResponsable(null));
+      this.store.dispatch(CargarRenglonPlan(null));
+      this.store.dispatch(SeleccionarFechaSeleccion(null));
+      this.store.dispatch(SeleccionarFuente(null));
+    });
+  }
+  ActualizarRenglon(renglon: any) {
+    this.route.navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones']).then(() => {
+      this.store.dispatch(ConsultarRenglonPlan(renglon));
+      this.store.dispatch(LoadFilaSeleccionada(null));
+    });
   }
 
   ngOnDestroy(): void {
