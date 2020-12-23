@@ -63,11 +63,12 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       ),
       this.store.select(getPlanDetallado),
     ]).subscribe(([fuentesRecurso, plan]) => {
-
       if (this.sharedService.IfStore(plan) && fuentesRecurso) {
-        this.AjustarDatos(plan[0], fuentesRecurso);
-      } else {
-        this.datos = [];
+        if (Object.keys(plan[0]).length !== 0) {
+          this.AjustarDatos(plan[0], fuentesRecurso);
+        } else {
+          this.datos = [];
+        }
       }
     });
     // Seleccionar Nuevo Plan
@@ -89,29 +90,23 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
   AjustarDatos(datos: any, fuentesRecurso: any) {
 
-    this.configuracion = [];
-    this.datos = [];
-    const llaves = [];
-
-    Object.keys(datos).forEach((key: any, index: any) => {
-
-      llaves.push(key.split(' ')[1]);
-
+    this.configuracion = Object.keys(datos).map((key: any, index: any) => {
       const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2));
       ajusteConfiguracion.title.name = fuentesRecurso.find(
-        (fuente: any) => fuente.Codigo === llaves[index]
+        (fuente: any) => fuente.Codigo === key.split(' ')[1]
       ).data.Nombre;
-      this.configuracion.push(ajusteConfiguracion);
-
-      datos[key].forEach((element: any) => {
-        const fechas: any = {
+      return ajusteConfiguracion;
+    })
+    this.datos = Object.keys(datos).map((key: any) => {
+      (datos[key] as Array<any>).map((element: any) => {
+        element.FechaEstimada = {
           start: new Date(element.FechaEstimadaInicio),
           end: new Date(element.FechaEstimadaFin),
         };
-        element.FechaEstimada = fechas;
+        return element;
       });
-      this.datos.push(datos[key]);
-    });
+      return datos[key];
+    })
   }
 
   CrearRenglon() {

@@ -80,7 +80,7 @@ export class LayoutComponent implements OnInit {
     NuevoRegistro.ResponsableId = data.Responsable.Id;
     NuevoRegistro.Activo = true;
     NuevoRegistro.MetaId = data.Meta.Id.toString();
-    NuevoRegistro.ProductoId = data.Producto.Codigo.toString();
+    NuevoRegistro.ProductoId = data.Producto._id;
     NuevoRegistro.RubroId = data.Rubro.data.Codigo;
     NuevoRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start.toISOString());
     NuevoRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end.toISOString());
@@ -106,7 +106,7 @@ export class LayoutComponent implements OnInit {
     const elementosARKA: any[] = [];
     data.ElementosARKA[0].forEach((element: any) => {
       elementosARKA.push({
-        CodigoARKA: element.Id.toString(),
+        CodigoArka: element.Id.toString(),
         Activo: true,
       });
     });
@@ -117,7 +117,7 @@ export class LayoutComponent implements OnInit {
     data.Actividades[0].forEach((element: any) => {
       actividades.push({
         ActividadId: element.ActividadId.Id,
-        ValorAsignado: element.Valor,
+        Valor: element.Valor,
         Activo: true,
         FuentesFinanciamiento: this.CrearFuentes(element),
       });
