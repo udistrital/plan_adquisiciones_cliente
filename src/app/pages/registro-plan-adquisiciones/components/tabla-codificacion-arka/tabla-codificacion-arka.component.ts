@@ -6,7 +6,7 @@ import { CONFIGURACION_PRUEBA, DATOS_PRUEBA_2 } from '../../interfaces/interface
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import Swal from 'sweetalert2';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
-import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getElementosARKA, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
 
   @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
   subscription$: any;
+  subscription4$: any;
 
   constructor(
     private store: Store<any>,
@@ -43,6 +44,14 @@ export class TablaCodificacionArkaComponent implements OnInit {
         this.Datos = [];
       }
     });
+
+    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+      if (this.sharedService.IfStore(renglon)) {
+        const elementos = this.MontarElementosARKA(renglon[0]['registro_plan_adquisiciones-codigo_arka']);
+        this.store.dispatch(CargarElementosARKA([elementos]));
+      }
+    });
+
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
@@ -92,9 +101,20 @@ export class TablaCodificacionArkaComponent implements OnInit {
       if (value.value) {
         // Quitar Elemento
         this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo), 1);
-
         this.store.dispatch(CargarElementosARKA([this.Datos]));
       }
     });
+  }
+  MontarElementosARKA(elementos: any[]) {
+    return elementos.map((elemento) => {
+      const Nombre = (elemento.Descripcion as string).split('-')[1];
+      return {
+        Activo: elemento.Activo,
+        Id: elemento.CodigoArka,
+        Descripcion: elemento.Descripcion,
+        Nombre: Nombre,
+        CodigoArkaId: 41,
+      }
+    })
   }
 }

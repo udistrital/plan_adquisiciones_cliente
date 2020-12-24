@@ -6,7 +6,7 @@ import { DATOS_PRUEBA } from '../../interfaces/interfaces';
 import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { CargarModalidades } from '../../actions/registro-plan-adquisiciones.actions';
-import { getModalidades } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getModalidades, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class ModalidadesSeleccionComponent implements OnInit {
   Datos: any[];
   Parametros: any;
   subscription$: any;
+  subscription2$: any;
 
   constructor(
     private fb: FormBuilder,
@@ -58,8 +59,19 @@ export class ModalidadesSeleccionComponent implements OnInit {
       this.ModalidadesSeleccionForm = this.fb.group({
         Valor: [null, [Validators.required]]
       });
-
     });
+
+    this.subscription2$ = combineLatest([
+      this.store.select(getModalidadesSeleccion),
+      this.store.select(getRenglonSeleccionado),
+    ]).subscribe(([modalidades, renglon]) => {
+      if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(modalidades)) {
+        const datos = (renglon[0]['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((dato: any) => {
+          return modalidades[0].find((x: any) => x.Id === parseFloat(dato.IdModalidadSeleccion));
+        })
+        this.store.dispatch(CargarModalidades([datos]));
+      }
+    })
   }
 
   AgregarModalidad() {

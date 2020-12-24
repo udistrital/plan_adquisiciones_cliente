@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LoadNodoSeleccionado } from '../../../../shared/actions/shared.actions';
 import { getArbolRubro, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarRubro } from '../../actions/registro-plan-adquisiciones.actions';
+import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-seleccion-rubro',
@@ -18,53 +21,78 @@ export class SeleccionRubroComponent implements OnInit {
   subscription$: any;
   fuentesRecurso: any;
   subscription2$: any;
+  subscription3$: any;
 
   constructor(
     private fb: FormBuilder,
     private parametrics: ParametricService,
-    private store: Store<any>
+    private store: Store<any>,
+    private sharedService: SharedService,
   ) {
+    this.parametrics.CargarArbolRubros('3');
     this.RubroForm = this.fb.group({
       FuenteSeleccionada: [null, [Validators.required]],
       RubroSeleccionado: [null, [Validators.required]],
-    });
-    this.parametrics.CargarArbolRubros('3');
-    this.RubroForm.get('RubroSeleccionado').valueChanges.subscribe((data: any) => {
-      this.store.dispatch(CargarRubro(data));
     });
   }
 
   ngOnInit() {
 
-    // Cargar Fuentes de Recurso
-    this.subscription$ = this.store.select(getArbolRubro).pipe(
-      map(data => {
-        if (Object.keys(data).length !== 0) {
-          return data[0].children;
+    this.subscription3$ = combineLatest([
+      this.store.select(getRenglonSeleccionado),
+      this.store.select(getArbolRubro),
+    ]).subscribe(([renglon, data]) => {
+      if (this.sharedService.IfStore(data) && Object.keys(data[0]).length !== 0) {
+        if (this.sharedService.IfStore(renglon)) {
+          this.CrearFormularioRubro(data, renglon[0].RubroId)
         } else {
-          return null;
+          this.CrearFormularioRubro(data);
         }
-      }),
-    ).subscribe((data: any) => {
-      this.fuentesRecurso = data;
-    });
-
+      }
+    })
     // Seleccionar Rubro
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
-
-      if (nodo) {
-        if (Object.keys(nodo)[0] === 'type') {
-          // hay que crear un delay porque el cambio se efectua antes de renderizar la vista
+      if (this.sharedService.IfStore(nodo)) {
+        if (!nodo.children) {
+          setTimeout(() => {
+            this.RubroForm.get('RubroSeleccionado').setValue(nodo);
+          });
+        } else {
           setTimeout(() => {
             this.RubroForm.get('RubroSeleccionado').setValue(null);
           });
-        } else {
-          if (!nodo.children) {
-            this.RubroForm.get('RubroSeleccionado').setValue(nodo);
-          }
         }
       }
     });
   }
 
+  CrearFormularioRubro(arbol: any, rubroId?: string) {
+
+    this.fuentesRecurso = arbol[0].children;
+
+    if (rubroId) {
+      console.log(rubroId)
+      const info = rubroId.split('-');
+      const rubro = this.sharedService.BuscarNodo(arbol[0].children, rubroId);
+      console.log(rubro, info[0]+'-' + info[1]);
+
+      this.store.dispatch(CargarRubro(rubro));
+      this.RubroForm = this.fb.group({
+        FuenteSeleccionada: [
+          this.fuentesRecurso.find((x: any) => x.Codigo === `${info[0]}-${info[1]}`),
+          [Validators.required]],
+        RubroSeleccionado: [
+          rubro,
+          [Validators.required]],
+      });
+    } else {
+      this.RubroForm = this.fb.group({
+        FuenteSeleccionada: [null, [Validators.required]],
+        RubroSeleccionado: [null, [Validators.required]],
+      });
+    }
+    this.RubroForm.get('RubroSeleccionado').valueChanges.subscribe((data: any) => {
+      this.store.dispatch(CargarRubro(data));
+    });
+  }
 }

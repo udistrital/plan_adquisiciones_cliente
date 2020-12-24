@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getCentroGestor } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { CrearRenglonPlan } from '../../actions/registro-plan-adquisiciones.actions';
+import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-layout',
@@ -18,6 +20,7 @@ export class LayoutComponent implements OnInit {
   Guardar: boolean;
   Registro: any;
   subscription$: any;
+  subscription2$: any;
 
   constructor(
     private store: Store<any>,
@@ -30,6 +33,12 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+      if (this.sharedService.IfStore(renglon)) {
+        this.store.dispatch(LoadAreaFuncional({Id: renglon[0].AreaFuncional}));
+        this.store.dispatch(LoadCentroGestor({CentroGestor: renglon[0].CentroGestor}))
+      }
+    })
     this.subscription$ = combineLatest([
       this.store.select('registroPlanAdquisiciones'),
       this.store.select(getCentroGestor),

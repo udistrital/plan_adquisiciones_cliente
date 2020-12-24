@@ -136,20 +136,20 @@ export class SharedService {
     }
   }
 
-  BuscarNodo(arbol: any, codigo: any) {
-    let dato: any = null;
-    arbol.forEach((element: any) => {
-      if (codigo.toString().toLowerCase().indexOf(element.Codigo.toLowerCase()) > -1) {
+  BuscarNodo(arbol: any, codigo: string) {
+
+    for (let element of arbol) {
+      console.log(arbol, codigo, element.Codigo, codigo.indexOf(element.Codigo))
+      if (codigo.indexOf(element.Codigo) !== -1) {
         if (element.Codigo === codigo) {
-          dato = element;
+          return element;
         } else {
-          if (element.Children) {
-            dato = this.BuscarNodo(element.Children, codigo);
+          if (element.children) {
+            return this.BuscarNodo(element.children, codigo);
           }
         }
       }
-    });
-    return dato;
+    }
   }
 
   ConvertirFecha(fecha: any) {
