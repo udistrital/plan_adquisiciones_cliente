@@ -44,12 +44,12 @@ export class SeleccionMetaProductoComponent implements OnInit {
           this.Productos = productos;
           this.Metas = metas;
           this.CrearFormulario(renglon);
-        })
+        });
       } else {
         this.Productos = productos;
         this.CrearFormulario();
       }
-    })
+    });
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (this.sharedService.IfStore(nodo)) {
         if (nodo.data && !nodo.children) {
@@ -67,7 +67,7 @@ export class SeleccionMetaProductoComponent implements OnInit {
         this.MetaForm.get('MetaSeleccionada').setValue(null);
         this.Metas = undefined;
       }
-    })
+    });
   }
 
   CrearFormulario(renglon?: any) {
@@ -75,7 +75,7 @@ export class SeleccionMetaProductoComponent implements OnInit {
     if (renglon) {
       const meta = this.Metas.find((x: any) => x.Id === parseFloat(renglon[0].MetaId));
       const producto = this.Productos.find((x: any) => x._id === renglon[0].ProductoId);
-      console.log(meta, producto, this.Productos, renglon[0].ProductoId)
+
       this.MetaForm = this.fb.group({
         MetaSeleccionada: [meta, [Validators.required]],
         ProductoSeleccionado: [producto, [Validators.required]],

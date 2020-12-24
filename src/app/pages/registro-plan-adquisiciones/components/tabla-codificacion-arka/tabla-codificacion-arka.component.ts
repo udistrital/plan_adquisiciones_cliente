@@ -114,7 +114,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
         Descripcion: elemento.Descripcion,
         Nombre: Nombre,
         CodigoArkaId: 41,
-      }
-    })
+      };
+    });
   }
 }

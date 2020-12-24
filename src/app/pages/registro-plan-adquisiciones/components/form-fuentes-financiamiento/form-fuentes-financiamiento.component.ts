@@ -135,7 +135,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Aceptar',
     }).then(() => {
       this.OnClose();
-    })
+    });
   }
 
   EnableFuente() {

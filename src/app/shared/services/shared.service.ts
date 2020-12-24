@@ -138,8 +138,8 @@ export class SharedService {
 
   BuscarNodo(arbol: any, codigo: string) {
 
-    for (let element of arbol) {
-      console.log(arbol, codigo, element.Codigo, codigo.indexOf(element.Codigo))
+    for (const element of arbol) {
+
       if (codigo.indexOf(element.Codigo) !== -1) {
         if (element.Codigo === codigo) {
           return element;

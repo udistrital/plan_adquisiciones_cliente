@@ -36,9 +36,9 @@ export class LayoutComponent implements OnInit {
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         this.store.dispatch(LoadAreaFuncional({Id: renglon[0].AreaFuncional}));
-        this.store.dispatch(LoadCentroGestor({CentroGestor: renglon[0].CentroGestor}))
+        this.store.dispatch(LoadCentroGestor({CentroGestor: renglon[0].CentroGestor}));
       }
-    })
+    });
     this.subscription$ = combineLatest([
       this.store.select('registroPlanAdquisiciones'),
       this.store.select(getCentroGestor),

@@ -96,7 +96,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         (fuente: any) => fuente.Codigo === key.split(' ')[1]
       ).data.Nombre;
       return ajusteConfiguracion;
-    })
+    });
     this.datos = Object.keys(datos).map((key: any) => {
       (datos[key] as Array<any>).map((element: any) => {
         element.FechaEstimada = {
@@ -106,7 +106,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         return element;
       });
       return datos[key];
-    })
+    });
   }
 
   CrearRenglon() {

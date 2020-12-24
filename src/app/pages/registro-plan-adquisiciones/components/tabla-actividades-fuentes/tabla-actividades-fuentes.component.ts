@@ -142,8 +142,8 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         },
         Valor: actividad.Valor,
         FuentesFinanciamiento: this.MontarFuentes(actividad.FuentesFinanciamiento, actividad.Valor),
-      }
-    })
+      };
+    });
   }
 
   MontarFuentes(fuentes: any[], valorActividad: any) {
@@ -155,8 +155,8 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         Nombre: fuente.Nombre,
         Valor: fuente.ValorAsignado,
         Porcentaje: fuente.ValorAsignado / valorActividad,
-      }
-    })
+      };
+    });
   }
 
 }

@@ -50,7 +50,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
       const fechaSeleccion = {
         start: new Date(renglon[0].FechaEstimadaInicio),
         end: new Date(renglon[0].FechaEstimadaFin)
-      }
+      };
       this.store.dispatch(SeleccionarFechaSeleccion(fechaSeleccion));
       this.store.dispatch(SeleccionarResponsable(responsable));
       this.DatosGeneralesForm = this.fb.group({

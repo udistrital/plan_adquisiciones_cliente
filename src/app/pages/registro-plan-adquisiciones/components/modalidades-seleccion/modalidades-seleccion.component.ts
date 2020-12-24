@@ -68,10 +68,10 @@ export class ModalidadesSeleccionComponent implements OnInit {
       if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(modalidades)) {
         const datos = (renglon[0]['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((dato: any) => {
           return modalidades[0].find((x: any) => x.Id === parseFloat(dato.IdModalidadSeleccion));
-        })
+        });
         this.store.dispatch(CargarModalidades([datos]));
       }
-    })
+    });
   }
 
   AgregarModalidad() {

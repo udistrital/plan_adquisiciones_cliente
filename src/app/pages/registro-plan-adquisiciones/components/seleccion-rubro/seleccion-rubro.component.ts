@@ -44,12 +44,12 @@ export class SeleccionRubroComponent implements OnInit {
     ]).subscribe(([renglon, data]) => {
       if (this.sharedService.IfStore(data) && Object.keys(data[0]).length !== 0) {
         if (this.sharedService.IfStore(renglon)) {
-          this.CrearFormularioRubro(data, renglon[0].RubroId)
+          this.CrearFormularioRubro(data, renglon[0].RubroId);
         } else {
           this.CrearFormularioRubro(data);
         }
       }
-    })
+    });
     // Seleccionar Rubro
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (this.sharedService.IfStore(nodo)) {
@@ -71,10 +71,10 @@ export class SeleccionRubroComponent implements OnInit {
     this.fuentesRecurso = arbol[0].children;
 
     if (rubroId) {
-      console.log(rubroId)
+
       const info = rubroId.split('-');
       const rubro = this.sharedService.BuscarNodo(arbol[0].children, rubroId);
-      console.log(rubro, info[0]+'-' + info[1]);
+
 
       this.store.dispatch(CargarRubro(rubro));
       this.RubroForm = this.fb.group({

@@ -158,7 +158,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar',
     }).then((value) => {
       if (value.value) {
-        console.log(index)
+
         this.Datos.splice(index, 1);
         this.store.dispatch(CargarFuentes([this.Datos]));
       }
