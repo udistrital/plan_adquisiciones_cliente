@@ -30,7 +30,7 @@ export class FormFichaTecnicaComponent implements OnInit {
       Magnitud: [null, [Validators.required]],
       UnidadMedida: [null, [Validators.required]],
       Descripcion: [null, [Validators.required]],
-    })
+    });
   }
 
   ngOnInit() {

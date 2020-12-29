@@ -11,7 +11,7 @@ import { FormFichaTecnicaComponent } from '../form-ficha-tecnica/form-ficha-tecn
   templateUrl: './tabla-ficha-tecnica.component.html',
   styleUrls: ['./tabla-ficha-tecnica.component.scss']
 })
-export class TablaFichaTecnicaComponent implements OnInit, OnDestroy{
+export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
 
   configuracion: any;
   datosPrueba: any;
