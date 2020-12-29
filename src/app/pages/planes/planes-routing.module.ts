@@ -4,6 +4,7 @@ import { CrearPlanAdquisicionComponent } from './components/crear-plan-adquisici
 import { DetallePlanComponent } from './components/detalle-plan/detalle-plan.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { TablaPlanesAdquisicionesComponent } from './components/tabla-planes-adquisiciones/tabla-planes-adquisiciones.component';
+import { TablaVersionesComponent } from './components/tabla-versiones/tabla-versiones.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'detalle-plan-adquisiciones',
         component: DetallePlanComponent,
+      },
+      {
+        path: 'versiones-plan-adquisiciones',
+        component: TablaVersionesComponent,
       },
       {
         path: '',
