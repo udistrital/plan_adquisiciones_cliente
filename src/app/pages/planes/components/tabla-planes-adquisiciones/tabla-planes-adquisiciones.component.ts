@@ -5,8 +5,8 @@ import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/action
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CargarPlanes, ConsultarPlanDetallado, ConsultarPlanes, SeleccionarPlan } from '../../actions/planes.actions';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
+import { CargarPlanes, CargarVersionesPlan, ConsultarPlanDetallado, ConsultarPlanes, ConsultarVersionesPlan, SeleccionarPlan } from '../../actions/planes.actions';
+import { CONFIGURACION_PRUEBA, DATOS_PRUEBA, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
 import { getPlanes } from '../../selectors/planes.selectors';
 
 @Component({
@@ -71,6 +71,13 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
           this.store.dispatch(SeleccionarPlan(accion.fila));
           this.store.dispatch(ConsultarPlanDetallado(accion.fila));
           this.route.navigate(['pages/plan-adquisiciones/planes/detalle-plan-adquisiciones']);
+          this.store.dispatch(LoadFilaSeleccionada(null));
+        }
+        if (accion.accion.name === 'Versiones') {
+          this.store.dispatch(SeleccionarPlan(accion.fila));
+          // this.store.dispatch(ConsultarVersionesPlan(accion.fila));
+          this.store.dispatch(CargarVersionesPlan([DATOS_PRUEBA_3]));
+          this.route.navigate(['pages/plan-adquisiciones/planes/versiones-plan-adquisiciones']);
           this.store.dispatch(LoadFilaSeleccionada(null));
         }
       }

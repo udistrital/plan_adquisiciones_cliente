@@ -7,12 +7,16 @@ export interface State {
   Planes: any;
   PlanSeleccionado: any;
   PlanDetallado: any;
+  Versiones: any;
+  VersionSeleccionada: any;
 }
 
 export const initialState: State = {
   Planes: null,
   PlanSeleccionado: null,
   PlanDetallado: null,
+  Versiones: null,
+  VersionSeleccionada: null,
 };
 
 const planesReducer = createReducer(
@@ -27,6 +31,12 @@ const planesReducer = createReducer(
   })),
   on(PlanesActions.CargarPlanDetallado, (state, action) => ({
     ...state, PlanDetallado: state.PlanDetallado = action
+  })),
+  on(PlanesActions.CargarVersionesPlan, (state, action) => ({
+    ...state, Versiones: state.Versiones = action
+  })),
+  on(PlanesActions.CargarVersion, (state, action) => ({
+    ...state, VersionSeleccionada: state.VersionSeleccionada = action
   })),
 );
 
