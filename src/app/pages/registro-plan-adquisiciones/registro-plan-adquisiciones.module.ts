@@ -23,6 +23,8 @@ import { TablaActividadesFuentesComponent } from './components/tabla-actividades
 import { FormActividadFuentesComponent } from './components/form-actividad-fuentes/form-actividad-fuentes.component';
 import { FormFuentesFinanciamientoComponent } from './components/form-fuentes-financiamiento/form-fuentes-financiamiento.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { TablaFichaTecnicaComponent } from './components/tabla-ficha-tecnica/tabla-ficha-tecnica.component';
+import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-ficha-tecnica.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     FormCodificacionArkaComponent,
     TablaActividadesFuentesComponent,
     FormActividadFuentesComponent,
-    FormFuentesFinanciamientoComponent
+    FormFuentesFinanciamientoComponent,
+    TablaFichaTecnicaComponent,
+    FormFichaTecnicaComponent
   ],
   imports: [
     CommonModule,
@@ -58,6 +62,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
   entryComponents: [
     FormActividadFuentesComponent,
     FormFuentesFinanciamientoComponent,
+    FormFichaTecnicaComponent,
   ]
 })
 export class RegistroPlanAdquisicionesModule { }
