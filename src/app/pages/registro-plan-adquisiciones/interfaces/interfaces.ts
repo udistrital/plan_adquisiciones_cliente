@@ -385,7 +385,7 @@ export const CONFIGURACION_PRUEBA_5: any = {
         class: 'text-center',
     },
     sort: true,
-    filter: true,
+    filter: false,
 };
 
 export const DATOS_PRUEBA_3: any = [
@@ -522,6 +522,27 @@ export const DATOS_PRUEBA_4: any = [
 export const DATOS_PRUEBA_5: any = [
     {
         Meta: 1,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 2,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 3,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 4,
         Proceso: 'Jhoan',
         Magnitud: 'sdfdfdf',
         UnidadMedida: 'Jhoan',

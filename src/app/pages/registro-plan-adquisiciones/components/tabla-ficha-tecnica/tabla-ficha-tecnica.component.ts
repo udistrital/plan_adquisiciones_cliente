@@ -42,7 +42,9 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
     });
   }
   OpenModal() {
-    this.matDialog.open(FormFichaTecnicaComponent);
+    this.matDialog.open(FormFichaTecnicaComponent, {
+      width: '500px',
+    });
   }
 
 }
