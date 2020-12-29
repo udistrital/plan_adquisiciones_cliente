@@ -110,10 +110,10 @@ export class TablaCodificacionArkaComponent implements OnInit {
       const Nombre = (elemento.Descripcion as string).split('-')[1];
       return {
         Activo: elemento.Activo,
-        Id: elemento.CodigoArka,
+        Id: parseFloat(elemento.CodigoArka),
         Descripcion: elemento.Descripcion,
         Nombre: Nombre,
-        CodigoArkaId: 41,
+        CodigoArkaId: elemento.Id,
       };
     });
   }

@@ -153,8 +153,13 @@ export class SharedService {
   }
 
   ConvertirFecha(fecha: any) {
-    const datos: any = fecha.split('T');
-    datos[1] = datos[1].split('Z')[0];
-    return `${datos[0]} ${datos[1]} +0000 +0000`;
+    if (fecha) {
+      const datos: any = fecha.toISOString().split('T');
+      datos[1] = datos[1].split('Z')[0];
+      return `${datos[0]} ${datos[1]} +0000 +0000`;
+    } else {
+      return null;
+    }
+    
   }
 }

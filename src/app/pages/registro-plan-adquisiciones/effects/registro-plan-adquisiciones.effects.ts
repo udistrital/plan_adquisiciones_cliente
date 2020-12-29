@@ -70,6 +70,26 @@ export class RegistroPlanAdquisicionesEffects {
     );
   });
 
+  ActualizarPlan$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistroPlanAdquisicionesActions.ActualizarRenglonPlan),
+      exhaustMap((Plan: any) =>
+        this.registroPlanService.UpdateRenglonPlan(
+          Plan,
+        ).pipe(
+          map((data: any) => {
+            this.popupManager.showSuccessAlert('Rubro Ajustado');
+            console.log(data)
+            return RegistroPlanAdquisicionesActions.ConsultarRenglonPlan(data[0]);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(RegistroPlanAdquisicionesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
   // ActualizarPlan$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(RegistroPlanAdquisicionesActions.ActualizarPlan),
