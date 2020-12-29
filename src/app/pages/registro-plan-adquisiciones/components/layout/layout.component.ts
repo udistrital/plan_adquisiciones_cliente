@@ -64,7 +64,7 @@ export class LayoutComponent implements OnInit {
           this.Guardar = false;
         }
       }
-      console.log(this.Registro);
+
     });
   }
 
@@ -121,7 +121,6 @@ export class LayoutComponent implements OnInit {
   CrearModalidades(data: any) {
     return (data.Modalidades[0] as Array<any>).map((element: any) => {
       return {
-        Id: 0,
         IdModalidadSeleccion: element.Id.toString(),
         Activo: true,
       };
@@ -130,7 +129,6 @@ export class LayoutComponent implements OnInit {
   CrearElementosARKA(data: any) {
     return (data.ElementosARKA[0] as Array<any>).map((element: any) => {
       return {
-        Id: 0,
         CodigoArka: element.Id.toString(),
         Activo: true,
       };
@@ -143,14 +141,12 @@ export class LayoutComponent implements OnInit {
         Valor: element.Valor,
         Activo: true,
         FuentesFinanciamiento: this.CrearFuentes(element),
-        Id: 0,
       };
     });
   }
   CrearFuentes(element: any) {
     return (element.FuentesFinanciamiento as Array<any>).map((fuente: any) => {
       return {
-        Id: 0,
         FuenteFinanciamientoId: fuente.Codigo,
         Activo: true,
         ValorAsignado: fuente.Valor,
@@ -162,7 +158,7 @@ export class LayoutComponent implements OnInit {
 
     const ActualizarRegistro: any = {};
 
-    ActualizarRegistro.Id = renglon.Id
+    ActualizarRegistro.Id = renglon.Id;
     ActualizarRegistro.AreaFuncional = area.Id;
     ActualizarRegistro.CentroGestor = centro.CentroGestor;
     ActualizarRegistro.ResponsableId = data.Responsable.Id;
@@ -183,7 +179,7 @@ export class LayoutComponent implements OnInit {
   ActualizarModalidades(data: any, renglon: any) {
     const modalidades: any = this.CrearModalidades(data);
     (renglon['registro_funcionamiento-modalidad_seleccion'] as Array<any>).forEach(element => {
-      const index = modalidades.findIndex((x: any) => x.IdModalidadSeleccion === element.IdModalidadSeleccion)
+      const index = modalidades.findIndex((x: any) => x.IdModalidadSeleccion === element.IdModalidadSeleccion);
       if (index !== -1) {
         modalidades[index].Id = element.Id;
       } else {
@@ -191,15 +187,15 @@ export class LayoutComponent implements OnInit {
           Id: element.Id,
           IdModalidadSeleccion: element.IdModalidadSeleccion,
           Activo: false,
-        })
+        });
       }
-    })
+    });
     return modalidades;
   }
   ActualizarElementosARKA(data: any, renglon: any) {
     const ElementosARKA: any = this.CrearElementosARKA(data);
     (renglon['registro_plan_adquisiciones-codigo_arka'] as Array<any>).forEach(element => {
-      const index = ElementosARKA.findIndex((x: any) => x.CodigoArka === element.CodigoArka)
+      const index = ElementosARKA.findIndex((x: any) => x.CodigoArka === element.CodigoArka);
       if (index !== -1) {
         ElementosARKA[index].Id = element.Id;
       } else {
@@ -207,15 +203,15 @@ export class LayoutComponent implements OnInit {
           Id: element.Id,
           CodigoArka: element.CodigoArka,
           Activo: false,
-        })
+        });
       }
-    })
+    });
     return ElementosARKA;
   }
   ActualizarActividades(data: any, renglon: any) {
     const actividades: any = this.CrearActividades(data);
     (renglon['registro_plan_adquisiciones-actividad'] as Array<any>).forEach(element => {
-      const index = actividades.findIndex((x: any) => x.ActividadId === element.ActividadId)
+      const index = actividades.findIndex((x: any) => x.ActividadId === element.ActividadId);
       if (index !== -1) {
         actividades[index].Id = element.RegistroActividadId;
         actividades[index].RegistroActividadId = element.RegistroActividadId;
@@ -234,16 +230,16 @@ export class LayoutComponent implements OnInit {
             element.FuentesFinanciamiento
           ),
           Activo: false,
-        })
+        });
       }
-    })
+    });
     return actividades;
   }
 
   ActualizarFuentes(data: any, renglon: any) {
     const fuentes: any = data;
     (renglon as Array<any>).forEach(element => {
-      const index = fuentes.findIndex((x: any) => x.FuenteFinanciamientoId === element.FuenteFinanciamiento)
+      const index = fuentes.findIndex((x: any) => x.FuenteFinanciamientoId === element.FuenteFinanciamiento);
       if (index !== -1) {
         fuentes[index].Id = element.Id;
       } else {
@@ -253,9 +249,9 @@ export class LayoutComponent implements OnInit {
           FuenteFinanciamientoId: element.FuenteFinanciamiento,
           ValorAsignado: element.ValorAsignado,
           Activo: false,
-        })
+        });
       }
-    })
+    });
     return fuentes;
   }
 }

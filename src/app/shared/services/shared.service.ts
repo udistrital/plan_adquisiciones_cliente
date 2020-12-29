@@ -160,6 +160,6 @@ export class SharedService {
     } else {
       return null;
     }
-    
+
   }
 }

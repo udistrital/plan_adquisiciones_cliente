@@ -79,8 +79,7 @@ export class RegistroPlanAdquisicionesEffects {
         ).pipe(
           map((data: any) => {
             this.popupManager.showSuccessAlert('Rubro Ajustado');
-            console.log(data)
-            return RegistroPlanAdquisicionesActions.ConsultarRenglonPlan(data[0]);
+            return RegistroPlanAdquisicionesActions.ConsultarRenglonPlan(data.Body);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);
