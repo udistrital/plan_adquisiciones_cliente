@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -10,7 +10,7 @@ import { getVersionesPlan } from '../../selectors/planes.selectors';
   templateUrl: './tabla-versiones.component.html',
   styleUrls: ['./tabla-versiones.component.scss']
 })
-export class TablaVersionesComponent implements OnInit {
+export class TablaVersionesComponent implements OnInit, OnDestroy {
 
   configuracion: any;
   datosPrueba: any;
@@ -29,19 +29,19 @@ export class TablaVersionesComponent implements OnInit {
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
-        console.log(accion)
+
       }
     });
     this.subscription2$ = this.store.select(getVersionesPlan).subscribe((accion: any) => {
-      console.log(accion)
+
       if (this.sharedService.IfStore(accion)) {
         this.datosPrueba = (accion[0] as Array<any>).map((element: any, index) => {
           return {
             _id: element._id,
             id: element.id,
             index: index,
-          }
-        })
+          };
+        });
       } else {
         this.datosPrueba = [];
       }

@@ -37,7 +37,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        const fuente: any = (renglon[0].RubroId as string).split('-')
+        const fuente: any = (renglon[0].RubroId as string).split('-');
         if ((fuente[0] + '-' + fuente[1]) === '3-01') {
           this.TipoDePlan = false;
         } else {
@@ -122,7 +122,7 @@ export class LayoutComponent implements OnInit {
         return false;
       }
     }
-    
+
   }
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
 

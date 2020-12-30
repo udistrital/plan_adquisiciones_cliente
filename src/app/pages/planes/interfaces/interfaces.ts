@@ -135,7 +135,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
                 class: 'text-center',
             }
         },
-        
+
     ],
     rowActions: {
         title: {
@@ -394,31 +394,31 @@ export const DATOS_PRUEBA_2: any = [
 
 export const DATOS_PRUEBA_3: any = [
     {
-      "_id": "5fdb7baa86fc8cc01fc96086",
-      "id": 6
+        '_id': '5fdb7baa86fc8cc01fc96086',
+        'id': 6
     },
     {
-      "_id": "5fdb7ed5986b84a9e369a386",
-      "id": 6
+        '_id': '5fdb7ed5986b84a9e369a386',
+        'id': 6
     },
     {
-      "_id": "5fdb86f43af186fdaee7cde6",
-      "id": 6
+        '_id': '5fdb86f43af186fdaee7cde6',
+        'id': 6
     },
     {
-      "_id": "5fdb8afc51063834bbaf8f6c",
-      "id": 6
+        '_id': '5fdb8afc51063834bbaf8f6c',
+        'id': 6
     },
     {
-      "_id": "5fdb9a4051063834bbaf8f6d",
-      "id": 6
+        '_id': '5fdb9a4051063834bbaf8f6d',
+        'id': 6
     },
     {
-      "_id": "5fdb9ea951063834bbaf8f6e",
-      "id": 6
+        '_id': '5fdb9ea951063834bbaf8f6e',
+        'id': 6
     },
     {
-      "_id": "5fdb9fbd51063834bbaf8f6f",
-      "id": 6
+        '_id': '5fdb9fbd51063834bbaf8f6f',
+        'id': 6
     }
-  ]
+];

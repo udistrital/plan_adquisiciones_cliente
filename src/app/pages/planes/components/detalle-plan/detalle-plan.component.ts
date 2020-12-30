@@ -64,11 +64,11 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         this.Plan = plan;
         this.store.dispatch(ConsultarPlanDetallado(plan));
         if (this.Plan.Publicado === true) {
-          this.publicar = 'Publicar Nueva Version del Plan de Adquisiciones'
+          this.publicar = 'Publicar Nueva Version del Plan de Adquisiciones';
         }
 
       }
-    })
+    });
     // lectura de Datos con fuentes de Recurso para renderizacion
     this.subscription$ = combineLatest([
       this.store.select(getArbolRubro).pipe(
@@ -165,11 +165,11 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       Id: this.Plan.Id,
       Publicado: true,
     }).subscribe((resultado: any) => {
-      console.log(resultado)
+
       this.popupService.showSuccessAlert(
         'Plan de Adquisiciones publicado',
         'Publicado',
-      )
-    })
+      );
+    });
   }
 }

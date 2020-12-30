@@ -86,7 +86,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
             this.popupManager.showInfoAlert(
               'Este Plan de Adquisiciones no se ha Publicado',
               'No Hay Publicaciones'
-            )
+            );
           }
 
         }
