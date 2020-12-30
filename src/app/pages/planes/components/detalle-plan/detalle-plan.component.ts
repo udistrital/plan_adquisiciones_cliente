@@ -33,6 +33,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   configuracion: any[];
   configTotal: any;
   datos: any[];
+  publicar: any;
 
   subscription$: any;
   subscription2$: any;
@@ -46,6 +47,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private parametrics: ParametricService,
   ) {
     // this.parametrics.CargarArbolRubros('3');
+    this.publicar = 'Publicar Plan de Adquisiciones';
   }
 
   ngOnInit() {
@@ -141,4 +143,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
 
+  Publicar() {
+
+  }
 }

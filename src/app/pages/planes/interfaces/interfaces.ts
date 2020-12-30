@@ -132,17 +132,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
                 class: 'text-center',
             },
             pipe: {
-                class: '',
-            }
-        },
-        {
-            key: '_id',
-            title: {
-                name: 'Id',
                 class: 'text-center',
-            },
-            pipe: {
-                class: 'text-justify',
             }
         },
         
@@ -167,7 +157,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
         class: 'text-center',
     },
     sort: true,
-    filter: true,
+    filter: false,
 };
 export const DATOS_PRUEBA: any = [
     {

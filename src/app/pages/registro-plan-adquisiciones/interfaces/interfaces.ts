@@ -372,14 +372,14 @@ export const CONFIGURACION_PRUEBA_5: any = {
             },
         ],
     },
-    // tableActions: [
-    //     {
-    //         name: 'nuevo',
-    //         icon: 'fas fa-plus py-1 px-2',
-    //         class: 'px-2',
-    //         title: 'Agregar Nuevo Lineamiento',
-    //     }
-    // ],
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Agregar Nueva Meta',
+        }
+    ],
     noData: {
         name: 'No Existen Elementos Asociados',
         class: 'text-center',
