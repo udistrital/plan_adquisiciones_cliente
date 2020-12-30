@@ -148,6 +148,7 @@ export class LayoutComponent implements OnInit {
   CrearModalidades(data: any) {
     return (data.Modalidades[0] as Array<any>).map((element: any) => {
       return {
+        Id: 0,
         IdModalidadSeleccion: element.Id.toString(),
         Activo: true,
       };
@@ -156,6 +157,7 @@ export class LayoutComponent implements OnInit {
   CrearElementosARKA(data: any) {
     return (data.ElementosARKA[0] as Array<any>).map((element: any) => {
       return {
+        Id: 0,
         CodigoArka: element.Id.toString(),
         Activo: true,
       };
@@ -164,6 +166,8 @@ export class LayoutComponent implements OnInit {
   CrearActividades(data: any) {
     return (data.Actividades[0] as Array<any>).map((element: any) => {
       return {
+        Id: 0,
+        RegistroActividadId: 0,
         ActividadId: element.ActividadId.Id,
         Valor: element.Valor,
         Activo: true,
@@ -174,6 +178,7 @@ export class LayoutComponent implements OnInit {
   CrearFuentes(element: any) {
     return (element.FuentesFinanciamiento as Array<any>).map((fuente: any) => {
       return {
+        Id: 0,
         FuenteFinanciamientoId: fuente.Codigo,
         Activo: true,
         ValorAsignado: fuente.Valor,
