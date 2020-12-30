@@ -90,7 +90,7 @@ export class PlanesService {
 
   /**
     * get Plan
-    *  se crea una Plan nueva
+    *  se solicitan las versiones del plan
     * @param [Plan] Plan por consultar
     * @returns  Plan creada.
     */
@@ -99,10 +99,26 @@ export class PlanesService {
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
     return this.rqManager.get(
-      `RegistrosOrdenadoPorRubro/` +
+      `PlanAdquisicion/versiones/` +
       `${Plan}`
     );
   }
 
+  /**
+    * Put Plan
+    *  se publica un plan
+    * @param [Plan] Plan por modificar
+    * @returns  Plan Modificada.
+    */
+   public publicarPlan(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
+    return this.rqManager.put(
+      `PlanAdquisicion/`,
+      Plan,
+      Plan.Id
+    );
+  }
 
 }

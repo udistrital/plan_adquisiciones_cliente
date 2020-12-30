@@ -368,7 +368,7 @@ export const CONFIGURACION_PRUEBA_5: any = {
                 name: 'editar',
                 icon: 'fas fa-pencil-alt',
                 class: '',
-                title: 'Editar',
+                title: 'Editar Ficha',
             },
         ],
     },

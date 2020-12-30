@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CONFIGURACION_PRUEBA_5, DATOS_PRUEBA_5 } from '../../interfaces/interfaces';
@@ -32,12 +33,18 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
-        this.OpenModal();
+        if (accion.accion.title === 'Editar Ficha') {
+          this.store.dispatch(LoadFilaSeleccionada(null));
+          this.OpenModal();
+        }
       }
     });
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
-        this.OpenModal();
+        if (accion.accion.title === 'Agregar Nueva Meta') {
+          this.store.dispatch(LoadFilaSeleccionada(null));
+          this.OpenModal();
+        }
       }
     });
   }

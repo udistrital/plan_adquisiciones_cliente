@@ -127,7 +127,7 @@ export class PlanesEffects {
     return this.actions$.pipe(
       ofType(PlanesActions.ConsultarVersionesPlan),
       exhaustMap((opciones: any) =>
-        this.planesService.getPlanDetallado(
+        this.planesService.getVersionesPlan(
           opciones.Id,
         ).pipe(
           map(data => {

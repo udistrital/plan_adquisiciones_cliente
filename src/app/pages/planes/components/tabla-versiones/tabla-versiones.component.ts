@@ -35,7 +35,6 @@ export class TablaVersionesComponent implements OnInit {
     this.subscription2$ = this.store.select(getVersionesPlan).subscribe((accion: any) => {
       console.log(accion)
       if (this.sharedService.IfStore(accion)) {
-
         this.datosPrueba = (accion[0] as Array<any>).map((element: any, index) => {
           return {
             _id: element._id,
@@ -43,6 +42,8 @@ export class TablaVersionesComponent implements OnInit {
             index: index,
           }
         })
+      } else {
+        this.datosPrueba = [];
       }
     });
 
