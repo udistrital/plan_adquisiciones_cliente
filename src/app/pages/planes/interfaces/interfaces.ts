@@ -120,7 +120,7 @@ export const CONFIGURACION_PRUEBA: any = {
 
 export const CONFIGURACION_PRUEBA_3: any = {
     title: {
-        name: 'Versiones',
+        name: '',
         class: 'text-center text-light',
     },
     showColumnTitle: true,

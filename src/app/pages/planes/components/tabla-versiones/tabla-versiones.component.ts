@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CONFIGURACION_PRUEBA_3, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
-import { getVersionesPlan } from '../../selectors/planes.selectors';
+import { getPlanSeleccionado, getVersionesPlan } from '../../selectors/planes.selectors';
 
 @Component({
   selector: 'ngx-tabla-versiones',
@@ -32,9 +33,15 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
 
       }
     });
-    this.subscription2$ = this.store.select(getVersionesPlan).subscribe((accion: any) => {
-
-      if (this.sharedService.IfStore(accion)) {
+    this.subscription2$ = combineLatest([
+      this.store.select(getVersionesPlan),
+      this.store.select(getPlanSeleccionado)
+    ]).subscribe(([accion, plan]) => {
+      if (this.sharedService.IfStore(accion) && this.sharedService.IfStore(plan)) {
+        this.configuracion.title = {
+          name: plan.Descripcion,
+          class: 'text-center text-light',
+        };
         this.datosPrueba = (accion[0] as Array<any>).map((element: any, index) => {
           return {
             _id: element._id,
