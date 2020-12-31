@@ -88,26 +88,4 @@ export class RegistroPlanAdquisicionesEffects {
       )
     );
   });
-
-  // ActualizarPlan$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(RegistroPlanAdquisicionesActions.ActualizarPlan),
-  //     exhaustMap((Plan: any) =>
-  //       this.planesService.updatePlan(
-  //         Plan,
-  //       ).pipe(
-  //         map(() => {
-  //           this.popupManager.showSuccessAlert('Plan Actualizada');
-  //           return RegistroPlanAdquisicionesActions.ConsultarPlanes({});
-  //         }),
-  //         catchError(data => {
-  //           this.popupManager.showAlert('error', data.status, data.statusText);
-  //           return of(RegistroPlanAdquisicionesActions.CatchError(data));
-  //         }))
-  //     )
-  //   );
-  // });
-
-
-
 }
