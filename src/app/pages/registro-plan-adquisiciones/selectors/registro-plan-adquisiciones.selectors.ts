@@ -49,3 +49,8 @@ export const getFuenteSeleccionada = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.FuenteSeleccionada
 );
+
+export const getRenglonSeleccionado = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.RenglonSeleccionado
+);

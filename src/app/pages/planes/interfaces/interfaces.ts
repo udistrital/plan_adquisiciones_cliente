@@ -148,7 +148,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
     showColumnTitle: true,
     dataConfig: [
         {
-            key: 'Rubro',
+            key: 'RubroId',
             title: {
                 name: 'Rubro Presupuestal',
                 class: 'text-center align-middle',
@@ -157,16 +157,16 @@ export const CONFIGURACION_PRUEBA_2: any = {
                 class: 'text-center align-middle',
             }
         },
-        {
-            key: 'Descripcion',
-            title: {
-                name: 'Descripcion',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-justify align-middle',
-            }
-        },
+        // {
+        //     key: 'Descripcion',
+        //     title: {
+        //         name: 'Descripcion',
+        //         class: 'text-center align-middle',
+        //     },
+        //     pipe: {
+        //         class: 'text-justify align-middle',
+        //     }
+        // },
         {
             key: 'FechaEstimada',
             title: {
@@ -174,21 +174,25 @@ export const CONFIGURACION_PRUEBA_2: any = {
                 class: 'text-center align-middle',
             },
             pipe: {
+                type: 'time-range',
+                config: ['limits'],
                 class: 'text-center align-middle',
             }
         },
         {
-            key: 'DuracionEstimada',
+            key: 'FechaEstimada',
             title: {
                 name: 'Duracion Estimada de Contrato',
                 class: 'text-center align-middle',
             },
             pipe: {
+                type: 'time-range',
+                config: ['range'],
                 class: 'text-center align-middle',
             }
         },
         {
-            key: 'Responsable',
+            key: 'ResponsableId',
             title: {
                 name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
                 class: 'text-center align-middle',
@@ -197,45 +201,54 @@ export const CONFIGURACION_PRUEBA_2: any = {
                 class: 'text-center align-middle',
             }
         },
-        {
-            key: 'ModalidadSeleccion',
-            title: {
-                name: 'Modalidad de Seleccion',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'd-flex flex-column align-items-center text-center align-middle',
-                isArray: true,
-            }
-        },
-        {
-            key: 'Valor',
-            title: {
-                name: 'Valor Asignado Año Vigente',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                type: 'currency',
-                config: [
-                ],
-                class: 'text-center align-middle',
-            }
-        },
-        {
-            key: 'FuenteRecurso',
-            title: {
-                name: 'Fuente de Recurso',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-            }
-        },
+        // {
+        //     key: 'ModalidadSeleccion',
+        //     title: {
+        //         name: 'Modalidad de Seleccion',
+        //         class: 'text-center align-middle',
+        //     },
+        //     pipe: {
+        //         class: 'd-flex flex-column align-items-center text-center align-middle',
+        //         isArray: true,
+        //     }
+        // },
+        // {
+        //     key: 'Valor',
+        //     title: {
+        //         name: 'Valor Asignado Año Vigente',
+        //         class: 'text-center align-middle',
+        //     },
+        //     pipe: {
+        //         type: 'currency',
+        //         config: [
+        //         ],
+        //         class: 'text-center align-middle',
+        //     }
+        // },
+        // {
+        //     key: 'FuenteRecurso',
+        //     title: {
+        //         name: 'Fuente de Recurso',
+        //         class: 'text-center align-middle',
+        //     },
+        //     pipe: {
+        //         class: 'text-center align-middle',
+        //     }
+        // },{
+        //     key: 'FuenteRecurso',
+        //     title: {
+        //         name: 'Fuente de Recurso',
+        //         class: 'text-center align-middle',
+        //     },
+        //     pipe: {
+        //         class: 'text-center align-middle',
+        //     }
+        // },
     ],
-    subtitle: {
-        name: '',
-        class: 'text-center text-light',
-    },
+    // subtitle: {
+    //     name: '',
+    //     class: 'text-center text-light',
+    // },
     rowActions: {
         title: {
             name: 'Acciones',
@@ -263,25 +276,25 @@ export const CONFIGURACION_PRUEBA_2: any = {
         name: 'No Existen Rubros Asociados',
         class: 'text-center',
     },
-    endSubtotal: {
-        property: 'Valor',
-        items: [
-            {
-                colspan: 6,
-                name: 'Total Plan',
-                class: 'text-center',
-            },
-        ],
-        last: {
-            class: 'text-left',
-            pipe: {
-                type: 'currency',
-                config: [
-                ],
-                class: '',
-            }
-        }
-    },
+    // endSubtotal: {
+    //     property: 'Valor',
+    //     items: [
+    //         {
+    //             colspan: 6,
+    //             name: 'Total Plan',
+    //             class: 'text-center',
+    //         },
+    //     ],
+    //     last: {
+    //         class: 'text-left',
+    //         pipe: {
+    //             type: 'currency',
+    //             config: [
+    //             ],
+    //             class: '',
+    //         }
+    //     }
+    // },
     sort: true,
     filter: false,
 };

@@ -58,6 +58,7 @@ import { CompoundCellComponent } from './components/compound-cell/compound-cell.
     DecimalPipe,
     PercentPipe,
     CustomTablePipe,
+    TimeRangePipe,
   ]
 })
 

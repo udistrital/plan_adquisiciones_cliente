@@ -15,7 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { RegistroPlanAdquisicionesEffects } from './effects/registro-plan-adquisiciones.effects';
 import { NbDatepickerModule } from '@nebular/theme';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { MatDialogModule, MatSelectModule, MatStepperModule } from '@angular/material';
+import { MatAutocompleteModule, MatDialogModule, MatSelectModule, MatStepperModule } from '@angular/material';
 import { ModalidadesSeleccionComponent } from './components/modalidades-seleccion/modalidades-seleccion.component';
 import { TablaCodificacionArkaComponent } from './components/tabla-codificacion-arka/tabla-codificacion-arka.component';
 import { FormCodificacionArkaComponent } from './components/form-codificacion-arka/form-codificacion-arka.component';
@@ -44,6 +44,7 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     SharedModule,
     FormsModule,
     MatStepperModule,
+    MatAutocompleteModule,
     ReactiveFormsModule,
     CurrencyMaskModule,
     MatDialogModule,

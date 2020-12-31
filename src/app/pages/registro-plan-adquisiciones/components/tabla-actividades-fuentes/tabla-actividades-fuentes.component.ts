@@ -1,12 +1,17 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { exhaustMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { SharedService } from '../../../../shared/services/shared.service';
+import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { CargarActividades, CargarFuentes, SeleccionarActividad } from '../../actions/registro-plan-adquisiciones.actions';
-import { CONFIGURACION_PRUEBA_2, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
-import { getActividades, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
+import { getActividades, getMeta, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 import { FormActividadFuentesComponent } from '../form-actividad-fuentes/form-actividad-fuentes.component';
 
 @Component({
@@ -23,17 +28,18 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   display: boolean;
   subscription$: any;
   Meta: any;
+  subscription4$: any;
 
   constructor(
     private store: Store<any>,
-    // private modalService: NgbModal,
-    private renderer: Renderer2,
     private matDialog: MatDialog,
+    private sharedService: SharedService,
+    private registroService: RegistroPlanAdquisicionesService,
+    private actividadesService: ActividadesService,
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_PRUEBA_2;
     this.Datos = [];
-    // this.store.dispatch(CargarActividades([DATOS_PRUEBA_3]));
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -49,12 +55,19 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+      if (this.sharedService.IfStore(renglon)) {
+        const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad']);
+        this.store.dispatch(CargarActividades([actividad]));
+      }
+    });
 
     this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
       if (elementos) {
         this.Datos = JSON.parse(JSON.stringify(elementos[0]));
       }
     });
+
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
@@ -112,6 +125,37 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
       if (value.value) {
         // Quitar Elemento
       }
+    });
+  }
+
+  MontarActividades(actividades: any[]) {
+    return actividades.map((actividad) => {
+      return {
+        ActividadId: {
+          Id: actividad.ActividadId,
+          Nombre: actividad.Nombre,
+          Activo: actividad.Activo,
+          Valor: actividad.Valor,
+          ActividadId: actividad.Id,
+          RegistroActividadId: actividad.RegistroActividadId,
+          RegistroPlanAdquisicionesId: actividad.RegistroPlanAdquisicionesId,
+        },
+        Valor: actividad.Valor,
+        FuentesFinanciamiento: this.MontarFuentes(actividad.FuentesFinanciamiento, actividad.Valor),
+      };
+    });
+  }
+
+  MontarFuentes(fuentes: any[], valorActividad: any) {
+    return fuentes.map((fuente) => {
+      return {
+        Activo: fuente.Activo,
+        Codigo: fuente.FuenteFinanciamiento,
+        Id: fuente.Id,
+        Nombre: fuente.Nombre,
+        Valor: fuente.ValorAsignado,
+        Porcentaje: fuente.ValorAsignado / valorActividad,
+      };
     });
   }
 

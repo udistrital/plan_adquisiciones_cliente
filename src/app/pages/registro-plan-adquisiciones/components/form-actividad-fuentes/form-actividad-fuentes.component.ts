@@ -97,7 +97,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Eliminar Fuente de Financiamiento') {
-          this.LaunchDeleteModal(accion.fila);
+          this.LaunchDeleteModal(accion.index);
         }
         if (accion.accion.title === 'Editar Fuente de Financiamiento') {
           this.store.dispatch(SeleccionarFuente(accion.fila));
@@ -148,7 +148,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   OnClose() {
     this.matDialogRef.close();
   }
-  LaunchDeleteModal(data?: any) {
+  LaunchDeleteModal(index: any) {
     Swal.fire({
       type: 'error',
       title: 'Esta Seguro de Eliminar',
@@ -158,7 +158,9 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancelar',
     }).then((value) => {
       if (value.value) {
-        // Quitar Elemento
+
+        this.Datos.splice(index, 1);
+        this.store.dispatch(CargarFuentes([this.Datos]));
       }
     });
   }

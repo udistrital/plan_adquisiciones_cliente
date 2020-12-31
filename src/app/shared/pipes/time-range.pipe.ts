@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
@@ -10,6 +11,10 @@ export class TimeRangePipe implements PipeTransform {
   //   start: Date
   //   end: Date
   // }
+  constructor(
+    private datePipe: DatePipe,
+  ) {
+  }
 
   getDaysMonth(date: Date) {
 
@@ -30,8 +35,7 @@ export class TimeRangePipe implements PipeTransform {
     }
   }
 
-  transform(value: any, ...args: any[]): any {
-
+  exactRangeTransform(value: any) {
     if (value && value.start && value.end) {
 
       let years = value.end.getFullYear() - value.start.getFullYear();
@@ -42,14 +46,23 @@ export class TimeRangePipe implements PipeTransform {
       let msg2 = '';
       let msg3 = '';
 
+      // Esta parte del codigo ajusta el rango de tiempo cuando los dias empiezan a las 00:00
       if (days < 0) {
         months -= 1;
         days += this.getDaysMonth(value.start);
       }
       if (months < 0) {
         years -= 1;
-        months += 11;
+        months += 12;
       }
+
+      // Esta parte del codigo agrega un dia adicional al rango de tiempo para que sea desde las 00:00 del primer dia a las 11:59 del dia final
+      days += 1;
+      if ((days) === this.getDaysMonth(value.end)) {
+        days = 0;
+        months += 1;
+      }
+
       switch (true) {
         case years === 0:
           break;
@@ -80,12 +93,35 @@ export class TimeRangePipe implements PipeTransform {
           msg3 = `${days} dias `;
           break;
       }
-
       return msg1 + msg2 + msg3;
-
     } else {
       return null;
     }
   }
 
+  limitsTransform(value: any, option: any) {
+    if (value && value.start && value.end) {
+      return this.datePipe.transform(value.start, option) + ' - ' +
+        this.datePipe.transform(value.end, option);
+    } else {
+      return null;
+    }
+  }
+
+
+  transform(value: any, args?: any): any {
+
+
+    switch (args) {
+      case 'range':
+        return this.exactRangeTransform(value);
+      case 'limits':
+        return this.limitsTransform(value, 'longDate');
+      case 'exactLimits':
+        return this.limitsTransform(value, 'MMMM d, y, h:mm:ss a');
+      default:
+        return this.exactRangeTransform(value);
+
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import Swal from 'sweetalert2';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getVigenciaActual, getAreaFuncional } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -122,8 +123,19 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
       }
     }
     if (this.ValorDisponible === 0) {
-      this.OnClose();
+      this.LaunchValueNullModal();
     }
+  }
+
+  LaunchValueNullModal() {
+    Swal.fire({
+      type: 'success',
+      title: 'Fuentes Asignadas',
+      text: `Si desea agregar mas fuentes es necesario reducir los valores asignados previamente`,
+      confirmButtonText: 'Aceptar',
+    }).then(() => {
+      this.OnClose();
+    });
   }
 
   EnableFuente() {

@@ -7,24 +7,30 @@ export interface State {
   Rubro: any;
   Meta: any;
   Producto: any;
+  Responsable: any;
+  FechaSeleccion: any;
   Modalidades: any;
   ElementosARKA: any;
   Actividades: any;
   ActividadSeleccionada: any;
   Fuentes: any;
   FuenteSeleccionada: any;
+  RenglonSeleccionado: any;
 }
 
 export const initialState: State = {
   Rubro: null,
   Meta: null,
   Producto: null,
+  Responsable: null,
+  FechaSeleccion: null,
   Modalidades: null,
   ElementosARKA: null,
   Actividades: null,
   ActividadSeleccionada: null,
   Fuentes: null,
   FuenteSeleccionada: null,
+  RenglonSeleccionado: null,
 };
 
 const registroPlanAdquisicionesReducer = createReducer(
@@ -58,9 +64,15 @@ const registroPlanAdquisicionesReducer = createReducer(
   on(RegistroPlanAdquisicionesActions.SeleccionarFuente, (state, action) => ({
     ...state, FuenteSeleccionada: state.FuenteSeleccionada = action
   })),
-
-
-
+  on(RegistroPlanAdquisicionesActions.SeleccionarResponsable, (state, action) => ({
+    ...state, Responsable: state.Responsable = action
+  })),
+  on(RegistroPlanAdquisicionesActions.SeleccionarFechaSeleccion, (state, action) => ({
+    ...state, FechaSeleccion: state.FechaSeleccion = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarRenglonPlan, (state, action) => ({
+    ...state, RenglonSeleccionado: state.RenglonSeleccionado = action
+  })),
 );
 
 export function reducer(state: State | undefined, action: Action) {

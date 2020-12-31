@@ -71,4 +71,22 @@ export class PlanesService {
       Plan.Id
     );
   }
+
+  /**
+    * get Plan
+    *  se crea una Plan nueva
+    * @param [Plan] Plan por consultar
+    * @returns  Plan creada.
+    */
+  public getPlanDetallado(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
+    return this.rqManager.get(
+      `RegistrosOrdenadoPorRubro/` +
+      `${Plan}`
+    );
+  }
+
+
 }

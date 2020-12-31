@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
+import { SharedService } from '../../../../shared/services/shared.service';
+import { SeleccionarFechaSeleccion, SeleccionarResponsable } from '../../actions/registro-plan-adquisiciones.actions';
+import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -12,44 +16,58 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
 })
 export class SeleccionDatosGeneralesComponent implements OnInit {
 
-  DatosGeneralesForm: any;
+  DatosGeneralesForm: FormGroup;
 
   ModalidadSeleccion: any;
   Responsables: any;
+  subscription$: any;
 
   constructor(
     private fb: FormBuilder,
     private registroService: RegistroPlanAdquisicionesService,
-
+    private store: Store<any>,
+    private sharedService: SharedService,
   ) {
-
-    this.DatosGeneralesForm = this.fb.group({
-      FechaInicioSeleccion: [null, [Validators.required]],
-      Responsable: [null, [Validators.required]],
-    });
   }
 
   ngOnInit() {
-    this.registroService.getResponsables().subscribe((data) => {
+
+    this.subscription$ = combineLatest([
+      this.store.select(getRenglonSeleccionado),
+      this.registroService.getResponsables()
+    ]).subscribe(([renglon, data]) => {
       this.Responsables = data;
+      if (this.sharedService.IfStore(renglon) && data) {
+        this.CrearFormulario(renglon);
+      } else {
+        this.CrearFormulario();
+      }
     });
   }
-
-  getDays(date: Date) {
-
-    const m = date.getMonth();
-    const y = date.getFullYear();
-    switch (true) {
-      case m === 0 || m === 2 || m === 4 || m === 6 || m === 7 || m === 9 || m === 11:
-        return 31;
-      case m === 3 || m === 5 || m === 8 || m === 10:
-        return 30;
-      case m === 1:
-        if (((y % 4 === 0) && (y % 100 !== 0)) || (y % 400 === 0)) {
-          return 29;
-        } else {
-          return 28;
-        }
+  CrearFormulario(renglon?: any) {
+    if (renglon) {
+      const responsable = this.Responsables.find((x: any) => x.Id === renglon[0].ResponsableId);
+      const fechaSeleccion = {
+        start: new Date(renglon[0].FechaEstimadaInicio),
+        end: new Date(renglon[0].FechaEstimadaFin)
+      };
+      this.store.dispatch(SeleccionarFechaSeleccion(fechaSeleccion));
+      this.store.dispatch(SeleccionarResponsable(responsable));
+      this.DatosGeneralesForm = this.fb.group({
+        FechaInicioSeleccion: [fechaSeleccion, [Validators.required]],
+        Responsable: [responsable, [Validators.required]],
+      });
+    } else {
+      this.DatosGeneralesForm = this.fb.group({
+        FechaInicioSeleccion: [null, [Validators.required]],
+        Responsable: [null, [Validators.required]],
+      });
     }
+    this.DatosGeneralesForm.get('FechaInicioSeleccion').valueChanges.subscribe((value: any) => {
+      this.store.dispatch(SeleccionarFechaSeleccion(value));
+    });
+    this.DatosGeneralesForm.get('Responsable').valueChanges.subscribe((value: any) => {
+      this.store.dispatch(SeleccionarResponsable(value));
+    });
   }
 }

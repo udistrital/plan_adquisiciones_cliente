@@ -5,14 +5,38 @@
         </div>
     </div>
     <div class="row">
-        <div class="col px-0">
-            <ng-container *ngFor="let table of configuracion">
+        <div class="col-12 px-0" *ngIf="datos && configuracion">
+            <ng-container *ngFor="let table of configuracion; index as i">
                 <div class="py-2">
-                    <ngx-general-table [config]="table" [datos]="datosPrueba"></ngx-general-table>
+                    <ngx-general-table [config]="table" [datos]="datos[i]"></ngx-general-table>
                 </div>
             </ng-container>
         </div>
-        <div class="col-12">
+        <div class="col-12" *ngIf="!datos && !configuracion">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+        </div>
+        <div class="col-12" *ngIf="datos && !configuracion">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 border border-light bg-primary text-center text-light py-2 font-weight-bold">
+                        No Hay Registros Asociados
+                    </div>
+                    <div class="col-12 d-flex justify-content-around">
+                        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="CrearRenglon()">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <i class="fas fa-plus text-light py-1 px-2"></i>
+                                <span class="text-light px-2 mx-2">Agregar Rubro</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="col-12">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-8 border border-light bg-primary text-center text-light py-2 font-weight-bold">
@@ -23,7 +47,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
