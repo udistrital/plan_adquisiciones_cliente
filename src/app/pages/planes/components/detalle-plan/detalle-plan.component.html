@@ -9,6 +9,14 @@
             <ng-container *ngFor="let table of configuracion; index as i">
                 <div class="py-2">
                     <ngx-general-table [config]="table" [datos]="datos[i]"></ngx-general-table>
+                    <div class="col-12 d-flex justify-content-around">
+                        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="Publicar()">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <i class="fas fa-check text-light py-1 px-2"></i>
+                                <span class="text-light px-2 mx-2">{{publicar}}</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </ng-container>
         </div>
@@ -51,7 +59,7 @@
     </div>
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
-            <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">Cancelar</button>
+            <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">Volver</button>
         </div>
     </div>
 </div>

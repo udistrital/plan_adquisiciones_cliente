@@ -49,3 +49,23 @@ export const CargarPlanDetallado = createAction(
   props()
 );
 
+export const ConsultarVersionesPlan = createAction(
+  '[Planes] Consultar Versiones Plan',
+  props()
+);
+
+export const CargarVersionesPlan = createAction(
+  '[Planes] Cargar Versiones Plan',
+  props()
+);
+
+export const ConsultarVersion = createAction(
+  '[Planes] Consultar Version',
+  props()
+);
+
+export const CargarVersion = createAction(
+  '[Planes] Cargar Version',
+  props()
+);
+

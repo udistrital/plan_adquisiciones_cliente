@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
@@ -20,8 +21,10 @@ import {
   SeleccionarFuente,
   SeleccionarResponsable
 } from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
+import { ConsultarPlanDetallado } from '../../actions/planes.actions';
 import { CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
-import { getPlanDetallado } from '../../selectors/planes.selectors';
+import { getPlanDetallado, getPlanSeleccionado } from '../../selectors/planes.selectors';
+import { PlanesService } from '../../services/planes.service';
 
 @Component({
   selector: 'ngx-detalle-plan',
@@ -33,10 +36,13 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   configuracion: any[];
   configTotal: any;
   datos: any[];
+  publicar: any;
 
   subscription$: any;
   subscription2$: any;
   subscription3$: any;
+  subscription4$: any;
+  Plan: any;
 
 
   constructor(
@@ -44,12 +50,25 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private route: Router,
     private sharedService: SharedService,
     private parametrics: ParametricService,
+    private planesService: PlanesService,
+    private popupService: PopUpManager,
   ) {
     // this.parametrics.CargarArbolRubros('3');
+    this.publicar = 'Publicar Plan de Adquisiciones';
   }
 
   ngOnInit() {
 
+    this.subscription4$ = this.store.select(getPlanSeleccionado).subscribe((plan: any) => {
+      if (this.sharedService.IfStore(plan)) {
+        this.Plan = plan;
+        this.store.dispatch(ConsultarPlanDetallado(plan));
+        if (this.Plan.Publicado === true) {
+          this.publicar = 'Publicar Nueva Version del Plan de Adquisiciones';
+        }
+
+      }
+    });
     // lectura de Datos con fuentes de Recurso para renderizacion
     this.subscription$ = combineLatest([
       this.store.select(getArbolRubro).pipe(
@@ -141,4 +160,16 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
 
+  Publicar() {
+    this.planesService.publicarPlan({
+      Id: this.Plan.Id,
+      Publicado: true,
+    }).subscribe((resultado: any) => {
+
+      this.popupService.showSuccessAlert(
+        'Plan de Adquisiciones publicado',
+        'Publicado',
+      );
+    });
+  }
 }

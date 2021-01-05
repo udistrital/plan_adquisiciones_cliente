@@ -19,3 +19,9 @@ export const getPlanDetallado = createSelector(
   selectPlanesState,
   (state: fromPlanes.State) => state.PlanDetallado
 );
+
+export const getVersionesPlan = createSelector(
+  selectPlanesState,
+  (state: fromPlanes.State) => state.Versiones
+);
+

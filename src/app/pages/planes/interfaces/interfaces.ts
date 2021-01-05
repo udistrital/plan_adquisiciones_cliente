@@ -93,7 +93,13 @@ export const CONFIGURACION_PRUEBA: any = {
                 icon: 'fas fa-list',
                 class: 'p-2',
                 title: 'Ver Plan de Adquisiciones',
-            }
+            },
+            {
+                name: 'Versiones',
+                icon: 'fas fa-code-branch',
+                class: 'p-2',
+                title: 'Ver Versiones',
+            },
         ],
     },
     tableActions: [
@@ -110,6 +116,48 @@ export const CONFIGURACION_PRUEBA: any = {
     },
     sort: true,
     filter: true,
+};
+
+export const CONFIGURACION_PRUEBA_3: any = {
+    title: {
+        name: '',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'index',
+            title: {
+                name: 'Version',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'Ver',
+                icon: 'fas fa-list',
+                class: 'p-2',
+                title: 'Ver Plan de Adquisiciones',
+            },
+        ],
+    },
+    noData: {
+        name: 'No Existen Versiones',
+        class: 'text-center',
+    },
+    sort: true,
+    filter: false,
 };
 export const DATOS_PRUEBA: any = [
     {
@@ -341,5 +389,36 @@ export const DATOS_PRUEBA_2: any = [
         ],
         Valor: 57091000.0,
         FuenteRecurso: 'Funcionamiento',
+    }
+];
+
+export const DATOS_PRUEBA_3: any = [
+    {
+        '_id': '5fdb7baa86fc8cc01fc96086',
+        'id': 6
+    },
+    {
+        '_id': '5fdb7ed5986b84a9e369a386',
+        'id': 6
+    },
+    {
+        '_id': '5fdb86f43af186fdaee7cde6',
+        'id': 6
+    },
+    {
+        '_id': '5fdb8afc51063834bbaf8f6c',
+        'id': 6
+    },
+    {
+        '_id': '5fdb9a4051063834bbaf8f6d',
+        'id': 6
+    },
+    {
+        '_id': '5fdb9ea951063834bbaf8f6e',
+        'id': 6
+    },
+    {
+        '_id': '5fdb9fbd51063834bbaf8f6f',
+        'id': 6
     }
 ];

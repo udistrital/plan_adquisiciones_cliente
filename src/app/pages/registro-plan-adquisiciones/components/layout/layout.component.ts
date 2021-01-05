@@ -37,6 +37,12 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
+        const fuente: any = (renglon[0].RubroId as string).split('-');
+        if ((fuente[0] + '-' + fuente[1]) === '3-01') {
+          this.TipoDePlan = false;
+        } else {
+          this.TipoDePlan = true;
+        }
         this.store.dispatch(LoadAreaFuncional({ Id: renglon[0].AreaFuncional }));
         this.store.dispatch(LoadCentroGestor({ CentroGestor: renglon[0].CentroGestor }));
       }
@@ -79,23 +85,44 @@ export class LayoutComponent implements OnInit {
   }
 
   RegistroCompleto(data: any, centro: any, area: any, plan: any) {
-    if (
-      this.sharedService.IfStore(data.Rubro) &&
-      this.sharedService.IfStore(data.Meta) &&
-      this.sharedService.IfStore(data.Producto) &&
-      this.sharedService.IfStore(data.Responsable) &&
-      this.sharedService.IfStore(data.FechaSeleccion) &&
-      this.sharedService.IfStore(data.Modalidades) &&
-      this.sharedService.IfStore(data.ElementosARKA) &&
-      this.sharedService.IfStore(data.Actividades) &&
-      this.sharedService.IfStore(centro) &&
-      this.sharedService.IfStore(area) &&
-      this.sharedService.IfStore(plan)
-    ) {
-      return true;
+    if (this.TipoDePlan) {
+      if (
+        this.sharedService.IfStore(data.Rubro) &&
+        this.sharedService.IfStore(data.Meta) &&
+        this.sharedService.IfStore(data.Producto) &&
+        this.sharedService.IfStore(data.Responsable) &&
+        this.sharedService.IfStore(data.FechaSeleccion) &&
+        this.sharedService.IfStore(data.Modalidades) &&
+        this.sharedService.IfStore(data.ElementosARKA) &&
+        this.sharedService.IfStore(data.Actividades) &&
+        this.sharedService.IfStore(centro) &&
+        this.sharedService.IfStore(area) &&
+        this.sharedService.IfStore(plan)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if (
+        this.sharedService.IfStore(data.Rubro) &&
+        // this.sharedService.IfStore(data.Meta) &&
+        // this.sharedService.IfStore(data.Producto) &&
+        this.sharedService.IfStore(data.Responsable) &&
+        this.sharedService.IfStore(data.FechaSeleccion) &&
+        this.sharedService.IfStore(data.Modalidades) &&
+        this.sharedService.IfStore(data.ElementosARKA) &&
+        // this.sharedService.IfStore(data.Actividades) &&
+        this.sharedService.IfStore(centro) &&
+        this.sharedService.IfStore(area) &&
+        this.sharedService.IfStore(plan)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
+
   }
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
 

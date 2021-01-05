@@ -299,6 +299,95 @@ export const CONFIGURACION_PRUEBA_4: any = {
     filter: false,
 };
 
+export const CONFIGURACION_PRUEBA_5: any = {
+    title: {
+        name: 'FICHA DE ESTADISTICAS BASICAS DE INVERSION Y DE METODOLOGIA GENERAL AJUSTADA',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Meta',
+            title: {
+                name: 'Meta',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'Proceso',
+            title: {
+                name: 'Proceso',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'Magnitud',
+            title: {
+                name: 'Magnitud',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'UnidadMedida',
+            title: {
+                name: 'Unidad de Medida',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+        {
+            key: 'Descripcion',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center',
+            },
+            pipe: {
+                class: '',
+            }
+        },
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'editar',
+                icon: 'fas fa-pencil-alt',
+                class: '',
+                title: 'Editar Ficha',
+            },
+        ],
+    },
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Agregar Nueva Meta',
+        }
+    ],
+    noData: {
+        name: 'No Existen Elementos Asociados',
+        class: 'text-center',
+    },
+    sort: true,
+    filter: false,
+};
+
 export const DATOS_PRUEBA_3: any = [
 
     {
@@ -427,5 +516,36 @@ export const DATOS_PRUEBA_4: any = [
         Nombre: 'Estampilla Universidad Distrital',
         Porcentaje: 50,
         Valor: 1000000,
+    },
+];
+
+export const DATOS_PRUEBA_5: any = [
+    {
+        Meta: 1,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 2,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 3,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
+    },
+    {
+        Meta: 4,
+        Proceso: 'Jhoan',
+        Magnitud: 'sdfdfdf',
+        UnidadMedida: 'Jhoan',
+        Descripcion: 'sdfdfdf',
     },
 ];

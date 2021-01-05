@@ -20,6 +20,7 @@ import { MultiPipePipe } from './pipes/multi-pipe.pipe';
 import { TimeRangePipe } from './pipes/time-range.pipe';
 import { CellViewComponent } from './components/cell-view/cell-view.component';
 import { CompoundCellComponent } from './components/compound-cell/compound-cell.component';
+import { BtnVolverComponent } from './components/btn-volver/btn-volver.component';
 
 @NgModule({
   exports: [
@@ -30,6 +31,7 @@ import { CompoundCellComponent } from './components/compound-cell/compound-cell.
     ArbolRubroComponent,
     SelectedRowDirective,
     TimeRangePipe,
+    BtnVolverComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ import { CompoundCellComponent } from './components/compound-cell/compound-cell.
     TimeRangePipe,
     CellViewComponent,
     CompoundCellComponent,
+    BtnVolverComponent,
   ],
   providers: [
     DatePipe,

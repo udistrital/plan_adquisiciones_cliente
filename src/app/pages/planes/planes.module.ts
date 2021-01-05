@@ -12,10 +12,11 @@ import * as fromPlanes from './reducers/planes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PlanesEffects } from './effects/planes.effects';
 import { DetallePlanComponent } from './components/detalle-plan/detalle-plan.component';
+import { TablaVersionesComponent } from './components/tabla-versiones/tabla-versiones.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent, DetallePlanComponent],
+  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent, DetallePlanComponent, TablaVersionesComponent],
   imports: [
     CommonModule,
     PlanesRoutingModule,

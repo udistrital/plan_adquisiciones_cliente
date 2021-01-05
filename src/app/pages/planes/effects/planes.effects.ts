@@ -123,4 +123,22 @@ export class PlanesEffects {
     );
   });
 
+  GetVersionesPlan$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PlanesActions.ConsultarVersionesPlan),
+      exhaustMap((opciones: any) =>
+        this.planesService.getVersionesPlan(
+          opciones.Id,
+        ).pipe(
+          map(data => {
+            return PlanesActions.CargarVersionesPlan([data]);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(PlanesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
 }
