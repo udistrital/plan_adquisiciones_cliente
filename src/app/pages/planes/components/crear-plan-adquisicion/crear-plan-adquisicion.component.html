@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="PlanForm">
+        <div class="col py-2">
+            <h5 *ngIf="titulo" class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="PlanForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="PlanForm" *ngIf="PlanForm">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="Descripcion"
+                        rows="2"></textarea>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Vigencia:</label>
+                    <input type="number" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+                        formControlName="Vigencia" placeholder="">
+                </div>
+            </div>
+            <!-- <div class="col-12">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="Publicado">
+                    <label class="form-check-label" for="exampleCheck1">Publicado</label>
+                  </div>
+            </div> -->
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="PlanForm.invalid || !PlanForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
+<ngx-btn-volver></ngx-btn-volver>

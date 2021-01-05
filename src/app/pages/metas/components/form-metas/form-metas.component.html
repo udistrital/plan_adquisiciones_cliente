@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="!MetaForm">
+        <div class="col py-2">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item px-1">Por favor Selecciona:</li>
+                <li class="list-group-item">Lineamiento</li>
+                <li class="list-group-item">Rubro</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row" *ngIf="!MetaForm">
+        <div class="col py-2"></div>
+    </div>
+    <div class="row" *ngIf="MetaForm">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="MetaForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="MetaForm" *ngIf="MetaForm">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Numero:</label>
+                    <input type="number" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+                        formControlName="Numero" placeholder="">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="Nombre"
+                        rows="3"></textarea>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="MetaForm.invalid || !MetaForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
