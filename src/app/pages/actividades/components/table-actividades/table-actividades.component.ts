@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
 import { ConsultarActividades, SeleccionarActividad } from '../../actions/actividades.actions';
-import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_ACTIVIDADES } from '../../interfaces/interfaces';
 import { getActividades } from '../../selectors/actividades.selectors';
 
 @Component({
@@ -23,7 +23,7 @@ export class TableActividadesComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<any>,
   ) {
-    this.configuracion = CONFIGURACION_PRUEBA;
+    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES;
   }
 
   ngOnInit() {

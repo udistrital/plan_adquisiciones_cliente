@@ -8,7 +8,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { CargarFichaSeleccionada, ConsultarFichaTecnica } from '../../actions/registro-plan-adquisiciones.actions';
-import { CONFIGURACION_PRUEBA_5, DATOS_PRUEBA_5 } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_FICHA_ESTADISTICA} from '../../interfaces/interfaces';
 import { getFichaTecnica, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { FormFichaTecnicaComponent } from '../form-ficha-tecnica/form-ficha-tecnica.component';
 
@@ -33,7 +33,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
     private metaService: MetasService,
   ) {
 
-    this.configuracion = CONFIGURACION_PRUEBA_5;
+    this.configuracion = CONFIGURACION_TABLA_FICHA_ESTADISTICA;
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

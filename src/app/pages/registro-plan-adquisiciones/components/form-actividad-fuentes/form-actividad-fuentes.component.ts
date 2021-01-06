@@ -2,14 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
-import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
-import { CONFIGURACION_PRUEBA_4 } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_FUENTES } from '../../interfaces/interfaces';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { getActividades, getActividadSeleccionada, getFuentes, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormFuentesFinanciamientoComponent } from '../form-fuentes-financiamiento/form-fuentes-financiamiento.component';
-import { CargarActividades, CargarFuentes, SeleccionarActividad, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
+import { CargarActividades, CargarFuentes, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
 import { combineLatest } from 'rxjs';
 import { SharedService } from '../../../../shared/services/shared.service';
 
@@ -46,7 +45,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     this.titulo = 'Agregar Actividad';
     this.boton = 'Crear';
     // this.Datos = DATOS_PRUEBA_4;
-    this.configuracion = CONFIGURACION_PRUEBA_4;
+    this.configuracion = CONFIGURACION_TABLA_FUENTES;
     this.ActividadesAsociadas = [];
   }
 

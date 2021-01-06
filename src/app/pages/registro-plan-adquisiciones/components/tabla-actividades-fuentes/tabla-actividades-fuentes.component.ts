@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
-import { exhaustMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { CargarActividades, CargarFuentes, SeleccionarActividad } from '../../actions/registro-plan-adquisiciones.actions';
-import { CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_ACTIVIDADES_FUENTES } from '../../interfaces/interfaces';
 import { getActividades, getMeta, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 import { FormActividadFuentesComponent } from '../form-actividad-fuentes/form-actividad-fuentes.component';
@@ -38,7 +36,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     private actividadesService: ActividadesService,
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_PRUEBA_2;
+    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES_FUENTES;
     this.Datos = [];
   }
   ngOnDestroy(): void {
