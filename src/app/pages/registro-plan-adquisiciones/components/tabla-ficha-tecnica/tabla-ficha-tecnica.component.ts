@@ -49,10 +49,10 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
         this.store.dispatch(ConsultarFichaTecnica({
           PlanAdquisicionesId: plan,
           Rubro: rubro.Codigo
-        }))
-        
+        }));
+
       }
-    })
+    });
 
     this.subscription4$ = this.subscription3$ = combineLatest([
       this.store.select(getFichaTecnica),
@@ -76,10 +76,10 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
                 PlanAdquisicionesId: element.PlanAdquisicionesId,
                 FechaCreacion: element.FechaCreacion,
                 FechaModificacion: element.FechaModificacion,
-              }
-              
-            })
-            console.log(this.datosPrueba)
+              };
+
+            });
+
           });
         } else {
           this.datosPrueba = [];
@@ -87,14 +87,14 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       } else {
         this.datosPrueba = [];
       }
-    })
+    });
 
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Editar Ficha') {
           this.store.dispatch(LoadFilaSeleccionada(null));
-          console.log(accion)
-          this.store.dispatch(CargarFichaSeleccionada(accion.fila))
+
+          this.store.dispatch(CargarFichaSeleccionada(accion.fila));
           this.OpenModal();
         }
       }
@@ -103,7 +103,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Agregar Nueva Meta Asociada') {
           this.store.dispatch(LoadFilaSeleccionada(null));
-          this.store.dispatch(CargarFichaSeleccionada(null))
+          this.store.dispatch(CargarFichaSeleccionada(null));
           this.OpenModal();
         }
       }

@@ -132,8 +132,8 @@ export class RegistroPlanAdquisicionesService {
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `Ficha_EB_IMGA/?query=`+
-      `PlanAdquisicionesId:${Plan},` + 
+      `Ficha_EB_IMGA/?query=` +
+      `PlanAdquisicionesId:${Plan},` +
       `Rubro:${Rubro}`
     );
   }

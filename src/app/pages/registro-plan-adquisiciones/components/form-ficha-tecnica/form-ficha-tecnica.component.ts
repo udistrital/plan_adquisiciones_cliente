@@ -53,14 +53,14 @@ export class FormFichaTecnicaComponent implements OnInit {
         });
 
       }
-    })
+    });
   }
   OnClose() {
     this.matDialogRef.close();
   }
   OnSubmit() {
-    const value = this.FichaTecnicaForm.value
-    console.log(value)
+    const value = this.FichaTecnicaForm.value;
+
     if (value.Id === null) {
       this.store.dispatch(CrearRenglonFicha(value));
     } else {
