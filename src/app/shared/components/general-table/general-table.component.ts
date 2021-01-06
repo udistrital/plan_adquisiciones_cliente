@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoadAccionTabla, LoadFilaSeleccionada } from '../../actions/shared.actions';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
+import { LoadAccionTabla } from '../../actions/shared.actions';
 
 @Component({
   selector: 'ngx-general-table',
@@ -74,12 +73,9 @@ export class GeneralTableComponent implements OnInit, OnChanges {
   }
 
   SelectedAllAction(action: any) {
-
     this.store.dispatch(LoadAccionTabla({
       titulo: this.config.title,
       accion: action,
     }));
-
   }
-
 }
