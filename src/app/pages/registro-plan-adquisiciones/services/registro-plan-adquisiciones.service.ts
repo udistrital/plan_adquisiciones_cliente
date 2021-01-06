@@ -79,7 +79,7 @@ export class RegistroPlanAdquisicionesService {
     * @param [Plan] Plan por consultar
     * @returns  Plan creada.
     */
-   public getRenglonPlan(
+  public getRenglonPlan(
     Plan: any
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
@@ -119,4 +119,54 @@ export class RegistroPlanAdquisicionesService {
       Plan.Id
     );
   }
+
+  /**
+    * get Plan
+    *  se crea una Plan nueva
+    * @param [Plan] Plan por consultar
+    * @returns  Plan creada.
+    */
+  public getFichaTecnica(
+    Plan: any,
+    Rubro: any,
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Ficha_EB_IMGA/?query=`+
+      `PlanAdquisicionesId:${Plan},` + 
+      `Rubro:${Rubro}`
+    );
+  }
+  /**
+    * Post Plan
+    *  se crea una Plan nueva
+    * @param [Plan] Plan por crear
+    * @returns  Plan creada.
+    */
+  public CrearRenglonFichaTecnica(
+    Ficha: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.post(
+      `Ficha_EB_IMGA`,
+      Ficha
+    );
+  }
+  /**
+    * Put Plan
+    *  se modifica un Plan
+    * @param [Plan] Plan por modificar
+    * @returns  Plan Modificada.
+    */
+  public UpdateRenglonFichaTecnica(
+    Ficha: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.put(
+      `Ficha_EB_IMGA/`,
+      Ficha,
+      Ficha.Id
+    );
+  }
+
 }

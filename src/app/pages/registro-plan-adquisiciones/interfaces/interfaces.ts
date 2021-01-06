@@ -313,6 +313,12 @@ export const CONFIGURACION_PRUEBA_5: any = {
                 class: 'text-center',
             },
             pipe: {
+                type: 'custom',
+                config: [
+                    (data: any) => {
+                        return data.Numero + '.' + data.LineamientoId.Numero;
+                    }
+                ],
                 class: '',
             }
         },
@@ -377,7 +383,7 @@ export const CONFIGURACION_PRUEBA_5: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Meta',
+            title: 'Agregar Nueva Meta Asociada',
         }
     ],
     noData: {

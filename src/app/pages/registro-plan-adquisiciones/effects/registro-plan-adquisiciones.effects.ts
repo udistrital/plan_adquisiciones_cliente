@@ -88,4 +88,65 @@ export class RegistroPlanAdquisicionesEffects {
       )
     );
   });
+
+
+  GetFichaTecnica$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistroPlanAdquisicionesActions.ConsultarFichaTecnica),
+      exhaustMap((opciones: any) => {
+        return this.registroPlanService.getFichaTecnica(
+          opciones.PlanAdquisicionesId.Id,
+          opciones.Rubro,
+        ).pipe(
+          map((data: any) => {
+            return RegistroPlanAdquisicionesActions.CargarFichaTecnica([data]);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(RegistroPlanAdquisicionesActions.CatchError(data));
+          }));
+      }
+      )
+    );
+  });
+
+  CrearRenglonFicha$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistroPlanAdquisicionesActions.CrearRenglonFicha),
+      exhaustMap((ficha: any) =>
+        this.registroPlanService.CrearRenglonFichaTecnica(
+          ficha,
+        ).pipe(
+          map((data: any) => {
+            this.popupManager.showSuccessAlert('Ficha Agregada');
+            return RegistroPlanAdquisicionesActions.ConsultarFichaTecnica(data);
+            // return RegistroPlanAdquisicionesActions.CatchError(data);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(RegistroPlanAdquisicionesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
+  ActualizarRenglonFicha$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(RegistroPlanAdquisicionesActions.ActualizarRenglonFicha),
+      exhaustMap((ficha: any) =>
+        this.registroPlanService.UpdateRenglonFichaTecnica(
+          ficha,
+        ).pipe(
+          map((data: any) => {
+            this.popupManager.showSuccessAlert('Ficha Ajustada');
+            return RegistroPlanAdquisicionesActions.ConsultarFichaTecnica(data);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(RegistroPlanAdquisicionesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
 }
