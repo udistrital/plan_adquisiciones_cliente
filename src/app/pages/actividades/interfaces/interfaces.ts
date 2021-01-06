@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_ACTIVIDADES: any = {
     title: {
         name: 'Actividades Asociadas',
         class: 'text-center text-light',

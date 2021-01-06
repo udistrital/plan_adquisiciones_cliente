@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_LINEAMIENTOS: any = {
     title: {
         name: 'Lineamientos Asociadas',
         class: 'text-center text-light',

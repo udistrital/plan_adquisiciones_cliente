@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
     title: {
         name: 'Codificacion ARKA (UNSPSC)',
         class: 'text-center text-light',
@@ -70,7 +70,7 @@ export const CONFIGURACION_PRUEBA: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_2: any = {
+export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
     showColumnTitle: true,
     dataConfig: [
         {
@@ -207,7 +207,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_4: any = {
+export const CONFIGURACION_TABLA_FUENTES: any = {
     title: {
         name: 'Fuentes de Financiamiento',
         class: 'text-center text-light',
@@ -299,7 +299,7 @@ export const CONFIGURACION_PRUEBA_4: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_5: any = {
+export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     title: {
         name: 'FICHA DE ESTADISTICAS BASICAS DE INVERSION Y DE METODOLOGIA GENERAL AJUSTADA',
         class: 'text-center text-light',
@@ -393,4 +393,3 @@ export const CONFIGURACION_PRUEBA_5: any = {
     sort: true,
     filter: false,
 };
-

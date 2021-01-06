@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
     title: {
         name: 'PLANES DE ADQUISICIONES',
         class: 'text-center text-light',
@@ -118,7 +118,7 @@ export const CONFIGURACION_PRUEBA: any = {
     filter: true,
 };
 
-export const CONFIGURACION_PRUEBA_3: any = {
+export const CONFIGURACION_TABLA_VERSIONES_PLAN: any = {
     title: {
         name: '',
         class: 'text-center text-light',
@@ -160,9 +160,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
     filter: false,
 };
 
-
-
-export const CONFIGURACION_PRUEBA_2: any = {
+export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
     title: {
         name: '',
         class: 'text-center text-light',
@@ -320,79 +318,3 @@ export const CONFIGURACION_PRUEBA_2: any = {
     sort: true,
     filter: false,
 };
-
-export const DATOS_PRUEBA_2: any = [
-    {
-        Rubro: '3-01-001-04-05-03-0123',
-        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
-        FechaEstimada: 'Mayo 2019 - Julio 2019',
-        DuracionEstimada: '1 Año',
-        Responsable: 'Jefe Oficina Asesora de Sistemas',
-        ModalidadSeleccion: [
-            'Subasta Inversa',
-            'Contratacion Directa',
-            'Convocatoria Publica'
-        ],
-        Valor: 57091000.0,
-        FuenteRecurso: 'Funcionamiento',
-    },
-    {
-        Rubro: '3-01-001-04-05-03-0123',
-        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
-        FechaEstimada: 'Mayo 2019 - Julio 2019',
-        DuracionEstimada: '1 Año',
-        Responsable: 'Jefe Oficina Asesora de Sistemas',
-        ModalidadSeleccion: [
-            'Subasta Inversa',
-            'Contratacion Directa',
-            'Convocatoria Publica'
-        ],
-        Valor: 57091000.0,
-        FuenteRecurso: 'Funcionamiento',
-    },
-    {
-        Rubro: '3-01-001-04-05-03-0123',
-        Descripcion: 'Compra de Equipos, Computadores, Portatiles, Impresoras y otros',
-        FechaEstimada: 'Mayo 2019 - Julio 2019',
-        DuracionEstimada: '1 Año',
-        Responsable: 'Jefe Oficina Asesora de Sistemas',
-        ModalidadSeleccion: [
-            'Subasta Inversa',
-            'Contratacion Directa',
-            'Convocatoria Publica'
-        ],
-        Valor: 57091000.0,
-        FuenteRecurso: 'Funcionamiento',
-    }
-];
-
-export const DATOS_PRUEBA_3: any = [
-    {
-        '_id': '5fdb7baa86fc8cc01fc96086',
-        'id': 6
-    },
-    {
-        '_id': '5fdb7ed5986b84a9e369a386',
-        'id': 6
-    },
-    {
-        '_id': '5fdb86f43af186fdaee7cde6',
-        'id': 6
-    },
-    {
-        '_id': '5fdb8afc51063834bbaf8f6c',
-        'id': 6
-    },
-    {
-        '_id': '5fdb9a4051063834bbaf8f6d',
-        'id': 6
-    },
-    {
-        '_id': '5fdb9ea951063834bbaf8f6e',
-        'id': 6
-    },
-    {
-        '_id': '5fdb9fbd51063834bbaf8f6f',
-        'id': 6
-    }
-];

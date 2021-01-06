@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_METAS: any = {
     title: {
         name: 'Metas Asociadas',
         class: 'text-center text-light',
