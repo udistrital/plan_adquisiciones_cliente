@@ -141,4 +141,22 @@ export class PlanesEffects {
     );
   });
 
+  GetVersionPlan$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(PlanesActions.ConsultarVersion),
+      exhaustMap((opciones: any) =>
+        this.planesService.getVersionPlan(
+          opciones._id,
+        ).pipe(
+          map(data => {
+            return PlanesActions.CargarVersion(data);
+          }),
+          catchError(data => {
+            this.popupManager.showAlert('error', data.status, data.statusText);
+            return of(PlanesActions.CatchError(data));
+          }))
+      )
+    );
+  });
+
 }

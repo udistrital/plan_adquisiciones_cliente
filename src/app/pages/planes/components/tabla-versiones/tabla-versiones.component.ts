@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { ConsultarVersion } from '../../actions/planes.actions';
 import { CONFIGURACION_TABLA_VERSIONES_PLAN} from '../../interfaces/interfaces';
 import { getPlanSeleccionado, getVersionesPlan } from '../../selectors/planes.selectors';
 
@@ -30,7 +31,7 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
-
+        this.store.dispatch(ConsultarVersion(accion.fila));
       }
     });
     this.subscription2$ = combineLatest([
