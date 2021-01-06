@@ -159,33 +159,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
     sort: true,
     filter: false,
 };
-export const DATOS_PRUEBA: any = [
-    {
-        Id: 1,
-        Descripcion: 'Plan cosito',
-        Vigencia: 2020,
-        FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2020-11-20T02:18:54Z',
-        Activo: true,
-    },
-    {
-        Id: 2,
-        Descripcion: 'Plan cosito 2',
-        Vigencia: 2020,
-        FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2020-11-20T02:18:54Z',
-        Activo: true,
-    },
 
-    {
-        Id: 3,
-        Descripcion: 'Plan cosito 3',
-        Vigencia: 2020,
-        FechaCreacion: '2020-11-20T02:18:54Z',
-        FechaModificacion: '2020-11-20T02:18:54Z',
-        Activo: true,
-    },
-];
 
 
 export const CONFIGURACION_PRUEBA_2: any = {
