@@ -7,10 +7,10 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/grid';
+// loading bootstrap theme
+@import './bootstrap-variables';
+@import '~bootstrap/scss/bootstrap';
+@import './material-custom-theme';
 
 // loading progress bar theme
 @import './pace.theme';
@@ -18,10 +18,7 @@
 @import './layout';
 @import './overrides';
 
-// loading bootstrap theme
-@import './bootstrap-variables';
-@import '~bootstrap/scss/bootstrap';
-@import './material-custom-theme';
+
 
 // install the framework and custom global styles
 @include nb-install() {
