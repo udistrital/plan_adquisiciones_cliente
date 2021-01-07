@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ConsultarVersion } from '../../actions/planes.actions';
-import { CONFIGURACION_TABLA_VERSIONES_PLAN} from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_VERSIONES_PLAN } from '../../interfaces/interfaces';
 import { getPlanSeleccionado, getVersionesPlan } from '../../selectors/planes.selectors';
 
 @Component({
@@ -19,6 +21,7 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
   subscription$: any;
   subscription2$: any;
   constructor(
+    private route: Router,
     private store: Store<any>,
     private sharedService: SharedService,
   ) {
@@ -31,7 +34,12 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
-        this.store.dispatch(ConsultarVersion(accion.fila));
+        console.log(accion);
+        if (accion.accion.title === 'Ver Plan de Adquisiciones') {
+          this.store.dispatch(ConsultarVersion(accion.fila));
+          this.store.dispatch(LoadFilaSeleccionada(null));
+          this.route.navigate(['pages/plan-adquisiciones/planes/detalle-version-plan-adquisiciones']);
+        }
       }
     });
     this.subscription2$ = combineLatest([

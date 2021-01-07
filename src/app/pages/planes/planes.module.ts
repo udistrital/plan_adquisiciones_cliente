@@ -13,10 +13,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { PlanesEffects } from './effects/planes.effects';
 import { DetallePlanComponent } from './components/detalle-plan/detalle-plan.component';
 import { TablaVersionesComponent } from './components/tabla-versiones/tabla-versiones.component';
+import { DetalleVersionPlanComponent } from './components/detalle-version-plan/detalle-version-plan.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent, DetallePlanComponent, TablaVersionesComponent],
+  declarations: [LayoutComponent, TablaPlanesAdquisicionesComponent, CrearPlanAdquisicionComponent, DetallePlanComponent, TablaVersionesComponent, DetalleVersionPlanComponent],
   imports: [
     CommonModule,
     PlanesRoutingModule,
