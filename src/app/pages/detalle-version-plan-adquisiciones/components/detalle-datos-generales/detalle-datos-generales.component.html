@@ -4,14 +4,14 @@
             <p>Fecha Estimada de Inicio de Proceso de Seleccion:</p>
         </div>
         <div class="col-9 pt-3">
-            <input class="form-control" [nbDatepicker]="rangepicker">
+            <input class="form-control" [nbDatepicker]="rangepicker" [(ngModel)]="datos.FechaEstimada">
             <nb-rangepicker #rangepicker></nb-rangepicker>
         </div>
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
             <p>Duracion Estimada del Contrato:</p>
         </div>
         <div class="col-9 pt-3">
-            <!-- <span class="form-control">{{DatosGeneralesForm.value.FechaInicioSeleccion | timeRange }}</span> -->
+            <span class="form-control">{{datos.FechaEstimada | timeRange }}</span>
         </div>
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
             <p>Responsable Formulacion del Estudio de Conveniencia y Oportunidad:</p>
@@ -20,7 +20,7 @@
             <ng-container >
                 <div class="form-group">
                     <span class="form-control overflow">
-
+                        {{datos.responsableid}}
                     </span>
                 </div>
             </ng-container>
@@ -30,10 +30,10 @@
         </div>
         <div class="col-9">
             <div class="container">
-                <div class="row py-2" *ngFor="let item of Datos; index as i">
+                <div class="row py-2" *ngFor="let item of modalidades; index as i">
                     <div class="col-12">
                         <span class="form-control overflow">
-                            
+                            {{item.Nombre}}
                         </span>
                     </div>
                 </div>

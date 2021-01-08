@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-detalle-rubro',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleRubroComponent implements OnInit {
 
-  constructor() { }
+
+  @Input() datos: any;
+  fuente: any;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.fuente = this.datos.split('-')[0] + '-' + this.datos.split('-')[1];
   }
 
 }

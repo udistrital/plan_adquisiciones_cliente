@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MetasService } from '../../../metas/services/metas.service';
+import { RegistroPlanAdquisicionesService } from '../../../registro-plan-adquisiciones/services/registro-plan-adquisiciones.service';
 
 @Component({
   selector: 'ngx-detalle-meta-producto',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleMetaProductoComponent implements OnInit {
 
-  constructor() { }
+  @Input() datos: any;
+  meta: any;
+  producto: any;
+  
+  constructor(
+    private metaService: MetasService,
+    private registroService: RegistroPlanAdquisicionesService,
+  ) {
+  }
 
   ngOnInit() {
+    this.metaService.getMeta(this.datos.metaid).subscribe((meta: any) => {
+      console.log(meta);
+      this.meta = meta;
+    });
+    this.registroService.getProductos(this.datos.productoid).subscribe((producto: any) => {
+      console.log(producto);
+      this.producto = producto;
+    })
   }
 
 }
