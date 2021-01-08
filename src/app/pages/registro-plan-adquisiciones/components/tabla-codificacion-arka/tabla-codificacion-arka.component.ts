@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { resultMemoize, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA_2 } from '../../interfaces/interfaces';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CONFIGURACION_TABLA_ELEMENTOS_ARKA} from '../../interfaces/interfaces';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import Swal from 'sweetalert2';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
@@ -31,7 +30,7 @@ export class TablaCodificacionArkaComponent implements OnInit {
     private renderer: Renderer2,
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_PRUEBA;
+    this.configuracion = CONFIGURACION_TABLA_ELEMENTOS_ARKA;
     this.store.dispatch(CargarElementosARKA([]));
   }
 

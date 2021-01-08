@@ -54,3 +54,13 @@ export const getRenglonSeleccionado = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.RenglonSeleccionado
 );
+
+export const getFichaTecnica = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.FichaTecnica
+);
+
+export const getFichaSeleccionada = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.FichaSeleccionada
+);

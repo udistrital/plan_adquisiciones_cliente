@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_LINEAMIENTOS: any = {
     title: {
         name: 'Lineamientos Asociadas',
         class: 'text-center text-light',
@@ -62,26 +62,3 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: true,
 };
-export const DATOS_PRUEBA: any = [
-    {
-        Numero: '1',
-        Objetivo: 'Objetivo de Prueba 1',
-        Nombre: 'Formar ciudadanos, profesionales, investigadores, creadores e innovadores, íntegros con pensamiento crítico y cultura democrática, en contextos diferenciados inter y multiculturalespara la transformación de la sociedad',
-    },
-    {
-        Numero: '2',
-        Objetivo: 'Objetivo de Prueba 2',
-        Nombre: 'Establecer un diseño curricular dinámico y flexible que promueva el pluralismo y consolide una comunidad universitaria crítica transformadora y en armonía ambiental',
-    },
-    {
-        Numero: '3',
-        Objetivo: 'Objetivo de Prueba 3',
-        Nombre: 'Integrar las funciones universitarias por medio de la investigación, creación, innovación para la ampliación del conocimiento como bien público y para la solución de problemas de la ciudad',
-    },
-    {
-        Numero: '4',
-        Objetivo: 'Objetivo de Prueba 4',
-        Nombre: 'Garantizar, gestionar y proveer las condiciones institucionales para el cumplimiento de las funciones universitarias y el bienestar de su comunidad',
-    },
-
-];

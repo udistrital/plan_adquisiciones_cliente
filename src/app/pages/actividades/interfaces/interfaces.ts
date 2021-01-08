@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_ACTIVIDADES: any = {
     title: {
         name: 'Actividades Asociadas',
         class: 'text-center text-light',
@@ -56,45 +56,3 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: true,
 };
-export const DATOS_PRUEBA: any = [
-    {
-        numero: '1.1',
-        nombre: 'Desarrollar diplomados y/o cursos certificados',
-    },
-    {
-        numero: '2.1',
-        nombre: 'Apoyar el desarrollo y organización de eventos que permitan la visibilización de la investigación de la UD',
-    },
-    {
-        numero: '3.1',
-        nombre: 'Apoyar el desarrollo de los proyectos de investigación de los grupos y semilleros de investigación institucionalizados y registrados en el sistema SICIUD',
-    },
-    {
-        numero: '4.1',
-        nombre: 'Apoyar los registros, patentes y demás procesos asociados a la protección de la propiedad intelectual',
-    },
-    {
-        numero: '5.1',
-        nombre: 'Lograr homologación y transferencia del 100% de la oferta académica de la universidad entre sus diferentes niveles de formación.',
-    },
-    {
-        numero: '6.1',
-        nombre: 'Gestionar la publicación de los resultados de investigación de acuerdo a lo establecido en la política editorial',
-    },
-    {
-        numero: '7.1',
-        nombre: 'Apoyar el proceso editorial de revistas institucionales',
-    },
-    {
-        numero: '8.1',
-        nombre: 'Generar el apoyo para el desarrollo de proyectos de investigación cofinanciados',
-    },
-    {
-        numero: '9.1',
-        nombre: 'Apoyar contrapartidas para Convocatorias de Jóvenes investigadores',
-    },
-    {
-        numero: '10.1',
-        nombre: 'Apoyar los a procesos estratégicos en sistemas de Información que apoyan el CIDC y las estructuras de Investigación',
-    },
-];

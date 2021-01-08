@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
-import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarActividades } from '../../../actividades/actions/actividades.actions';
 import {
@@ -22,7 +21,7 @@ import {
   SeleccionarResponsable
 } from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
 import { ConsultarPlanDetallado } from '../../actions/planes.actions';
-import { CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_DETALLE_PLAN } from '../../interfaces/interfaces';
 import { getPlanDetallado, getPlanSeleccionado } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
 
@@ -49,7 +48,6 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private route: Router,
     private sharedService: SharedService,
-    private parametrics: ParametricService,
     private planesService: PlanesService,
     private popupService: PopUpManager,
   ) {
@@ -110,7 +108,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   AjustarDatos(datos: any, fuentesRecurso: any) {
 
     this.configuracion = Object.keys(datos).map((key: any, index: any) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_PRUEBA_2));
+      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN));
       ajusteConfiguracion.title.name = fuentesRecurso.find(
         (fuente: any) => fuente.Codigo === key.split(' ')[1]
       ).data.Nombre;

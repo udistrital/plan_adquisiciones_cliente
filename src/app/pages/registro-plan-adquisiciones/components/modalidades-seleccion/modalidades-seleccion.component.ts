@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { DATOS_PRUEBA } from '../../interfaces/interfaces';
 import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { CargarModalidades } from '../../actions/registro-plan-adquisiciones.actions';

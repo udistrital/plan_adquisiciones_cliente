@@ -7,7 +7,7 @@ import { getAccionTabla, getFilaSeleccionada, getNodoSeleccionado } from '../../
 import { SeleccionarLineamiento } from '../../../lineamientos/actions/lineamientos.actions';
 import { getFuenteRecursoSeleccionada, getLineamientos, getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
 import { ConsultarMetas, SeleccionarMeta, SeleccionarRubro } from '../../actions/metas.actions';
-import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_METAS } from '../../interfaces/interfaces';
 import { getMetas, getRubroSeleccionado } from '../../selectors/metas.selectors';
 
 @Component({
@@ -39,7 +39,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private route: Router
   ) {
-    this.configuracion = CONFIGURACION_PRUEBA;
+    this.configuracion = CONFIGURACION_TABLA_METAS;
   }
 
   ngOnInit() {

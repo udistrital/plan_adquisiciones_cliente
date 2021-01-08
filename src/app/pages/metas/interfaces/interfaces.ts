@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_METAS: any = {
     title: {
         name: 'Metas Asociadas',
         class: 'text-center text-light',
@@ -62,25 +62,3 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: true,
 };
-export const DATOS_PRUEBA: any = [
-    {
-        numero: '1.',
-        nombre: 'Mantener y elevar la acreditación institucional de alta calidad y alcanzar el reconocimiento internacional.',
-    },
-    {
-        numero: '2.',
-        nombre: 'Aumentar en 34% el número de estudiantes de pregrado matriculados.',
-    },
-    {
-        numero: '3.',
-        nombre: 'Aumentar el 65% de estudiantes matriculados en posgrado.',
-    },
-    {
-        numero: '4.',
-        nombre: 'Aumentar en 28% el número de programas en todos los niveles y modalidades',
-    },
-    {
-        numero: '5.',
-        nombre: 'Lograr homologación y transferencia del 100% de la oferta académica de la universidad entre sus diferentes niveles de formación.',
-    },
-];

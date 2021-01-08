@@ -34,12 +34,12 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'registro-plan-adquisiciones',
+      redirectTo: 'planes',
       pathMatch: 'full',
     },
     {
       path: '**',
-      redirectTo: 'registro-plan-adquisiciones',
+      redirectTo: 'planes',
       pathMatch: 'full',
     },
   ],
