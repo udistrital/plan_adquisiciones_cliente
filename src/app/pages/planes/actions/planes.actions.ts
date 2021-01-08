@@ -70,7 +70,7 @@ export const CargarVersion = createAction(
 );
 
 export const CargarRenglonVersion = createAction(
-  '[Planes] Cargar Version',
+  '[Planes] Cargar Renglon Version',
   props()
 );
 

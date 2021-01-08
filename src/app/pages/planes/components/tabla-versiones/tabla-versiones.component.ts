@@ -34,7 +34,6 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
-        console.log(accion);
         if (accion.accion.title === 'Ver Plan de Adquisiciones') {
           this.store.dispatch(ConsultarVersion(accion.fila));
           this.store.dispatch(LoadFilaSeleccionada(null));

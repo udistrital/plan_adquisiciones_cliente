@@ -29,3 +29,8 @@ export const getVersionPlan = createSelector(
   selectPlanesState,
   (state: fromPlanes.State) => state.VersionSeleccionada
 );
+
+export const getRenglonVersion = createSelector(
+  selectPlanesState,
+  (state: fromPlanes.State) => state.RenglonVersion
+);

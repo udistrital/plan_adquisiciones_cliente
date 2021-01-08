@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -17,7 +17,7 @@ import { PlanesService } from '../../services/planes.service';
   templateUrl: './detalle-version-plan.component.html',
   styleUrls: ['./detalle-version-plan.component.scss']
 })
-export class DetalleVersionPlanComponent implements OnInit {
+export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   configuracion: any[];
   configTotal: any;
@@ -54,7 +54,7 @@ export class DetalleVersionPlanComponent implements OnInit {
         if (accion.accion.name === 'Ver') {
           this.store.dispatch(LoadFilaSeleccionada(null));
           this.store.dispatch(CargarRenglonVersion(accion.fila));
-          this.route.navigate(['pages/plan-adquisiciones/detalle-version-plan-adquisiciones'])
+          this.route.navigate(['pages/plan-adquisiciones/detalle-version-plan-adquisiciones']);
         }
       }
     });
@@ -71,7 +71,7 @@ export class DetalleVersionPlanComponent implements OnInit {
         class: 'p-2',
         title: 'Ver Datos Rubro',
       },
-    ]
+    ];
     delete ajusteConfiguracion.tableActions;
     this.configuracion = ajusteConfiguracion;
     this.datos = (datos.registroplanadquisiciones as Array<any>).map((element: any) => {
