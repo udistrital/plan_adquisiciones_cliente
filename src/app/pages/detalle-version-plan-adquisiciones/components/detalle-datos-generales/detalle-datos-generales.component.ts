@@ -12,7 +12,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 export class DetalleDatosGeneralesComponent implements OnInit {
 
   @Input() datos: any;
-  modalidades: any
+  modalidades: any;
   subscription$: any;
 
   constructor(
@@ -28,9 +28,9 @@ export class DetalleDatosGeneralesComponent implements OnInit {
       if (this.sharedService.IfStore(modalidades)) {
         this.modalidades = (this.datos.registrofuncionamientomodalidadseleccion as Array<any>).map((element: any) => {
           return modalidades[0].find((x: any) => x.Id === parseFloat(element.idmodalidadseleccion));
-        })
-        console.log(this.modalidades);
+        });
+
       }
-    })
+    });
   }
 }

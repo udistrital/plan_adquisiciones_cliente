@@ -12,7 +12,7 @@ export class DetalleMetaProductoComponent implements OnInit {
   @Input() datos: any;
   meta: any;
   producto: any;
-  
+
   constructor(
     private metaService: MetasService,
     private registroService: RegistroPlanAdquisicionesService,
@@ -21,13 +21,13 @@ export class DetalleMetaProductoComponent implements OnInit {
 
   ngOnInit() {
     this.metaService.getMeta(this.datos.metaid).subscribe((meta: any) => {
-      console.log(meta);
+
       this.meta = meta;
     });
     this.registroService.getProductos(this.datos.productoid).subscribe((producto: any) => {
-      console.log(producto);
+
       this.producto = producto;
-    })
+    });
   }
 
 }

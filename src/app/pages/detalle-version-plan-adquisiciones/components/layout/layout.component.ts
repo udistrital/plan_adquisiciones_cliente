@@ -26,7 +26,7 @@ export class LayoutComponent implements OnInit {
     this.store.select(getRenglonVersion).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         this.Info = renglon;
-        this.store.dispatch(LoadCentroGestor({CentroGestor: renglon.centrogestor}))
+        this.store.dispatch(LoadCentroGestor({ CentroGestor: renglon.centrogestor }));
       }
     });
     this.store.select(getVersionPlan).subscribe((plan: any) => {

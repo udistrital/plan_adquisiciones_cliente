@@ -22,7 +22,7 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.datos)
+
     this.DatosTabla = this.MontarActividades(this.datos);
   }
 
