@@ -19,12 +19,12 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'prueba',
+      redirectTo: 'plan-adquisiciones',
       pathMatch: 'full',
     },
     {
       path: '**',
-      redirectTo: 'prueba',
+      redirectTo: 'plan-adquisiciones',
       pathMatch: 'full',
     },
   ],
