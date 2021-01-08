@@ -69,3 +69,8 @@ export const CargarVersion = createAction(
   props()
 );
 
+export const CargarRenglonVersion = createAction(
+  '[Planes] Cargar Version',
+  props()
+);
+

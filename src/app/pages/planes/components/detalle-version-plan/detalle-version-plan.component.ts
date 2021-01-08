@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
+import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarRenglonVersion } from '../../actions/planes.actions';
 import { CONFIGURACION_TABLA_DETALLE_PLAN } from '../../interfaces/interfaces';
 import { getVersionPlan } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
@@ -50,7 +52,8 @@ export class DetalleVersionPlanComponent implements OnInit {
     this.subscription2$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Ver') {
-          // this.route.navigate(['pages/registro-plan-adquisiciones-'])
+          this.store.dispatch(LoadFilaSeleccionada(null));
+          this.store.dispatch(CargarRenglonVersion(accion.fila));
         }
       }
     });
