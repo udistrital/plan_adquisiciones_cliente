@@ -6,8 +6,8 @@ import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/action
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CargarPlanDetallado, CargarPlanes, CargarVersionesPlan, ConsultarPlanDetallado, ConsultarPlanes, ConsultarVersionesPlan, SeleccionarPlan } from '../../actions/planes.actions';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
+import { CargarPlanDetallado, ConsultarPlanes, ConsultarVersionesPlan, SeleccionarPlan } from '../../actions/planes.actions';
+import { CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES } from '../../interfaces/interfaces';
 import { getPlanes } from '../../selectors/planes.selectors';
 
 @Component({
@@ -31,7 +31,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
     private parametrics: ParametricService,
     private popupManager: PopUpManager
   ) {
-    this.configuracion = CONFIGURACION_PRUEBA;
+    this.configuracion = CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES;
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(ConsultarPlanes({}));
     this.parametrics.CargarArbolRubros('3');

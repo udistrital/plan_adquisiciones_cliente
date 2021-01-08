@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest, iif, of } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { iif, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
-import { DATOS_PRUEBA_2 } from '../../interfaces/interfaces';
 import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 

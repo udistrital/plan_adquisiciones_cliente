@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CONFIGURACION_PRUEBA_3, DATOS_PRUEBA_3 } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_VERSIONES_PLAN} from '../../interfaces/interfaces';
 import { getPlanSeleccionado, getVersionesPlan } from '../../selectors/planes.selectors';
 
 @Component({
@@ -21,7 +21,7 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
   ) {
-    this.configuracion = CONFIGURACION_PRUEBA_3;
+    this.configuracion = CONFIGURACION_TABLA_VERSIONES_PLAN;
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

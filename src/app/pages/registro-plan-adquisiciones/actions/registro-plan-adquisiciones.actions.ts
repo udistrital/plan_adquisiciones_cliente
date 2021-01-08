@@ -84,3 +84,28 @@ export const ActualizarRenglonPlan = createAction(
   '[RegistroPlanAdquisiciones] Actualizar Renglon Plan Adquisiciones',
   props(),
 );
+
+export const ConsultarFichaTecnica = createAction(
+  '[RegistroPlanAdquisiciones] Consultar Ficha Tecnica',
+  props(),
+);
+
+export const CargarFichaTecnica = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Ficha Tecnica',
+  props(),
+);
+
+export const CargarFichaSeleccionada = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Renglon Ficha Tecnica',
+  props(),
+);
+
+export const CrearRenglonFicha = createAction(
+  '[RegistroPlanAdquisiciones] Crear Renglon Ficha Tecnica',
+  props(),
+);
+
+export const ActualizarRenglonFicha = createAction(
+  '[RegistroPlanAdquisiciones] Actualizar Renglon Ficha Tecnica',
+  props(),
+);

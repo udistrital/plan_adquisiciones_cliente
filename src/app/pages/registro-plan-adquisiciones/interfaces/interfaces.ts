@@ -1,4 +1,4 @@
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
     title: {
         name: 'Codificacion ARKA (UNSPSC)',
         class: 'text-center text-light',
@@ -70,7 +70,7 @@ export const CONFIGURACION_PRUEBA: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_2: any = {
+export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
     showColumnTitle: true,
     dataConfig: [
         {
@@ -207,7 +207,7 @@ export const CONFIGURACION_PRUEBA_2: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_4: any = {
+export const CONFIGURACION_TABLA_FUENTES: any = {
     title: {
         name: 'Fuentes de Financiamiento',
         class: 'text-center text-light',
@@ -299,7 +299,7 @@ export const CONFIGURACION_PRUEBA_4: any = {
     filter: false,
 };
 
-export const CONFIGURACION_PRUEBA_5: any = {
+export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     title: {
         name: 'FICHA DE ESTADISTICAS BASICAS DE INVERSION Y DE METODOLOGIA GENERAL AJUSTADA',
         class: 'text-center text-light',
@@ -313,6 +313,12 @@ export const CONFIGURACION_PRUEBA_5: any = {
                 class: 'text-center',
             },
             pipe: {
+                type: 'custom',
+                config: [
+                    (data: any) => {
+                        return data.Numero + '.' + data.LineamientoId.Numero;
+                    }
+                ],
                 class: '',
             }
         },
@@ -377,7 +383,7 @@ export const CONFIGURACION_PRUEBA_5: any = {
             name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Meta',
+            title: 'Agregar Nueva Meta Asociada',
         }
     ],
     noData: {
@@ -387,165 +393,3 @@ export const CONFIGURACION_PRUEBA_5: any = {
     sort: true,
     filter: false,
 };
-
-export const DATOS_PRUEBA_3: any = [
-
-    {
-        ActividadId: {
-            Id: 6,
-            Numero: 3,
-            Nombre: 'Actividad de Prueba para Registro de Fuentes 3',
-            FechaCreacion: '2020-12-08 21:11:58.241699 +0000 +0000',
-            FechaModificacion: '2020-12-08 21:11:58.241811 +0000 +0000',
-            Activo: true,
-            MetaId: {
-                Id: 3,
-                Numero: 1,
-                Nombre: 'Meta 1 asociadaghfhg',
-                FechaCreacion: '2020-11-17 15:08:55.764593 +0000 +0000',
-                FechaModificacion: '2020-11-17 17:46:07.2147 +0000 +0000',
-                Activo: true,
-                Rubro: '3-01-001-04-05-03-0123',
-                LineamientoId: {
-                    Id: 1,
-                    Numero: 1,
-                    Nombre: 'prueba 1',
-                    Objetivo: 'objetivo de prueba',
-                    FuenteRecursoId: '3-01',
-                    CentroGestor: 230,
-                    AreaFuncionalId: 1,
-                    Vigencia: 2020,
-                    FechaCreacion: '2020-11-12 18:47:40.078717 +0000 +0000',
-                    FechaModificacion: '2020-11-12 19:27:43.392857 +0000 +0000',
-                    Activo: true
-                }
-            },
-            Valor: 23000
-        },
-        Valor: 23000,
-        FuentesFinanciamiento: [
-            {
-                Vigencia: 2020,
-                Nombre: 'Recursos del Balance Estampilla UD Ley 1825 de 2020',
-                Descripcion: 'Recursos del Balance Estampilla UD Ley 1825 de 2020',
-                FechaCreacion: '0001-01-01T00:00:00Z',
-                FechaModificacion: '0001-01-01T00:00:00Z',
-                Activo: true,
-                Codigo: '2414',
-                TipoFuente: null,
-                ValorInicial: 20000000000,
-                ValorActual: 0,
-                Estado: 'distribuida',
-                Rubros: {},
-                NumeroDocumento: '34689',
-                TipoDocumento: 'RESOLUCION',
-                UnidadEjecutora: '1',
-                Movimientos: {},
-                Valor: 23000,
-                Porcentaje: 1
-            }
-        ]
-    },
-    {
-        ActividadId: {
-            Id: 1,
-            Nombre: 'Actividad 1',
-            Valor: 2000000,
-        },
-        Valor: 2000000,
-        FuentesFinanciamiento: [
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-            {
-                Id: 12,
-                Nombre: 'Estampilla Universidad Distrital',
-                Porcentaje: 50,
-                Valor: 1000000,
-            },
-        ]
-    },
-];
-
-export const DATOS_PRUEBA: any = [
-    {
-        Id: 1,
-        Nombre: 'Licitación Pública',
-        Descripcion: '',
-        CodigoAbreviacion: '',
-        Estado: true,
-        NumeroOrden: '1.00'
-    },
-    {
-        Id: 2,
-        Nombre: 'Selección Abreviada',
-        Descripcion: '',
-        CodigoAbreviacion: '',
-        Estado: true,
-        NumeroOrden: '2.00'
-    },
-];
-
-export const DATOS_PRUEBA_2: any = [
-    {
-        Codigo: '43211507',
-        Nombre: 'Computadores de Escritorio',
-    },
-    {
-        Codigo: '43212104',
-        Nombre: 'Impresoras de Inyeccion de Tinta',
-    },
-    {
-        Codigo: '43212114',
-        Nombre: 'Impresoras de Inyeccion',
-    },
-];
-
-export const DATOS_PRUEBA_4: any = [
-    {
-        Id: 12,
-        Nombre: 'Estampilla Universidad Distrital',
-        Porcentaje: 50,
-        Valor: 1000000,
-    },
-    {
-        Id: 12,
-        Nombre: 'Estampilla Universidad Distrital',
-        Porcentaje: 50,
-        Valor: 1000000,
-    },
-];
-
-export const DATOS_PRUEBA_5: any = [
-    {
-        Meta: 1,
-        Proceso: 'Jhoan',
-        Magnitud: 'sdfdfdf',
-        UnidadMedida: 'Jhoan',
-        Descripcion: 'sdfdfdf',
-    },
-    {
-        Meta: 2,
-        Proceso: 'Jhoan',
-        Magnitud: 'sdfdfdf',
-        UnidadMedida: 'Jhoan',
-        Descripcion: 'sdfdfdf',
-    },
-    {
-        Meta: 3,
-        Proceso: 'Jhoan',
-        Magnitud: 'sdfdfdf',
-        UnidadMedida: 'Jhoan',
-        Descripcion: 'sdfdfdf',
-    },
-    {
-        Meta: 4,
-        Proceso: 'Jhoan',
-        Magnitud: 'sdfdfdf',
-        UnidadMedida: 'Jhoan',
-        Descripcion: 'sdfdfdf',
-    },
-];
