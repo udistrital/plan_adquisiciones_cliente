@@ -54,6 +54,7 @@ export class DetalleVersionPlanComponent implements OnInit {
         if (accion.accion.name === 'Ver') {
           this.store.dispatch(LoadFilaSeleccionada(null));
           this.store.dispatch(CargarRenglonVersion(accion.fila));
+          this.route.navigate(['pages/plan-adquisiciones/detalle-version-plan-adquisiciones'])
         }
       }
     });
