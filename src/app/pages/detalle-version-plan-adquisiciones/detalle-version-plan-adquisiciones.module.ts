@@ -9,10 +9,15 @@ import { MatStepperModule, MatAutocompleteModule, MatDialogModule, MatSelectModu
 import { NbDatepickerModule } from '@nebular/theme';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { SharedModule } from '../../shared/shared.module';
+import { DetalleRubroComponent } from './components/detalle-rubro/detalle-rubro.component';
+import { DetalleMetaProductoComponent } from './components/detalle-meta-producto/detalle-meta-producto.component';
+import { DetalleDatosGeneralesComponent } from './components/detalle-datos-generales/detalle-datos-generales.component';
+import { DetalleActividadesFuentesComponent } from './components/detalle-actividades-fuentes/detalle-actividades-fuentes.component';
+import { DetalleElementosArkaComponent } from './components/detalle-elementos-arka/detalle-elementos-arka.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, DetalleRubroComponent, DetalleMetaProductoComponent, DetalleDatosGeneralesComponent, DetalleActividadesFuentesComponent, DetalleElementosArkaComponent],
   imports: [
     CommonModule,
     SharedModule,
