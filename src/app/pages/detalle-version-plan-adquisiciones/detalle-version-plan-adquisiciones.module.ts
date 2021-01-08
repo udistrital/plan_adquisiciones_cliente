@@ -17,7 +17,14 @@ import { DetalleElementosArkaComponent } from './components/detalle-elementos-ar
 
 
 @NgModule({
-  declarations: [LayoutComponent, DetalleRubroComponent, DetalleMetaProductoComponent, DetalleDatosGeneralesComponent, DetalleActividadesFuentesComponent, DetalleElementosArkaComponent],
+  declarations: [
+    LayoutComponent,
+    DetalleRubroComponent,
+    DetalleMetaProductoComponent,
+    DetalleDatosGeneralesComponent,
+    DetalleActividadesFuentesComponent,
+    DetalleElementosArkaComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

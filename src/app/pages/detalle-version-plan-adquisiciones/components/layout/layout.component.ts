@@ -20,9 +20,9 @@ export class LayoutComponent implements OnInit {
     this.store.select(getRenglonVersion).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         this.Informacion = renglon;
-        console.log(renglon)
+
       }
-    })
+    });
   }
 
 }

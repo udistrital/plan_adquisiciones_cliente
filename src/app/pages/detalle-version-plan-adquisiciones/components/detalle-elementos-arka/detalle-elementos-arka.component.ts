@@ -22,7 +22,7 @@ export class DetalleElementosArkaComponent implements OnInit {
     delete formatoTabla.rowActions;
     this.configuracion = formatoTabla;
     this.Datos = [];
-    console.log(this.configuracion)
+
   }
 
   ngOnInit() {
