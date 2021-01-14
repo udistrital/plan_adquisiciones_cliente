@@ -57,7 +57,7 @@ export class MetasService {
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `Meta/` +
+      `Meta?query=Id:` +
       `${Meta}`
     );
   }
