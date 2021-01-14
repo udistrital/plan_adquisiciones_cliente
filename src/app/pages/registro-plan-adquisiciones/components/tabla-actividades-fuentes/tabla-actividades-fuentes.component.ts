@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
@@ -53,10 +54,15 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
-      if (this.sharedService.IfStore(renglon)) {
-        const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad']);
-        this.store.dispatch(CargarActividades([actividad]));
+    this.subscription4$ = combineLatest([
+      this.store.select(getMeta),
+      this.store.select(getRenglonSeleccionado),
+    ]).subscribe(([meta, renglon]) => {
+      if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(meta)) {
+        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
+          const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
+          this.store.dispatch(CargarActividades([actividad]));
+        })
       }
     });
 
@@ -126,11 +132,13 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     });
   }
 
-  MontarActividades(actividades: any[]) {
+  MontarActividades(actividades: any[], datos: any) {
     return actividades.map((actividad) => {
+      const info = datos.find((x: any) => x.Id === actividad.ActividadId);
       return {
         ActividadId: {
           Id: actividad.ActividadId,
+          Id2: info.Numero + '.' +info.MetaId.Numero+ '.' + info.MetaId.LineamientoId.Numero,
           Nombre: actividad.Nombre,
           Activo: actividad.Activo,
           Valor: actividad.Valor,
