@@ -116,7 +116,10 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
 
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
-        Actividad: [this.Actividades.find((element: any) => element.Id === data.ActividadId.Id), []],
+        Actividad: [ {
+          value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
+          disabled: true,
+        }, []],
         Valor: [data.Valor, []],
       });
     } else {
