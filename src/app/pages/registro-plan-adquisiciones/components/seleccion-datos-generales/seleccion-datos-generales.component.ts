@@ -47,6 +47,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
   CrearFormulario(renglon?: any) {
     if (renglon) {
       const responsable = this.Responsables.find((x: any) => x.Id === renglon[0].ResponsableId);
+      this.Responsables.unshift(responsable);
       const fechaSeleccion = {
         start: new Date(renglon[0].FechaEstimadaInicio),
         end: new Date(renglon[0].FechaEstimadaFin)
