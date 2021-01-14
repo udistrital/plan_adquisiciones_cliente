@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">PLAN DE ADQUISICIONES</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 px-0" *ngIf="datos && configuracion">
+            <ngx-general-table [config]="configuracion" [datos]="datos"></ngx-general-table>
+        </div>
+        <div class="col-12" *ngIf="!datos && !configuracion">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+        </div>
+        <div class="col-12">
+            <ngx-btn-volver></ngx-btn-volver>
+        </div>
+    </div>
+</div>

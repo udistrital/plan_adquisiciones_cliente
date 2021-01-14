@@ -121,4 +121,19 @@ export class PlanesService {
     );
   }
 
+  /**
+    * get Plan
+    *  se solicitan las versiones del plan
+    * @param [Plan] Plan por consultar
+    * @returns  Plan creada.
+    */
+   public getVersionPlan(
+    Plan: any
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Plan_adquisiciones_mongo/` +
+      `${Plan}`
+    );
+  }
 }

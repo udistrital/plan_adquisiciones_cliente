@@ -164,7 +164,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Valor', // object key
                     title: {
-                        name: 'Nombre',
+                        name: 'Valor',
                         class: 'text-center',
                     },
                     pipe: {
