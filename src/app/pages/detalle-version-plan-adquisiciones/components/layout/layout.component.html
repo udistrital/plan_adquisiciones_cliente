@@ -1,0 +1,87 @@
+<div class="container" *ngIf="Info">
+    <div class="row">
+        <div class="col">
+            <ngx-datos-generales-iniciales [Title]="titulo" [Disabled]="true"></ngx-datos-generales-iniciales>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col py-2"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-horizontal-stepper>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Datos Iniciales</ng-template>
+                                        <div class="pt-2">
+                                        </div>
+                                        <div>
+                                            <ngx-detalle-rubro [datos]="Info.rubroid"></ngx-detalle-rubro>
+                                        </div>
+                                        <div>
+                                            <ngx-detalle-meta-producto [datos]="Info">
+                                            </ngx-detalle-meta-producto>
+                                        </div>
+                                        <div class="d-flex justify-content-end p-3">
+                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                        </div>
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Datos de Responsable</ng-template>
+                                        <div class="pt-2">
+                                            <ngx-detalle-datos-generales [datos]="Info"></ngx-detalle-datos-generales>
+                                        </div>
+                                        <div class="d-flex justify-content-between p-3">
+                                            <button class="btn btn-primary text-light" matStepperPrevious>Atras</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                        </div>
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Productos Asociados</ng-template>
+                                        <div class="py-2">
+                                            <!-- <ngx-detalle-elementos-arka
+                                                [datos]="Info.registroplanadquisicionescodigoarka">
+                                            </ngx-detalle-elementos-arka> -->
+                                            <ngx-detalle-elementos-arka>
+                                            </ngx-detalle-elementos-arka>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between p-3">
+                                            <button class="btn btn-primary text-light" matStepperPrevious>Atras</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                        </div>
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Fuentes de Financiamiento</ng-template>
+                                        <div class="py-2">
+                                            <ngx-detalle-actividades-fuentes
+                                                [datos]="Info.registroplanadquisicionesactividad">
+                                            </ngx-detalle-actividades-fuentes>
+                                        </div>
+                                        <div class="d-flex justify-content-between p-3">
+                                            <button class="btn btn-primary text-light" matStepperPrevious>Atras</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                        </div>
+                                    </mat-step>
+                                    <mat-step>
+                                        <ng-template matStepLabel>Ficha de Estadisticas</ng-template>
+                                        <div class="py-2">
+                                        </div>
+                                        <div class="d-flex justify-content-start p-3">
+                                            <button class="btn btn-primary text-light" matStepperPrevious>Atras</button>
+                                        </div>
+                                    </mat-step>
+                                </mat-horizontal-stepper>
+                                <ngx-btn-volver></ngx-btn-volver>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

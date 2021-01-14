@@ -9,6 +9,7 @@ export interface State {
   PlanDetallado: any;
   Versiones: any;
   VersionSeleccionada: any;
+  RenglonVersion: any;
 }
 
 export const initialState: State = {
@@ -17,6 +18,7 @@ export const initialState: State = {
   PlanDetallado: null,
   Versiones: null,
   VersionSeleccionada: null,
+  RenglonVersion: null,
 };
 
 const planesReducer = createReducer(
@@ -37,6 +39,9 @@ const planesReducer = createReducer(
   })),
   on(PlanesActions.CargarVersion, (state, action) => ({
     ...state, VersionSeleccionada: state.VersionSeleccionada = action
+  })),
+  on(PlanesActions.CargarRenglonVersion, (state, action) => ({
+    ...state, RenglonVersion: state.RenglonVersion = action
   })),
 );
 

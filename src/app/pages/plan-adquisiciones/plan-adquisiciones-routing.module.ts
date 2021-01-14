@@ -33,6 +33,11 @@ const routes: Routes = [{
       .then(m => m.RegistroPlanAdquisicionesModule),
     },
     {
+      path: 'detalle-version-plan-adquisiciones',
+      loadChildren: () => import('../detalle-version-plan-adquisiciones/detalle-version-plan-adquisiciones.module')
+      .then(m => m.DetalleVersionPlanAdquisicionesModule),
+    },
+    {
       path: '',
       redirectTo: 'planes',
       pathMatch: 'full',
