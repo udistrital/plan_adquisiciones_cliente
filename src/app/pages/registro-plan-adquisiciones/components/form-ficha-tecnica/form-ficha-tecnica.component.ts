@@ -4,11 +4,12 @@ import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import Swal from 'sweetalert2';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { ActualizarRenglonFicha, CrearRenglonFicha } from '../../actions/registro-plan-adquisiciones.actions';
-import { getFichaSeleccionada, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getFichaSeleccionada, getFichaTecnica, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-form-ficha-tecnica',
@@ -40,21 +41,28 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
     this.subscription$ = combineLatest([
       this.store.select(getPlanSeleccionado),
       this.store.select(getRubro),
-      this.store.select(getFichaSeleccionada)
-    ]).subscribe(([plan, rubro, ficha]) => {
+      this.store.select(getFichaSeleccionada),
+      this.store.select(getFichaTecnica)
+    ]).subscribe(([plan, rubro, ficha, fichaTecnica]) => {
       if (
         this.sharedService.IfStore(plan) &&
-        this.sharedService.IfStore(rubro)
+        this.sharedService.IfStore(rubro) &&
+        this.sharedService.IfStore(fichaTecnica)
       ) {
         this.metaService.getMetasRubro(rubro.Codigo).subscribe((metas) => {
-          this.Metas = metas;
+          
           if (this.sharedService.IfStore(ficha)) {
+            this.Metas = metas;
             this.CrearFormulario(plan, rubro, ficha);
           } else {
-            this.CrearFormulario(plan, rubro, null);
+            this.Metas = this.CargarMetas(metas, fichaTecnica[0]);
+            if (Object.keys(this.Metas).length !== 0) {
+              this.CrearFormulario(plan, rubro, null);
+            } else {
+              this.MetasAsignadas();
+            }
           }
         });
-
       }
     });
   }
@@ -110,4 +118,29 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
       });
     }
   }
+  CargarMetas(metas: any[], ficha: any[]) {
+
+    console.log(metas);
+    console.log(ficha);
+    const data: any[] = [];
+    metas.map((element: any) => {
+
+      console.log(ficha.find((x: any) => x.MetaId === element.Id))
+      if (ficha.find((x: any) => x.MetaId === element.Id) === undefined) {
+        data.push(element)
+      }
+    })
+    return data
+  }
+  MetasAsignadas() {
+      Swal.fire({
+        type: 'info',
+        title: 'Metas Asignadas',
+        text: `Todas las metas asociadas han sido asignadas`,
+        confirmButtonText: 'Aceptar',
+      }).then(() => {
+        this.OnClose();
+      });
+    
+  } 
 }
