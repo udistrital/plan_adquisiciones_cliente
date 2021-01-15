@@ -61,4 +61,16 @@ export class SharedEffects {
       )
     );
   });
+
+  GetResponsables$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SharedActions.GetResponsables),
+      mergeMap(() =>
+        this.sharedService.getResponsables()
+          .pipe(
+            map(data => SharedActions.LoadResponsables([data])),
+            catchError(data => of(SharedActions.CatchError(data))))
+      )
+    );
+  });
 }

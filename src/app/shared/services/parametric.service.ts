@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetArbolRubro, GetModalidadesSeleccion } from '../actions/shared.actions';
-import { getArbolRubro, getModalidadesSeleccion } from '../selectors/shared.selectors';
+import { GetArbolRubro, GetModalidadesSeleccion, GetResponsables } from '../actions/shared.actions';
+import { getArbolRubro, getModalidadesSeleccion, getResponsables } from '../selectors/shared.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,14 @@ export class ParametricService {
     this.store.select(getModalidadesSeleccion).subscribe((modalidades: any) => {
       if (!modalidades) {
         this.store.dispatch(GetModalidadesSeleccion({}));
+      }
+    });
+  }
+
+  CargarResponsables() {
+    this.store.select(getResponsables).subscribe((responsables: any) => {
+      if (!responsables) {
+        this.store.dispatch(GetResponsables({}));
       }
     });
   }

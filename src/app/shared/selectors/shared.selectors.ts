@@ -45,3 +45,7 @@ export const getModalidadesSeleccion = createSelector(
   (state: fromShared.State) => state.ModalidadesSeleccion
 );
 
+export const getResponsables = createSelector(
+  selectSharedState,
+  (state: fromShared.State) => state.Responsables
+);
