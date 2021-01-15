@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { CONFIGURACION_TABLA_ELEMENTOS_ARKA} from '../../interfaces/interfaces';
@@ -13,7 +13,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
   templateUrl: './tabla-codificacion-arka.component.html',
   styleUrls: ['./tabla-codificacion-arka.component.scss']
 })
-export class TablaCodificacionArkaComponent implements OnInit {
+export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
   configuracion: any;
   Datos: any;
   subscription2$: any;
@@ -32,6 +32,12 @@ export class TablaCodificacionArkaComponent implements OnInit {
     this.display = false;
     this.configuracion = CONFIGURACION_TABLA_ELEMENTOS_ARKA;
     this.store.dispatch(CargarElementosARKA([]));
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+    this.subscription3$.unsubscribe();
+    this.subscription4$.unsubscribe();
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -14,7 +14,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
   templateUrl: './seleccion-meta-producto.component.html',
   styleUrls: ['./seleccion-meta-producto.component.scss']
 })
-export class SeleccionMetaProductoComponent implements OnInit {
+export class SeleccionMetaProductoComponent implements OnInit, OnDestroy {
 
   MetaForm: FormGroup;
   Productos: any;
@@ -30,6 +30,10 @@ export class SeleccionMetaProductoComponent implements OnInit {
     private sharedService: SharedService,
   ) {
     this.CrearFormulario();
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   ngOnInit() {

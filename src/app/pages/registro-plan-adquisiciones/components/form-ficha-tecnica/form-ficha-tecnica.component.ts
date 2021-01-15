@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { getFichaSeleccionada, getRubro } from '../../selectors/registro-plan-ad
   templateUrl: './form-ficha-tecnica.component.html',
   styleUrls: ['./form-ficha-tecnica.component.scss']
 })
-export class FormFichaTecnicaComponent implements OnInit {
+export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
 
   FichaTecnicaForm: FormGroup;
   titulo: any;
@@ -31,6 +31,9 @@ export class FormFichaTecnicaComponent implements OnInit {
     private metaService: MetasService,
     // private route: Router,
   ) {
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   ngOnInit() {
