@@ -59,16 +59,23 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
       this.store.select(getRenglonSeleccionado),
     ]).subscribe(([meta, renglon]) => {
       if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(meta)) {
-        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
-          const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
-          this.store.dispatch(CargarActividades([actividad]));
-        })
+        if (parseFloat(renglon[0]['MetaId']) === meta.Id) {
+          this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
+            const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
+            this.store.dispatch(CargarActividades([actividad]));
+          })
+        } else {
+          this.store.dispatch(CargarActividades(null));
+        }
+        
       }
     });
 
     this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
-      if (elementos) {
+      if (this.sharedService.IfStore(elementos)) {
         this.Datos = JSON.parse(JSON.stringify(elementos[0]));
+      } else {
+        this.Datos = []
       }
     });
 
