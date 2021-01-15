@@ -29,7 +29,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private parametricService: ParametricService,
   ) {
-    this.parametricService.CargarResponsables()
+    this.parametricService.CargarResponsables();
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();

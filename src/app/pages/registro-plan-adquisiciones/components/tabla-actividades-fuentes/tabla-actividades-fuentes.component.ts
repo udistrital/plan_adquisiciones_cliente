@@ -63,11 +63,10 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
           this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
             const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
             this.store.dispatch(CargarActividades([actividad]));
-          })
+          });
         } else {
           this.store.dispatch(CargarActividades(null));
         }
-        
       }
     });
 
@@ -75,7 +74,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(elementos)) {
         this.Datos = JSON.parse(JSON.stringify(elementos[0]));
       } else {
-        this.Datos = []
+        this.Datos = [];
       }
     });
 
@@ -145,7 +144,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
       return {
         ActividadId: {
           Id: actividad.ActividadId,
-          Id2: info.Numero + '.' +info.MetaId.Numero+ '.' + info.MetaId.LineamientoId.Numero,
+          Id2: info.Numero + '.' + info.MetaId.Numero + '.' + info.MetaId.LineamientoId.Numero,
           Nombre: actividad.Nombre,
           Activo: actividad.Activo,
           Valor: actividad.Valor,
