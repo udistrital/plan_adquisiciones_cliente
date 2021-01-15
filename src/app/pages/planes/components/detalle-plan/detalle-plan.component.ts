@@ -7,7 +7,6 @@ import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CargarActividades } from '../../../actividades/actions/actividades.actions';
 import {
   CargarElementosARKA,
   CargarMeta,
@@ -15,6 +14,7 @@ import {
   CargarProducto,
   CargarRenglonPlan,
   CargarRubro,
+  CargarActividades,
   ConsultarRenglonPlan,
   SeleccionarFechaSeleccion,
   SeleccionarFuente,

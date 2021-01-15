@@ -116,7 +116,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
 
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
-        Actividad: [ {
+        Actividad: [{
           value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
           disabled: true,
         }, []],
@@ -169,6 +169,9 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   OnSubmit() {
     let Creacion = true;
     const Actividad = this.ActividadFuentesForm.value;
+      Actividad.Actividad.Id2 = Actividad.Actividad.Numero + '.' +
+      Actividad.Actividad.MetaId.Numero + '.' +
+      Actividad.Actividad.MetaId.LineamientoId.Numero;
     Actividad.Actividad.Valor = Actividad.Valor;
     this.ActividadesAsociadas.forEach((element: any) => {
       if (Actividad.Actividad.Id === element.ActividadId.Id) {
@@ -185,6 +188,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         FuentesFinanciamiento: this.Datos,
       });
     }
+    console.log(this.ActividadesAsociadas)
     this.store.dispatch(CargarActividades([this.ActividadesAsociadas]));
     this.OnClose();
   }
