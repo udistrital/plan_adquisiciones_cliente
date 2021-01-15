@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import { catchError, concatMap, map, exhaustMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
 import * as SharedActions from '../actions/shared.actions';
@@ -29,7 +29,7 @@ export class SharedEffects {
   GetArbolRubro$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SharedActions.GetArbolRubro),
-      mergeMap((branch) =>
+      exhaustMap((branch) =>
         this.sharedService.getArbol(branch.branch)
           .pipe(
             map(data => SharedActions.LoadArbolRubro(data)),
@@ -41,7 +41,7 @@ export class SharedEffects {
   GetVigenciaActual$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SharedActions.GetVigenciaActual),
-      mergeMap((offset) =>
+      exhaustMap((offset) =>
         this.sharedService.getVigenciaActual(offset.offset)
           .pipe(
             map(data => SharedActions.LoadVigenciaActual(data)),
@@ -53,7 +53,7 @@ export class SharedEffects {
   GetModalidadesSeleccion$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SharedActions.GetModalidadesSeleccion),
-      mergeMap(() =>
+      exhaustMap(() =>
         this.sharedService.getModalidadesDeSeleccion()
           .pipe(
             map(data => SharedActions.LoadModalidadesSeleccion([data])),
@@ -65,7 +65,7 @@ export class SharedEffects {
   GetResponsables$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SharedActions.GetResponsables),
-      mergeMap(() =>
+      exhaustMap(() =>
         this.sharedService.getResponsables()
           .pipe(
             map(data => SharedActions.LoadResponsables([data])),
