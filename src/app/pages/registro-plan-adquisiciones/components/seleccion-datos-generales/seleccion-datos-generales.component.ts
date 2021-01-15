@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
-import { getModalidadesSeleccion } from '../../../../shared/selectors/shared.selectors';
+import { getModalidadesSeleccion, getResponsables } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { SeleccionarFechaSeleccion, SeleccionarResponsable } from '../../actions/registro-plan-adquisiciones.actions';
@@ -14,7 +14,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
   templateUrl: './seleccion-datos-generales.component.html',
   styleUrls: ['./seleccion-datos-generales.component.scss']
 })
-export class SeleccionDatosGeneralesComponent implements OnInit {
+export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
 
   DatosGeneralesForm: FormGroup;
 
@@ -27,20 +27,28 @@ export class SeleccionDatosGeneralesComponent implements OnInit {
     private registroService: RegistroPlanAdquisicionesService,
     private store: Store<any>,
     private sharedService: SharedService,
+    private parametricService: ParametricService,
   ) {
+    this.parametricService.CargarResponsables()
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   ngOnInit() {
 
     this.subscription$ = combineLatest([
       this.store.select(getRenglonSeleccionado),
-      this.registroService.getResponsables()
+      this.store.select(getResponsables),
     ]).subscribe(([renglon, data]) => {
-      this.Responsables = data;
-      if (this.sharedService.IfStore(renglon) && data) {
-        this.CrearFormulario(renglon);
-      } else {
-        this.CrearFormulario();
+      if (this.sharedService.IfStore(data)) {
+        if (this.sharedService.IfStore(renglon)) {
+          this.Responsables = data[0];
+          this.CrearFormulario(renglon);
+        } else {
+          this.Responsables = data[0];
+          this.CrearFormulario();
+        }
       }
     });
   }
