@@ -66,7 +66,7 @@ export class ActividadesEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return ActividadesActions.SeleccionarActividad(data);
+            return ActividadesActions.SeleccionarActividad(data[0]);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);
