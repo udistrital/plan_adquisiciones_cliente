@@ -30,7 +30,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="MostrarResponsable">
                                         <ng-template matStepLabel>Datos de Responsable</ng-template>
                                         <div class="pt-2">
                                             <ngx-seleccion-datos-generales></ngx-seleccion-datos-generales>

@@ -1,25 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getCentroGestor } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
-import {
-  ActualizarRenglonPlan,
-  CargarActividades,
-  CargarElementosARKA,
-  CargarMeta,
-  CargarModalidades,
-  CargarProducto,
-  CargarRenglonPlan,
-  CargarRubro,
-  CrearRenglonPlan,
-  SeleccionarFechaSeleccion,
-  SeleccionarFuente,
-  SeleccionarResponsable
-} from '../../actions/registro-plan-adquisiciones.actions';
+import { ActualizarRenglonPlan, CrearRenglonPlan } from '../../actions/registro-plan-adquisiciones.actions';
 import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
@@ -27,7 +14,7 @@ import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisicio
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   titulo: any;
   TipoDePlan: any;
@@ -36,6 +23,7 @@ export class LayoutComponent implements OnInit {
   subscription$: any;
   subscription2$: any;
   subscription3$: any;
+  MostrarResponsable: boolean;
 
 
   constructor(
@@ -45,8 +33,14 @@ export class LayoutComponent implements OnInit {
   ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
+    this.MostrarResponsable = false;
     this.Guardar = false;
     this.Registro = {};
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+    this.subscription3$.unsubscribe();
   }
 
   ngOnInit() {
@@ -86,6 +80,20 @@ export class LayoutComponent implements OnInit {
         }
       }
     });
+    this.subscription3$ = combineLatest([
+      this.store.select(getRenglonSeleccionado),
+      this.store.select(getPlanSeleccionado),
+    ]).subscribe(([renglon, plan]) => {
+      if (this.sharedService.IfStore(renglon)) {
+        if (plan.Publicado) {
+          this.MostrarResponsable = false;
+        } else {
+          this.MostrarResponsable = true;
+        }
+      } else {
+        this.MostrarResponsable = true;
+      }
+    })
     this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
