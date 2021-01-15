@@ -102,6 +102,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
 

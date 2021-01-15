@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { State, Store } from '@ngrx/store';
 import { BehaviorSubject, fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../@core/managers/popUpManager';
@@ -16,6 +17,8 @@ export class SharedService {
   constructor(
     private rqManager: RequestManager,
     private store: Store<any>,
+    private route: Router,
+    private state: State<any>
   ) {
 
     this.behavior = new BehaviorSubject({
@@ -175,5 +178,11 @@ export class SharedService {
       query: '?limit=-1&sortby=Nombre&order=asc',
     };
     return this.rqManager.get('dependencia/' + query_params.query);
+  }
+
+  public RetornarAlInicio(store: any, route: any) {
+    if (Object.keys(this.state.getValue()).find(key => key ===  store) === undefined) {
+      this.route.navigate([route]);
+    }
   }
 }

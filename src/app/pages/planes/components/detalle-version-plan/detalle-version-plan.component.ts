@@ -58,6 +58,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
   AjustarDatos(datos: any) {

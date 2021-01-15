@@ -70,8 +70,8 @@ export class LayoutComponent implements OnInit {
           this.Guardar = false;
         }
       }
-
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
   OnSubmit() {
