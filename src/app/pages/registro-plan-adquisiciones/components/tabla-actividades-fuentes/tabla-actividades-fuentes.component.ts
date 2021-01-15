@@ -28,6 +28,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   subscription$: any;
   Meta: any;
   subscription4$: any;
+  subscription5$: any;
 
   constructor(
     private store: Store<any>,
@@ -44,13 +45,15 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
+    this.subscription4$.unsubscribe();
+    this.subscription5$.unsubscribe();
   }
 
   ngOnInit() {
-    this.store.select(getMeta).subscribe((meta: any) => {
+    this.subscription5$ = this.store.select(getMeta).subscribe((meta: any) => {
       if (meta) {
         if (Object.keys(meta)[0] !== 'type') {
-          this.Meta = meta;
+          this.Meta = JSON.parse(JSON.stringify(meta));
         }
       }
     });

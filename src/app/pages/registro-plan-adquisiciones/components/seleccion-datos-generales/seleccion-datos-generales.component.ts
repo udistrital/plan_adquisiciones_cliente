@@ -19,7 +19,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
   DatosGeneralesForm: FormGroup;
 
   ModalidadSeleccion: any;
-  Responsables: any;
+  Responsables: any[];
   subscription$: any;
 
   constructor(
@@ -42,11 +42,10 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
       this.store.select(getResponsables),
     ]).subscribe(([renglon, data]) => {
       if (this.sharedService.IfStore(data)) {
+        this.Responsables = JSON.parse(JSON.stringify(data[0]));
         if (this.sharedService.IfStore(renglon)) {
-          this.Responsables = data[0];
           this.CrearFormulario(renglon);
         } else {
-          this.Responsables = data[0];
           this.CrearFormulario();
         }
       }

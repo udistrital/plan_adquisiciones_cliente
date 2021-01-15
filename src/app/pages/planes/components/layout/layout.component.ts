@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ParametricService } from '../../../../shared/services/parametric.service';
 
 @Component({
   selector: 'ngx-layout',
@@ -8,11 +7,7 @@ import { ParametricService } from '../../../../shared/services/parametric.servic
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(
-    private parametricService: ParametricService,
-  ) {
-    this.parametricService.CargarResponsables();
-  }
+  constructor() { }
 
   ngOnInit() {
   }

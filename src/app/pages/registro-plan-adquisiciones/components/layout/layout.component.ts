@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -5,7 +6,20 @@ import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/
 import { getAreaFuncional, getCentroGestor } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
-import { ActualizarRenglonPlan, CrearRenglonPlan } from '../../actions/registro-plan-adquisiciones.actions';
+import {
+  ActualizarRenglonPlan,
+  CargarActividades,
+  CargarElementosARKA,
+  CargarMeta,
+  CargarModalidades,
+  CargarProducto,
+  CargarRenglonPlan,
+  CargarRubro,
+  CrearRenglonPlan,
+  SeleccionarFechaSeleccion,
+  SeleccionarFuente,
+  SeleccionarResponsable
+} from '../../actions/registro-plan-adquisiciones.actions';
 import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
@@ -27,6 +41,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
+    private location: Location,
   ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
@@ -287,3 +302,4 @@ export class LayoutComponent implements OnInit {
     return fuentes;
   }
 }
+
