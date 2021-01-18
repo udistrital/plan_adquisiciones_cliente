@@ -49,8 +49,7 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
         this.sharedService.IfStore(rubro) &&
         this.sharedService.IfStore(fichaTecnica)
       ) {
-        this.metaService.getMetasRubro(rubro.Codigo).subscribe((metas) => {
-
+        this.metaService.getMetasRubro(rubro.data.Codigo).subscribe((metas) => {
           if (this.sharedService.IfStore(ficha)) {
             this.Metas = metas;
             this.CrearFormulario(plan, rubro, ficha);
@@ -120,17 +119,17 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
   }
   CargarMetas(metas: any[], ficha: any[]) {
 
-
-
-    const data: any[] = [];
-    metas.map((element: any) => {
-
-
-      if (ficha.find((x: any) => x.MetaId === element.Id) === undefined) {
-        data.push(element);
-      }
-    });
-    return data;
+    if (Object.keys(ficha[0]).length !== 0) {
+      const data: any[] = [];
+      metas.map((element: any) => {
+        if (ficha.find((x: any) => x.MetaId === element.Id) === undefined) {
+          data.push(element);
+        }
+      });
+      return data;
+    } else {
+      return metas;
+    }
   }
   MetasAsignadas() {
     Swal.fire({
