@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="meta && producto">
+        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            <p>Meta:</p>
+        </div>
+        <div class="col-3 pt-3">
+            <ng-container>
+                <div class="form-group">
+                    <span class="form-control overflow">
+                        {{meta.Numero + '.' + meta.LineamientoId.Numero}}
+                    </span>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-6 pt-3">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{meta.Nombre}}
+                </span>
+            </div>
+        </div>
+        <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            <p>Producto:</p>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{producto.Codigo}}
+                </span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{producto.Nombre}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

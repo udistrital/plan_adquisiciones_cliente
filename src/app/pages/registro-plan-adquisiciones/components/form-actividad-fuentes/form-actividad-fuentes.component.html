@@ -1,0 +1,62 @@
+<div mat-dialog-content class="container-fluid m-0">
+    <div class="row" *ngIf="!ActividadFuentesForm">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-grow text-primary" role="status"></div>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="ActividadFuentesForm" *ngIf="ActividadFuentesForm">
+        <div class="row">
+            <div class="col py-2">
+                <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col py-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <div class="form-group">
+                    <label>Codigo:</label>
+                    <mat-select class="form-control" formControlName="Actividad">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
+                                [value]="actividad">
+                                {{actividad.Numero}}.{{actividad.MetaId.Numero}}.{{actividad.MetaId.LineamientoId.Numero}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-8">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <span class="form-control overflow">
+                        {{ActividadFuentesForm.get('Actividad').value ? ActividadFuentesForm.get('Actividad').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input currencyMask type="text" [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }"
+                        class="form-control text-left" placeholder="Valor" formControlName="Valor">
+                </div>
+            </div>
+            <div class="col-12">
+                <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="ActividadFuentesForm.invalid || !ActividadFuentesForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">
+                    {{boton}}
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnClose()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="FichaTecnicaForm">
+        <div class="col py-2">
+            <h5 *ngIf="titulo" class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="FichaTecnicaForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="FichaTecnicaForm" *ngIf="FichaTecnicaForm">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Meta:</label>
+                    <mat-select class="form-control" formControlName="MetaId">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                            <mat-option *cdkVirtualFor="let meta of Metas" class="example-item" [value]="meta.Id">
+                                {{meta.Numero}}.{{meta.LineamientoId.Numero}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Proceso:</label>
+                    <input type="text" class="form-control py-2" aria-describedby="search-table"
+                        formControlName="Proceso" placeholder="">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Magnitud:</label>
+                    <input type="number" class="form-control py-2" aria-describedby="search-table"
+                        formControlName="Magnitud" placeholder="">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Unidad de Medida:</label>
+                    <input type="text" class="form-control py-2" aria-describedby="search-table"
+                        formControlName="UnidadMedida" placeholder="">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="Descripcion"
+                        rows="2"></textarea>
+                </div>
+            </div>
+            
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="FichaTecnicaForm.invalid || !FichaTecnicaForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnClose()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -2,35 +2,30 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
-import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
-      component: ECommerceComponent,
+      path: 'prueba',
+      loadChildren: () => import('./primer-modulo/primer-modulo.module')
+      .then(m => m.PrimerModuloModule),
     },
     {
-      path: 'iot-dashboard',
-      component: DashboardComponent,
-    },
-    {
-      path: 'plan-cuentas',
-      loadChildren: () => import('./plan-cuentas/plan-cuentas.module')
-      .then(m => m.PlanCuentasModule),
+      path: 'plan-adquisiciones',
+      loadChildren: () => import('./plan-adquisiciones/plan-adquisiciones.module')
+      .then(m => m.PlanAdquisicionesModule),
     },
     {
       path: '',
-      redirectTo: 'plan-cuentas',
+      redirectTo: 'plan-adquisiciones',
       pathMatch: 'full',
     },
     {
       path: '**',
-      component: NotFoundComponent,
+      redirectTo: 'plan-adquisiciones',
+      pathMatch: 'full',
     },
   ],
 }];

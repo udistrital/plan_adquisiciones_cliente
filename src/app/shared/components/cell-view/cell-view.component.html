@@ -1,0 +1,76 @@
+<!-- Si es seleccionable -->
+<ng-container *ngIf="config.checkElement">
+    <td [class]="config.checkElement.pipe.class">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        </div>
+    </td>
+</ng-container>
+<ng-container *ngFor="let data of config.dataConfig">
+
+    <!-- Si el Dato es un Boolean -->
+    <ng-container *ngIf="data.pipe.isBoolean">
+        <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[index]">
+            <ng-container *ngIf="items[data.key]; else DatoFalse">
+                <i class="fas fa-check"></i>
+            </ng-container>
+            <ng-template #DatoFalse>
+                <i class="fas fa-minus"></i>
+            </ng-template>
+        </td>
+    </ng-container>
+    <!-- Si el Dato es un Arreglo (No Objetos) -->
+    <ng-container *ngIf="data.pipe.isArray">
+        <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[index]">
+            <ng-container *ngFor="let value of items[data.key]">
+                <span class="my-2">{{value}}</span>
+            </ng-container>
+        </td>
+    </ng-container>
+
+    <!-- Si es otro tipo de dato -->
+    <ng-container *ngIf="!data.pipe.isArray && !data.pipe.isBoolean">
+
+        <!-- Si es un Dato Sencillo (string, number, Date...) -->
+        <ng-container *ngIf="!data.compound && !data.objectKeys">
+            <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[index]">
+                {{  data.pipe.type ? (items[data.key] | multiPipe:data.pipe.type:data.pipe.config) : items[data.key] }}
+            </td>
+        </ng-container>
+
+        <!-- Si el Dato es un Arreglo de Objetos (Deja el espacio para colocarlos despues) -->
+        <ng-container *ngIf="data.compound && !data.objectKeys">
+            <ng-container *ngFor="let element3 of data.compound">
+                <td class="p-0 m-0 border-0"></td>
+            </ng-container>
+        </ng-container>
+
+        <!-- Si el Dato es un Objeto -->
+        <ng-container *ngIf="!data.compound && data.objectKeys">
+            <ng-container *ngFor="let element of items[data.key] | keyvalue">
+                <ng-container *ngFor="let element3 of data.objectKeys">
+                    <ng-container *ngIf="element3.key === element.key">
+                        <td [class]="element3.pipe.class" [attr.rowspan]="rowspanTable[index]">
+                            {{  element3.pipe.type ? (element.value | multiPipe:element3.pipe.type:element3.pipe.config) : element.value }}
+                        </td>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+
+</ng-container>
+
+<!-- Acciones -->
+<ng-container *ngIf="config.rowActions">
+    <td class="align-middle" [attr.rowspan]="rowspanTable[index]">
+        <div [class]="config.rowActions.title.actionClass">
+            <ng-container *ngFor="let actions of config.rowActions.actions">
+                <div ngxMouseOver [class]="actions.class" data-toggle="tooltip" data-placement="top"
+                    (click)="SelectedAction(actions, items, index)" title="{{actions.title}}">
+                    <i [class]="actions.icon"></i>
+                </div>
+            </ng-container>
+        </div>
+    </td>
+</ng-container>

@@ -1,0 +1,31 @@
+<form [formGroup]="FuenteForm" *ngIf="FuenteForm">
+    <fieldset [attr.disabled]="FuentesFinanciamiento ? null: 'disabled'">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                    <p>Fuente de Financiamiento:</p>
+                </div>
+                <div class="col-3 pt-3">
+                    <ng-container>
+                        <div class="form-group">
+                            <mat-select class="form-control" formControlName="fuenteSeleccionada">
+                                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
+                                    <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item" [value]="fuente">
+                                        {{fuente.Codigo}}
+                                    </mat-option>
+                                </cdk-virtual-scroll-viewport>
+                            </mat-select>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-6 pt-3">
+                    <div class="form-group">
+                        <span class="form-control overflow">
+                            {{FuenteForm.get('fuenteSeleccionada').value ? FuenteForm.get('fuenteSeleccionada').value.Nombre : '' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

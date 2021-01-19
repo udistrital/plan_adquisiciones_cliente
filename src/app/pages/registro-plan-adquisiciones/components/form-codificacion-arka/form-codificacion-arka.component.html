@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="ElementoARKAForm">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="ElementoARKAForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="ElementoARKAForm" *ngIf="ElementoARKAForm">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Codigo:</label>
+                    <input type="text" class="form-control" placeholder="" [matAutocomplete]="auto"
+                        formControlName="Elemento">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *cdkVirtualFor="let fuente of Elementos | async" class="example-item"
+                                [value]="fuente">
+                                {{fuente.Descripcion}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <span class="form-control overflow">
+                        {{ElementoARKAForm.get('Elemento').value ? ElementoARKAForm.get('Elemento').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="ElementoARKAForm.invalid || !ElementoARKAForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">
+                    {{boton}}
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

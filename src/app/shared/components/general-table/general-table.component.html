@@ -1,0 +1,130 @@
+<div class="container-fluid" *ngIf="config && datos && rowspanTable">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group mt-3" *ngIf="config.filter">
+        <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
+          placeholder="Campo de Busqueda" [(ngModel)]="stringBusqueda">
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="bg-primary text-white">
+            <!-- Titulo General -->
+            <tr *ngIf="config.title">
+              <th scope="col" colspan="100" [class]="config.title.class">
+                {{config.title.name}}
+              </th>
+            </tr>
+            <!-- Titulos Principales -->
+            <tr *ngIf="config.showColumnTitle">
+              <!-- Select / Checkbox -->
+              <ng-container *ngIf="config.checkElement">
+                <th scope="col" [attr.rowspan]="rowspanTitle" [class]="config.checkElement.title.class">
+                  {{config.checkElement.title.name}}</th>
+              </ng-container>
+              <!-- Llaves de Objetos -->
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.compound">
+                  <th scope="col" [attr.colspan]="element.compound.length" [class]="element.title.class">
+                    {{element.title.name}}</th>
+                </ng-container>
+                <ng-container *ngIf="!element.compound && !element.objectKeys">
+                  <th scope="col" [attr.rowspan]="rowspanTitle" [class]="element.title.class">{{element.title.name}}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="element.objectKeys">
+                  <th scope="col" [attr.colspan]="element.objectKeys.length" [class]="element.title.class">
+                    {{element.title.name}}</th>
+                </ng-container>
+
+              </ng-container>
+              <!-- Acciones -->
+              <ng-container *ngIf="config.rowActions">
+                <th scope="col" [attr.rowspan]="rowspanTitle" [class]="config.rowActions.title.class">
+                  {{config.rowActions.title.name}}</th>
+              </ng-container>
+            </tr>
+
+            <!-- Titulos de Datos Compuestos y Objeto -->
+            <tr *ngIf="config.showColumnTitle">
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.objectKeys">
+                  <ng-container *ngFor="let titles of element.objectKeys">
+                    <th scope="col" [class]="titles.title.class">{{titles.title.name}}</th>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngFor="let element of config.dataConfig">
+                <ng-container *ngIf="element.compound">
+                  <ng-container *ngFor="let titles of element.compound">
+                    <th scope="col" [class]="titles.title.class">{{titles.title.name}}</th>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <!-- Subtitulo -->
+            <tr *ngIf="config.subtitle">
+              <th scope="col" colspan="100" [class]="config.subtitle.class">
+                {{config.subtitle.name}}
+              </th>
+            </tr>
+          </thead>
+          <!-- Elementos Relacionados -->
+          <tbody>
+            <ng-container *ngFor="let items of datos | filterTable:stringBusqueda; index as i">
+              <tr ngx-cell-view [items]="items" [config]="config" [rowspanTable]="rowspanTable" [index]="i"></tr>
+              <!-- Para Arreglos de Objetos -->
+              <ng-container *ngFor="let data of config.dataConfig">
+                <ng-container *ngIf="data.compound">
+                  <ng-container *ngFor="let element of items[data.key]">
+                    <tr ngx-compound-cell [dataConfig]="data" [items]="element"></tr>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            
+            <ng-container *ngIf="config.noData">
+              <ng-container *ngIf="(datos | filterTable:stringBusqueda).length === 0">
+                <tr>
+                  <th scope="col" colspan="100" [class]="config.noData.class">
+                    {{config.noData.name}}
+                  </th>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="config.endSubtotal">
+              <tr>
+                <ng-container *ngFor="let subsection of config.endSubtotal.items">
+                  <th scope="col" [attr.colspan]="subsection.colspan" [class]="subsection.class">
+                    {{subsection.name}}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="config.endSubtotal.last.name">
+                  <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
+                    {{ config.endSubtotal.last.name | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
+                  </th>
+                </ng-container>
+                <ng-container *ngIf="!config.endSubtotal.last.name">
+                  <th scope="col" colspan="100" [class]="config.endSubtotal.last.class">
+                    {{ Subtotal | multiPipe:config.endSubtotal.last.pipe.type:config.endSubtotal.last.pipe.config }}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="config.tableActions" class="col-12 d-flex justify-content-around">
+      <ng-container *ngFor="let allAction of config.tableActions">
+        <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="SelectedAllAction(allAction)">
+          <div class="d-flex flex-row justify-content-around align-middle" >
+            <i [class]="allAction.icon"></i>
+            <span [class]="allAction.class">{{allAction.title}}</span>
+          </div>
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
