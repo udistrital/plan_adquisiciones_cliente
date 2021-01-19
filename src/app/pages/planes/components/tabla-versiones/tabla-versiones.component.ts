@@ -61,6 +61,6 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
         this.datosPrueba = [];
       }
     });
-
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 }

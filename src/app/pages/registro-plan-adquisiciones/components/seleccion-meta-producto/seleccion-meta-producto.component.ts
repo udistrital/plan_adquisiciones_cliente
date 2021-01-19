@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -14,7 +14,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
   templateUrl: './seleccion-meta-producto.component.html',
   styleUrls: ['./seleccion-meta-producto.component.scss']
 })
-export class SeleccionMetaProductoComponent implements OnInit {
+export class SeleccionMetaProductoComponent implements OnInit, OnDestroy {
 
   MetaForm: FormGroup;
   Productos: any;
@@ -29,43 +29,41 @@ export class SeleccionMetaProductoComponent implements OnInit {
     private store: Store<any>,
     private sharedService: SharedService,
   ) {
-    this.CrearFormulario();
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   ngOnInit() {
 
-    this.subscription$ = combineLatest([
-      this.store.select(getRenglonSeleccionado),
-      this.registroService.getProductos(),
-    ]).subscribe(([renglon, productos]) => {
-
-      if (this.sharedService.IfStore(renglon) && productos) {
-        this.metaService.getMetasRubro(renglon[0].RubroId).subscribe((metas) => {
+    this.subscription$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+      this.registroService.getProductos().subscribe((productos: any) => {
+        if (this.sharedService.IfStore(renglon) && productos) {
+          this.metaService.getMetasRubro(renglon[0].RubroId).subscribe((metas) => {
+            this.Productos = productos;
+            this.Metas = metas;
+            this.CrearFormulario(renglon);
+          });
+        } else {
           this.Productos = productos;
-          this.Metas = metas;
-          this.CrearFormulario(renglon);
-        });
-      } else {
-        this.Productos = productos;
-        this.CrearFormulario();
-      }
+          this.CrearFormulario();
+        }
+      });
+
     });
     this.subscription2$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (this.sharedService.IfStore(nodo)) {
-        if (nodo.data && !nodo.children) {
+        if (nodo.data && !nodo.children && this.MetaForm !== undefined) {
           this.metaService.getMetasRubro(nodo.data.Codigo).subscribe((data) => {
+            this.MetaForm.get('MetaSeleccionada').setValue(null);
             if (Object.keys(data[0]).length !== 0) {
-              this.MetaForm.get('MetaSeleccionada').setValue(null);
               this.Metas = data;
             } else {
-              this.MetaForm.get('MetaSeleccionada').setValue(null);
               this.Metas = undefined;
             }
           });
         }
-      } else {
-        this.MetaForm.get('MetaSeleccionada').setValue(null);
-        this.Metas = undefined;
       }
     });
   }

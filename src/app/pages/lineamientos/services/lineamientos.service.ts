@@ -43,7 +43,7 @@ export class LineamientosService {
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `Lineamiento/` +
+      `Lineamiento?query=Id:` +
       `${Lineamiento}`
     );
   }

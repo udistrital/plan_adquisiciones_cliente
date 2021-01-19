@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { iif, of } from 'rxjs';
@@ -14,7 +14,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
   templateUrl: './form-codificacion-arka.component.html',
   styleUrls: ['./form-codificacion-arka.component.scss']
 })
-export class FormCodificacionArkaComponent implements OnInit {
+export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
 
   titulo: string;
   boton: string;
@@ -35,6 +35,10 @@ export class FormCodificacionArkaComponent implements OnInit {
     this.titulo = 'Agregar Elemento ARKA';
     this.boton = 'Crear';
     // this.Elementos = DATOS_PRUEBA_2;
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   ngOnInit() {

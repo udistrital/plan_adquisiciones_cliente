@@ -38,7 +38,7 @@ export class ActividadesService {
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
     return this.rqManager.get(
-      `Actividad/` +
+      `Actividad?query=Id:` +
       `${Actividad}`
     );
   }

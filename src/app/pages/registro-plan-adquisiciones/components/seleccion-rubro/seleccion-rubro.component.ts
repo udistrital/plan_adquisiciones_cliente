@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -15,13 +15,12 @@ import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisicio
   templateUrl: './seleccion-rubro.component.html',
   styleUrls: ['./seleccion-rubro.component.scss']
 })
-export class SeleccionRubroComponent implements OnInit {
+export class SeleccionRubroComponent implements OnInit, OnDestroy {
 
   RubroForm: FormGroup;
   subscription$: any;
   fuentesRecurso: any;
   subscription2$: any;
-  subscription3$: any;
 
   constructor(
     private fb: FormBuilder,
@@ -35,10 +34,14 @@ export class SeleccionRubroComponent implements OnInit {
       RubroSeleccionado: [null, [Validators.required]],
     });
   }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+  }
 
   ngOnInit() {
 
-    this.subscription3$ = combineLatest([
+    this.subscription$ = combineLatest([
       this.store.select(getRenglonSeleccionado),
       this.store.select(getArbolRubro),
     ]).subscribe(([renglon, data]) => {

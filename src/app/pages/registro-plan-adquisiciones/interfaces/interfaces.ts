@@ -84,7 +84,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
             },
             objectKeys: [
                 {
-                    key: 'Id',
+                    key: 'Id2',
                     title: {
                         name: 'Numero',
                         class: 'text-center',

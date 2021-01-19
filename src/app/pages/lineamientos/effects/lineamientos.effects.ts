@@ -82,7 +82,7 @@ export class LineamientosEffects {
           opciones.Id
         ).pipe(
           map(data => {
-            return LineamientosActions.SeleccionarLineamiento(data);
+            return LineamientosActions.SeleccionarLineamiento(data[0]);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);
