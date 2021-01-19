@@ -22,8 +22,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   Registro: any;
   subscription$: any;
   subscription2$: any;
-  subscription3$: any;
-  MostrarResponsable: boolean;
 
 
   constructor(
@@ -33,14 +31,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
-    this.MostrarResponsable = false;
     this.Guardar = false;
     this.Registro = {};
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
-    this.subscription3$.unsubscribe();
   }
 
   ngOnInit() {
@@ -78,20 +74,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
         } else {
           this.Guardar = false;
         }
-      }
-    });
-    this.subscription3$ = combineLatest([
-      this.store.select(getRenglonSeleccionado),
-      this.store.select(getPlanSeleccionado),
-    ]).subscribe(([renglon, plan]) => {
-      if (this.sharedService.IfStore(renglon)) {
-        if (plan.Publicado) {
-          this.MostrarResponsable = false;
-        } else {
-          this.MostrarResponsable = true;
-        }
-      } else {
-        this.MostrarResponsable = true;
       }
     });
     this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
