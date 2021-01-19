@@ -34,6 +34,7 @@ export class LayoutComponent implements OnInit {
         this.Version = plan;
       }
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
 }

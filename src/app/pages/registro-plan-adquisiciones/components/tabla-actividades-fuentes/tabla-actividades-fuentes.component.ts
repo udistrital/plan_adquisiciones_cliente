@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
@@ -27,6 +28,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   subscription$: any;
   Meta: any;
   subscription4$: any;
+  subscription5$: any;
 
   constructor(
     private store: Store<any>,
@@ -43,26 +45,39 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
+    this.subscription4$.unsubscribe();
+    this.subscription5$.unsubscribe();
   }
 
   ngOnInit() {
-    this.store.select(getMeta).subscribe((meta: any) => {
+    this.subscription5$ = this.store.select(getMeta).subscribe((meta: any) => {
       if (meta) {
         if (Object.keys(meta)[0] !== 'type') {
-          this.Meta = meta;
+          this.Meta = JSON.parse(JSON.stringify(meta));
         }
       }
     });
-    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
-      if (this.sharedService.IfStore(renglon)) {
-        const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad']);
-        this.store.dispatch(CargarActividades([actividad]));
+    this.subscription4$ = combineLatest([
+      this.store.select(getMeta),
+      this.store.select(getRenglonSeleccionado),
+    ]).subscribe(([meta, renglon]) => {
+      if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(meta)) {
+        if (parseFloat(renglon[0]['MetaId']) === meta.Id) {
+          this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
+            const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
+            this.store.dispatch(CargarActividades([actividad]));
+          });
+        } else {
+          this.store.dispatch(CargarActividades(null));
+        }
       }
     });
 
     this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
-      if (elementos) {
+      if (this.sharedService.IfStore(elementos)) {
         this.Datos = JSON.parse(JSON.stringify(elementos[0]));
+      } else {
+        this.Datos = [];
       }
     });
 
@@ -126,11 +141,13 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     });
   }
 
-  MontarActividades(actividades: any[]) {
+  MontarActividades(actividades: any[], datos: any) {
     return actividades.map((actividad) => {
+      const info = datos.find((x: any) => x.Id === actividad.ActividadId);
       return {
         ActividadId: {
           Id: actividad.ActividadId,
+          Id2: info.Numero + '.' + info.MetaId.Numero + '.' + info.MetaId.LineamientoId.Numero,
           Nombre: actividad.Nombre,
           Activo: actividad.Activo,
           Valor: actividad.Valor,

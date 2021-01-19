@@ -77,7 +77,7 @@ export class MetasEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return MetasActions.SeleccionarMeta(data);
+            return MetasActions.SeleccionarMeta(data[0]);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);

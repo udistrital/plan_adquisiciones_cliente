@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/shared.actions';
@@ -13,7 +14,7 @@ import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisicio
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
 
   titulo: any;
   TipoDePlan: any;
@@ -21,17 +22,21 @@ export class LayoutComponent implements OnInit {
   Registro: any;
   subscription$: any;
   subscription2$: any;
-  subscription3$: any;
 
 
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
+    private location: Location,
   ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
     this.Guardar = false;
     this.Registro = {};
+  }
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   ngOnInit() {
@@ -70,8 +75,8 @@ export class LayoutComponent implements OnInit {
           this.Guardar = false;
         }
       }
-
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
   OnSubmit() {
@@ -287,3 +292,4 @@ export class LayoutComponent implements OnInit {
     return fuentes;
   }
 }
+

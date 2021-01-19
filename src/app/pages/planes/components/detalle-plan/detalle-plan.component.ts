@@ -7,7 +7,6 @@ import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CargarActividades } from '../../../actividades/actions/actividades.actions';
 import {
   CargarElementosARKA,
   CargarMeta,
@@ -15,6 +14,7 @@ import {
   CargarProducto,
   CargarRenglonPlan,
   CargarRubro,
+  CargarActividades,
   ConsultarRenglonPlan,
   SeleccionarFechaSeleccion,
   SeleccionarFuente,
@@ -53,6 +53,16 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   ) {
     // this.parametrics.CargarArbolRubros('3');
     this.publicar = 'Publicar Plan de Adquisiciones';
+    this.store.dispatch(CargarRubro(null));
+    this.store.dispatch(CargarMeta(null));
+    this.store.dispatch(CargarProducto(null));
+    this.store.dispatch(CargarModalidades(null));
+    this.store.dispatch(CargarElementosARKA(null));
+    this.store.dispatch(CargarActividades(null));
+    this.store.dispatch(SeleccionarResponsable(null));
+    this.store.dispatch(CargarRenglonPlan(null));
+    this.store.dispatch(SeleccionarFechaSeleccion(null));
+    this.store.dispatch(SeleccionarFuente(null));
   }
 
   ngOnInit() {
@@ -102,6 +112,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
 

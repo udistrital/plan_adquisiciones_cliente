@@ -81,3 +81,15 @@ export const LoadModalidadesSeleccion = createAction(
   '[Shared] Load Modalidad Seleccion',
   props()
 );
+
+// Responsables
+
+export const GetResponsables = createAction(
+  '[Shared] Get Responsables',
+  props()
+);
+
+export const LoadResponsables = createAction(
+  '[Shared] Load Responsables',
+  props()
+);
