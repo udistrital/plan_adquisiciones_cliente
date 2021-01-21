@@ -23,21 +23,22 @@ export class DetalleActividadesFuentesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.DatosTabla = this.MontarActividades(this.datos);
+    this.DatosTabla = this.MontarActividades(this.datos['registro_plan_adquisiciones-actividad']);
   }
 
   MontarActividades(actividades: any[]) {
+    console.log(this.datos)
     return actividades.map((actividad) => {
       return {
         ActividadId: {
-          Id: actividad.actividad.numero + '.' +
-            actividad.actividad.meta.numero + '.' +
-            actividad.actividad.meta.lineamiento.numero,
-          Nombre: actividad.actividad.nombre,
-          Valor: actividad.valor,
+          Id2: actividad.actividad.Numero + '.' +
+            actividad.actividad.MetaId.Numero + '.' +
+            actividad.actividad.MetaId.LineamientoId.Numero,
+          Nombre: actividad.actividad.Nombre,
+          Valor: actividad.Valor,
         },
-        Valor: actividad.valor,
-        FuentesFinanciamiento: this.MontarFuentes(actividad.registroinversionactividadfuentefinanciamiento, actividad.valor),
+        Valor: actividad.Valor,
+        FuentesFinanciamiento: this.MontarFuentes(actividad.FuentesFinanciamiento, actividad.Valor),
       };
     });
   }
@@ -45,10 +46,10 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   MontarFuentes(fuentes: any[], valorActividad: any) {
     return fuentes.map((fuente) => {
       return {
-        Codigo: fuente.fuentefinanciamientoid,
-        Nombre: fuente.nombre,
-        Valor: fuente.valorasignado,
-        Porcentaje: fuente.valorasignado / valorActividad,
+        Codigo: fuente.FuenteFinanciamiento,
+        Nombre: fuente.Nombre,
+        Valor: fuente.ValorAsignado,
+        Porcentaje: fuente.ValorAsignado / valorActividad,
       };
     });
   }

@@ -20,7 +20,7 @@
                                         <div class="pt-2">
                                         </div>
                                         <div>
-                                            <ngx-detalle-rubro [datos]="Info.rubroid"></ngx-detalle-rubro>
+                                            <ngx-detalle-rubro [datos]="Info"></ngx-detalle-rubro>
                                         </div>
                                         <div>
                                             <ngx-detalle-meta-producto [datos]="Info">
@@ -43,10 +43,7 @@
                                     <mat-step>
                                         <ng-template matStepLabel>Productos Asociados</ng-template>
                                         <div class="py-2">
-                                            <!-- <ngx-detalle-elementos-arka
-                                                [datos]="Info.registroplanadquisicionescodigoarka">
-                                            </ngx-detalle-elementos-arka> -->
-                                            <ngx-detalle-elementos-arka>
+                                            <ngx-detalle-elementos-arka [datos]="Info">
                                             </ngx-detalle-elementos-arka>
                                         </div>
 
@@ -58,8 +55,7 @@
                                     <mat-step>
                                         <ng-template matStepLabel>Fuentes de Financiamiento</ng-template>
                                         <div class="py-2">
-                                            <ngx-detalle-actividades-fuentes
-                                                [datos]="Info.registroplanadquisicionesactividad">
+                                            <ngx-detalle-actividades-fuentes [datos]="Info">
                                             </ngx-detalle-actividades-fuentes>
                                         </div>
                                         <div class="d-flex justify-content-between p-3">

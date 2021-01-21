@@ -16,21 +16,9 @@ export class DetalleDatosGeneralesComponent implements OnInit {
   subscription$: any;
 
   constructor(
-    private parametricService: ParametricService,
-    private sharedService: SharedService,
-    private store: Store<any>,
   ) {
-    this.parametricService.CargarModalidadesDeSeleccion();
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getModalidadesSeleccion).subscribe((modalidades: any) => {
-      if (this.sharedService.IfStore(modalidades)) {
-        this.modalidades = (this.datos.registrofuncionamientomodalidadseleccion as Array<any>).map((element: any) => {
-          return modalidades[0].find((x: any) => x.Id === parseFloat(element.idmodalidadseleccion));
-        });
-
-      }
-    });
   }
 }
