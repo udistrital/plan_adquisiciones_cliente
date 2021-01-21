@@ -21,7 +21,7 @@ import {
   SeleccionarResponsable
 } from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
 import { ConsultarPlanDetallado } from '../../actions/planes.actions';
-import { CONFIGURACION_TABLA_DETALLE_PLAN } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
 import { getPlanDetallado, getPlanSeleccionado } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
 
@@ -119,10 +119,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   AjustarDatos(datos: any, fuentesRecurso: any) {
 
     this.configuracion = Object.keys(datos).map((key: any, index: any) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN));
-      ajusteConfiguracion.title.name = fuentesRecurso.find(
-        (fuente: any) => fuente.Codigo === key.split(' ')[1]
-      ).data.Nombre;
+      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
+      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
       return ajusteConfiguracion;
     });
     this.datos = Object.keys(datos).map((key: any) => {
@@ -131,6 +129,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           start: new Date(element.FechaEstimadaInicio),
           end: new Date(element.FechaEstimadaFin),
         };
+        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
+          return data.Nombre;
+        });
         return element;
       });
       return datos[key];
