@@ -14,6 +14,7 @@ import { DetalleMetaProductoComponent } from './components/detalle-meta-producto
 import { DetalleDatosGeneralesComponent } from './components/detalle-datos-generales/detalle-datos-generales.component';
 import { DetalleActividadesFuentesComponent } from './components/detalle-actividades-fuentes/detalle-actividades-fuentes.component';
 import { DetalleElementosArkaComponent } from './components/detalle-elementos-arka/detalle-elementos-arka.component';
+import { DetalleFichaTecnicaComponent } from './components/detalle-ficha-tecnica/detalle-ficha-tecnica.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DetalleElementosArkaComponent } from './components/detalle-elementos-ar
     DetalleMetaProductoComponent,
     DetalleDatosGeneralesComponent,
     DetalleActividadesFuentesComponent,
-    DetalleElementosArkaComponent
+    DetalleElementosArkaComponent,
+    DetalleFichaTecnicaComponent
   ],
   imports: [
     CommonModule,
