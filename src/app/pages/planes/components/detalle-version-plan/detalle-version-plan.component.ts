@@ -92,7 +92,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         };
         element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
           return data.Nombre;
-        })
+        });
         return element;
       });
       return datos[key];

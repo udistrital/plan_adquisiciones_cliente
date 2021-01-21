@@ -21,7 +21,7 @@ export class DetalleElementosArkaComponent implements OnInit {
     const formatoTabla = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_ELEMENTOS_ARKA));
     formatoTabla.dataConfig[0].pipe.config[0] = (data: any) => {
       return data.split('-')[0];
-    }
+    };
     delete formatoTabla.tableActions;
     delete formatoTabla.rowActions;
     this.configuracion = formatoTabla;

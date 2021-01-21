@@ -27,7 +27,7 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   }
 
   MontarActividades(actividades: any[]) {
-    console.log(this.datos)
+
     return actividades.map((actividad) => {
       return {
         ActividadId: {
