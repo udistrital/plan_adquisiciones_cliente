@@ -8,7 +8,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { CargarFichaSeleccionada, ConsultarFichaTecnica } from '../../actions/registro-plan-adquisiciones.actions';
-import { CONFIGURACION_TABLA_FICHA_ESTADISTICA} from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_FICHA_ESTADISTICA } from '../../interfaces/interfaces';
 import { getFichaTecnica, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { FormFichaTecnicaComponent } from '../form-ficha-tecnica/form-ficha-tecnica.component';
 
@@ -34,7 +34,6 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   ) {
 
     this.configuracion = CONFIGURACION_TABLA_FICHA_ESTADISTICA;
-    console.log(this.configuracion)
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -64,7 +63,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(ficha) && this.sharedService.IfStore(rubro)) {
         if (Object.keys(ficha[0][0]).length !== 0) {
           this.metaService.getMetasRubro(rubro.data.Codigo).subscribe((metas) => {
-           this.MontarFicha(metas, ficha[0]);
+            this.MontarFicha(metas, ficha[0]);
           });
         } else {
           this.datosPrueba = [];
