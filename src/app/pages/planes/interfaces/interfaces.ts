@@ -233,19 +233,19 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
                 isArray: true,
             }
         },
-        // {
-        //     key: 'Valor',
-        //     title: {
-        //         name: 'Valor Asignado Año Vigente',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         type: 'currency',
-        //         config: [
-        //         ],
-        //         class: 'text-center align-middle',
-        //     }
-        // },
+        {
+            key: 'ValorTotalActividades',
+            title: {
+                name: 'Valor Asignado Año Vigente',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: 'text-center align-middle',
+            }
+        },
         {
             key: 'FuenteRecursosNombre',
             title: {

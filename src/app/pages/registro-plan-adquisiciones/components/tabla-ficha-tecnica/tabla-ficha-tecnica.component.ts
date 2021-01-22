@@ -25,7 +25,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   subscription2$: any;
   subscription3$: any;
   subscription4$: any;
-  Metas: any;
+
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
@@ -34,6 +34,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   ) {
 
     this.configuracion = CONFIGURACION_TABLA_FICHA_ESTADISTICA;
+    console.log(this.configuracion)
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -50,7 +51,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(plan) && this.sharedService.IfStore(rubro)) {
         this.store.dispatch(ConsultarFichaTecnica({
           PlanAdquisicionesId: plan,
-          Rubro: rubro.Codigo
+          Rubro: rubro.data.Codigo
         }));
 
       }
@@ -62,26 +63,8 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
     ]).subscribe(([ficha, rubro]) => {
       if (this.sharedService.IfStore(ficha) && this.sharedService.IfStore(rubro)) {
         if (Object.keys(ficha[0][0]).length !== 0) {
-          this.metaService.getMetasRubro(rubro.Codigo).subscribe((metas) => {
-            this.Metas = metas;
-            this.datosPrueba = (ficha[0] as Array<any>).map((element: any) => {
-              return {
-                Id: element.Id,
-                MetaId: element.MetaId,
-                Meta: this.Metas.find((x: any) => x.Id === element.MetaId),
-                Proceso: element.Proceso,
-                Magnitud: element.Magnitud,
-                UnidadMedida: element.UnidadMedida,
-                Descripcion: element.Descripcion,
-                Activo: element.Activo,
-                Rubro: element.Rubro,
-                PlanAdquisicionesId: element.PlanAdquisicionesId,
-                FechaCreacion: element.FechaCreacion,
-                FechaModificacion: element.FechaModificacion,
-              };
-
-            });
-
+          this.metaService.getMetasRubro(rubro.data.Codigo).subscribe((metas) => {
+           this.MontarFicha(metas, ficha[0]);
           });
         } else {
           this.datosPrueba = [];
@@ -114,6 +97,25 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   OpenModal() {
     this.matDialog.open(FormFichaTecnicaComponent, {
       width: '500px',
+    });
+  }
+
+  MontarFicha(metas: any, ficha: any) {
+    this.datosPrueba = (ficha as Array<any>).map((element: any) => {
+      return {
+        Id: element.Id,
+        MetaId: element.MetaId,
+        Meta: metas.find((x: any) => x.Id === element.MetaId),
+        Proceso: element.Proceso,
+        Magnitud: element.Magnitud,
+        UnidadMedida: element.UnidadMedida,
+        Descripcion: element.Descripcion,
+        Activo: element.Activo,
+        Rubro: element.Rubro,
+        PlanAdquisicionesId: element.PlanAdquisicionesId,
+        FechaCreacion: element.FechaCreacion,
+        FechaModificacion: element.FechaModificacion,
+      };
     });
   }
 
