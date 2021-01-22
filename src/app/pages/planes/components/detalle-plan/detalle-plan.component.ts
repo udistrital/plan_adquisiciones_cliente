@@ -5,7 +5,7 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAccionTabla, LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
-import { getAccionTabla, getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import {
   CargarElementosARKA,
@@ -36,6 +36,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   configTotal: any;
   datos: any[];
   publicar: any;
+  TotalPlan: any;
 
   subscription$: any;
   subscription2$: any;
@@ -98,12 +99,6 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         }
       }
     });
-    // Seleccionar Nuevo Plan
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      if (this.sharedService.IfStore(accion)) {
-        this.CrearRenglon();
-      }
-    });
     // Seleccionar Fila Tabla
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
@@ -117,25 +112,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
 
   AjustarDatos(datos: any, fuentesRecurso: any) {
-
-    this.configuracion = Object.keys(datos).map((key: any, index: any) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
-      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
-      return ajusteConfiguracion;
-    });
-    this.datos = Object.keys(datos).map((key: any) => {
-      (datos[key] as Array<any>).map((element: any) => {
-        element.FechaEstimada = {
-          start: new Date(element.FechaEstimadaInicio),
-          end: new Date(element.FechaEstimadaFin),
-        };
-        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
-          return data.Nombre;
-        });
-        return element;
-      });
-      return datos[key];
-    });
+    this.configuracion = this.AjustarConfiguracion(datos);
+    this.datos = this.planesService.AjustarDatosPlan(datos);
+    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 
   CrearRenglon() {
@@ -162,7 +141,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
-    this.subscription2$.unsubscribe();
+    this.subscription4$.unsubscribe();
     this.subscription3$.unsubscribe();
   }
 
@@ -182,4 +161,14 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       );
     });
   }
+
+  AjustarConfiguracion(datos: any) {
+    return Object.keys(datos).map((key: any, index: any) => {
+      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
+      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
+      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + datos[key][0].FuenteRecursosNombre;
+      return ajusteConfiguracion;
+    });
+  }
+
 }
