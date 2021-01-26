@@ -1,6 +1,6 @@
 export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
     title: {
-        name: 'Codificacion ARKA (UNSPSC)',
+        name: 'Codificacion UNSPSC',
         class: 'text-center text-light',
     },
     showColumnTitle: true,

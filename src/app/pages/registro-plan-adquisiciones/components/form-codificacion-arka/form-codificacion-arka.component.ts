@@ -32,7 +32,7 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
     private registroPlanService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
   ) {
-    this.titulo = 'Agregar Elemento ARKA';
+    this.titulo = 'Agregar Elemento';
     this.boton = 'Crear';
     // this.Elementos = DATOS_PRUEBA_2;
   }
@@ -46,12 +46,12 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
 
       this.index = null;
       if (this.sharedService.IfStore(fila) && fila.accion.title === 'Editar Elemento') {
-        this.titulo = 'Editar Elemento ARKA';
+        this.titulo = 'Editar Elemento';
         this.boton = 'Editar';
         this.index = fila.index;
         this.CrearElementoARKAForm(fila.fila);
       } else {
-        this.titulo = 'Agregar Elemento ARKA';
+        this.titulo = 'Agregar Elemento';
         this.boton = 'Crear';
         this.CrearElementoARKAForm(null);
       }
