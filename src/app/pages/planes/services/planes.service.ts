@@ -136,4 +136,27 @@ export class PlanesService {
       `${Plan}`
     );
   }
+
+  public SacarTotalPlan(plan: any) {
+    return Object.keys(plan).map((key: any) => {
+      return (plan[key] as Array<any>).map((element: any) => {
+        return element.ValorTotalActividades;
+      }).reduce((accumulator, currentValue) => accumulator + currentValue);
+    }).reduce((accumulator, currentValue) => accumulator + currentValue);
+  }
+  public AjustarDatosPlan(datos: any) {
+    return Object.keys(datos).map((key: any) => {
+      (datos[key] as Array<any>).map((element: any) => {
+        element.FechaEstimada = {
+          start: new Date(element.FechaEstimadaInicio),
+          end: new Date(element.FechaEstimadaFin),
+        };
+        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
+          return data.Nombre;
+        });
+        return element;
+      });
+      return datos[key];
+    });
+  }
 }

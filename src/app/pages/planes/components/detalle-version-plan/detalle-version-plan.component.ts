@@ -27,12 +27,14 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   subscription$: any;
   subscription2$: any;
   Plan: any;
+  TotalPlan: any;
 
 
   constructor(
     private store: Store<any>,
     private route: Router,
     private sharedService: SharedService,
+    private planesService: PlanesService,
   ) {
   }
 
@@ -70,9 +72,20 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   AjustarDatos(datos: any) {
 
-    this.configuracion = Object.keys(datos).map((key) => {
+    this.configuracion = this.AjustarConfiguracion(datos);
+    this.datos = this.planesService.AjustarDatosPlan(datos);
+    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+    this.subscription2$.unsubscribe();
+  }
+  AjustarConfiguracion(datos: any) {
+    return Object.keys(datos).map((key) => {
       const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
       ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
+      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + datos[key][0].FuenteRecursosNombre;
       ajusteConfiguracion.rowActions.actions = [
         {
           name: 'Ver',
@@ -84,24 +97,6 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       delete ajusteConfiguracion.tableActions;
       return ajusteConfiguracion;
     });
-    this.datos = Object.keys(datos).map((key: any) => {
-      (datos[key] as Array<any>).map((element: any) => {
-        element.FechaEstimada = {
-          start: new Date(element.FechaEstimadaInicio),
-          end: new Date(element.FechaEstimadaFin),
-        };
-        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
-          return data.Nombre;
-        });
-        return element;
-      });
-      return datos[key];
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
-    this.subscription2$.unsubscribe();
   }
 
 }
