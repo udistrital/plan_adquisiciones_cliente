@@ -90,7 +90,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
 
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      console.log(accion)
+
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Agregar Actividad y Fuentes Asociadas') {
           if (this.CentroGestor && this.AreaFuncional) {

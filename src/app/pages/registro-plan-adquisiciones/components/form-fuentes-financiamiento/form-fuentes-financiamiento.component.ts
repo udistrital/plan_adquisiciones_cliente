@@ -67,7 +67,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         };
         this.CalcularValorMaximo(fuente, fuentes);
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
-          console.log(fuentesAsociadas)
+
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);
@@ -102,7 +102,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
       });
     }
     this.FuenteFinanciamientoForm.get('FuenteSeleccionada').valueChanges.subscribe((value: any) => {
-      console.log(value.ValorActual, this.ValorDisponible)
+
       if (value.ValorActual < this.ValorDisponible) {
         this.Valor2 = value.ValorActual;
         this.FuenteFinanciamientoForm.controls['Valor'].setValidators(Validators.max(value.ValorActual));
@@ -112,9 +112,9 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         this.FuenteFinanciamientoForm.controls['Valor'].setValidators(Validators.max(this.ValorDisponible));
         this.FuenteFinanciamientoForm.controls['Valor'].updateValueAndValidity();
       }
-      console.log(this.FuenteFinanciamientoForm.controls)
-    })
-    
+
+    });
+
   }
 
   OnClose() {

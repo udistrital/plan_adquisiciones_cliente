@@ -66,21 +66,24 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(meta)) {
         this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
           if (Object.keys(actividades2[0]).length !== 0) {
-            this.Actividades = actividades2;
             if (this.sharedService.IfStore(actividad)) {
+              this.Actividades = actividades2;
               this.CrearActividadFuentesForm(actividad);
               this.titulo = 'Editar Actividad';
               this.boton = 'Editar';
             } else {
+              if (this.sharedService.IfStore(actividades)) {
+                this.ActividadesAsociadas = actividades[0];
+                this.Actividades = this.MontarActividades(actividades2, actividades[0]);
+              } else {
+                this.Actividades = actividades2;
+              }
               this.CrearActividadFuentesForm(null);
               this.titulo = 'Agregar Actividad';
               this.boton = 'Crear';
             }
           }
         });
-      }
-      if (this.sharedService.IfStore(actividades)) {
-        this.ActividadesAsociadas = actividades[0];
       }
     });
     // Seleccionar Elemento
@@ -191,5 +194,14 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(CargarActividades([this.ActividadesAsociadas]));
     this.OnClose();
+  }
+  MontarActividades(datos: any, actividadesAsociadas: any) {
+    let actividad: any = [];
+    datos.forEach((element: any) => {
+      if (actividadesAsociadas.find((data: any) => data.ActividadId.Id === element.Id) === undefined) {
+        actividad.push(element);
+      }
+    });
+    return actividad;
   }
 }
