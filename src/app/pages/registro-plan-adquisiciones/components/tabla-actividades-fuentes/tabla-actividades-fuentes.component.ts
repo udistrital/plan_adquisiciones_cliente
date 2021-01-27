@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import Swal from 'sweetalert2';
+import { PopUpManager } from '../../../../@core/managers/popUpManager';
 
-import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
+import { getAccionTabla, getAreaFuncional, getCentroGestor, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { CargarActividades, CargarFuentes, SeleccionarActividad } from '../../actions/registro-plan-adquisiciones.actions';
@@ -29,13 +30,17 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   Meta: any;
   subscription4$: any;
   subscription5$: any;
+  AreaFuncional: any;
+  CentroGestor: any;
+  subscription6$: any;
+  subscription7$: any;
 
   constructor(
     private store: Store<any>,
     private matDialog: MatDialog,
     private sharedService: SharedService,
-    private registroService: RegistroPlanAdquisicionesService,
     private actividadesService: ActividadesService,
+    private popupService: PopUpManager,
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES_FUENTES;
@@ -47,6 +52,8 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     this.subscription3$.unsubscribe();
     this.subscription4$.unsubscribe();
     this.subscription5$.unsubscribe();
+    this.subscription6$.unsubscribe();
+    this.subscription7$.unsubscribe();
   }
 
   ngOnInit() {
@@ -83,31 +90,49 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
 
     // Seleccionar Elemento
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-      if (accion) {
-        if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Agregar Actividad y Fuentes Asociadas') {
+      console.log(accion)
+      if (this.sharedService.IfStore(accion)) {
+        if (accion.accion.title === 'Agregar Actividad y Fuentes Asociadas') {
+          if (this.CentroGestor && this.AreaFuncional) {
             this.store.dispatch(SeleccionarActividad(null));
             this.store.dispatch(CargarFuentes(null));
             setTimeout(() => {
               this.OpenModal();
             }, 0);
-
+          } else {
+            this.popupService.showInfoAlert('Selecciona el centro gestor y el area funcional', 'Info');
           }
         }
       }
     });
     // Nuevo Elemento
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
-      if (accion) {
-        if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Editar Actividad y Fuentes Asociadas') {
+      if (this.sharedService.IfStore(accion)) {
+        if (accion.accion.title === 'Editar Actividad y Fuentes Asociadas') {
+          if (this.CentroGestor && this.AreaFuncional) {
             this.store.dispatch(SeleccionarActividad(accion.fila));
             this.store.dispatch(CargarFuentes([accion.fila.FuentesFinanciamiento]));
             setTimeout(() => {
               this.OpenModal();
             }, 0);
+          } else {
+            this.popupService.showInfoAlert('Seleccionar el centro gestor y el area funcional', 'Info');
           }
         }
+      }
+    });
+    this.subscription6$ = this.store.select(getAreaFuncional).subscribe((area: any) => {
+      if (this.sharedService.IfStore(area)) {
+        this.AreaFuncional = area;
+      } else {
+        this.AreaFuncional = undefined;
+      }
+    });
+    this.subscription7$ = this.store.select(getCentroGestor).subscribe((centro: any) => {
+      if (this.sharedService.IfStore(centro)) {
+        this.CentroGestor = centro.CentroGestor;
+      } else {
+        this.CentroGestor = undefined;
       }
     });
   }
