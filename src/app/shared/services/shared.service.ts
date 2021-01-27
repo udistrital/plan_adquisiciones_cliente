@@ -175,7 +175,7 @@ export class SharedService {
   public getResponsables() {
     this.rqManager.setPath('OIKOS_2_SERVICE');
     const query_params = {
-      query: '?limit=-1&sortby=Nombre&order=asc',
+      query: '?query=Activo:true&limit=-1&sortby=Nombre&order=asc',
     };
     return this.rqManager.get('dependencia/' + query_params.query);
   }

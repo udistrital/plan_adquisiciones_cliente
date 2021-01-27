@@ -77,23 +77,29 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
       });
     }
     this.Elementos = this.ElementoARKAForm.get('Elemento').valueChanges.pipe(
-      map(value => typeof value === 'string' ? value : value.Descripcion),
-      switchMap(value => iif(() => value.length > 3, this.registroPlanService.getElementosARKA(value), of([])))
+      map(value => typeof value === 'string' ? value : value.Codigo),
+      switchMap(value => iif(() => value.length > 2, this.registroPlanService.getElementosARKA(value), of([])))
     );
   }
 
   getOptionText(valor: any): string | undefined {
-    return valor ? valor.Descripcion : undefined;
+    return valor ? valor.Codigo : undefined;
   }
 
   OnSubmit() {
     if (this.index === null) {
-      this.ElementosTabla.push(this.ElementoARKAForm.value.Elemento);
+      let elemento = this.TransformarElemento(this.ElementoARKAForm.value.Elemento)
+      this.ElementosTabla.push(elemento);
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     } else {
-      this.ElementosTabla[this.index] = this.ElementoARKAForm.value.Elemento;
+      let elemento2 = this.TransformarElemento(this.ElementoARKAForm.value.Elemento)
+      this.ElementosTabla[this.index] = elemento2;
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     }
+  }
+  TransformarElemento(elemento: any) {
+    elemento.Descripcion = elemento.Codigo + '-' + elemento.Descripcion;
+    return elemento;
   }
 
 }
