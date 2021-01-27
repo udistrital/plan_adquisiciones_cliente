@@ -27,6 +27,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
   subscription2$: any;
   FuentesAsociadas: any;
   valoresFuentes: any;
+  Valor2: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -37,7 +38,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
-    this.titulo = 'Agregar Fuente';
+    this.titulo = 'Agregar Fuente de Financiamiento';
     this.boton = 'Crear';
     this.FuentesAsociadas = [];
   }
@@ -66,15 +67,15 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         };
         this.CalcularValorMaximo(fuente, fuentes);
         this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuentesAsociadas: any) => {
-
+          console.log(fuentesAsociadas)
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);
-            this.titulo = 'Editar Fuente';
+            this.titulo = 'Editar Fuente de Financiamiento';
             this.boton = 'Editar';
           } else {
             this.CrearFuenteFinanciamientoForm(null);
-            this.titulo = 'Agregar Fuente';
+            this.titulo = 'Agregar Fuente de Financiamiento';
             this.boton = 'Crear';
           }
         });
@@ -100,6 +101,20 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         Valor: [null, [Validators.max(this.ValorDisponible), Validators.required]],
       });
     }
+    this.FuenteFinanciamientoForm.get('FuenteSeleccionada').valueChanges.subscribe((value: any) => {
+      console.log(value.ValorActual, this.ValorDisponible)
+      if (value.ValorActual < this.ValorDisponible) {
+        this.Valor2 = value.ValorActual;
+        this.FuenteFinanciamientoForm.controls['Valor'].setValidators(Validators.max(value.ValorActual));
+        this.FuenteFinanciamientoForm.controls['Valor'].updateValueAndValidity();
+      } else {
+        this.Valor2 = this.ValorDisponible;
+        this.FuenteFinanciamientoForm.controls['Valor'].setValidators(Validators.max(this.ValorDisponible));
+        this.FuenteFinanciamientoForm.controls['Valor'].updateValueAndValidity();
+      }
+      console.log(this.FuenteFinanciamientoForm.controls)
+    })
+    
   }
 
   OnClose() {
@@ -125,6 +140,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     if (this.ValorDisponible === 0) {
       this.LaunchValueNullModal();
     }
+    this.Valor2 = this.ValorDisponible;
   }
 
   LaunchValueNullModal() {
