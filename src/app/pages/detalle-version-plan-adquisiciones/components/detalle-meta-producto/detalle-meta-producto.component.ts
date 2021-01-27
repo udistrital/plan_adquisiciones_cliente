@@ -20,11 +20,11 @@ export class DetalleMetaProductoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.metaService.getMeta(this.datos.metaid).subscribe((meta: any) => {
+    this.metaService.getMeta(this.datos.MetaId).subscribe((meta: any) => {
       this.meta = meta[0];
     });
-    this.registroService.getProductos(this.datos.productoid).subscribe((producto: any) => {
-      this.producto = producto[0];
+    this.registroService.getProductos(this.datos.ProductoId).subscribe((producto: any) => {
+      this.producto = producto;
     });
   }
 

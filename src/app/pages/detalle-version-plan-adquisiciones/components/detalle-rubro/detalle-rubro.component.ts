@@ -15,7 +15,7 @@ export class DetalleRubroComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fuente = this.datos.split('-')[0] + '-' + this.datos.split('-')[1];
+    this.fuente = this.datos.RubroId.split('-')[0] + '-' + this.datos.RubroId.split('-')[1];
   }
 
 }

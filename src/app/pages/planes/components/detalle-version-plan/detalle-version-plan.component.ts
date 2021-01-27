@@ -8,7 +8,7 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarRenglonVersion } from '../../actions/planes.actions';
-import { CONFIGURACION_TABLA_DETALLE_PLAN } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
 import { getVersionPlan } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
 
@@ -26,8 +26,6 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   subscription$: any;
   subscription2$: any;
-  subscription3$: any;
-  subscription4$: any;
   Plan: any;
 
 
@@ -35,16 +33,25 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private route: Router,
     private sharedService: SharedService,
-    private planesService: PlanesService,
-    private popupService: PopUpManager,
   ) {
   }
 
   ngOnInit() {
     // lectura de Datos con fuentes de Recurso para renderizacion
-    this.subscription$ = this.store.select(getVersionPlan).subscribe((plan: any) => {
-      if (this.sharedService.IfStore(plan)) {
-        this.AjustarDatos(plan);
+    this.subscription$ = combineLatest([
+      this.store.select(getVersionPlan),
+      this.store.select(getArbolRubro).pipe(
+        map(data => {
+          if (Object.keys(data).length !== 0) {
+            return data[0].children;
+          } else {
+            return null;
+          }
+        }),
+      ),
+    ]).subscribe(([plan, fuentesRecurso]) => {
+      if (this.sharedService.IfStore(plan) && this.sharedService.IfStore(fuentesRecurso)) {
+        this.AjustarDatos(plan['registroplanadquisiciones']);
       }
     });
 
@@ -63,26 +70,32 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   AjustarDatos(datos: any) {
 
-    const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN));
-    ajusteConfiguracion.title.name = datos.descripcion;
-    ajusteConfiguracion.rowActions.actions = [
-      {
-        name: 'Ver',
-        icon: 'fas fa-list',
-        class: 'p-2',
-        title: 'Ver Datos Rubro',
-      },
-    ];
-    delete ajusteConfiguracion.tableActions;
-    this.configuracion = ajusteConfiguracion;
-    this.datos = (datos.registroplanadquisiciones as Array<any>).map((element: any) => {
-      element.RubroId = element.rubroid,
-        element.FechaEstimada = {
-          start: new Date(element.fechaestimadainicio),
-          end: new Date(element.fechaestimadafin),
+    this.configuracion = Object.keys(datos).map((key) => {
+      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
+      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
+      ajusteConfiguracion.rowActions.actions = [
+        {
+          name: 'Ver',
+          icon: 'fas fa-list',
+          class: 'p-2',
+          title: 'Ver Datos Rubro',
         },
-        element.ResponsableId = element.responsableid;
-      return element;
+      ];
+      delete ajusteConfiguracion.tableActions;
+      return ajusteConfiguracion;
+    });
+    this.datos = Object.keys(datos).map((key: any) => {
+      (datos[key] as Array<any>).map((element: any) => {
+        element.FechaEstimada = {
+          start: new Date(element.FechaEstimadaInicio),
+          end: new Date(element.FechaEstimadaFin),
+        };
+        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
+          return data.Nombre;
+        });
+        return element;
+      });
+      return datos[key];
     });
   }
 

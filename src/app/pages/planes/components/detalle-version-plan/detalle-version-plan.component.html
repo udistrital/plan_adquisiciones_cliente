@@ -6,7 +6,11 @@
     </div>
     <div class="row">
         <div class="col-12 px-0" *ngIf="datos && configuracion">
-            <ngx-general-table [config]="configuracion" [datos]="datos"></ngx-general-table>
+            <ng-container *ngFor="let table of configuracion; index as i">
+                <div class="py-2">
+                    <ngx-general-table [config]="table" [datos]="datos[i]"></ngx-general-table>
+                </div>
+            </ng-container>
         </div>
         <div class="col-12" *ngIf="!datos && !configuracion">
             <div class="d-flex justify-content-center">
