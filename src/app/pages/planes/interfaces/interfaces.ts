@@ -160,7 +160,8 @@ export const CONFIGURACION_TABLA_VERSIONES_PLAN: any = {
     filter: false,
 };
 
-export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
+
+export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
     title: {
         name: '',
         class: 'text-center text-light',
@@ -177,16 +178,16 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
                 class: 'text-center align-middle',
             }
         },
-        // {
-        //     key: 'Descripcion',
-        //     title: {
-        //         name: 'Descripcion',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-justify align-middle',
-        //     }
-        // },
+        {
+            key: 'RubroNombre',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-justify align-middle',
+            }
+        },
         {
             key: 'FechaEstimada',
             title: {
@@ -212,7 +213,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
             }
         },
         {
-            key: 'ResponsableId',
+            key: 'ResponsableNombre',
             title: {
                 name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
                 class: 'text-center align-middle',
@@ -221,49 +222,40 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
                 class: 'text-center align-middle',
             }
         },
-        // {
-        //     key: 'ModalidadSeleccion',
-        //     title: {
-        //         name: 'Modalidad de Seleccion',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'd-flex flex-column align-items-center text-center align-middle',
-        //         isArray: true,
-        //     }
-        // },
-        // {
-        //     key: 'Valor',
-        //     title: {
-        //         name: 'Valor Asignado Año Vigente',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         type: 'currency',
-        //         config: [
-        //         ],
-        //         class: 'text-center align-middle',
-        //     }
-        // },
-        // {
-        //     key: 'FuenteRecurso',
-        //     title: {
-        //         name: 'Fuente de Recurso',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-center align-middle',
-        //     }
-        // },{
-        //     key: 'FuenteRecurso',
-        //     title: {
-        //         name: 'Fuente de Recurso',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-center align-middle',
-        //     }
-        // },
+        {
+            key: 'ModalidadSeleccion',
+            title: {
+                name: 'Modalidad de Seleccion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'd-flex flex-column align-items-center text-center align-middle justify-content-around',
+                isArray: true,
+            }
+        },
+        {
+            key: 'ValorTotalActividades',
+            title: {
+                name: 'Valor Asignado Año Vigente',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'FuenteRecursosNombre',
+            title: {
+                name: 'Fuente de Recurso',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
     ],
     // subtitle: {
     //     name: '',
@@ -284,37 +276,37 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
             },
         ],
     },
-    tableActions: [
-        {
-            name: 'nuevo',
-            icon: 'fas fa-plus py-1 px-2',
-            class: 'px-2 mx-2',
-            title: 'Agregar Rubro',
-        },
-    ],
+    // tableActions: [
+    //     {
+    //         name: 'nuevo',
+    //         icon: 'fas fa-plus py-1 px-2',
+    //         class: 'px-2 mx-2',
+    //         title: 'Agregar Rubro',
+    //     },
+    // ],
     noData: {
         name: 'No Existen Rubros Asociados',
         class: 'text-center',
     },
-    // endSubtotal: {
-    //     property: 'Valor',
-    //     items: [
-    //         {
-    //             colspan: 6,
-    //             name: 'Total Plan',
-    //             class: 'text-center',
-    //         },
-    //     ],
-    //     last: {
-    //         class: 'text-left',
-    //         pipe: {
-    //             type: 'currency',
-    //             config: [
-    //             ],
-    //             class: '',
-    //         }
-    //     }
-    // },
+    endSubtotal: {
+        property: 'ValorTotalActividades',
+        items: [
+            {
+                colspan: 6,
+                name: 'Total Plan',
+                class: 'text-center',
+            },
+        ],
+        last: {
+            class: 'text-left',
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: '',
+            }
+        }
+    },
     sort: true,
     filter: false,
 };

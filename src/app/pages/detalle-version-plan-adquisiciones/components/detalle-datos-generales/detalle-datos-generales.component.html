@@ -20,7 +20,7 @@
             <ng-container >
                 <div class="form-group">
                     <span class="form-control overflow">
-                        {{datos.responsableid}}
+                        {{datos.ResponsableNombre}}
                     </span>
                 </div>
             </ng-container>
@@ -30,10 +30,10 @@
         </div>
         <div class="col-9">
             <div class="container">
-                <div class="row py-2" *ngFor="let item of modalidades; index as i">
+                <div class="row py-2" *ngFor="let item of datos.ModalidadSeleccion">
                     <div class="col-12">
                         <span class="form-control overflow">
-                            {{item.Nombre}}
+                            {{item}}
                         </span>
                     </div>
                 </div>
