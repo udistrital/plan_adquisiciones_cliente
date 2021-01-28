@@ -196,7 +196,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     this.OnClose();
   }
   MontarActividades(datos: any, actividadesAsociadas: any) {
-    let actividad: any = [];
+    const actividad: any = [];
     datos.forEach((element: any) => {
       if (actividadesAsociadas.find((data: any) => data.ActividadId.Id === element.Id) === undefined) {
         actividad.push(element);

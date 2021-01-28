@@ -88,11 +88,11 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
 
   OnSubmit() {
     if (this.index === null) {
-      let elemento = this.TransformarElemento(this.ElementoARKAForm.value.Elemento)
+      const elemento = this.TransformarElemento(this.ElementoARKAForm.value.Elemento);
       this.ElementosTabla.push(elemento);
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     } else {
-      let elemento2 = this.TransformarElemento(this.ElementoARKAForm.value.Elemento)
+      const elemento2 = this.TransformarElemento(this.ElementoARKAForm.value.Elemento);
       this.ElementosTabla[this.index] = elemento2;
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     }
