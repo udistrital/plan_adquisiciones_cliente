@@ -21,6 +21,8 @@ import { TimeRangePipe } from './pipes/time-range.pipe';
 import { CellViewComponent } from './components/cell-view/cell-view.component';
 import { CompoundCellComponent } from './components/compound-cell/compound-cell.component';
 import { BtnVolverComponent } from './components/btn-volver/btn-volver.component';
+import { TablaPlanAdquisicionesComponent } from './components/tabla-plan-adquisiciones/tabla-plan-adquisiciones.component';
+import { TablaRubrosPlanComponent } from './components/tabla-rubros-plan/tabla-rubros-plan.component';
 
 @NgModule({
   exports: [
@@ -32,6 +34,7 @@ import { BtnVolverComponent } from './components/btn-volver/btn-volver.component
     SelectedRowDirective,
     TimeRangePipe,
     BtnVolverComponent,
+    TablaPlanAdquisicionesComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +57,8 @@ import { BtnVolverComponent } from './components/btn-volver/btn-volver.component
     CellViewComponent,
     CompoundCellComponent,
     BtnVolverComponent,
+    TablaPlanAdquisicionesComponent,
+    TablaRubrosPlanComponent,
   ],
   providers: [
     DatePipe,
