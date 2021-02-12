@@ -55,13 +55,13 @@ export class SharedService {
       rama: branch,
     };
     // call request manager for the tree's data.
-    return this.rqManager.get(`arbol_rubro/arbol/${branch}`, params);
+    return this.rqManager.get(`arbol_rubro/arbol_reducido/${branch}?nivel=-1`, params);
 
   }
 
   public getRubro(codigo: string) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
-    return this.rqManager.get(`arbol_rubro/arbol/${codigo}`);
+    return this.rqManager.get(`arbol_rubro/arbol_reducido/${codigo}?nivel=0`);
   }
   /**
      * Gets Vigencia Actual
