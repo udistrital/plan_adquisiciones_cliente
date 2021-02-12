@@ -24,7 +24,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="!TipoDePlan">
                                         <ng-template matStepLabel>Metas Asociadas</ng-template>
                                         <div class="pt-2">
                                             <ngx-metas-asociadas></ngx-metas-asociadas>
@@ -34,7 +34,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="!TipoDePlan">
                                         <ng-template matStepLabel>Productos Asociados</ng-template>
                                         <div class="pt-2">
                                             <ngx-productos-asociados></ngx-productos-asociados>
@@ -64,7 +64,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="TipoDePlan">
                                         <ng-template matStepLabel>Actividad y Fuente de Financiamiento</ng-template>
                                         <div class="pt-2">
                                             <ngx-seleccion-fuente></ngx-seleccion-fuente>
@@ -74,7 +74,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="!TipoDePlan">
                                         <ng-template matStepLabel>Actividades y Fuentes de Financiamiento</ng-template>
                                         <div class="py-2">
                                             <ngx-tabla-actividades-fuentes></ngx-tabla-actividades-fuentes>
@@ -84,7 +84,7 @@
                                             <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
                                         </div>
                                     </mat-step>
-                                    <mat-step>
+                                    <mat-step *ngIf="!TipoDePlan">
                                         <ng-template matStepLabel>Ficha de Estadisticas Basicas de Inversion y Metodologia General Ajustada</ng-template>
                                         <div class="py-2">
                                             <ngx-tabla-ficha-tecnica></ngx-tabla-ficha-tecnica>

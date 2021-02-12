@@ -59,9 +59,9 @@ export class SharedService {
 
   }
 
-  public getRubro(codigo: string) {
+  public getRubro(codigo: string, area: any, vigencia: any, nivel: any) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
-    return this.rqManager.get(`arbol_rubro/arbol_reducido/${codigo}?nivel=0`);
+    return this.rqManager.get(`arbol_rubro_apropiacion/arbol_apropiacion_valores/${area}/${vigencia}/${codigo}?nivel=${nivel}`);
   }
   /**
      * Gets Vigencia Actual

@@ -7,7 +7,7 @@ import { getAreaFuncional, getCentroGestor } from '../../../../shared/selectors/
 import { SharedService } from '../../../../shared/services/shared.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { ActualizarRenglonPlan, CrearRenglonPlan } from '../../actions/registro-plan-adquisiciones.actions';
-import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-layout',
@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   Registro: any;
   subscription$: any;
   subscription2$: any;
+  subscription3$: any;
 
 
   constructor(
@@ -42,14 +43,22 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        const fuente: any = (renglon[0].RubroId as string).split('-');
-        if ((fuente[0] + '-' + fuente[1]) === '3-01') {
-          this.TipoDePlan = false;
-        } else {
+        if ((renglon[0].RubroId as string).split('-')[1] === '01') {
           this.TipoDePlan = true;
+        } else {
+          this.TipoDePlan = false;
         }
         this.store.dispatch(LoadAreaFuncional({ Id: renglon[0].AreaFuncional }));
         this.store.dispatch(LoadCentroGestor({ CentroGestor: renglon[0].CentroGestor }));
+      }
+    });
+    this.subscription3$ = this.store.select(getRubro).subscribe((data: any) => {
+      if (this.sharedService.IfStore(data)) {
+        if (data.data.Codigo.split('-')[1] === '01') {
+          this.TipoDePlan = true;
+        } else {
+          this.TipoDePlan = false;
+        }
       }
     });
     this.subscription$ = combineLatest([

@@ -28,7 +28,7 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
   ) {
-    this.parametrics.CargarArbolRubros('3');
+    // this.parametrics.CargarArbolRubros('3');
     this.RubroForm = this.fb.group({
       FuenteSeleccionada: [null, [Validators.required]],
       RubroSeleccionado: [null, [Validators.required]],
@@ -45,7 +45,8 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
       this.store.select(getRenglonSeleccionado),
       this.store.select(getArbolRubro),
     ]).subscribe(([renglon, data]) => {
-      if (this.sharedService.IfStore(data) && Object.keys(data[0]).length !== 0) {
+      console.log(data)
+      if (this.sharedService.IfStore(data) && Object.keys(data).length !== 0) {
         if (this.sharedService.IfStore(renglon)) {
           this.CrearFormularioRubro(data, renglon[0].RubroId);
         } else {
@@ -77,8 +78,6 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
 
       const info = rubroId.split('-');
       const rubro = this.sharedService.BuscarNodo(arbol[0].children, rubroId);
-
-
       this.store.dispatch(CargarRubro(rubro));
       this.RubroForm = this.fb.group({
         FuenteSeleccionada: [
