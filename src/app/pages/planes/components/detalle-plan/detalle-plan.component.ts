@@ -88,6 +88,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Editar') {
+          console.log(accion.fila)
           this.ActualizarRenglon(accion.fila);
         }
       }
@@ -100,7 +101,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     console.log(datos)
     this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
     this.datos = datos
-    // this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 
   CrearRenglon() {

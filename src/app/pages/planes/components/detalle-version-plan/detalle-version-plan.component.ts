@@ -40,19 +40,8 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // lectura de Datos con fuentes de Recurso para renderizacion
-    this.subscription$ = combineLatest([
-      this.store.select(getVersionPlan),
-      this.store.select(getArbolRubro).pipe(
-        map(data => {
-          if (Object.keys(data).length !== 0) {
-            return data[0].children;
-          } else {
-            return null;
-          }
-        }),
-      ),
-    ]).subscribe(([plan, fuentesRecurso]) => {
-      if (this.sharedService.IfStore(plan) && this.sharedService.IfStore(fuentesRecurso)) {
+    this.subscription$ = this.store.select(getVersionPlan).subscribe((plan: any) => {
+      if (this.sharedService.IfStore(plan)) {
         this.AjustarDatos(plan['registroplanadquisiciones']);
       }
     });
@@ -71,9 +60,18 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   }
 
   AjustarDatos(datos: any) {
-
-    this.configuracion = this.AjustarConfiguracion(datos);
-    this.datos = this.planesService.AjustarDatosPlan(datos);
+    console.log(datos)
+    const conf = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2))
+    conf.rowActions.actions = [
+      {
+        name: 'Ver',
+        icon: 'fas fa-list',
+        class: 'p-2',
+        title: 'Ver Version',
+      },
+    ]
+    this.configuracion = conf;
+    this.datos = datos
     this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 
@@ -81,22 +79,4 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
   }
-  AjustarConfiguracion(datos: any) {
-    return Object.keys(datos).map((key) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
-      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
-      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + datos[key][0].FuenteRecursosNombre;
-      ajusteConfiguracion.rowActions.actions = [
-        {
-          name: 'Ver',
-          icon: 'fas fa-list',
-          class: 'p-2',
-          title: 'Ver Datos Rubro',
-        },
-      ];
-      delete ajusteConfiguracion.tableActions;
-      return ajusteConfiguracion;
-    });
-  }
-
 }

@@ -37,7 +37,7 @@ export class TablaPlanAdquisicionesComponent implements OnInit {
 
   ngOnInit() {
     this.ConfiguracionTabla();
-    this.suma = this.planesService.SacarTotalPlan(this.datos.datos)
+    this.suma = this.planesService.SacarSumaFuente(this.datos.datos)
   }
 
   ConfiguracionTabla() {

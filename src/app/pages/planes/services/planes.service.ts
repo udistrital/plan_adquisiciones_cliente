@@ -137,20 +137,23 @@ export class PlanesService {
     );
   }
 
+  public SacarSumaFuente(plan: any) {
+    return plan.map((key: any) => {
+      return this.SacarSumaRubro(key.datos)
+    }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
+  }
   public SacarTotalPlan(plan: any) {
     return plan.map((key: any) => {
-      return key.datos.map((element: any) => {
-        if (element.FuenteFinanciamientoId === "") {
-          return element.ValorTotalActividades;
-        } else {
-          return element.ValorActividad;
-        }
-      }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
+      return this.SacarSumaFuente(key.datos);
     }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
   }
   public SacarSumaRubro(plan: any) {
     return plan.map((element: any) => {
-      return element.ValorTotalActividades;
+      if (element.FuenteFinanciamientoId === "") {
+        return element.ValorTotalActividades;
+      } else {
+        return element.ValorActividad;
+      }
     }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
   }
   public AjustarDatosPlan(datos: any[]) {
