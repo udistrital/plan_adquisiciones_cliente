@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanesService } from '../../../planes/services/planes.service';
-import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
+// import { PlanesService } from '../../../planes/services/planes.service';
+// import { CONFIGURACION_PRUEBA, CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'ngx-componente-prueba',
@@ -10,17 +10,13 @@ import { CONFIGURACION_PRUEBA } from '../../interfaces/interfaces';
 export class ComponentePruebaComponent implements OnInit {
 
   configuracion: any;
+  configuracion2: any;
   datosPrueba: any;
+  datosPrueba2: any
   constructor(
-    private planesService: PlanesService
   ) {
-    // this.datosPrueba = DATOS_PRUEBA;
-    this.configuracion = CONFIGURACION_PRUEBA;
   }
   ngOnInit() {
-    this.planesService.getPlanDetallado(7).subscribe((data: any) => {
-      this.datosPrueba = data;
-      console.log(this.datosPrueba)
-    })
+
   }
 }

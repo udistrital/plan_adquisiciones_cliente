@@ -1,1 +1,20 @@
-<p>productos-asociados works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col px-0">
+            <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
+            <a *ngIf="display" [hidden]="true" #exampleModal data-toggle="modal" data-target="#exampleModal"></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- <ngx-form-codificacion-arka></ngx-form-codificacion-arka> -->
+            </div>
+        </div>
+    </div>
+</div>

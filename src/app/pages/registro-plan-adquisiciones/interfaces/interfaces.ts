@@ -393,3 +393,135 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     sort: true,
     filter: false,
 };
+
+export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
+    title: {
+        name: 'Productos Asociados',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Codigo',
+            title: {
+                name: 'Codigo',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'Nombre',
+            title: {
+                name: 'Nombre',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'PorcentajeDistribucion',
+            title: {
+                name: '% Distribucion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'percent',
+                config: [
+                    '1.2-2'
+                ],
+                class: 'text-center align-middle'
+            }
+        },
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center align-middle',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'Eliminar',
+                icon: 'fas fa-trash',
+                class: 'p-2',
+                title: 'Editar Metas Asociadas',
+            },
+        ],
+    },
+    noData: {
+        name: 'No Existen Productos Asociados',
+        class: 'text-center',
+    },
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Asociar Nuevo Producto',
+        }
+    ],
+    sort: true,
+    filter: false,
+};
+
+export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
+    title: {
+        name: 'Metas Asociadas',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Numero',
+            title: {
+                name: 'Numero',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'Nombre',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center align-middle',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'Eliminar',
+                icon: 'fas fa-trash',
+                class: 'p-2',
+                title: 'Editar Datos Rubro',
+            },
+        ],
+    },
+    noData: {
+        name: 'No Existen Metas Asociadas',
+        class: 'text-center',
+    },
+    tableActions: [
+        {
+            name: 'nuevo',
+            icon: 'fas fa-plus py-1 px-2',
+            class: 'px-2',
+            title: 'Asociar Nueva Meta',
+        }
+    ],
+    sort: true,
+    filter: false,
+};

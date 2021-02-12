@@ -17,6 +17,7 @@ export class SeleccionFuenteComponent implements OnInit {
   FuentesFinanciamiento: any;
   FuenteForm: any;
   subscription$: any;
+  Actividades: any;
 
   constructor(
     private registroService: RegistroPlanAdquisicionesService,
@@ -25,11 +26,14 @@ export class SeleccionFuenteComponent implements OnInit {
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.FuenteForm = this.fb.group({
-      fuenteSeleccionada: [null, [Validators.required]],
+      Actividad:[null, [Validators.required]],
+      Valor: [0, [Validators.required]],
+      FuenteFinanciamiento: [null, [Validators.required]],
     });
-    this.FuenteForm.get('fuenteSeleccionada').valueChanges.subscribe((value: any) => {
-      this.store.dispatch(SeleccionarFuente(value));
-    });
+    // this.FuenteForm.get('fuenteSeleccionada').valueChanges.subscribe((value: any) => {
+    //   this.store.dispatch(SeleccionarFuente(value));
+    // });
+    this.Actividades = []
   }
 
   ngOnInit() {
