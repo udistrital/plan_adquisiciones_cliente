@@ -55,7 +55,6 @@ export class MetasEffects {
       ofType(MetasActions.ConsultarMetas),
       exhaustMap((opciones: any) =>
         this.metasService.getMetasAsociadas(
-          opciones.Lineamiento.Id,
           opciones.Rubro.data.Codigo,
         ).pipe(
           map(data => {

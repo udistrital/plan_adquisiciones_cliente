@@ -70,21 +70,31 @@ export class TableMetasComponent implements OnInit, OnDestroy {
       }
     });
     // Consultar Metas, Cargar rubro y lineamiento seleccionado
-    this.subscription3$ = combineLatest([
-      this.store.select(getRubroSeleccionado),
-      this.store.select(getLineamientoSeleccionado),
-    ]).subscribe(([rubro, lineamiento]) => {
-      if (rubro && lineamiento) {
+    // this.subscription3$ = combineLatest([
+    //   this.store.select(getRubroSeleccionado),
+    //   this.store.select(getLineamientoSeleccionado),
+    // ]).subscribe(([rubro, lineamiento]) => {
+    //   if (rubro && lineamiento) {
+    //     this.store.dispatch(ConsultarMetas({
+    //       Lineamiento: lineamiento,
+    //       Rubro: rubro,
+    //     }));
+    //   }
+    //   if (rubro) {
+    //     this.rubroSeleccionado = rubro;
+    //   }
+    //   if (lineamiento) {
+    //     this.LineamientoSeleccionado = this.Lineamientos.find((elemento) => lineamiento.Id === elemento.Id);
+    //   }
+    // });
+    this.subscription3$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
+      if (rubro) {
         this.store.dispatch(ConsultarMetas({
-          Lineamiento: lineamiento,
           Rubro: rubro,
         }));
       }
       if (rubro) {
         this.rubroSeleccionado = rubro;
-      }
-      if (lineamiento) {
-        this.LineamientoSeleccionado = this.Lineamientos.find((elemento) => lineamiento.Id === elemento.Id);
       }
     });
 
@@ -117,9 +127,9 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     });
   }
 
-  SeleccionarLineamiento(lineamiento: any) {
-    this.store.dispatch(SeleccionarLineamiento(lineamiento));
-  }
+  // SeleccionarLineamiento(lineamiento: any) {
+  //   this.store.dispatch(SeleccionarLineamiento(lineamiento));
+  // }
   SeleccionarRubro(rubro: any) {
     this.store.dispatch(SeleccionarRubro(rubro));
   }

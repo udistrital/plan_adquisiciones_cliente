@@ -30,12 +30,11 @@ export class FormMetasComponent implements OnInit, OnDestroy {
 
     this.subscription$ = combineLatest([
       this.store.select(getRubroSeleccionado),
-      this.store.select(getLineamientoSeleccionado),
       this.store.select(getMetaSeleccionada),
-    ]).subscribe(([rubro, lineamiento, meta]) => {
-      if (rubro && lineamiento && meta) {
+    ]).subscribe(([rubro, meta]) => {
+      if (rubro && meta) {
         if (Object.keys(meta)[0] === 'type') {
-          this.CrearMetaForm(null, rubro, lineamiento);
+          this.CrearMetaForm(null, rubro, null);
         } else {
           this.CrearMetaForm(meta);
         }
