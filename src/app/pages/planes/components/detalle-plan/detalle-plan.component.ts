@@ -79,24 +79,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       }
     });
     // lectura de Datos con fuentes de Recurso para renderizacion
-    this.subscription$ = combineLatest([
-      this.store.select(getArbolRubro).pipe(
-        map(data => {
-          if (Object.keys(data).length !== 0) {
-            return data[0].children;
-          } else {
-            return null;
-          }
-        }),
-      ),
-      this.store.select(getPlanDetallado),
-    ]).subscribe(([fuentesRecurso, plan]) => {
-      if (this.sharedService.IfStore(plan) && fuentesRecurso) {
-        if (Object.keys(plan[0]).length !== 0) {
-          this.AjustarDatos(plan[0], fuentesRecurso);
-        } else {
-          this.datos = [];
-        }
+    this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
+      if (this.sharedService.IfStore(plan)) {
+        this.AjustarDatos(plan[0])
       }
     });
     // Seleccionar Fila Tabla
@@ -111,10 +96,11 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
 
-  AjustarDatos(datos: any, fuentesRecurso: any) {
-    this.configuracion = this.AjustarConfiguracion(datos);
-    this.datos = this.planesService.AjustarDatosPlan(datos);
-    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+  AjustarDatos(datos: any) {
+    console.log(datos)
+    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
+    this.datos = datos
+    // this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 
   CrearRenglon() {
@@ -159,15 +145,6 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         'Plan de Adquisiciones publicado',
         'Publicado',
       );
-    });
-  }
-
-  AjustarConfiguracion(datos: any) {
-    return Object.keys(datos).map((key: any, index: any) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
-      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
-      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + datos[key][0].FuenteRecursosNombre;
-      return ajusteConfiguracion;
     });
   }
 

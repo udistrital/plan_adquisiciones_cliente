@@ -160,14 +160,28 @@ export const CONFIGURACION_TABLA_VERSIONES_PLAN: any = {
     filter: false,
 };
 
-
 export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
     title: {
         name: '',
         class: 'text-center text-light',
     },
+    subtitle: {
+        name: '', // name subtitle
+        class: 'text-center bg-primary text-light', // bootstrap class
+    },
     showColumnTitle: true,
     dataConfig: [
+        {
+            key: 'CodigoArka',
+            title: {
+                name: 'Codigos UNSPSC',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
         {
             key: 'RubroId',
             title: {
@@ -229,7 +243,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
                 class: 'text-center align-middle',
             },
             pipe: {
-                class: 'd-flex flex-column align-items-center text-center align-middle justify-content-around',
+                class: 'text-center align-middle',
                 isArray: true,
             }
         },
@@ -247,20 +261,17 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             }
         },
         {
-            key: 'FuenteRecursosNombre',
+            key: 'FuenteRecursos',
             title: {
                 name: 'Fuente de Recurso',
                 class: 'text-center align-middle',
             },
             pipe: {
                 class: 'text-center align-middle',
+                isArray: true,
             }
         },
     ],
-    // subtitle: {
-    //     name: '',
-    //     class: 'text-center text-light',
-    // },
     rowActions: {
         title: {
             name: 'Acciones',
@@ -276,35 +287,16 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             },
         ],
     },
-    // tableActions: [
-    //     {
-    //         name: 'nuevo',
-    //         icon: 'fas fa-plus py-1 px-2',
-    //         class: 'px-2 mx-2',
-    //         title: 'Agregar Rubro',
-    //     },
-    // ],
     noData: {
         name: 'No Existen Rubros Asociados',
         class: 'text-center',
     },
     endSubtotal: {
-        property: 'ValorTotalActividades',
-        items: [
-            {
-                colspan: 6,
-                name: 'Total Plan',
-                class: 'text-center',
-            },
-        ],
+        first: {
+            class: 'text-center bg-primary text-light',
+        },
         last: {
-            class: 'text-left',
-            pipe: {
-                type: 'currency',
-                config: [
-                ],
-                class: '',
-            }
+            class: 'text-left bg-primary text-light',
         }
     },
     sort: true,

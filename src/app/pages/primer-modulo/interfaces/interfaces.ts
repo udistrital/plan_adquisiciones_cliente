@@ -112,7 +112,7 @@ export const configTable: any = {
     sort: 'boolean',
     filter: 'boolean',
 };
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_PRUEBA_2: any = {
     title: {
         name: 'Titulo de Prueba',
         class: 'text-center text-light',
@@ -230,7 +230,7 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: true,
 };
-export const DATOS_PRUEBA: any = [
+export const DATOS_PRUEBA_2: any = [
     {
         id: 1,
         nombre: 'Jhoan',
@@ -291,3 +291,145 @@ export const DATOS_PRUEBA: any = [
     },
 ];
 
+export const CONFIGURACION_PRUEBA: any = {
+    title: {
+        name: '',
+        class: 'text-center text-light',
+    },
+    subtitle: {
+        name: '', // name subtitle
+        class: 'text-center bg-primary text-light', // bootstrap class
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'CodigoArka',
+            title: {
+                name: 'Codigos UNSPSC',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
+        {
+            key: 'RubroId',
+            title: {
+                name: 'Rubro Presupuestal',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'RubroNombre',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-justify align-middle',
+            }
+        },
+        {
+            key: 'FechaEstimada',
+            title: {
+                name: 'Fecha Estimada de Inicio de Proceso de Seleccion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'time-range',
+                config: ['limits'],
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'FechaEstimada',
+            title: {
+                name: 'Duracion Estimada de Contrato',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'time-range',
+                config: ['range'],
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'ResponsableNombre',
+            title: {
+                name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'ModalidadSeleccion',
+            title: {
+                name: 'Modalidad de Seleccion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
+        {
+            key: 'ValorTotalActividades',
+            title: {
+                name: 'Valor Asignado Año Vigente',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'currency',
+                config: [
+                ],
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'FuenteRecursos',
+            title: {
+                name: 'Fuente de Recurso',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
+    ],
+    rowActions: {
+        title: {
+            name: 'Acciones',
+            class: 'text-center align-middle',
+            actionClass: 'd-flex flex-row justify-content-around align-middle'
+        },
+        actions: [
+            {
+                name: 'Editar',
+                icon: 'fas fa-pencil-alt',
+                class: 'p-2',
+                title: 'Editar Datos Rubro',
+            },
+        ],
+    },
+    noData: {
+        name: 'No Existen Rubros Asociados',
+        class: 'text-center',
+    },
+    endSubtotal: {
+        first: {
+            class: 'text-center bg-primary text-light',
+        },
+        last: {
+            class: 'text-left bg-primary text-light',
+        }
+    },
+    sort: true,
+    filter: false,
+};

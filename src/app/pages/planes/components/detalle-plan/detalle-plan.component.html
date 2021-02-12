@@ -6,10 +6,8 @@
     </div>
     <div class="row">
         <div class="col-12 px-0" *ngIf="datos && configuracion">
-            <ng-container *ngFor="let table of configuracion; index as i">
-                <div class="py-2">
-                    <ngx-general-table [config]="table" [datos]="datos[i]"></ngx-general-table>
-                </div>
+            <ng-container *ngFor="let data of datos, index as i">
+                <ngx-tabla-plan-adquisiciones [config]="configuracion" [datos]="data"></ngx-tabla-plan-adquisiciones>
             </ng-container>
         </div>
         <div class="col-8 border border-light bg-primary text-center text-light py-2 font-weight-bold"
