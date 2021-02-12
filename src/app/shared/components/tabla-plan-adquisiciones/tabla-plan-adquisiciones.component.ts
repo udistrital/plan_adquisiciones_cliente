@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { PlanesService } from '../../../pages/planes/services/planes.service';
 import { LoadAccionTabla } from '../../actions/shared.actions';
 
 @Component({
@@ -19,9 +20,11 @@ export class TablaPlanAdquisicionesComponent implements OnInit {
   rowspanTable: any[];
   keyCompound: any;
   keyObject: any;
+  suma: any;
 
   constructor(
     private store: Store<any>,
+    private planesService: PlanesService,
   ) {
     this.selectedAction = new EventEmitter<any>();
     this.rowspanTitle = 1;
@@ -34,6 +37,7 @@ export class TablaPlanAdquisicionesComponent implements OnInit {
 
   ngOnInit() {
     this.ConfiguracionTabla();
+    this.suma = this.planesService.SacarTotalPlan(this.datos.datos)
   }
 
   ConfiguracionTabla() {

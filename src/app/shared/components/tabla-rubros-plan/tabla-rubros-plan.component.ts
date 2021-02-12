@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PlanesService } from '../../../pages/planes/services/planes.service';
 
 @Component({
   selector: '[ngx-tabla-rubros-plan]',
@@ -11,12 +12,15 @@ export class TablaRubrosPlanComponent implements OnInit {
   @Input() datos: any;
   @Input() rowspanTable: any;
   @Input() index: any;
+  suma: any;
 
-  constructor() { }
+  constructor(
+    private planesService: PlanesService,
+  ) { }
 
   ngOnInit() {
-    console.log(this.config)
-    console.log(this.datos)
+    this.datos.datos = this.planesService.AjustarDatosPlan(this.datos.datos);
+    this.suma = this.planesService.SacarSumaRubro(this.datos.datos)
   }
 
 }

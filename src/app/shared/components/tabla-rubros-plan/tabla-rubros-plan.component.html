@@ -6,3 +6,10 @@
 <ng-container *ngFor="let items of datos.datos; index as i">
     <tr ngx-cell-view [items]="items" [config]="config" [rowspanTable]="rowspanTable" [index]="i"></tr>
 </ng-container>
+<!-- Suma -->
+<th scope="col" colspan="7" [class]="config.endSubtotal.first.class">
+    Total {{datos.Rubro}}
+</th>
+<th scope="col" colspan="4" [class]="config.endSubtotal.last.class">
+    {{suma | currency}}
+</th>

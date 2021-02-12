@@ -110,7 +110,7 @@ export class PlanesService {
     * @param [Plan] Plan por modificar
     * @returns  Plan Modificada.
     */
-   public publicarPlan(
+  public publicarPlan(
     Plan: any
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_MID_SERVICE');
@@ -127,7 +127,7 @@ export class PlanesService {
     * @param [Plan] Plan por consultar
     * @returns  Plan creada.
     */
-   public getVersionPlan(
+  public getVersionPlan(
     Plan: any
   ) {
     this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
@@ -138,25 +138,52 @@ export class PlanesService {
   }
 
   public SacarTotalPlan(plan: any) {
-    return Object.keys(plan).map((key: any) => {
-      return (plan[key] as Array<any>).map((element: any) => {
-        return element.ValorTotalActividades;
-      }).reduce((accumulator, currentValue) => accumulator + currentValue);
-    }).reduce((accumulator, currentValue) => accumulator + currentValue);
+    return plan.map((key: any) => {
+      return key.datos.map((element: any) => {
+        if (element.FuenteFinanciamientoId === "") {
+          return element.ValorTotalActividades;
+        } else {
+          return element.ValorActividad;
+        }
+      }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
+    }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
   }
-  public AjustarDatosPlan(datos: any) {
-    return Object.keys(datos).map((key: any) => {
-      (datos[key] as Array<any>).map((element: any) => {
-        element.FechaEstimada = {
-          start: new Date(element.FechaEstimadaInicio),
-          end: new Date(element.FechaEstimadaFin),
-        };
-        element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
-          return data.Nombre;
-        });
-        return element;
+  public SacarSumaRubro(plan: any) {
+    return plan.map((element: any) => {
+      return element.ValorTotalActividades;
+    }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
+  }
+  public AjustarDatosPlan(datos: any[]) {
+
+    return datos.map((element: any) => {
+      element.FechaEstimada = {
+        start: new Date(element.FechaEstimadaInicio),
+        end: new Date(element.FechaEstimadaFin),
+      };
+      element.ModalidadSeleccion = (element['registro_funcionamiento-modalidad_seleccion'] as Array<any>).map((data: any) => {
+        return data.Nombre;
       });
-      return datos[key];
+      element.CodigoArka = (element['registro_plan_adquisiciones-codigo_arka'] as Array<any>).map((data: any) => {
+        return data.Descripcion.split('-')[0];
+      });
+      if (element.FuenteFinanciamientoId === "") {
+        element.FuenteRecursos = this.ObtenerFuentes(element['registro_plan_adquisiciones-actividad']);
+      } else {
+        element.FuenteRecursos = [element.FuenteFinanciamientoData.Nombre];
+        element.ValorTotalActividades = element.ValorActividad;
+      }
+      return element;
     });
+  }
+  public ObtenerFuentes(Actividad: any) {
+    const fuentes: any[] = [];
+    Actividad.forEach((element: any) => {
+      element.FuentesFinanciamiento.forEach((data: any) => {
+        if (fuentes.find((x: any) => x === data.Nombre) === undefined) {
+          fuentes.push(data.Nombre);
+        }
+      })
+    });
+    return fuentes
   }
 }
