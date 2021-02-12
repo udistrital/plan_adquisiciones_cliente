@@ -25,6 +25,9 @@ import { FormFuentesFinanciamientoComponent } from './components/form-fuentes-fi
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { TablaFichaTecnicaComponent } from './components/tabla-ficha-tecnica/tabla-ficha-tecnica.component';
 import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-ficha-tecnica.component';
+import { MetasAsociadasComponent } from './components/metas-asociadas/metas-asociadas.component';
+import { ProductosAsociadosComponent } from './components/productos-asociados/productos-asociados.component';
+import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
 
 
 @NgModule({
@@ -41,7 +44,10 @@ import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-
     FormActividadFuentesComponent,
     FormFuentesFinanciamientoComponent,
     TablaFichaTecnicaComponent,
-    FormFichaTecnicaComponent
+    FormFichaTecnicaComponent,
+    MetasAsociadasComponent,
+    ProductosAsociadosComponent,
+    ActividadFuncionamientoComponent
   ],
   imports: [
     CommonModule,
