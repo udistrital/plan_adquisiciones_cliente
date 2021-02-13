@@ -444,10 +444,16 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         },
         actions: [
             {
+                name: 'Editar',
+                icon: 'fas fa-trash',
+                class: 'p-2',
+                title: 'Editar Producto Asociado',
+            },
+            {
                 name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Editar Metas Asociadas',
+                title: 'Eliminar Producto Asociado',
             },
         ],
     },

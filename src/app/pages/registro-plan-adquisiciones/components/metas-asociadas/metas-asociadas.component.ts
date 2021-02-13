@@ -20,7 +20,7 @@ export class MetasAsociadasComponent implements OnInit {
   subscription3$: any;
   display: boolean;
 
-  @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
+  @ViewChild('exampleModal2', { static: false }) contentRef: ElementRef;
   subscription$: any;
   subscription4$: any;
 

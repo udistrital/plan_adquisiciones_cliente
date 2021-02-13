@@ -28,6 +28,8 @@ import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-
 import { MetasAsociadasComponent } from './components/metas-asociadas/metas-asociadas.component';
 import { ProductosAsociadosComponent } from './components/productos-asociados/productos-asociados.component';
 import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
+import { FormMetasAsociadasComponent } from './components/form-metas-asociadas/form-metas-asociadas.component';
+import { FormProductosAsociadosComponent } from './components/form-productos-asociados/form-productos-asociados.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { ActividadFuncionamientoComponent } from './components/actividad-funcion
     FormFichaTecnicaComponent,
     MetasAsociadasComponent,
     ProductosAsociadosComponent,
-    ActividadFuncionamientoComponent
+    ActividadFuncionamientoComponent,
+    FormMetasAsociadasComponent,
+    FormProductosAsociadosComponent
   ],
   imports: [
     CommonModule,

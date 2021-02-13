@@ -20,7 +20,7 @@ export class ProductosAsociadosComponent implements OnInit {
   subscription3$: any;
   display: boolean;
 
-  @ViewChild('exampleModal', { static: false }) contentRef: ElementRef;
+  @ViewChild('exampleModal3', { static: false }) contentRef: ElementRef;
   subscription$: any;
   subscription4$: any;
 
@@ -62,7 +62,7 @@ export class ProductosAsociadosComponent implements OnInit {
     this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Asociar Nueva Meta') {
+          if (accion.accion.title === 'Asociar Nuevo Producto') {
             this.store.dispatch(LoadFilaSeleccionada(null));
             this.OpenModal();
           }
@@ -73,10 +73,10 @@ export class ProductosAsociadosComponent implements OnInit {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Eliminar Elemento') {
+          if (accion.accion.title === 'Eliminar Producto Asociado') {
             this.LaunchDeleteModal(accion.fila);
           }
-          if (accion.accion.title === 'Editar Elemento') {
+          if (accion.accion.title === 'Editar Producto Asociado') {
             this.OpenModal();
           }
 
