@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RegistroPlanAdquisicionesRoutingModule } from './registro-plan-adquisiciones-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SeleccionRubroComponent } from './components/seleccion-rubro/seleccion-rubro.component';
-import { SeleccionMetaProductoComponent } from './components/seleccion-meta-producto/seleccion-meta-producto.component';
+// import { SeleccionMetaProductoComponent } from './components/seleccion-meta-producto/seleccion-meta-producto.component';
 import { SeleccionFuenteComponent } from './components/seleccion-fuente/seleccion-fuente.component';
 import { SeleccionDatosGeneralesComponent } from './components/seleccion-datos-generales/seleccion-datos-generales.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -27,7 +27,7 @@ import { TablaFichaTecnicaComponent } from './components/tabla-ficha-tecnica/tab
 import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-ficha-tecnica.component';
 import { MetasAsociadasComponent } from './components/metas-asociadas/metas-asociadas.component';
 import { ProductosAsociadosComponent } from './components/productos-asociados/productos-asociados.component';
-import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
+// import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
 import { FormMetasAsociadasComponent } from './components/form-metas-asociadas/form-metas-asociadas.component';
 import { FormProductosAsociadosComponent } from './components/form-productos-asociados/form-productos-asociados.component';
 
@@ -36,7 +36,6 @@ import { FormProductosAsociadosComponent } from './components/form-productos-aso
   declarations: [
     LayoutComponent,
     SeleccionRubroComponent,
-    SeleccionMetaProductoComponent,
     SeleccionFuenteComponent,
     SeleccionDatosGeneralesComponent,
     ModalidadesSeleccionComponent,
@@ -49,7 +48,6 @@ import { FormProductosAsociadosComponent } from './components/form-productos-aso
     FormFichaTecnicaComponent,
     MetasAsociadasComponent,
     ProductosAsociadosComponent,
-    ActividadFuncionamientoComponent,
     FormMetasAsociadasComponent,
     FormProductosAsociadosComponent
   ],
