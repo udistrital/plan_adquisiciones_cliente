@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.navigate(['pages/plan-adquisiciones/metas'])
+    this.route.navigate(['pages/plan-adquisiciones/metas']);
   }
 
 }

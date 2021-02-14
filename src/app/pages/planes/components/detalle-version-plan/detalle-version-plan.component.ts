@@ -60,8 +60,8 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   }
 
   AjustarDatos(datos: any) {
-    console.log(datos)
-    const conf = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2))
+
+    const conf = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
     conf.rowActions.actions = [
       {
         name: 'Ver',
@@ -69,9 +69,9 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         class: 'p-2',
         title: 'Ver Version',
       },
-    ]
+    ];
     this.configuracion = conf;
-    this.datos = datos
+    this.datos = datos;
     this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 

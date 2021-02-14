@@ -139,7 +139,7 @@ export class PlanesService {
 
   public SacarSumaFuente(plan: any) {
     return plan.map((key: any) => {
-      return this.SacarSumaRubro(key.datos)
+      return this.SacarSumaRubro(key.datos);
     }).reduce((accumulator: any, currentValue: any) => accumulator + currentValue);
   }
   public SacarTotalPlan(plan: any) {
@@ -149,7 +149,7 @@ export class PlanesService {
   }
   public SacarSumaRubro(plan: any) {
     return plan.map((element: any) => {
-      if (element.FuenteFinanciamientoId === "") {
+      if (element.FuenteFinanciamientoId === '') {
         return element.ValorTotalActividades;
       } else {
         return element.ValorActividad;
@@ -169,7 +169,7 @@ export class PlanesService {
       element.CodigoArka = (element['registro_plan_adquisiciones-codigo_arka'] as Array<any>).map((data: any) => {
         return data.Descripcion.split('-')[0];
       });
-      if (element.FuenteFinanciamientoId === "") {
+      if (element.FuenteFinanciamientoId === '') {
         element.FuenteRecursos = this.ObtenerFuentes(element['registro_plan_adquisiciones-actividad']);
       } else {
         element.FuenteRecursos = [element.FuenteFinanciamientoData.Nombre];
@@ -185,8 +185,8 @@ export class PlanesService {
         if (fuentes.find((x: any) => x === data.Nombre) === undefined) {
           fuentes.push(data.Nombre);
         }
-      })
+      });
     });
-    return fuentes
+    return fuentes;
   }
 }

@@ -30,7 +30,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
-    this.Actividades = []
+    this.Actividades = [];
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -53,12 +53,12 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
           this.FuentesFinanciamiento = fuente;
           if (this.sharedService.IfStore(renglon)) {
             if (renglon[0]['FuenteFinanciamientoId'] !== '') {
-              this.CrearFuenteForm(renglon[0])
+              this.CrearFuenteForm(renglon[0]);
             } else {
-              this.CrearFuenteForm(null)
+              this.CrearFuenteForm(null);
             }
           } else {
-            this.CrearFuenteForm(null)
+            this.CrearFuenteForm(null);
           }
         });
       }
@@ -67,9 +67,9 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
     this.subscription2$ = this.store.select(getActividadFuente).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
 
-      //   this.Datos = elementos[0];
-      // } else {
-      //   this.Datos = [];
+        //   this.Datos = elementos[0];
+        // } else {
+        //   this.Datos = [];
       }
     });
   }
@@ -77,7 +77,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   CrearFuenteForm(data: any) {
     if (data) {
       this.FuenteForm = this.fb.group({
-        Actividad:[null, [Validators.required]],
+        Actividad: [null, [Validators.required]],
         Valor: [0, [Validators.required]],
         FuenteFinanciamiento: [null, [Validators.required]],
       });
@@ -86,7 +86,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       });
     } else {
       this.FuenteForm = this.fb.group({
-        Actividad:[null, [Validators.required]],
+        Actividad: [null, [Validators.required]],
         Valor: [0, [Validators.required]],
         FuenteFinanciamiento: [null, [Validators.required]],
       });

@@ -45,7 +45,7 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
       this.store.select(getRenglonSeleccionado),
       this.store.select(getArbolRubro),
     ]).subscribe(([renglon, data]) => {
-      console.log(data)
+
       if (this.sharedService.IfStore(data) && Object.keys(data).length !== 0) {
         if (this.sharedService.IfStore(renglon)) {
           this.CrearFormularioRubro(data, renglon[0].RubroId);

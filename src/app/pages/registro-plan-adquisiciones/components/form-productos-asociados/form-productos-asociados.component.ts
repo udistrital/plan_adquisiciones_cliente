@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { iif, of } from 'rxjs';
@@ -14,7 +14,7 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
   templateUrl: './form-productos-asociados.component.html',
   styleUrls: ['./form-productos-asociados.component.scss']
 })
-export class FormProductosAsociadosComponent implements OnInit {
+export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
 
   titulo: string;
   boton: string;
@@ -45,7 +45,7 @@ export class FormProductosAsociadosComponent implements OnInit {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
-      console.log(fila)
+
       this.index = null;
       if (this.sharedService.IfStore(fila)) {
         if (fila.accion.title === 'Editar Producto Asociado') {
@@ -54,8 +54,7 @@ export class FormProductosAsociadosComponent implements OnInit {
           this.index = fila.index;
           this.CrearProductosAsociadosForm(fila.fila);
         }
-      }
-      else {
+      } else {
         this.titulo = 'Asociar Producto';
         this.boton = 'Asociar';
         this.CrearProductosAsociadosForm(null);
@@ -63,8 +62,8 @@ export class FormProductosAsociadosComponent implements OnInit {
     });
 
     this.subscription3$ = this.registroPlanService.getProductos().subscribe((productos: any) => {
-      this.Elementos = productos
-    })
+      this.Elementos = productos;
+    });
 
     this.subscription2$ = this.store.select(getProductosAsociados).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
@@ -111,7 +110,7 @@ export class FormProductosAsociadosComponent implements OnInit {
       ProductoAsociadoId: elemento.Elemento.id,
       PorcentajeDistribucion: elemento.PorcentajeDistribucion,
       ProductoData: elemento.Elemento
-    }
+    };
   }
 
 }

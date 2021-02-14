@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PlanesService } from '../../../pages/planes/services/planes.service';
 import { LoadAccionTabla } from '../../actions/shared.actions';
@@ -8,7 +8,7 @@ import { LoadAccionTabla } from '../../actions/shared.actions';
   templateUrl: './tabla-plan-adquisiciones.component.html',
   styleUrls: ['./tabla-plan-adquisiciones.component.scss']
 })
-export class TablaPlanAdquisicionesComponent implements OnInit {
+export class TablaPlanAdquisicionesComponent implements OnInit, OnChanges {
 
   @Input() config: any;
   @Input() datos: any;
@@ -37,7 +37,7 @@ export class TablaPlanAdquisicionesComponent implements OnInit {
 
   ngOnInit() {
     this.ConfiguracionTabla();
-    this.suma = this.planesService.SacarSumaFuente(this.datos.datos)
+    this.suma = this.planesService.SacarSumaFuente(this.datos.datos);
   }
 
   ConfiguracionTabla() {

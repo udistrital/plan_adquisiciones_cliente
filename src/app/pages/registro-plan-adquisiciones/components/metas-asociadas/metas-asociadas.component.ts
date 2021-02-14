@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
@@ -13,7 +13,7 @@ import { getMetasAsociadas, getRenglonSeleccionado } from '../../selectors/regis
   templateUrl: './metas-asociadas.component.html',
   styleUrls: ['./metas-asociadas.component.scss']
 })
-export class MetasAsociadasComponent implements OnInit {
+export class MetasAsociadasComponent implements OnInit, OnDestroy {
 
   configuracion: any;
   Datos: any;
@@ -32,7 +32,7 @@ export class MetasAsociadasComponent implements OnInit {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_TABLA_METAS_ASOCIADAS;
-    this.Datos = []
+    this.Datos = [];
     // this.store.dispatch(CargarElementosARKA([]));
   }
   ngOnDestroy(): void {

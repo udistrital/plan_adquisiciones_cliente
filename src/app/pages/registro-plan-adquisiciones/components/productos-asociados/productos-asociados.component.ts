@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
@@ -13,7 +13,7 @@ import { getProductosAsociados, getRenglonSeleccionado } from '../../selectors/r
   templateUrl: './productos-asociados.component.html',
   styleUrls: ['./productos-asociados.component.scss']
 })
-export class ProductosAsociadosComponent implements OnInit {
+export class ProductosAsociadosComponent implements OnInit, OnDestroy {
 
   configuracion: any;
   Datos: any;
@@ -32,7 +32,7 @@ export class ProductosAsociadosComponent implements OnInit {
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS;
-    this.Datos = []
+    this.Datos = [];
     // this.store.dispatch(CargarElementosARKA([]));
   }
   ngOnDestroy(): void {

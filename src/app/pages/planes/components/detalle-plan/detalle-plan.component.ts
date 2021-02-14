@@ -81,14 +81,14 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     // lectura de Datos con fuentes de Recurso para renderizacion
     this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
       if (this.sharedService.IfStore(plan)) {
-        this.AjustarDatos(plan[0])
+        this.AjustarDatos(plan[0]);
       }
     });
     // Seleccionar Fila Tabla
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Editar') {
-          console.log(accion.fila)
+
           this.ActualizarRenglon(accion.fila);
         }
       }
@@ -98,9 +98,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
 
   AjustarDatos(datos: any) {
-    console.log(datos)
+
     this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
-    this.datos = datos
+    this.datos = datos;
     this.TotalPlan = this.planesService.SacarTotalPlan(datos);
   }
 

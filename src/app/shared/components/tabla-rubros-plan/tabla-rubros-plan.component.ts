@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PlanesService } from '../../../pages/planes/services/planes.service';
 
+/* tslint:disable:component-selector */
 @Component({
   selector: '[ngx-tabla-rubros-plan]',
   templateUrl: './tabla-rubros-plan.component.html',
@@ -20,7 +21,7 @@ export class TablaRubrosPlanComponent implements OnInit {
 
   ngOnInit() {
     this.datos.datos = this.planesService.AjustarDatosPlan(this.datos.datos);
-    this.suma = this.planesService.SacarSumaRubro(this.datos.datos)
+    this.suma = this.planesService.SacarSumaRubro(this.datos.datos);
   }
 
 }

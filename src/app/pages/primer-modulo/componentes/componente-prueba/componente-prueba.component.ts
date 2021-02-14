@@ -12,7 +12,7 @@ export class ComponentePruebaComponent implements OnInit {
   configuracion: any;
   configuracion2: any;
   datosPrueba: any;
-  datosPrueba2: any
+  datosPrueba2: any;
   constructor(
   ) {
   }
