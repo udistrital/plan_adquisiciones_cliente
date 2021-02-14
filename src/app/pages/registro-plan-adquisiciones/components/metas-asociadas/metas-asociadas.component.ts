@@ -4,8 +4,9 @@ import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarMetasAsociadas } from '../../actions/registro-plan-adquisiciones.actions';
 import { CONFIGURACION_TABLA_METAS_ASOCIADAS } from '../../interfaces/interfaces';
-import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getMetasAsociadas, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-metas-asociadas',
@@ -43,18 +44,18 @@ export class MetasAsociadasComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
-    //   if (this.sharedService.IfStore(elementos)) {
-    //     this.Datos = elementos[0];
-    //   } else {
-    //     this.Datos = [];
-    //   }
-    // });
+    this.subscription$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
+      if (this.sharedService.IfStore(elementos)) {
+        this.Datos = elementos[0];
+      } else {
+        this.Datos = [];
+      }
+    });
 
     this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        // const elementos = this.MontarElementosARKA(renglon[0]['registro_plan_adquisiciones-codigo_arka']);
-        // this.store.dispatch(CargarElementosARKA([elementos]));
+        const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
+        this.store.dispatch(CargarMetasAsociadas([elementos]));
       }
     });
 
@@ -73,13 +74,9 @@ export class MetasAsociadasComponent implements OnInit {
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
-          if (accion.accion.title === 'Eliminar Elemento') {
+          if (accion.accion.title === 'Eliminar Meta Asociada') {
             this.LaunchDeleteModal(accion.fila);
           }
-          if (accion.accion.title === 'Editar Elemento') {
-            this.OpenModal();
-          }
-
         }
       }
     });
@@ -111,17 +108,17 @@ export class MetasAsociadasComponent implements OnInit {
       }
     });
   }
-  // MontarElementosARKA(elementos: any[]) {
-  //   return elementos.map((elemento) => {
-  //     const Nombre = (elemento.Descripcion as string).split('-')[1];
-  //     return {
-  //       Activo: elemento.Activo,
-  //       Id: parseFloat(elemento.CodigoArka),
-  //       Descripcion: elemento.Descripcion,
-  //       Nombre: Nombre,
-  //       CodigoArkaId: elemento.Id,
-  //     };
-  //   });
-  // }
+  MontarMetasAsociadas(elementos: any[]) {
+    return elementos.map((elemento) => {
+      const Nombre = (elemento.Descripcion as string).split('-')[1];
+      return {
+        Activo: elemento.Activo,
+        Id: parseFloat(elemento.CodigoArka),
+        Descripcion: elemento.Descripcion,
+        Nombre: Nombre,
+        CodigoArkaId: elemento.Id,
+      };
+    });
+  }
 
 }

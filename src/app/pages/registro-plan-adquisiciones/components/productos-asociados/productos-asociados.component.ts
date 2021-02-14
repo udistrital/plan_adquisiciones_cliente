@@ -4,8 +4,9 @@ import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { CargarProductosAsociados } from '../../actions/registro-plan-adquisiciones.actions';
 import { CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS } from '../../interfaces/interfaces';
-import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getProductosAsociados, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 
 @Component({
   selector: 'ngx-productos-asociados',
@@ -43,18 +44,18 @@ export class ProductosAsociadosComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
-    //   if (this.sharedService.IfStore(elementos)) {
-    //     this.Datos = elementos[0];
-    //   } else {
-    //     this.Datos = [];
-    //   }
-    // });
+    this.subscription$ = this.store.select(getProductosAsociados).subscribe((elementos: any) => {
+      if (this.sharedService.IfStore(elementos)) {
+        this.Datos = elementos[0];
+      } else {
+        this.Datos = [];
+      }
+    });
 
     this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        // const elementos = this.MontarElementosARKA(renglon[0]['registro_plan_adquisiciones-codigo_arka']);
-        // this.store.dispatch(CargarElementosARKA([elementos]));
+        const elementos = this.MontarProductosAsociados(renglon[0]['registro_funcionamiento-productos_asociados']);
+        this.store.dispatch(CargarProductosAsociados([elementos]));
       }
     });
 
@@ -111,17 +112,17 @@ export class ProductosAsociadosComponent implements OnInit {
       }
     });
   }
-  // MontarElementosARKA(elementos: any[]) {
-  //   return elementos.map((elemento) => {
-  //     const Nombre = (elemento.Descripcion as string).split('-')[1];
-  //     return {
-  //       Activo: elemento.Activo,
-  //       Id: parseFloat(elemento.CodigoArka),
-  //       Descripcion: elemento.Descripcion,
-  //       Nombre: Nombre,
-  //       CodigoArkaId: elemento.Id,
-  //     };
-  //   });
-  // }
+  MontarProductosAsociados(elementos: any[]) {
+    return elementos.map((elemento) => {
+      const Nombre = (elemento.Descripcion as string).split('-')[1];
+      return {
+        Activo: elemento.Activo,
+        Id: parseFloat(elemento.CodigoArka),
+        Descripcion: elemento.Descripcion,
+        Nombre: Nombre,
+        CodigoArkaId: elemento.Id,
+      };
+    });
+  }
 
 }

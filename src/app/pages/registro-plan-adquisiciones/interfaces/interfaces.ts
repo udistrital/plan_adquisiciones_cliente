@@ -512,7 +512,7 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
                 name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Editar Datos Rubro',
+                title: 'Eliminar Meta Asociada',
             },
         ],
     },

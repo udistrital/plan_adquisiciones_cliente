@@ -6,7 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
-import { getElementosARKA } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getElementosARKA, getProductosAsociados } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -66,13 +66,13 @@ export class FormProductosAsociadosComponent implements OnInit {
       this.Elementos = productos
     })
 
-    // this.subscription2$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
-    //   if (this.sharedService.IfStore(elementos)) {
-    //     this.ElementosTabla = elementos[0];
-    //   } else {
-    //     this.ElementosTabla = [];
-    //   }
-    // });
+    this.subscription2$ = this.store.select(getProductosAsociados).subscribe((elementos: any) => {
+      if (this.sharedService.IfStore(elementos)) {
+        this.ElementosTabla = elementos[0];
+      } else {
+        this.ElementosTabla = [];
+      }
+    });
   }
 
   CrearProductosAsociadosForm(data: any) {
@@ -95,18 +95,23 @@ export class FormProductosAsociadosComponent implements OnInit {
 
   OnSubmit() {
     if (this.index === null) {
-      const elemento = this.TransformarElemento(this.ProductosAsociadosForm.value.Elemento);
+      const elemento = this.TransformarElemento(this.ProductosAsociadosForm.value);
       this.ElementosTabla.push(elemento);
       // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     } else {
-      const elemento2 = this.TransformarElemento(this.ProductosAsociadosForm.value.Elemento);
+      const elemento2 = this.TransformarElemento(this.ProductosAsociadosForm.value);
       this.ElementosTabla[this.index] = elemento2;
       // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     }
   }
   TransformarElemento(elemento: any) {
-    elemento.Descripcion = elemento.Codigo + '-' + elemento.Descripcion;
-    return elemento;
+    return {
+      Id: 0,
+      Activo: true,
+      ProductoAsociadoId: elemento.Elemento.id,
+      PorcentajeDistribucion: elemento.PorcentajeDistribucion,
+      ProductoData: elemento.Elemento
+    }
   }
 
 }

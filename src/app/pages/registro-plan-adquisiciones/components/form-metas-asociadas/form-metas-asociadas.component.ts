@@ -7,7 +7,7 @@ import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selecto
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
-import { getElementosARKA, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getElementosARKA, getMetasAsociadas, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -61,13 +61,13 @@ export class FormMetasAsociadasComponent implements OnInit {
     })
 
 
-    // this.subscription2$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
-    //   if (this.sharedService.IfStore(elementos)) {
-    //     this.ElementosTabla = elementos[0];
-    //   } else {
-    //     this.ElementosTabla = [];
-    //   }
-    // });
+    this.subscription2$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
+      if (this.sharedService.IfStore(elementos)) {
+        this.ElementosTabla = elementos[0];
+      } else {
+        this.ElementosTabla = [];
+      }
+    });
   }
 
   CrearElementoARKAForm() {
@@ -88,8 +88,11 @@ export class FormMetasAsociadasComponent implements OnInit {
     }
   }
   TransformarElemento(elemento: any) {
-    elemento.Descripcion = elemento.Codigo + '-' + elemento.Descripcion;
-    return elemento;
+    return {
+      Id: 0,
+      Activo: true,
+      MetaId: elemento.Id
+    }
   }
 
 }

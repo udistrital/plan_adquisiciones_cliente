@@ -98,43 +98,52 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   }
 
+  RevisarRegistroInversion(data: any, centro: any, area: any, plan: any) {
+    if (
+      this.sharedService.IfStore(data.Rubro) &&
+      this.sharedService.IfStore(data.Meta) &&
+      this.sharedService.IfStore(data.Producto) &&
+      this.sharedService.IfStore(data.Responsable) &&
+      this.sharedService.IfStore(data.FechaSeleccion) &&
+      this.sharedService.IfStore(data.Modalidades) &&
+      this.sharedService.IfStore(data.ElementosARKA) &&
+      this.sharedService.IfStore(data.Actividades) &&
+      this.sharedService.IfStore(centro) &&
+      this.sharedService.IfStore(area) &&
+      this.sharedService.IfStore(plan)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  RevisarRegistroFuncionamiento(data: any, centro: any, area: any, plan: any) {
+    if (
+      this.sharedService.IfStore(data.Rubro) &&
+      // this.sharedService.IfStore(data.Meta) &&
+      // this.sharedService.IfStore(data.Producto) &&
+      this.sharedService.IfStore(data.Responsable) &&
+      this.sharedService.IfStore(data.FechaSeleccion) &&
+      this.sharedService.IfStore(data.Modalidades) &&
+      this.sharedService.IfStore(data.ElementosARKA) &&
+      // this.sharedService.IfStore(data.Actividades) &&
+      this.sharedService.IfStore(centro) &&
+      this.sharedService.IfStore(area) &&
+      this.sharedService.IfStore(plan)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
   RegistroCompleto(data: any, centro: any, area: any, plan: any) {
     if (this.TipoDePlan) {
-      if (
-        this.sharedService.IfStore(data.Rubro) &&
-        this.sharedService.IfStore(data.Meta) &&
-        this.sharedService.IfStore(data.Producto) &&
-        this.sharedService.IfStore(data.Responsable) &&
-        this.sharedService.IfStore(data.FechaSeleccion) &&
-        this.sharedService.IfStore(data.Modalidades) &&
-        this.sharedService.IfStore(data.ElementosARKA) &&
-        this.sharedService.IfStore(data.Actividades) &&
-        this.sharedService.IfStore(centro) &&
-        this.sharedService.IfStore(area) &&
-        this.sharedService.IfStore(plan)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.RevisarRegistroInversion(data, centro, area, plan);
     } else {
-      if (
-        this.sharedService.IfStore(data.Rubro) &&
-        // this.sharedService.IfStore(data.Meta) &&
-        // this.sharedService.IfStore(data.Producto) &&
-        this.sharedService.IfStore(data.Responsable) &&
-        this.sharedService.IfStore(data.FechaSeleccion) &&
-        this.sharedService.IfStore(data.Modalidades) &&
-        this.sharedService.IfStore(data.ElementosARKA) &&
-        // this.sharedService.IfStore(data.Actividades) &&
-        this.sharedService.IfStore(centro) &&
-        this.sharedService.IfStore(area) &&
-        this.sharedService.IfStore(plan)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.RevisarRegistroFuncionamiento(data, centro, area, plan);
     }
 
   }
