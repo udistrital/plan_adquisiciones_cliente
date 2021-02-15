@@ -422,7 +422,7 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
             }
         },
         {
-            key: 'PorcentajeDistribucion',
+            key: 'PorcentajeDistribucion2',
             title: {
                 name: '% Distribucion',
                 class: 'text-center align-middle',
@@ -445,7 +445,7 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         actions: [
             {
                 name: 'Editar',
-                icon: 'fas fa-trash',
+                icon: 'fas fa-pencil-alt',
                 class: 'p-2',
                 title: 'Editar Producto Asociado',
             },

@@ -46,7 +46,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
-        this.Datos = elementos[0];
+        this.Datos = this.MontarMetasAsociadas(elementos[0]);
       } else {
         this.Datos = [];
       }
@@ -54,8 +54,8 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
 
     this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
-        this.store.dispatch(CargarMetasAsociadas([elementos]));
+        // const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
+        this.store.dispatch(CargarMetasAsociadas([renglon[0]['registro_funcionamiento-metas_asociadas']]));
       }
     });
 
@@ -103,21 +103,18 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
-        this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo), 1);
-        // this.store.dispatch(CargarElementosARKA([this.Datos]));
+        this.Datos.splice(this.Datos.findIndex((element: any) => element.Id === data.Id), 1);
+        this.store.dispatch(CargarMetasAsociadas([this.Datos]));
       }
     });
   }
   MontarMetasAsociadas(elementos: any[]) {
     return elementos.map((elemento) => {
-      const Nombre = (elemento.Descripcion as string).split('-')[1];
       return {
-        Activo: elemento.Activo,
-        Id: parseFloat(elemento.CodigoArka),
-        Descripcion: elemento.Descripcion,
-        Nombre: Nombre,
-        CodigoArkaId: elemento.Id,
-      };
+        IdRegistro: elemento.Id,
+        ActivoRegistro: elemento.Activo,
+        ...elemento.MetaId
+      }
     });
   }
 

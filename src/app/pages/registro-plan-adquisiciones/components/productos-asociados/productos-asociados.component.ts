@@ -64,8 +64,12 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Asociar Nuevo Producto') {
-            this.store.dispatch(LoadFilaSeleccionada(null));
-            this.OpenModal();
+            if (this.CalcularPorcentajeMaximo()) {
+              this.store.dispatch(LoadFilaSeleccionada(null));
+              this.OpenModal();
+            } else {
+              this.LaunchValueNullModal();
+            } 
           }
         }
       }
@@ -107,22 +111,37 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
-        this.Datos.splice(this.Datos.findIndex((element: any) => element.Codigo === data.Codigo), 1);
-        // this.store.dispatch(CargarElementosARKA([this.Datos]));
+        this.Datos.splice(this.Datos.findIndex((element: any) => element.id === data.id), 1);
+        this.store.dispatch(CargarProductosAsociados([this.Datos]));
       }
     });
   }
   MontarProductosAsociados(elementos: any[]) {
     return elementos.map((elemento) => {
-      const Nombre = (elemento.Descripcion as string).split('-')[1];
       return {
-        Activo: elemento.Activo,
-        Id: parseFloat(elemento.CodigoArka),
-        Descripcion: elemento.Descripcion,
-        Nombre: Nombre,
-        CodigoArkaId: elemento.Id,
-      };
+        IdRegistro: elemento.Id,
+        ActivoRegistro: elemento.Activo,
+        PorcentajeDistribucion: elemento.PorcentajeDistribucion,
+        PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
+        ...elemento.ProductoData
+      }
     });
+  }
+  CalcularPorcentajeMaximo() {
+    const total = this.Datos.reduce((acc: any, value: any) => acc + value.PorcentajeDistribucion, 0);
+    if (total < 100) {
+      return true
+    } else {
+      return false
+    }
+  }
+  LaunchValueNullModal() {
+    Swal.fire({
+      type: 'success',
+      title: 'Porcentajes de Distribucion completado',
+      text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
+      confirmButtonText: 'Aceptar',
+    })
   }
 
 }

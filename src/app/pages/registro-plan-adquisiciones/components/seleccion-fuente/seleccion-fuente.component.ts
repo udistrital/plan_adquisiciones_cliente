@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
+import { combineLatest, forkJoin } from 'rxjs';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { CargarActividadFuente, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
-import { getActividadFuente, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getActividadFuente, getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
 @Component({
@@ -28,14 +29,15 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private store: Store<any>,
     private sharedService: SharedService,
+    private actividadesService: ActividadesService,
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.Actividades = [];
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
-    this.subscription2$.unsubscribe();
-    this.subscription3$.unsubscribe();
+    // this.subscription2$.unsubscribe();
+    // this.subscription3$.unsubscribe();
   }
 
   ngOnInit() {
@@ -43,14 +45,24 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       this.store.select(getVigenciaActual),
       this.store.select(getAreaFuncional),
       this.store.select(getRenglonSeleccionado),
-    ]).subscribe(([vigencia, area, renglon]) => {
-      if (vigencia && area) {
+      this.store.select(getRubro),
+    ]).subscribe(([vigencia, area, renglon, rubro]) => {
+      if (
+        this.sharedService.IfStore(vigencia) &&
+        this.sharedService.IfStore(area) &&
+        this.sharedService.IfStore(rubro)
+      ) {
         const query = {
           Vigencia: vigencia[0].valor,
           UnidadEjecutora: area.Id,
         };
-        this.registroService.getFuentesFinanciamiento(null, query).subscribe((fuente: any) => {
+        forkJoin({
+          fuente: this.registroService.getFuentesFinanciamiento(null, query),
+          actividades: this.actividadesService.getActividadesPorRubro(rubro.data.Codigo)
+        }).subscribe(({ fuente, actividades }) => {
+          console.log(fuente, actividades)
           this.FuentesFinanciamiento = fuente;
+          this.Actividades = actividades;
           if (this.sharedService.IfStore(renglon)) {
             if (renglon[0]['FuenteFinanciamientoId'] !== '') {
               this.CrearFuenteForm(renglon[0]);
@@ -60,16 +72,8 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
           } else {
             this.CrearFuenteForm(null);
           }
-        });
-      }
-    });
-
-    this.subscription2$ = this.store.select(getActividadFuente).subscribe((elementos: any) => {
-      if (this.sharedService.IfStore(elementos)) {
-
-        //   this.Datos = elementos[0];
-        // } else {
-        //   this.Datos = [];
+        }
+        );
       }
     });
   }
@@ -77,9 +81,9 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   CrearFuenteForm(data: any) {
     if (data) {
       this.FuenteForm = this.fb.group({
-        Actividad: [null, [Validators.required]],
-        Valor: [0, [Validators.required]],
-        FuenteFinanciamiento: [null, [Validators.required]],
+        Actividad: [this.Actividades.find((x: any) => x.Id === data.ActividadId), [Validators.required]],
+        Valor: [data.ValorActividad, [Validators.required]],
+        FuenteFinanciamiento: [this.FuentesFinanciamiento.find((x: any) => x.Codigo == data.FuenteFinanciamientoId), [Validators.required]],
       });
       this.FuenteForm.valueChanges.subscribe((value: any) => {
         this.store.dispatch(CargarActividadFuente(value));

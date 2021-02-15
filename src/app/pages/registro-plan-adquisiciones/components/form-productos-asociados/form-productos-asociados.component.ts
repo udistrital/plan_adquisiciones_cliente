@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { iif, of } from 'rxjs';
+import { combineLatest, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
+import { CargarElementosARKA, CargarProductosAsociados } from '../../actions/registro-plan-adquisiciones.actions';
 import { getElementosARKA, getProductosAsociados } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
@@ -25,6 +26,8 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
   ElementosTabla: any;
   subscription2$: any;
   subscription3$: any;
+  PorcentajeDisponible: any;
+  PorcentajeTotal: any;
 
 
   constructor(
@@ -44,48 +47,52 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
-
-      this.index = null;
-      if (this.sharedService.IfStore(fila)) {
-        if (fila.accion.title === 'Editar Producto Asociado') {
-          this.titulo = 'Editar Producto';
-          this.boton = 'Editar';
-          this.index = fila.index;
-          this.CrearProductosAsociadosForm(fila.fila);
-        }
-      } else {
-        this.titulo = 'Asociar Producto';
-        this.boton = 'Asociar';
-        this.CrearProductosAsociadosForm(null);
-      }
-    });
-
-    this.subscription3$ = this.registroPlanService.getProductos().subscribe((productos: any) => {
-      this.Elementos = productos;
-    });
-
-    this.subscription2$ = this.store.select(getProductosAsociados).subscribe((elementos: any) => {
-      if (this.sharedService.IfStore(elementos)) {
-        this.ElementosTabla = elementos[0];
+    this.subscription$ = combineLatest([
+      this.store.select(getFilaSeleccionada),
+      this.store.select(getProductosAsociados),
+    ]).subscribe(([fila, productos]) => {
+      if (this.sharedService.IfStore(productos)) {
+        this.ElementosTabla = productos[0];
       } else {
         this.ElementosTabla = [];
       }
-    });
+
+      this.registroPlanService.getProductos().subscribe((datos: any) => {
+        this.Elementos = datos;
+        this.index = null;
+        if (this.sharedService.IfStore(fila)) {
+          if (fila.accion.title === 'Editar Producto Asociado') {
+            this.titulo = 'Editar Producto';
+            this.boton = 'Editar';
+            this.index = fila.index;
+            this.CalcularPorcentajeMaximo(fila.fila)
+            this.CrearProductosAsociadosForm(fila.fila);
+          }
+        } else {
+          this.titulo = 'Asociar Producto';
+          this.boton = 'Asociar';
+          this.CalcularPorcentajeMaximo(null)
+          this.CrearProductosAsociadosForm(null);
+        }
+      });
+    })
   }
 
   CrearProductosAsociadosForm(data: any) {
     if (data) {
       this.ProductosAsociadosForm = this.fb.group({
-        Elemento: [data.ProductoData, [Validators.required]],
-        PorcentajeDistribucion: [data.PorcentajeDistribucion, [Validators.required]]
+        IdRegistro: [data.IdRegistro],
+        ActivoRegistro: [data.ActivoRegistro],
+        Elemento: [this.Elementos.find((x: any) => x.id === data.id), [Validators.required]],
+        PorcentajeDistribucion: [data.PorcentajeDistribucion, [Validators.required, Validators.max(this.PorcentajeDisponible)]]
       });
     } else {
       this.ProductosAsociadosForm = this.fb.group({
         Elemento: [null, [Validators.required]],
-        PorcentajeDistribucion: [null, [Validators.required]]
+        PorcentajeDistribucion: [null, [Validators.required, Validators.max(this.PorcentajeDisponible)]]
       });
     }
+    this.ProductosAsociadosForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
   getOptionText(valor: any): string | undefined {
@@ -96,21 +103,41 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
     if (this.index === null) {
       const elemento = this.TransformarElemento(this.ProductosAsociadosForm.value);
       this.ElementosTabla.push(elemento);
-      // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
+      this.store.dispatch(CargarProductosAsociados([this.ElementosTabla]));
     } else {
       const elemento2 = this.TransformarElemento(this.ProductosAsociadosForm.value);
       this.ElementosTabla[this.index] = elemento2;
-      // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
+      this.store.dispatch(CargarProductosAsociados([this.ElementosTabla]));
     }
   }
   TransformarElemento(elemento: any) {
     return {
-      Id: 0,
-      Activo: true,
-      ProductoAsociadoId: elemento.Elemento.id,
+      IdRegistro: elemento.Id,
+      ActivoRegistro: elemento.Activo,
       PorcentajeDistribucion: elemento.PorcentajeDistribucion,
-      ProductoData: elemento.Elemento
-    };
+      PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
+      ...elemento.Elemento
+    }
   }
 
+  CalcularPorcentajeMaximo( producto: any) {
+    this.PorcentajeTotal = this.ElementosTabla.reduce((acc: any, value: any) => acc + value.PorcentajeDistribucion, 0);
+    if (this.PorcentajeTotal < 100) {
+      if (producto) {
+        this.PorcentajeDisponible = 100 - this.PorcentajeTotal + producto.PorcentajeDistribucion;
+      } else {
+        this.PorcentajeDisponible = 100 - this.PorcentajeTotal;
+      }
+    }
+    console.log(this.PorcentajeDisponible)
+  }
+
+  LaunchValueNullModal() {
+    Swal.fire({
+      type: 'success',
+      title: 'Porcentajes de Distribucion completado',
+      text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
+      confirmButtonText: 'Aceptar',
+    })
+  }
 }

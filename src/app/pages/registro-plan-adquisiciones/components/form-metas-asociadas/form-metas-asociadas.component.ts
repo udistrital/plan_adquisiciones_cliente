@@ -6,7 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
-import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
+import { CargarElementosARKA, CargarMetasAsociadas } from '../../actions/registro-plan-adquisiciones.actions';
 import { getElementosARKA, getMetasAsociadas, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
@@ -77,21 +77,17 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   }
 
   OnSubmit() {
-    if (this.index === null) {
-      const elemento = this.TransformarElemento(this.MetasAsociadasForm.value.Elemento);
-      this.ElementosTabla.push(elemento);
-      // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
-    } else {
-      const elemento2 = this.TransformarElemento(this.MetasAsociadasForm.value.Elemento);
-      this.ElementosTabla[this.index] = elemento2;
-      // this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
-    }
+    const elemento = this.TransformarElemento(this.MetasAsociadasForm.value.Elemento);
+    this.ElementosTabla.push(elemento);
+    console.log(this.ElementosTabla)
+    this.store.dispatch(CargarMetasAsociadas([this.ElementosTabla]));
   }
   TransformarElemento(elemento: any) {
+    console.log(elemento);
     return {
       Id: 0,
       Activo: true,
-      MetaId: elemento.Id
+      MetaId: elemento
     };
   }
 
