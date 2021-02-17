@@ -316,7 +316,7 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
                 type: 'custom',
                 config: [
                     (data: any) => {
-                        return data.Numero + '.' + data.LineamientoId.Numero;
+                        return data.Numero
                     }
                 ],
                 class: '',

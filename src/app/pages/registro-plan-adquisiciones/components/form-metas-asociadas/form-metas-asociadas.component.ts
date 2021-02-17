@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { iif, of } from 'rxjs';
+import { combineLatest, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -41,36 +41,38 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
-    // this.subscription2$.unsubscribe();
-    this.subscription3$.unsubscribe();
+    this.subscription2$.unsubscribe();
   }
 
   ngOnInit() {
-    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
+    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe(() => {
       this.titulo = 'Asociar Meta';
       this.boton = 'Asociar';
-      this.CrearElementoARKAForm();
+      this.CrearMetasAsociadasForm();
     });
 
-    this.subscription3$ = this.store.select(getRubro).subscribe((data: any) => {
-      if (this.sharedService.IfStore(data)) {
-        this.metasService.getMetasAsociadas(data.data.Codigo).subscribe((data2: any) => {
-          this.Elementos = data2;
-        });
-      }
-    });
-
-
-    this.subscription2$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
+    this.subscription2$ = combineLatest([
+      this.store.select(getRubro),
+      this.store.select(getMetasAsociadas),
+    ]).subscribe(([data, elementos]) => {
       if (this.sharedService.IfStore(elementos)) {
         this.ElementosTabla = elementos[0];
       } else {
         this.ElementosTabla = [];
       }
-    });
+      if (this.sharedService.IfStore(data)) {
+        this.metasService.getMetasAsociadas(data.data.Codigo).subscribe((data2: any) => {
+          if (this.sharedService.IfStore(elementos)) {
+            this.Elementos = this.MontarMetasAsociadas(data2, elementos[0])
+          } else {
+            this.Elementos = data2;
+          }
+        });
+      }
+    })
   }
 
-  CrearElementoARKAForm() {
+  CrearMetasAsociadasForm() {
     this.MetasAsociadasForm = this.fb.group({
       Elemento: [null, [Validators.required]]
     });
@@ -85,10 +87,18 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   TransformarElemento(elemento: any) {
     console.log(elemento);
     return {
-      Id: 0,
-      Activo: true,
-      MetaId: elemento
+      IdRegistro: elemento.Id,
+      ActivoRegistro: elemento.Activo,
+      ...elemento
     };
   }
-
+  MontarMetasAsociadas(datos: any, metasAsociadas: any) {
+    const metas: any = [];
+    datos.forEach((element: any) => {
+      if (metasAsociadas.find((data: any) => data.Id === element.Id) === undefined) {
+        metas.push(element);
+      }
+    });
+    return metas;
+  }
 }

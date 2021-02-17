@@ -52,7 +52,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+    this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         const elementos = this.MontarProductosAsociados(renglon[0]['registro_funcionamiento-productos_asociados']);
         this.store.dispatch(CargarProductosAsociados([elementos]));
@@ -60,7 +60,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
     });
 
     // Seleccionar Elemento
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
+    this.subscription3$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Asociar Nuevo Producto') {
@@ -75,7 +75,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
       }
     });
     // Nuevo Elemento
-    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
+    this.subscription4$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Eliminar Producto Asociado') {

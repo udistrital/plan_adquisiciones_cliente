@@ -46,21 +46,21 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
 
     this.subscription$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
-        this.Datos = this.MontarMetasAsociadas(elementos[0]);
+        this.Datos = elementos[0];
       } else {
         this.Datos = [];
       }
     });
 
-    this.subscription4$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+    this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        // const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
-        this.store.dispatch(CargarMetasAsociadas([renglon[0]['registro_funcionamiento-metas_asociadas']]));
+        const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
+        this.store.dispatch(CargarMetasAsociadas(elementos));
       }
     });
 
     // Seleccionar Elemento
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
+    this.subscription3$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Asociar Nueva Meta') {
@@ -71,7 +71,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
       }
     });
     // Nuevo Elemento
-    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
+    this.subscription4$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (accion) {
         if (Object.keys(accion)[0] !== 'type') {
           if (accion.accion.title === 'Eliminar Meta Asociada') {
@@ -103,7 +103,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
-        this.Datos.splice(this.Datos.findIndex((element: any) => element.Id === data.Id), 1);
+        this.Datos.splice(this.Datos.findIndex((element: any) => element.IdRegistro === data.IdRegistro), 1);
         this.store.dispatch(CargarMetasAsociadas([this.Datos]));
       }
     });

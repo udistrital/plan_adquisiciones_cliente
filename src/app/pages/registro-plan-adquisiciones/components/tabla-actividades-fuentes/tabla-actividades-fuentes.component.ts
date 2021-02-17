@@ -10,7 +10,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
 import { CargarActividades, CargarFuentes, SeleccionarActividad } from '../../actions/registro-plan-adquisiciones.actions';
 import { CONFIGURACION_TABLA_ACTIVIDADES_FUENTES } from '../../interfaces/interfaces';
-import { getActividades, getMeta, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getActividades, getMeta, getMetasAsociadas, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 import { FormActividadFuentesComponent } from '../form-actividad-fuentes/form-actividad-fuentes.component';
 
@@ -53,102 +53,91 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     this.subscription4$.unsubscribe();
     this.subscription5$.unsubscribe();
     this.subscription6$.unsubscribe();
-    this.subscription7$.unsubscribe();
   }
 
   ngOnInit() {
-    this.subscription5$ = this.store.select(getMeta).subscribe((meta: any) => {
-      if (meta) {
-        if (Object.keys(meta)[0] !== 'type') {
-          this.Meta = JSON.parse(JSON.stringify(meta));
-        }
+
+
+    this.subscription$ = this.store.select(getMetasAsociadas).subscribe((metas: any) => {
+      if (this.sharedService.IfStore(metas)) {
+        this.Meta = metas[0];
       }
     });
-    this.subscription4$ = combineLatest([
-      this.store.select(getMeta),
-      this.store.select(getRenglonSeleccionado),
-    ]).subscribe(([meta, renglon]) => {
-      if (this.sharedService.IfStore(renglon) && this.sharedService.IfStore(meta)) {
-        if (parseFloat(renglon[0]['MetaId']) === meta.Id) {
-          this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
-            const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad'], actividades2);
-            this.store.dispatch(CargarActividades([actividad]));
-          });
-        } else {
-          this.store.dispatch(CargarActividades(null));
-        }
+    this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
+      if (this.sharedService.IfStore(renglon)) {
+        const actividad = this.MontarActividades(renglon[0]['registro_plan_adquisiciones-actividad']);
+        this.store.dispatch(CargarActividades([actividad]));
+      } else {
+        this.store.dispatch(CargarActividades(null));
       }
     });
 
-    this.subscription$ = this.store.select(getActividades).subscribe((elementos: any) => {
+    this.subscription3$ = this.store.select(getActividades).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
-        this.Datos = JSON.parse(JSON.stringify(elementos[0]));
+        this.Datos = JSON.parse(JSON.stringify(elementos[0])); // no quitar funciones JSON, por efectos de renderizacion de tabla
       } else {
         this.Datos = [];
       }
     });
 
     // Seleccionar Elemento
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
-
+    this.subscription4$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Agregar Actividad y Fuentes Asociadas') {
-          if (this.CentroGestor && this.AreaFuncional) {
+          if (this.CentroGestor && this.AreaFuncional && this.Meta) {
             this.store.dispatch(SeleccionarActividad(null));
             this.store.dispatch(CargarFuentes(null));
             setTimeout(() => {
               this.OpenModal();
             }, 0);
           } else {
-            this.popupService.showInfoAlert('Selecciona el centro gestor y el area funcional', 'Info');
+            this.FaltanDatos();
           }
         }
       }
     });
     // Nuevo Elemento
-    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
+    this.subscription5$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Editar Actividad y Fuentes Asociadas') {
-          if (this.CentroGestor && this.AreaFuncional) {
+          if (this.CentroGestor && this.AreaFuncional && this.Meta) {
             this.store.dispatch(SeleccionarActividad(accion.fila));
             this.store.dispatch(CargarFuentes([accion.fila.FuentesFinanciamiento]));
             setTimeout(() => {
               this.OpenModal();
             }, 0);
           } else {
-            this.popupService.showInfoAlert('Seleccionar el centro gestor y el area funcional', 'Info');
+            this.FaltanDatos();
           }
         }
       }
     });
-    this.subscription6$ = this.store.select(getAreaFuncional).subscribe((area: any) => {
-      if (this.sharedService.IfStore(area)) {
+    this.subscription6$ = combineLatest([
+      this.store.select(getAreaFuncional),
+      this.store.select(getCentroGestor),
+      this.store.select(getMetasAsociadas),
+    ]).subscribe(([area, centro, metas]) => {
+      if (
+        this.sharedService.IfStore(area) &&
+        this.sharedService.IfStore(centro) &&
+        this.sharedService.IfStore(metas)
+      ) {
         this.AreaFuncional = area;
+        this.CentroGestor = centro.CentroGestor;
+        this.Meta = metas[0];
       } else {
         this.AreaFuncional = undefined;
-      }
-    });
-    this.subscription7$ = this.store.select(getCentroGestor).subscribe((centro: any) => {
-      if (this.sharedService.IfStore(centro)) {
-        this.CentroGestor = centro.CentroGestor;
-      } else {
         this.CentroGestor = undefined;
+        this.Meta = undefined;
       }
-    });
+    })
   }
 
   OpenModal() {
-    if (this.Meta) {
-      this.matDialog.open(FormActividadFuentesComponent);
-    } else {
-      Swal.fire({
-        type: 'error',
-        title: 'No Existen Datos',
-        text: 'Es Necesario seleccionar una Meta',
-        confirmButtonText: 'Aceptar',
-      });
-    }
-
+    this.matDialog.open(FormActividadFuentesComponent);
+  }
+  FaltanDatos() {
+    this.popupService.showInfoAlert('Selecciona el centro gestor, el area funcional, y al menos una meta', 'Info');
   }
 
   LaunchDeleteModal(data: any) {
@@ -166,13 +155,12 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     });
   }
 
-  MontarActividades(actividades: any[], datos: any) {
+  MontarActividades(actividades: any[]) {
     return actividades.map((actividad) => {
-      const info = datos.find((x: any) => x.Id === actividad.ActividadId);
       return {
         ActividadId: {
           Id: actividad.ActividadId,
-          Id2: info.Numero + '.' + info.MetaId.Numero + '.' + info.MetaId.LineamientoId.Numero,
+          Id2: actividad.Numero + '.' + actividad.NumeroMeta,
           Nombre: actividad.Nombre,
           Activo: actividad.Activo,
           Valor: actividad.Valor,
