@@ -114,7 +114,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
         IdRegistro: elemento.Id,
         ActivoRegistro: elemento.Activo,
         ...elemento.MetaId
-      }
+      };
     });
   }
 

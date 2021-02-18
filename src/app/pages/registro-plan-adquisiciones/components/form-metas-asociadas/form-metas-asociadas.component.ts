@@ -63,13 +63,13 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
       if (this.sharedService.IfStore(data)) {
         this.metasService.getMetasAsociadas(data.data.Codigo).subscribe((data2: any) => {
           if (this.sharedService.IfStore(elementos)) {
-            this.Elementos = this.MontarMetasAsociadas(data2, elementos[0])
+            this.Elementos = this.MontarMetasAsociadas(data2, elementos[0]);
           } else {
             this.Elementos = data2;
           }
         });
       }
-    })
+    });
   }
 
   CrearMetasAsociadasForm() {
@@ -81,11 +81,11 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   OnSubmit() {
     const elemento = this.TransformarElemento(this.MetasAsociadasForm.value.Elemento);
     this.ElementosTabla.push(elemento);
-    console.log(this.ElementosTabla)
+
     this.store.dispatch(CargarMetasAsociadas([this.ElementosTabla]));
   }
   TransformarElemento(elemento: any) {
-    console.log(elemento);
+
     return {
       IdRegistro: elemento.Id,
       ActivoRegistro: elemento.Activo,

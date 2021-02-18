@@ -27,7 +27,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.store.select(getRenglonVersion).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
-        console.log(renglon)
+
         if ((renglon.RubroId as string).split('-')[1] === '01') {
           this.TipoDePlan = true;
         } else {

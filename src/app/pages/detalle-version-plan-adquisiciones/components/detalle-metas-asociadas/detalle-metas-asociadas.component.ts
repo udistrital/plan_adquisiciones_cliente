@@ -33,7 +33,7 @@ export class DetalleMetasAsociadasComponent implements OnInit {
         IdRegistro: elemento.Id,
         ActivoRegistro: elemento.Activo,
         ...elemento.MetaId
-      }
+      };
     });
   }
 

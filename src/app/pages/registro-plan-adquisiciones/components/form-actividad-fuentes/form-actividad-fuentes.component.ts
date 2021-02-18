@@ -66,25 +66,25 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       this.store.select(getActividadSeleccionada),
       this.store.select(getActividades),
     ]).subscribe(([metas, actividad, actividades]) => {
-      console.log(metas, actividad, actividades)
+
       if (this.sharedService.IfStore(metas)) {
         const datos = of(...metas[0]);
-        console.log(metas, actividad, actividades)
+
         datos.pipe(
           mergeMap(
             (value: any) => {
-              console.log(value);
-              return this.actividadesService.getActividadesAsociadas(value.Id)
+
+              return this.actividadesService.getActividadesAsociadas(value.Id);
             }
           )
         ).subscribe((actividades2: any) => {
-          console.log(actividades2)
+
           if (Object.keys(actividades2[0]).length !== 0) {
             this.ActividadesCapturadas = [...this.ActividadesCapturadas, ...actividades2];
-            console.log(this.ActividadesCapturadas)
+
           }
         }, () => { }, () => {
-          console.log('complete')
+
           if (this.sharedService.IfStore(actividad)) {
             this.Actividades = this.ActividadesCapturadas;
             this.CrearActividadFuentesForm(actividad);

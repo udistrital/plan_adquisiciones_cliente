@@ -10,8 +10,8 @@ import { getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
 })
 export class CardMetaComponent implements OnInit {
   subscription$: any;
-  Meta: any
-  
+  Meta: any;
+
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
@@ -22,7 +22,7 @@ export class CardMetaComponent implements OnInit {
       if (this.sharedService.IfStore(meta)) {
         this.Meta = meta;
       }
-    })
+    });
   }
 
 }

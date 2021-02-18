@@ -65,17 +65,17 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
             this.titulo = 'Editar Producto';
             this.boton = 'Editar';
             this.index = fila.index;
-            this.CalcularPorcentajeMaximo(fila.fila)
+            this.CalcularPorcentajeMaximo(fila.fila);
             this.CrearProductosAsociadosForm(fila.fila);
           }
         } else {
           this.titulo = 'Asociar Producto';
           this.boton = 'Asociar';
-          this.CalcularPorcentajeMaximo(null)
+          this.CalcularPorcentajeMaximo(null);
           this.CrearProductosAsociadosForm(null);
         }
       });
-    })
+    });
   }
 
   CrearProductosAsociadosForm(data: any) {
@@ -92,7 +92,6 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
         PorcentajeDistribucion: [null, [Validators.required, Validators.max(this.PorcentajeDisponible)]]
       });
     }
-    this.ProductosAsociadosForm.valueChanges.subscribe((value: any) => console.log(value))
   }
 
   getOptionText(valor: any): string | undefined {
@@ -117,7 +116,7 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
       PorcentajeDistribucion: elemento.PorcentajeDistribucion,
       PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
       ...elemento.Elemento
-    }
+    };
   }
 
   CalcularPorcentajeMaximo( producto: any) {
@@ -129,7 +128,6 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
         this.PorcentajeDisponible = 100 - this.PorcentajeTotal;
       }
     }
-    console.log(this.PorcentajeDisponible)
   }
 
   LaunchValueNullModal() {
@@ -138,6 +136,6 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
       title: 'Porcentajes de Distribucion completado',
       text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
       confirmButtonText: 'Aceptar',
-    })
+    });
   }
 }

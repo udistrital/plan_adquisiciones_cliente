@@ -69,7 +69,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
               this.OpenModal();
             } else {
               this.LaunchValueNullModal();
-            } 
+            }
           }
         }
       }
@@ -124,15 +124,15 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
         PorcentajeDistribucion: elemento.PorcentajeDistribucion,
         PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
         ...elemento.ProductoData
-      }
+      };
     });
   }
   CalcularPorcentajeMaximo() {
     const total = this.Datos.reduce((acc: any, value: any) => acc + value.PorcentajeDistribucion, 0);
     if (total < 100) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   }
   LaunchValueNullModal() {
@@ -141,7 +141,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
       title: 'Porcentajes de Distribucion completado',
       text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
       confirmButtonText: 'Aceptar',
-    })
+    });
   }
 
 }

@@ -60,7 +60,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
           fuente: this.registroService.getFuentesFinanciamiento(null, query),
           actividades: this.actividadesService.getActividadesPorRubro(rubro.data.Codigo)
         }).subscribe(({ fuente, actividades }) => {
-          console.log(fuente, actividades)
+
           this.FuentesFinanciamiento = fuente;
           this.Actividades = actividades;
           if (this.sharedService.IfStore(renglon)) {
@@ -83,7 +83,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       this.FuenteForm = this.fb.group({
         Actividad: [this.Actividades.find((x: any) => x.Id === data.ActividadId), [Validators.required]],
         Valor: [data.ValorActividad, [Validators.required]],
-        FuenteFinanciamiento: [this.FuentesFinanciamiento.find((x: any) => x.Codigo == data.FuenteFinanciamientoId), [Validators.required]],
+        FuenteFinanciamiento: [this.FuentesFinanciamiento.find((x: any) => x.Codigo === data.FuenteFinanciamientoId), [Validators.required]],
       });
       this.FuenteForm.valueChanges.subscribe((value: any) => {
         this.store.dispatch(CargarActividadFuente(value));

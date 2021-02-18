@@ -130,7 +130,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         this.CentroGestor = undefined;
         this.Meta = undefined;
       }
-    })
+    });
   }
 
   OpenModal() {

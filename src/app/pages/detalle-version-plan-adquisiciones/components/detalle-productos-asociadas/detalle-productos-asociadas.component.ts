@@ -35,7 +35,7 @@ export class DetalleProductosAsociadasComponent implements OnInit {
         PorcentajeDistribucion: elemento.PorcentajeDistribucion,
         PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
         ...elemento.ProductoData
-      }
+      };
     });
   }
 }
