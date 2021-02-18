@@ -1,6 +1,6 @@
 <!-- Subtitulo -->
 <th scope="col" colspan="100" [class]="config.subtitle.class">
-    {{datos.Rubro}}
+    {{datos.RubroInfo ? datos.RubroInfo.Codigo + ' ' + datos.RubroInfo.Nombre : ''}}
 </th>
 <!-- Datos -->
 <ng-container *ngFor="let items of datos.datos; index as i">

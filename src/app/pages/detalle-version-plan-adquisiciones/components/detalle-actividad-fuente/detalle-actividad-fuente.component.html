@@ -1,1 +1,60 @@
-<p>detalle-actividad-fuente works!</p>
+<div class="container-fluid" *ngIf="datos">
+    <div class="row">
+        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            <p>Actividad:</p>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label>Codigo:</label>
+                <span class="form-control overflow">
+                    {{ Actividad ? actividad.Numero : ''}}.{{Actividad ?
+                    Actividad.MetaId.Numero : ''}}
+                </span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Nombre:</label>
+                <span class="form-control overflow">
+                    {{ Actividad ? Actividad.Nombre : ''}}
+                </span>
+            </div>
+        </div>
+        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+        </div>
+        <div class="col-9">
+            <div class="form-group">
+                <label>Valor:</label>
+                <span class="form-control overflow">
+                    {{datos ? (ValorActividad | currency): ''}}
+                </span>
+            </div>
+        </div>
+        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            <p>Fuente de Financiamiento:</p>
+        </div>
+        <div class="col-3 pt-3">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{Fuente ? Fuente.Codigo : ''}}
+                </span>
+            </div>
+        </div>
+        <div class="col-6 pt-3">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{Fuente ? Fuente.Nombre : ''}}
+                </span>
+            </div>
+        </div>
+        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+        </div>
+        <div class="col-9 pt-3">
+            <div class="form-group">
+                <span class="form-control overflow">
+                    {{Fuente ? (Fuente.ValorActual | currency) : ''}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

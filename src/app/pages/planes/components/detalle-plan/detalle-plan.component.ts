@@ -98,10 +98,11 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
 
   AjustarDatos(datos: any) {
-
     this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
-    this.datos = datos;
-    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+    if (Object.keys(datos[0]).length !== 0) {
+      this.datos = datos;
+      this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+    }
   }
 
   CrearRenglon() {

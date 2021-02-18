@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActividadesService } from '../../../actividades/services/actividades.service';
 
 @Component({
   selector: 'ngx-detalle-actividad-fuente',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleActividadFuenteComponent implements OnInit {
 
-  constructor() { }
+  @Input() datos: any;
+
+  Actividad: any;
+  Fuente: any;
+
+  constructor(
+    private actividadesService: ActividadesService
+  ) { }
 
   ngOnInit() {
+    this.actividadesService.getActividad(this.datos.ActividadId).subscribe((meta: any) => {
+      this.Actividad = meta[0];
+      this.Fuente = this.datos.FuenteFinanciamientoData;
+    });
   }
 
 }
