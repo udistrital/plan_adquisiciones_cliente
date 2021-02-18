@@ -55,7 +55,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.subscription3$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
+    this.subscription2$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
       if (rubro) {
         this.store.dispatch(ConsultarMetas({
           Rubro: rubro,
@@ -67,7 +67,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     });
 
     // Seleccionar Rubro
-    this.subscription4$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
+    this.subscription3$ = this.store.select(getNodoSeleccionado).subscribe((nodo: any) => {
       if (nodo) {
         if (Object.keys(nodo)[0] !== 'type') {
           if (nodo && !nodo.children) {
@@ -78,7 +78,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     });
 
     // Seleccionar Meta (Editar o Actividades)
-    this.subscription5$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
+    this.subscription4$ = this.store.select(getFilaSeleccionada).subscribe((fila: any) => {
       if (fila) {
         if (Object.keys(fila)[0] !== 'type') {
           this.store.dispatch(SeleccionarMeta(fila.fila));
@@ -90,7 +90,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
       }
     });
     // Crear Nueva Meta
-    this.subscription6$ = this.store.select(getAccionTabla).subscribe(() => {
+    this.subscription5$ = this.store.select(getAccionTabla).subscribe(() => {
       this.store.dispatch(SeleccionarMeta(null));
     });
   }
@@ -142,6 +142,5 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     this.subscription3$.unsubscribe();
     this.subscription4$.unsubscribe();
     this.subscription5$.unsubscribe();
-    this.subscription6$.unsubscribe();
   }
 }

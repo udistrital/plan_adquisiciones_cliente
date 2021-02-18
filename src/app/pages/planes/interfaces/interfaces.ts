@@ -193,13 +193,14 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             }
         },
         {
-            key: 'RubroNombre',
+            key: 'Actividades',
             title: {
                 name: 'Descripcion',
                 class: 'text-center align-middle',
             },
             pipe: {
                 class: 'text-justify align-middle',
+                isArray: true,
             }
         },
         {
