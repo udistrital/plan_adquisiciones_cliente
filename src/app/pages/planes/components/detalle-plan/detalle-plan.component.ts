@@ -18,7 +18,10 @@ import {
   ConsultarRenglonPlan,
   SeleccionarFechaSeleccion,
   SeleccionarFuente,
-  SeleccionarResponsable
+  SeleccionarResponsable,
+  CargarMetasAsociadas,
+  CargarProductosAsociados,
+  CargarActividadFuente
 } from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
 import { ConsultarPlanDetallado } from '../../actions/planes.actions';
 import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
@@ -113,6 +116,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       this.store.dispatch(CargarProducto(null));
       this.store.dispatch(CargarModalidades(null));
       this.store.dispatch(CargarElementosARKA(null));
+      this.store.dispatch(CargarMetasAsociadas(null));
+      this.store.dispatch(CargarProductosAsociados(null));
+      this.store.dispatch(CargarActividadFuente(null));
       this.store.dispatch(CargarActividades(null));
       this.store.dispatch(SeleccionarResponsable(null));
       this.store.dispatch(CargarRenglonPlan(null));

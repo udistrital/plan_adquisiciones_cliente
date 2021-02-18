@@ -55,7 +55,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         const elementos = this.MontarMetasAsociadas(renglon[0]['registro_funcionamiento-metas_asociadas']);
-        this.store.dispatch(CargarMetasAsociadas(elementos));
+        this.store.dispatch(CargarMetasAsociadas([elementos]));
       }
     });
 

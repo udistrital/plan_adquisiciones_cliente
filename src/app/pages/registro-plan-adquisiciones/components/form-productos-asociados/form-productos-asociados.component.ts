@@ -42,8 +42,6 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
-    // this.subscription2$.unsubscribe();
-    this.subscription3$.unsubscribe();
   }
 
   ngOnInit() {
@@ -56,7 +54,6 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
       } else {
         this.ElementosTabla = [];
       }
-
       this.registroPlanService.getProductos().subscribe((datos: any) => {
         this.Elementos = datos;
         this.index = null;

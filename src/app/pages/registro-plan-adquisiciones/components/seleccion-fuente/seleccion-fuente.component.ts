@@ -6,7 +6,7 @@ import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
-import { CargarActividadFuente, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
+import { CargarActividadFuente, CargarProducto, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
 import { getActividadFuente, getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
@@ -96,6 +96,9 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       });
       this.FuenteForm.valueChanges.subscribe((value: any) => {
         this.store.dispatch(CargarActividadFuente(value));
+      });
+      this.FuenteForm.get('FuenteFinanciamiento').valueChanges.subscribe((value: any) => {
+        this.store.dispatch(CargarProducto(value));
       });
     }
 

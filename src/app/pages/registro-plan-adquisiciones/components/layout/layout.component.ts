@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/shared.actions';
@@ -84,12 +84,20 @@ export class LayoutComponent implements OnInit, OnDestroy {
           this.Guardar = false;
         }
       }
+      console.log(this.Registro)
     });
     this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }
 
-  OnSubmit() {
+  RegistroCompleto(data: any, centro: any, area: any, plan: any) {
+    if (this.TipoDePlan) {
+      return this.RevisarRegistroFuncionamiento(data, centro, area, plan);
+    } else {
+      return this.RevisarRegistroInversion(data, centro, area, plan);
+    }
+  }
 
+  OnSubmit() {
     if (this.Registro.Id) {
       this.store.dispatch(ActualizarRenglonPlan(this.Registro));
     } else {
@@ -101,8 +109,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   RevisarRegistroInversion(data: any, centro: any, area: any, plan: any) {
     if (
       this.sharedService.IfStore(data.Rubro) &&
-      this.sharedService.IfStore(data.Meta) &&
-      this.sharedService.IfStore(data.Producto) &&
+      this.sharedService.IfStore(data.MetasAsociadas) &&
+      this.sharedService.IfStore(data.ProductosAsociados) &&
       this.sharedService.IfStore(data.Responsable) &&
       this.sharedService.IfStore(data.FechaSeleccion) &&
       this.sharedService.IfStore(data.Modalidades) &&
@@ -121,13 +129,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   RevisarRegistroFuncionamiento(data: any, centro: any, area: any, plan: any) {
     if (
       this.sharedService.IfStore(data.Rubro) &&
-      // this.sharedService.IfStore(data.Meta) &&
-      // this.sharedService.IfStore(data.Producto) &&
       this.sharedService.IfStore(data.Responsable) &&
       this.sharedService.IfStore(data.FechaSeleccion) &&
       this.sharedService.IfStore(data.Modalidades) &&
       this.sharedService.IfStore(data.ElementosARKA) &&
-      // this.sharedService.IfStore(data.Actividades) &&
+      this.sharedService.IfStore(data.ActividadFuente) &&
+      this.sharedService.IfStore(data.Producto) &&
       this.sharedService.IfStore(centro) &&
       this.sharedService.IfStore(area) &&
       this.sharedService.IfStore(plan)
@@ -138,15 +145,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  RegistroCompleto(data: any, centro: any, area: any, plan: any) {
-    if (this.TipoDePlan) {
-      return this.RevisarRegistroInversion(data, centro, area, plan);
-    } else {
-      return this.RevisarRegistroFuncionamiento(data, centro, area, plan);
-    }
-
-  }
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
 
     const NuevoRegistro: any = {};
@@ -155,19 +153,26 @@ export class LayoutComponent implements OnInit, OnDestroy {
     NuevoRegistro.CentroGestor = centro.CentroGestor;
     NuevoRegistro.ResponsableId = data.Responsable.Id;
     NuevoRegistro.Activo = true;
-    NuevoRegistro.MetaId = data.Meta.Id.toString();
-    NuevoRegistro.ProductoId = data.Producto._id;
     NuevoRegistro.RubroId = data.Rubro.data.Codigo;
+    NuevoRegistro.FuenteFinanciamientoId = '';
     NuevoRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start);
     NuevoRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end);
     NuevoRegistro.PlanAdquisicionesId = plan.Id;
     NuevoRegistro.ModalidadSeleccion = this.CrearModalidades(data);
     NuevoRegistro.CodigoArka = this.CrearElementosARKA(data);
-    NuevoRegistro.RegistroPlanAdquisicionActividad = this.CrearActividades(data);
+
+    if (this.TipoDePlan) {
+      NuevoRegistro.ActividadId = data.ActividadFuente.Actividad.Id;
+      NuevoRegistro.FuenteFinanciamientoId = data.Producto.Codigo;
+      NuevoRegistro.ValorActividad = data.ActividadFuente.Valor;
+    } else {
+      NuevoRegistro.RegistroPlanAdquisicionActividad = this.CrearActividades(data);
+      NuevoRegistro.MetasAsociadas = this.CrearMetasAsociadas(data);
+      NuevoRegistro.ProductosAsociados = this.CrearProductosAsociados(data);
+    }
 
     return NuevoRegistro;
   }
-
   CrearModalidades(data: any) {
     return (data.Modalidades[0] as Array<any>).map((element: any) => {
       return {
@@ -208,6 +213,25 @@ export class LayoutComponent implements OnInit, OnDestroy {
       };
     });
   }
+  CrearMetasAsociadas(element: any) {
+    return (element.MetasAsociadas[0] as Array<any>).map((meta: any) => {
+      return {
+        Id: 0,
+        Activo: true,
+        MetaId: meta.Id
+      };
+    });
+  }
+  CrearProductosAsociados(element: any) {
+    return (element.ProductosAsociados[0] as Array<any>).map((producto: any) => {
+      return {
+        Id: 0,
+        Activo: true,
+        ProductoAsociadoId: producto._id,
+        PorcentajeDistribucion: producto.PorcentajeDistribucion,
+      };
+    });
+  }
 
   ActualizarRegistro(data: any, centro: any, area: any, plan: any, renglon: any) {
 
@@ -218,15 +242,24 @@ export class LayoutComponent implements OnInit, OnDestroy {
     ActualizarRegistro.CentroGestor = centro.CentroGestor;
     ActualizarRegistro.ResponsableId = data.Responsable.Id;
     ActualizarRegistro.Activo = true;
-    ActualizarRegistro.MetaId = data.Meta.Id.toString();
-    ActualizarRegistro.ProductoId = data.Producto._id;
     ActualizarRegistro.RubroId = data.Rubro.data.Codigo;
+    ActualizarRegistro.FuenteFinanciamientoId = '';
     ActualizarRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start);
     ActualizarRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end);
     ActualizarRegistro.PlanAdquisicionesId = plan.Id;
     ActualizarRegistro.ModalidadSeleccion = this.ActualizarModalidades(data, renglon);
     ActualizarRegistro.CodigoArka = this.ActualizarElementosARKA(data, renglon);
-    ActualizarRegistro.RegistroPlanAdquisicionActividad = this.ActualizarActividades(data, renglon);
+
+    if (this.TipoDePlan) {
+      ActualizarRegistro.ActividadId = data.ActividadFuente.Actividad.Id;
+      ActualizarRegistro.FuenteFinanciamientoId = data.Producto.Codigo;
+      ActualizarRegistro.ValorActividad = data.ActividadFuente.Valor;
+    } else {
+      ActualizarRegistro.RegistroPlanAdquisicionActividad = this.ActualizarActividades(data, renglon);
+      ActualizarRegistro.MetasAsociadas = this.ActualizarMetasAsociadas(data, renglon);
+      ActualizarRegistro.ProductosAsociados = this.ActualizarProductosAsociados(data, renglon);
+
+    }
 
     return ActualizarRegistro;
   }
@@ -308,6 +341,40 @@ export class LayoutComponent implements OnInit, OnDestroy {
       }
     });
     return fuentes;
+  }
+
+  ActualizarMetasAsociadas(data: any, renglon: any) {
+    const MetasAsociadas: any = this.CrearMetasAsociadas(data);
+    (renglon['registro_funcionamiento-metas_asociadas'] as Array<any>).forEach(element => {
+      const index = MetasAsociadas.findIndex((x: any) => x.MetaId === element.MetaId.Id);
+      if (index !== -1) {
+        MetasAsociadas[index].Id = element.Id;
+      } else {
+        MetasAsociadas.push({
+          Id: element.Id,
+          MetaId: element.MetaId.Id,
+          Activo: false,
+        });
+      }
+    });
+    return MetasAsociadas;
+  }
+  ActualizarProductosAsociados(data: any, renglon: any) {
+    const ProductosAsociados: any = this.CrearProductosAsociados(data);
+    (renglon['registro_funcionamiento-productos_asociados'] as Array<any>).forEach(element => {
+      const index = ProductosAsociados.findIndex((x: any) => x.ProductoAsociadoId === element.ProductoAsociadoId);
+      if (index !== -1) {
+        ProductosAsociados[index].Id = element.Id;
+      } else {
+        ProductosAsociados.push({
+          Id: element.Id,
+          ProductoAsociadoId: element.ProductoAsociadoId,
+          PorcentajeDistribucion: element.PorcentajeDistribucion,
+          Activo: false,
+        });
+      }
+    });
+    return ProductosAsociados;
   }
 }
 
