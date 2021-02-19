@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="datos">
+<div class="container-fluid" *ngIf="Actividad">
     <div class="row">
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
             <p>Actividad:</p>
@@ -7,8 +7,7 @@
             <div class="form-group">
                 <label>Codigo:</label>
                 <span class="form-control overflow">
-                    {{ Actividad ? actividad.Numero : ''}}.{{Actividad ?
-                    Actividad.MetaId.Numero : ''}}
+                    {{ Actividad ? Actividad.Numero : ''}}
                 </span>
             </div>
         </div>
@@ -26,7 +25,7 @@
             <div class="form-group">
                 <label>Valor:</label>
                 <span class="form-control overflow">
-                    {{datos ? (ValorActividad | currency): ''}}
+                    {{datos ? (datos.ValorActividad | currency): ''}}
                 </span>
             </div>
         </div>

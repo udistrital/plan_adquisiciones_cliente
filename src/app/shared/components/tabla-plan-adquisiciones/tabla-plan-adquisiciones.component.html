@@ -7,7 +7,7 @@
                         <!-- Titulo General Fuente-->
                         <tr *ngIf="config.title">
                             <th scope="col" colspan="100" [class]="config.title.class">
-                                {{datos.Fuente}}
+                                {{datos.Fuente}} - {{datos.FuenteData.Nombre}}
                             </th>
                         </tr>
                         <!-- Titulos Principales -->
@@ -33,7 +33,7 @@
                     </ng-container>
                     <tr>
                         <th scope="col" colspan="7" [class]="config.endSubtotal.first.class">
-                            Total {{datos.Fuente}}
+                            Total {{datos.FuenteData.Nombre}}:
                         </th>
                         <th scope="col" colspan="4" [class]="config.endSubtotal.last.class">
                             {{suma | currency}}

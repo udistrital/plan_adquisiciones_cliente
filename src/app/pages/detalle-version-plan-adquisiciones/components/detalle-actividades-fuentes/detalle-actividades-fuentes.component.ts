@@ -27,13 +27,13 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   }
 
   MontarActividades(actividades: any[]) {
+    console.log(actividades)
 
     return actividades.map((actividad) => {
       return {
         ActividadId: {
           Id2: actividad.actividad.Numero + '.' +
-            actividad.actividad.MetaId.Numero + '.' +
-            actividad.actividad.MetaId.LineamientoId.Numero,
+            actividad.actividad.MetaId.Numero,
           Nombre: actividad.actividad.Nombre,
           Valor: actividad.Valor,
         },

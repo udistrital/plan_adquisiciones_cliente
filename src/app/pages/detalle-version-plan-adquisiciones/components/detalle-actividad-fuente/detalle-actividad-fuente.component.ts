@@ -14,14 +14,12 @@ export class DetalleActividadFuenteComponent implements OnInit {
   Fuente: any;
 
   constructor(
-    private actividadesService: ActividadesService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.actividadesService.getActividad(this.datos.ActividadId).subscribe((meta: any) => {
-      this.Actividad = meta[0];
-      this.Fuente = this.datos.FuenteFinanciamientoData;
-    });
+    this.Fuente = this.datos.FuenteFinanciamientoData;
+    this.Actividad = this.datos.ActividadData;
   }
 
 }
