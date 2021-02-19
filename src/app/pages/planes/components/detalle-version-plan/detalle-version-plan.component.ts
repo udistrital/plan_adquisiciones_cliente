@@ -8,7 +8,7 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarRenglonVersion } from '../../actions/planes.actions';
-import { CONFIGURACION_TABLA_DETALLE_PLAN_2, PDF_PLANTILLA } from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
 import { getPlanSeleccionado, getVersionPlan } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
 
@@ -104,8 +104,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   // Creacion de PDF
   DescargarPDF() {
     this.CrearPDFPublicacion();
-    console.log(this.PDFPublicado)
-    const data = this.PDFPublicado
+    const data = this.PDFPublicado;
     pdfMake.createPdf(data).download();
   }
 
@@ -193,7 +192,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           fontSize: 6,
         }
       }
-    }
+    };
     // Titulo General
     this.PDFPublicado.content[0].table.body.push(
       [
@@ -246,7 +245,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         {}, {}, {}, {}, {}, {}, {}, {}
       ],
     );
-    this.SumaTotal()
+    this.SumaTotal();
   }
   // Agregando Fuentes
   AgregarFuentes() {
@@ -320,7 +319,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         ],
       );
       this.AgregarRubros(fuente.datos);
-      this.SumaFuente(fuente.datos, fuente.FuenteData)
+      this.SumaFuente(fuente.datos, fuente.FuenteData);
       this.PDFPublicado.content[0].table.body.push(
         [
           {
@@ -331,11 +330,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           {}, {}, {}, {}, {}, {}, {}, {}
         ],
       );
-    })
+    });
   }
   // Agregando Rubros
   AgregarRubros(Rubros: any) {
-    console.log(Rubros)
     Rubros.forEach((rubro: any) => {
       this.PDFPublicado.content[0].table.body.push(
         [
@@ -349,15 +347,15 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           {}, {}, {}, {}, {}, {}, {}, {}
         ],
       );
-      this.AgregarRenglones(rubro.datos, rubro.RubroInfo)
-      this.SumaRubro(rubro.datos, rubro.RubroInfo)
+      this.AgregarRenglones(rubro.datos, rubro.RubroInfo);
+      this.SumaRubro(rubro.datos, rubro.RubroInfo);
     });
   }
   // Agregando Renglones
   AgregarRenglones(Renglones: any, Rubro: any) {
     Renglones.forEach((renglon: any) => {
       if (renglon.FuenteFinanciamientoId === '') {
-        this.AjustarActividades(renglon, renglon['registro_plan_adquisiciones-actividad'], Rubro)
+        this.AjustarActividades(renglon, renglon['registro_plan_adquisiciones-actividad'], Rubro);
       } else {
         this.PDFPublicado.content[0].table.body.push(
           [
@@ -415,10 +413,9 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   // Desagregando Actividades
   AjustarActividades(Renglon: any, Actividades: any, Rubro) {
     Actividades.forEach((actividad: any, index: any) => {
-      const datosArka = this.MontarElementosArka(Renglon, index, Actividades.length)
+      const datosArka = this.MontarElementosArka(Renglon, index, Actividades.length);
       this.PDFPublicado.content[0].table.body.push(
         [
-          // 
           datosArka,
           {
             text: Rubro.Codigo,
@@ -466,39 +463,38 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     });
   }
   MontarElementosArka(Renglon: any, index: any, length) {
-    console.log(index, length);
     if (index === 0) {
       return {
         text: this.ExtraerCodigosArka(Renglon),
         alignment: 'center',
         style: 'style_7',
         rowSpan: length,
-      }
+      };
     } else {
       return {
         text: '',
-      }
+      };
     }
   }
-  
+
   ExtraerCodigosArka(Renglon: any) {
     const datos: any = Renglon['registro_plan_adquisiciones-codigo_arka'].map((codigo: any) => {
-      return codigo.Descripcion.split('-')[0] + ' '
+      return codigo.Descripcion.split('-')[0] + ' ';
     });
-    return datos.reduce((a: any, c: any) => a + '' + c)
+    return datos.reduce((a: any, c: any) => a + '' + c);
   }
   ExtraerFecha(Renglon: any, type: any) {
     const datos = {
       start: new Date(Renglon.FechaEstimadaInicio),
       end: new Date(Renglon.FechaEstimadaFin),
-    }
-    return this.datePipe.transform(datos, type)
+    };
+    return this.datePipe.transform(datos, type);
   }
   ExtraerModalidades(Renglon: any) {
     const datos: any = Renglon['registro_funcionamiento-modalidad_seleccion'].map((codigo: any) => {
       return codigo.Nombre + '  ';
     });
-    return datos.reduce((a: any, c: any) => a + '  ' + c)
+    return datos.reduce((a: any, c: any) => a + '  ' + c);
   }
   ExtraerFuentesFinanciamiento(Actividad: any, tipo: boolean) {
     const datos: any = Actividad.FuentesFinanciamiento.map((fuente: any) => {
@@ -508,7 +504,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         return this.currencyPipe.transform(fuente.ValorAsignado) + ' ';
       }
     });
-    return datos.reduce((a: any, c: any) => a + '' + c)
+    return datos.reduce((a: any, c: any) => a + '' + c);
   }
   SumaRubro(Renglones: any, Rubro: any) {
     this.PDFPublicado.content[0].table.body.push(

@@ -176,7 +176,7 @@ export class PlanesService {
       } else {
         element.FuenteRecursos = [element.FuenteFinanciamientoData.Nombre];
         element.ValorTotalActividades = element.ValorActividad;
-        element.Actividades = [element.ActividadData.Nombre]
+        element.Actividades = [element.ActividadData.Nombre];
       }
       return element;
     });
@@ -185,7 +185,7 @@ export class PlanesService {
     const fuentes: any[] = [];
     const actividades: any[] = [];
     Actividad.forEach((element: any) => {
-      actividades.push(element.Numero + '.' +element.NumeroMeta + ' ' + element.Nombre)
+      actividades.push(element.Numero + '.' + element.NumeroMeta + ' ' + element.Nombre);
       element.FuentesFinanciamiento.forEach((data: any) => {
         if (fuentes.find((x: any) => x === data.Nombre) === undefined) {
           fuentes.push(data.Nombre);

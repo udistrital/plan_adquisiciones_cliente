@@ -84,7 +84,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
           this.Guardar = false;
         }
       }
-      console.log(this.Registro)
+
     });
     this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
   }

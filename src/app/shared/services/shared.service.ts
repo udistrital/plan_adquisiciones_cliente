@@ -141,7 +141,7 @@ export class SharedService {
 
   BuscarNodo(arbol: any, codigo: string) {
     for (const element of arbol) {
-      console.log(element.Codigo, codigo)
+
       if (codigo.indexOf(element.Codigo) === 0) {
         if (element.Codigo === codigo) {
           return element;
@@ -180,7 +180,7 @@ export class SharedService {
   }
 
   public RetornarAlInicio(store: any, route: any) {
-    if (Object.keys(this.state.getValue()).find(key => key ===  store) === undefined) {
+    if (Object.keys(this.state.getValue()).find(key => key === store) === undefined) {
       this.route.navigate([route]);
     }
   }
