@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe, TitleCasePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -21,6 +21,9 @@ import { TimeRangePipe } from './pipes/time-range.pipe';
 import { CellViewComponent } from './components/cell-view/cell-view.component';
 import { CompoundCellComponent } from './components/compound-cell/compound-cell.component';
 import { BtnVolverComponent } from './components/btn-volver/btn-volver.component';
+import { TablaPlanAdquisicionesComponent } from './components/tabla-plan-adquisiciones/tabla-plan-adquisiciones.component';
+import { TablaRubrosPlanComponent } from './components/tabla-rubros-plan/tabla-rubros-plan.component';
+import { OrdinalPipePipe } from './pipes/ordinal-pipe.pipe';
 
 @NgModule({
   exports: [
@@ -32,6 +35,7 @@ import { BtnVolverComponent } from './components/btn-volver/btn-volver.component
     SelectedRowDirective,
     TimeRangePipe,
     BtnVolverComponent,
+    TablaPlanAdquisicionesComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +58,9 @@ import { BtnVolverComponent } from './components/btn-volver/btn-volver.component
     CellViewComponent,
     CompoundCellComponent,
     BtnVolverComponent,
+    TablaPlanAdquisicionesComponent,
+    TablaRubrosPlanComponent,
+    OrdinalPipePipe,
   ],
   providers: [
     DatePipe,
@@ -62,6 +69,8 @@ import { BtnVolverComponent } from './components/btn-volver/btn-volver.component
     PercentPipe,
     CustomTablePipe,
     TimeRangePipe,
+    OrdinalPipePipe,
+    TitleCasePipe,
   ]
 })
 

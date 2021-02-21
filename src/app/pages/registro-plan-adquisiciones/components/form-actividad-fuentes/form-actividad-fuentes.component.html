@@ -24,7 +24,7 @@
                             class="example-viewport">
                             <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
                                 [value]="actividad">
-                                {{actividad.Numero}}.{{actividad.MetaId.Numero}}.{{actividad.MetaId.LineamientoId.Numero}}
+                                {{actividad.Numero}}.{{actividad.MetaId.Numero}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
                     </mat-select>

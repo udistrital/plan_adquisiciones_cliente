@@ -6,7 +6,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -36,6 +36,10 @@ import { AppEffects } from '././@core/store/effects/app.effects';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [AppComponent],
@@ -71,12 +75,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         strictActionImmutability: false
       }
     }),
-    !environment.production ? StoreDevtoolsModule.instrument({ }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument({}) : [],
     EffectsModule.forRoot([AppEffects]),
   ],
   bootstrap: [AppComponent],
   providers: [ImplicitAutenticationService,
     { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: LOCALE_ID, useValue: 'es' },
   ],
 })
 export class AppModule {

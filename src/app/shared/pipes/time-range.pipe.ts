@@ -116,7 +116,7 @@ export class TimeRangePipe implements PipeTransform {
       case 'range':
         return this.exactRangeTransform(value);
       case 'limits':
-        return this.limitsTransform(value, 'longDate');
+        return this.limitsTransform(value, 'MMMM d');
       case 'exactLimits':
         return this.limitsTransform(value, 'MMMM d, y, h:mm:ss a');
       default:

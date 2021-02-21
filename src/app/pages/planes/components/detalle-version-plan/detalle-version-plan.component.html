@@ -6,24 +6,30 @@
     </div>
     <div class="row">
         <div class="col-12 px-0" *ngIf="datos && configuracion">
-            <ng-container *ngFor="let table of configuracion; index as i">
-                <div class="py-2">
-                    <ngx-general-table [config]="table" [datos]="datos[i]"></ngx-general-table>
-                </div>
+            <ng-container *ngFor="let data of datos, index as i">
+                <ngx-tabla-plan-adquisiciones [config]="configuracion" [datos]="data"></ngx-tabla-plan-adquisiciones>
             </ng-container>
         </div>
-        <div class="col-8 border border-light bg-primary text-center text-light py-2 font-weight-bold"
+        <div class="col-8 border border-light bg-primary text-center text-light  pl-2 py-2 font-weight-bold"
             *ngIf="TotalPlan">
             TOTAL PLAN DE FUNCIONAMIENTO E INVERSION VIGENCIA 2020:
         </div>
-        <div class="col-4 border border-light bg-primary text-center text-light py-2 font-weight-bold"
+        <div class="col-4 border border-light bg-primary text-center text-light py-2 pr-2 font-weight-bold"
             *ngIf="TotalPlan">
-            {{this.TotalPlan | currency}}
+            {{this.TotalPlan | currency: '$'}}
         </div>
         <div class="col-12" *ngIf="!datos && !configuracion">
             <div class="d-flex justify-content-center">
                 <div class="spinner-grow text-primary" role="status"></div>
             </div>
+        </div>
+        <div class="col-12 d-flex justify-content-around">
+            <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="DescargarPDF()">
+                <div class="d-flex flex-row justify-content-around align-middle">
+                    <i class="fas fa-file text-light py-1 px-2"></i>
+                    <span class="text-light px-2 mx-2">Descargar Publicacion</span>
+                </div>
+            </button>
         </div>
         <div class="col-12">
             <ngx-btn-volver></ngx-btn-volver>

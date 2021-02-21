@@ -21,8 +21,14 @@ export const initialState: State = {
   FilaSeleccionada: null,
   AccionTabla: null,
   VigenciaActual: null,
-  AreaFuncional: null,
-  CentroGestor: null,
+  AreaFuncional: {
+    Id: 1,
+    Nombre: 'Rector',
+    label: '01 - Rector',
+  },
+  CentroGestor: {
+    CentroGestor: 230,
+  },
   ModalidadesSeleccion: null,
   Responsables: null,
 };

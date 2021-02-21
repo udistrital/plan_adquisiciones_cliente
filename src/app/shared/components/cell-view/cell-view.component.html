@@ -23,7 +23,7 @@
     <ng-container *ngIf="data.pipe.isArray">
         <td [class]="data.pipe.class" [attr.rowspan]="rowspanTable[index]">
             <ng-container *ngFor="let value of items[data.key]">
-                <span class="my-2">{{value}}</span>
+                {{value}} <br>
             </ng-container>
         </td>
     </ng-container>

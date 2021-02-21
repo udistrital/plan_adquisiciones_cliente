@@ -11,11 +11,8 @@
             <h5 class="card-title text-center text-primary">{{titulo}}</h5>
         </div>
     </div>
-    <div class="row" *ngIf="FuenteFinanciamientoForm">
-        <div class="col py-2"></div>
-    </div>
     <form [formGroup]="FuenteFinanciamientoForm" *ngIf="FuenteFinanciamientoForm">
-        <div class="row">
+        <div class="row border-bottom border-dark my-3 py-3">
             <div class="col-12 col-sm-4">
                 <div class="form-group">
                     <label>Codigo:</label>
@@ -38,17 +35,35 @@
                     </span>
                 </div>
             </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Valor Fuente de Financiamiento:</label>
+                    <span class="form-control overflow">
+                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ? (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorActual | currency ) : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Valor Disponible Actividad:</label>
+                    <span class="form-control overflow">
+                        {{ ValorDisponible | currency :'$'}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <label>Valor:</label>
+                    <label>Valor a Asignar:</label>
                     <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="text"
                         class="form-control text-left" placeholder="" formControlName="Valor">
                     <ng-container *ngIf="FuenteFinanciamientoForm && !(FuenteFinanciamientoForm.controls.Valor.errors)">
-                        <small>Valor Disponible: {{ ValorDisponible | currency }}</small>
+                        <small>Valor Disponible: {{ Valor2 | currency :'$'}}</small>
                     </ng-container>
                     <ng-container *ngIf="FuenteFinanciamientoForm.controls.Valor.errors">
                         <small *ngIf="FuenteFinanciamientoForm.controls.Valor.errors.max" class="text-danger">
-                            El valor no debe pasar el maximo valor Disponible {{ ValorDisponible | currency }}</small>
+                            El valor no debe pasar el maximo valor Disponible {{ Valor2 | currency :'$'}}</small>
                     </ng-container>
 
                 </div>

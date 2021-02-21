@@ -32,7 +32,7 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
     private registroPlanService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
   ) {
-    this.titulo = 'Agregar Elemento ARKA';
+    this.titulo = 'Agregar Elemento';
     this.boton = 'Crear';
     // this.Elementos = DATOS_PRUEBA_2;
   }
@@ -46,12 +46,12 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
 
       this.index = null;
       if (this.sharedService.IfStore(fila) && fila.accion.title === 'Editar Elemento') {
-        this.titulo = 'Editar Elemento ARKA';
+        this.titulo = 'Editar Elemento';
         this.boton = 'Editar';
         this.index = fila.index;
         this.CrearElementoARKAForm(fila.fila);
       } else {
-        this.titulo = 'Agregar Elemento ARKA';
+        this.titulo = 'Agregar Elemento';
         this.boton = 'Crear';
         this.CrearElementoARKAForm(null);
       }
@@ -77,23 +77,29 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
       });
     }
     this.Elementos = this.ElementoARKAForm.get('Elemento').valueChanges.pipe(
-      map(value => typeof value === 'string' ? value : value.Descripcion),
-      switchMap(value => iif(() => value.length > 3, this.registroPlanService.getElementosARKA(value), of([])))
+      map(value => typeof value === 'string' ? value : value.Codigo),
+      switchMap(value => iif(() => value.length > 2, this.registroPlanService.getElementosARKA(value), of([])))
     );
   }
 
   getOptionText(valor: any): string | undefined {
-    return valor ? valor.Descripcion : undefined;
+    return valor ? valor.Codigo : undefined;
   }
 
   OnSubmit() {
     if (this.index === null) {
-      this.ElementosTabla.push(this.ElementoARKAForm.value.Elemento);
+      const elemento = this.TransformarElemento(this.ElementoARKAForm.value.Elemento);
+      this.ElementosTabla.push(elemento);
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     } else {
-      this.ElementosTabla[this.index] = this.ElementoARKAForm.value.Elemento;
+      const elemento2 = this.TransformarElemento(this.ElementoARKAForm.value.Elemento);
+      this.ElementosTabla[this.index] = elemento2;
       this.store.dispatch(CargarElementosARKA([this.ElementosTabla]));
     }
+  }
+  TransformarElemento(elemento: any) {
+    elemento.Descripcion = elemento.Codigo + '-' + elemento.Descripcion;
+    return elemento;
   }
 
 }
