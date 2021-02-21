@@ -19,7 +19,8 @@
                             class="example-viewport">
                             <mat-option *cdkVirtualFor="let fuente of Elementos | async" class="example-item"
                                 [value]="fuente">
-                                {{fuente.Descripcion}}
+                                <span>{{fuente.Codigo}}</span> - 
+                                <small>{{fuente.Nombre}}</small>
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
                     </mat-autocomplete>
@@ -27,12 +28,20 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Descripcion:</label>
+                    <label>Nombre:</label>
                     <span class="form-control overflow">
                         {{ElementoARKAForm.get('Elemento').value ? ElementoARKAForm.get('Elemento').value.Nombre : '' }}
                     </span>
                 </div>
             </div>
+            <!-- <div class="col-12">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <span class="form-control overflow">
+                        {{ElementoARKAForm.get('Elemento').value ? ElementoARKAForm.get('Elemento').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div> -->
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="ElementoARKAForm.invalid || !ElementoARKAForm.touched" type="button"
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">

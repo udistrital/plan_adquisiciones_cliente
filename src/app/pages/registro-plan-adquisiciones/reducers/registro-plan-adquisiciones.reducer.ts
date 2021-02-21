@@ -18,6 +18,9 @@ export interface State {
   RenglonSeleccionado: any;
   FichaTecnica: any;
   FichaSeleccionada: any;
+  MetasAsociadas: any;
+  ProductosAsociados: any;
+  ActividadFuente: any;
 }
 
 export const initialState: State = {
@@ -35,6 +38,9 @@ export const initialState: State = {
   RenglonSeleccionado: null,
   FichaTecnica: null,
   FichaSeleccionada: null,
+  MetasAsociadas: null,
+  ProductosAsociados: null,
+  ActividadFuente: null,
 };
 
 const registroPlanAdquisicionesReducer = createReducer(
@@ -82,6 +88,15 @@ const registroPlanAdquisicionesReducer = createReducer(
   })),
   on(RegistroPlanAdquisicionesActions.CargarFichaSeleccionada, (state, action) => ({
     ...state, FichaSeleccionada: state.FichaSeleccionada = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarMetasAsociadas, (state, action) => ({
+    ...state, MetasAsociadas: state.MetasAsociadas = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarProductosAsociados, (state, action) => ({
+    ...state, ProductosAsociados: state.ProductosAsociados = action
+  })),
+  on(RegistroPlanAdquisicionesActions.CargarActividadFuente, (state, action) => ({
+    ...state, ActividadFuente: state.ActividadFuente = action
   })),
 );
 

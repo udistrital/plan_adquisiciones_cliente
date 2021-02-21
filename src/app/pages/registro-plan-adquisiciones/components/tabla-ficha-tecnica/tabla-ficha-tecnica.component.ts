@@ -43,7 +43,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
 
-    this.subscription3$ = combineLatest([
+    this.subscription$ = combineLatest([
       this.store.select(getPlanSeleccionado),
       this.store.select(getRubro),
     ]).subscribe(([plan, rubro]) => {
@@ -56,7 +56,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscription4$ = this.subscription3$ = combineLatest([
+    this.subscription2$ = combineLatest([
       this.store.select(getFichaTecnica),
       this.store.select(getRubro),
     ]).subscribe(([ficha, rubro]) => {
@@ -73,17 +73,16 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
+    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Editar Ficha') {
           this.store.dispatch(LoadFilaSeleccionada(null));
-
           this.store.dispatch(CargarFichaSeleccionada(accion.fila));
           this.OpenModal();
         }
       }
     });
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
+    this.subscription4$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Agregar Nueva Meta Asociada') {
           this.store.dispatch(LoadFilaSeleccionada(null));

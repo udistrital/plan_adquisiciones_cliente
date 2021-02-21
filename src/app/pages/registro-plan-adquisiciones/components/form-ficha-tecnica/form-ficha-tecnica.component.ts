@@ -96,7 +96,7 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
         UnidadMedida: [ficha.UnidadMedida, [Validators.required]],
         Descripcion: [ficha.Descripcion, [Validators.required]],
         Activo: [ficha.Activo, []],
-        Rubro: [rubro.Codigo, []],
+        Rubro: [rubro.data.Codigo, []],
         PlanAdquisicionesId: [plan, []],
         FechaCreacion: [ficha.FechaCreacion, []],
         FechaModificacion: [ficha.FechaModificacion, []]
@@ -112,7 +112,7 @@ export class FormFichaTecnicaComponent implements OnInit, OnDestroy {
         UnidadMedida: [null, [Validators.required]],
         Descripcion: [null, [Validators.required]],
         Activo: [true, []],
-        Rubro: [rubro.Codigo, []],
+        Rubro: [rubro.data.Codigo, []],
         PlanAdquisicionesId: [plan, []],
       });
     }

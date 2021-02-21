@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces';
+// import { PlanesService } from '../../../planes/services/planes.service';
+// import { CONFIGURACION_PRUEBA, CONFIGURACION_PRUEBA_2 } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'ngx-componente-prueba',
@@ -9,12 +10,13 @@ import { CONFIGURACION_PRUEBA, DATOS_PRUEBA } from '../../interfaces/interfaces'
 export class ComponentePruebaComponent implements OnInit {
 
   configuracion: any;
+  configuracion2: any;
   datosPrueba: any;
-  constructor() {
-    this.datosPrueba = DATOS_PRUEBA;
-    this.configuracion = CONFIGURACION_PRUEBA;
+  datosPrueba2: any;
+  constructor(
+  ) {
   }
   ngOnInit() {
-  }
 
+  }
 }

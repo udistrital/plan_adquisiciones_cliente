@@ -18,7 +18,10 @@ import {
   ConsultarRenglonPlan,
   SeleccionarFechaSeleccion,
   SeleccionarFuente,
-  SeleccionarResponsable
+  SeleccionarResponsable,
+  CargarMetasAsociadas,
+  CargarProductosAsociados,
+  CargarActividadFuente
 } from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
 import { ConsultarPlanDetallado } from '../../actions/planes.actions';
 import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
@@ -79,30 +82,16 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       }
     });
     // lectura de Datos con fuentes de Recurso para renderizacion
-    this.subscription$ = combineLatest([
-      this.store.select(getArbolRubro).pipe(
-        map(data => {
-          if (Object.keys(data).length !== 0) {
-            return data[0].children;
-          } else {
-            return null;
-          }
-        }),
-      ),
-      this.store.select(getPlanDetallado),
-    ]).subscribe(([fuentesRecurso, plan]) => {
-      if (this.sharedService.IfStore(plan) && fuentesRecurso) {
-        if (Object.keys(plan[0]).length !== 0) {
-          this.AjustarDatos(plan[0], fuentesRecurso);
-        } else {
-          this.datos = [];
-        }
+    this.subscription$ = this.store.select(getPlanDetallado).subscribe((plan: any) => {
+      if (this.sharedService.IfStore(plan)) {
+        this.AjustarDatos(plan[0]);
       }
     });
     // Seleccionar Fila Tabla
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Editar') {
+
           this.ActualizarRenglon(accion.fila);
         }
       }
@@ -111,10 +100,12 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
 
-  AjustarDatos(datos: any, fuentesRecurso: any) {
-    this.configuracion = this.AjustarConfiguracion(datos);
-    this.datos = this.planesService.AjustarDatosPlan(datos);
-    this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+  AjustarDatos(datos: any) {
+    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
+    if (Object.keys(datos[0]).length !== 0) {
+      this.datos = datos;
+      this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+    }
   }
 
   CrearRenglon() {
@@ -125,6 +116,9 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       this.store.dispatch(CargarProducto(null));
       this.store.dispatch(CargarModalidades(null));
       this.store.dispatch(CargarElementosARKA(null));
+      this.store.dispatch(CargarMetasAsociadas(null));
+      this.store.dispatch(CargarProductosAsociados(null));
+      this.store.dispatch(CargarActividadFuente(null));
       this.store.dispatch(CargarActividades(null));
       this.store.dispatch(SeleccionarResponsable(null));
       this.store.dispatch(CargarRenglonPlan(null));
@@ -159,15 +153,6 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
         'Plan de Adquisiciones publicado',
         'Publicado',
       );
-    });
-  }
-
-  AjustarConfiguracion(datos: any) {
-    return Object.keys(datos).map((key: any, index: any) => {
-      const ajusteConfiguracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
-      ajusteConfiguracion.title.name = datos[key][0].FuenteRecursosNombre;
-      ajusteConfiguracion.endSubtotal.items[0].name = 'Total Plan ' + datos[key][0].FuenteRecursosNombre;
-      return ajusteConfiguracion;
     });
   }
 

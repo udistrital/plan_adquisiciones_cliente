@@ -1,21 +1,27 @@
-<div class="container-fluid">
-    <div class="row m-0 p-0">
-        <div class="col m-0 p-0">
+<div class="container-fluid" *ngIf="Meta">
+    <div class="row">
+        <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center text-primary">Meta Asociada</h5>
                     <div class="container">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-12 col-sm-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Numero:</label>
-                                    <span class="form-control py-2">1</span>
+                                    <span class="form-control py-2 overflow">{{Meta.Numero}}</span>
                                 </div>
                             </div>
-                            <div class="col-9">
+                            <div class="col-12 col-sm-8 col-lg-9">
                                 <div class="form-group">
                                     <label>Nombre:</label>
-                                    <span class="form-control py-2">Meta de Prueba</span>
+                                    <span class="form-control py-2 overflow">{{Meta.Nombre}}</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Rubro Asociado:</label>
+                                    <span class="form-control py-2 overflow">{{Meta.Rubro}}</span>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-layout',
@@ -8,11 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit {
 
   titulo: any;
-  constructor() {
+  constructor(
+    private route: Router,
+  ) {
     this.titulo = 'LINEAMIENTOS';
   }
 
   ngOnInit() {
+    this.route.navigate(['pages/plan-adquisiciones/metas']);
   }
 
 }

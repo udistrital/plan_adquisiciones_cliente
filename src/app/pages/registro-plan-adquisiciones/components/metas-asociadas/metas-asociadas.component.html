@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col px-0">
+            <ngx-general-table [config]="configuracion" [datos]="Datos"></ngx-general-table>
+            <a *ngIf="display" [hidden]="true" #exampleModal2 data-toggle="modal" data-target="#exampleModal2"></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ngx-form-metas-asociadas></ngx-form-metas-asociadas>
+            </div>
+        </div>
+    </div>
+</div>
