@@ -359,7 +359,7 @@ export const COLUMNAS_PLAN = [
         border: [true, true, true, false],
         style: 'style_2'
     }
-]
+];
 
 export const ESPACIO_TABLA = [
     {
@@ -368,7 +368,7 @@ export const ESPACIO_TABLA = [
         border: [false, false, false, false],
     },
     {}, {}, {}, {}, {}, {}, {}, {}
-]
+];
 
 export const PLANTILLA_TABLA = {
     pageSize: 'A4',
@@ -451,4 +451,4 @@ export const PLANTILLA_TABLA = {
         fontSize: 6,
       }
     }
-}
+};

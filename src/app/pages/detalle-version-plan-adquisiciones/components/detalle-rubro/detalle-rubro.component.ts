@@ -27,7 +27,7 @@ export class DetalleRubroComponent implements OnInit {
         .find((x: any) => x.Fuente === fuente_);
       this.rubro = (this.fuente.datos as Array<any>)
         .find((x: any) => x.Rubro === this.datos.RubroId);
-    })
+    });
   }
 
 }

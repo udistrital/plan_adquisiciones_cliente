@@ -132,7 +132,7 @@ export class PlanesEffects {
         ).pipe(
           map(data => {
             // sort versions
-            const data2 = data.sort((a: any,b: any) => new Date(a.fechacreacion).getTime() - new Date(b.fechacreacion).getTime())
+            const data2 = data.sort((a: any, b: any) => new Date(a.fechacreacion).getTime() - new Date(b.fechacreacion).getTime());
             return PlanesActions.CargarVersionesPlan([data2]);
           }),
           catchError(data => {

@@ -66,7 +66,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         this.AjustarDatos(plan['registroplanadquisiciones']);
         this.index = versiones[0].findIndex((x: any) => x._id === plan._id) + 1;
         this.Plan = versiones[0].find((x: any) => x._id === plan._id);
-        console.log(this.index)
+
       }
     });
     this.subscription2$ = this.store.select(getPlanSeleccionado).subscribe((plan: any) => {
@@ -122,7 +122,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   // Plantilla General
   CrearPDFPublicacion() {
 
-    this.PDFPublicado = JSON.parse(JSON.stringify(PLANTILLA_TABLA))
+    this.PDFPublicado = JSON.parse(JSON.stringify(PLANTILLA_TABLA));
     // Titulo General
     this.PDFPublicado.content[0].table.body.push(
       [
@@ -147,10 +147,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       ],
       [
         {
-          text: this.ordinalPipe.transform(this.index) + 
-            ' Edicion\n' + 
+          text: this.ordinalPipe.transform(this.index) +
+            ' Edicion\n' +
             this.titlepipe.transform(
-              this.datePipe.transform(this.Plan.fechacreacion,'medium')
+              this.datePipe.transform(this.Plan.fechacreacion, 'medium')
             ),
           colSpan: 9,
           alignment: 'right',
@@ -358,7 +358,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       if (tipo) {
         return fuente.Nombre;
       } else {
-        return this.currencyPipe.transform(fuente.ValorAsignado,'$');
+        return this.currencyPipe.transform(fuente.ValorAsignado, '$');
       }
     });
     return datos.reduce((a: any, c: any) => a + '\n' + c);
@@ -419,7 +419,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
         }, {}, {}, {}, {}, {}, {},
         {
-          text: this.currencyPipe.transform(this.TotalPlan ,'$'),
+          text: this.currencyPipe.transform(this.TotalPlan, '$'),
           alignment: 'right',
           style: 'style_1'
         },

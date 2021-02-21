@@ -7,11 +7,11 @@ export class OrdinalPipePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     if (value < 0 || value > 99) {
-      return ''
+      return '';
     } else {
-      const decenas = Math.trunc(value / 10)
+      const decenas = Math.trunc(value / 10);
       const unidades = value - decenas;
-      return this.DevolverDecena(decenas) + ' ' + this.DevolverUnidad(unidades)
+      return this.DevolverDecena(decenas) + ' ' + this.DevolverUnidad(unidades);
     }
   }
 
