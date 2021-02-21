@@ -8,14 +8,15 @@ import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions'
 import { getArbolRubro, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarRenglonVersion } from '../../actions/planes.actions';
-import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
-import { getPlanSeleccionado, getVersionPlan } from '../../selectors/planes.selectors';
+import { COLUMNAS_PLAN, CONFIGURACION_TABLA_DETALLE_PLAN_2, ESPACIO_TABLA, PLANTILLA_TABLA } from '../../interfaces/interfaces';
+import { getPlanSeleccionado, getVersionesPlan, getVersionPlan } from '../../selectors/planes.selectors';
 import { PlanesService } from '../../services/planes.service';
 
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TimeRangePipe } from '../../../../shared/pipes/time-range.pipe';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { OrdinalPipePipe } from '../../../../shared/pipes/ordinal-pipe.pipe';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -39,6 +40,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   TotalPlan: any;
   PlanAdquisiciones: any;
   PDFPublicado: any;
+  index: any;
 
 
   constructor(
@@ -46,16 +48,25 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private route: Router,
     private sharedService: SharedService,
     private planesService: PlanesService,
-    private datePipe: TimeRangePipe,
+    private timeRangePipe: TimeRangePipe,
     private currencyPipe: CurrencyPipe,
+    private ordinalPipe: OrdinalPipePipe,
+    private titlepipe: TitleCasePipe,
+    private datePipe: DatePipe,
   ) {
   }
 
   ngOnInit() {
     // lectura de Datos con fuentes de Recurso para renderizacion
-    this.subscription$ = this.store.select(getVersionPlan).subscribe((plan: any) => {
-      if (this.sharedService.IfStore(plan)) {
+    this.subscription$ = combineLatest([
+      this.store.select(getVersionPlan),
+      this.store.select(getVersionesPlan),
+    ]).subscribe(([plan, versiones]) => {
+      if (this.sharedService.IfStore(plan) && this.sharedService.IfStore(versiones)) {
         this.AjustarDatos(plan['registroplanadquisiciones']);
+        this.index = versiones[0].findIndex((x: any) => x._id === plan._id) + 1;
+        this.Plan = versiones[0].find((x: any) => x._id === plan._id);
+        console.log(this.index)
       }
     });
     this.subscription2$ = this.store.select(getPlanSeleccionado).subscribe((plan: any) => {
@@ -72,7 +83,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
+    this.sharedService.RetornarAlInicio2('planes.Versiones', 'pages/plan-adquisiciones/planes/tabla-general');
 
   }
 
@@ -111,88 +122,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   // Plantilla General
   CrearPDFPublicacion() {
 
-    this.PDFPublicado = {
-      pageSize: 'A4',
-      pageOrientation: 'landscape',
-      pageMargins: [30, 30, 30, 30],
-      content: [
-        {
-          table: {
-            widths: ['*', '*', '*', '*', '*', '*', '*', '*', '*'],
-            body: [
-            ],
-          }
-        }
-      ],
-      styles: {
-        body: {
-          marginTop: 80,
-        },
-        general_font: {
-          fontSize: 6,
-          alignment: 'justify',
-          margin: [25, 0, 25, 0],
-        },
-        general_list: {
-          fontSize: 6,
-          alignment: 'justify',
-          margin: [35, 0, 25, 0],
-        },
-        topHeader: {
-          margin: [5, 0, 5, 0],
-          alignment: 'justify',
-          fontSize: 6,
-        },
-        table: {
-          margin: [30, 0, 30, 0],
-          border: '0',
-        },
-        tableInfo: {
-          fontSize: 6,
-        },
-        table2: {
-          margin: [25, 0, 25, 0],
-          border: '0',
-          fontSize: 6,
-        },
-        style_1: {
-          fillColor: '#1792CA',
-          color: '#ffffff',
-          bold: true,
-          fontSize: 6,
-        },
-        style_2: {
-          fillColor: '#eeeeee',
-          bold: true,
-          fontSize: 6,
-        },
-        style_3: {
-          fillColor: '#FECE30',
-          bold: true,
-          fontSize: 6,
-        },
-        style_4: {
-          fillColor: '#F09102',
-          bold: true,
-          fontSize: 6,
-        },
-        style_5: {
-          fillColor: '#C0F20C',
-          bold: true,
-          fontSize: 6,
-        },
-        style_6: {
-          fillColor: '#E60077',
-          bold: true,
-          fontSize: 6,
-        },
-        style_7: {
-          // fillColor: '#E60077',
-          // bold: true,
-          fontSize: 6,
-        }
-      }
-    };
+    this.PDFPublicado = JSON.parse(JSON.stringify(PLANTILLA_TABLA))
     // Titulo General
     this.PDFPublicado.content[0].table.body.push(
       [
@@ -217,7 +147,11 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       ],
       [
         {
-          text: 'Septima Edicion',
+          text: this.ordinalPipe.transform(this.index) + 
+            ' Edicion\n' + 
+            this.titlepipe.transform(
+              this.datePipe.transform(this.Plan.fechacreacion,'medium')
+            ),
           colSpan: 9,
           alignment: 'right',
           border: [false, false, false, false],
@@ -225,25 +159,11 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         },
         {}, {}, {}, {}, {}, {}, {}, {}
       ],
-      [
-        {
-          text: '',
-          colSpan: 9,
-          border: [false, false, false, false],
-        },
-        {}, {}, {}, {}, {}, {}, {}, {}
-      ],
+      ESPACIO_TABLA
     );
     this.AgregarFuentes();
     this.PDFPublicado.content[0].table.body.push(
-      [
-        {
-          text: '',
-          colSpan: 9,
-          border: [false, false, false, false],
-        },
-        {}, {}, {}, {}, {}, {}, {}, {}
-      ],
+      ESPACIO_TABLA
     );
     this.SumaTotal();
   }
@@ -261,74 +181,12 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           },
           {}, {}, {}, {}, {}, {}, {}, {}
         ],
-        [
-          {
-            text: 'Codigo UNSPSC',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Rubro Presupuestal',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Actividad',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Fecha Estimada de Inicio de Proceso de seleccion',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Duracion Estimada del Contrato',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Modalidad de Seleccion',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Valor Asignado',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          },
-          {
-            text: 'Fuente de Recursos',
-            alignment: 'center',
-            border: [true, true, true, false],
-            style: 'style_2'
-          }
-        ],
+        JSON.parse(JSON.stringify(COLUMNAS_PLAN))
       );
       this.AgregarRubros(fuente.datos);
       this.SumaFuente(fuente.datos, fuente.FuenteData);
       this.PDFPublicado.content[0].table.body.push(
-        [
-          {
-            text: '',
-            colSpan: 9,
-            border: [false, false, false, false],
-          },
-          {}, {}, {}, {}, {}, {}, {}, {}
-        ],
+        ESPACIO_TABLA
       );
     });
   }
@@ -345,7 +203,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             style: 'style_3'
           },
           {}, {}, {}, {}, {}, {}, {}, {}
-        ],
+        ]
       );
       this.AgregarRenglones(rubro.datos, rubro.RubroInfo);
       this.SumaRubro(rubro.datos, rubro.RubroInfo);
@@ -395,16 +253,16 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
               alignment: 'center',
             },
             {
-              text: this.currencyPipe.transform(renglon.ValorActividad),
+              text: this.currencyPipe.transform(renglon.ValorActividad, '$'),
               style: 'style_7',
-              alignment: 'center',
+              alignment: 'right',
             },
             {
               text: renglon.FuenteFinanciamientoData.Nombre,
               style: 'style_7',
-              alignment: 'center',
+              alignment: 'left',
             },
-          ],
+          ]
         );
       }
     });
@@ -450,19 +308,18 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           {
             text: this.ExtraerFuentesFinanciamiento(actividad, false),
             style: 'style_7',
-            alignment: 'center',
+            alignment: 'right',
           },
           {
             text: this.ExtraerFuentesFinanciamiento(actividad, true),
             style: 'style_7',
-            alignment: 'center',
+            alignment: 'left',
           },
-        ],
-
+        ]
       );
     });
   }
-  MontarElementosArka(Renglon: any, index: any, length) {
+  MontarElementosArka(Renglon: any, index: any, length: any) {
     if (index === 0) {
       return {
         text: this.ExtraerCodigosArka(Renglon),
@@ -479,32 +336,32 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   ExtraerCodigosArka(Renglon: any) {
     const datos: any = Renglon['registro_plan_adquisiciones-codigo_arka'].map((codigo: any) => {
-      return codigo.Descripcion.split('-')[0] + ' ';
+      return codigo.Descripcion.split('-')[0];
     });
-    return datos.reduce((a: any, c: any) => a + '' + c);
+    return datos.reduce((a: any, c: any) => a + '\n' + c);
   }
   ExtraerFecha(Renglon: any, type: any) {
     const datos = {
       start: new Date(Renglon.FechaEstimadaInicio),
       end: new Date(Renglon.FechaEstimadaFin),
     };
-    return this.datePipe.transform(datos, type);
+    return this.titlepipe.transform(this.timeRangePipe.transform(datos, type));
   }
   ExtraerModalidades(Renglon: any) {
     const datos: any = Renglon['registro_funcionamiento-modalidad_seleccion'].map((codigo: any) => {
-      return codigo.Nombre + '  ';
+      return codigo.Nombre;
     });
-    return datos.reduce((a: any, c: any) => a + '  ' + c);
+    return datos.reduce((a: any, c: any) => a + '\n' + c);
   }
   ExtraerFuentesFinanciamiento(Actividad: any, tipo: boolean) {
     const datos: any = Actividad.FuentesFinanciamiento.map((fuente: any) => {
       if (tipo) {
-        return fuente.Nombre + ' ';
+        return fuente.Nombre;
       } else {
-        return this.currencyPipe.transform(fuente.ValorAsignado) + ' ';
+        return this.currencyPipe.transform(fuente.ValorAsignado,'$');
       }
     });
-    return datos.reduce((a: any, c: any) => a + '' + c);
+    return datos.reduce((a: any, c: any) => a + '\n' + c);
   }
   SumaRubro(Renglones: any, Rubro: any) {
     this.PDFPublicado.content[0].table.body.push(
@@ -517,7 +374,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
         }, {}, {}, {}, {}, {}, {},
         {
-          text: this.currencyPipe.transform(this.planesService.SacarSumaRubro(Renglones)),
+          text: this.currencyPipe.transform(this.planesService.SacarSumaRubro(Renglones), '$'),
           alignment: 'right',
           style: 'style_1'
         },
@@ -526,7 +383,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           style: 'style_1'
 
         }
-      ],
+      ]
     );
   }
   SumaFuente(Rubros: any, Fuente: any) {
@@ -540,7 +397,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
         }, {}, {}, {}, {}, {}, {},
         {
-          text: this.currencyPipe.transform(this.planesService.SacarSumaFuente(Rubros)),
+          text: this.currencyPipe.transform(this.planesService.SacarSumaFuente(Rubros), '$'),
           alignment: 'right',
           style: 'style_1'
         },
@@ -548,7 +405,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           text: '',
           style: 'style_1'
         }
-      ],
+      ]
     );
   }
   SumaTotal() {
@@ -562,7 +419,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
         }, {}, {}, {}, {}, {}, {},
         {
-          text: this.currencyPipe.transform(this.TotalPlan),
+          text: this.currencyPipe.transform(this.TotalPlan ,'$'),
           alignment: 'right',
           style: 'style_1'
         },
@@ -570,7 +427,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           text: '',
           style: 'style_1'
         }
-      ],
+      ]
     );
   }
 }

@@ -54,7 +54,7 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
           return {
             _id: element._id,
             id: element.id,
-            index: index,
+            index: index + 1,
           };
         });
       } else {

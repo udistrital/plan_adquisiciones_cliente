@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label>Valor:</label>
                 <span class="form-control overflow">
-                    {{datos ? (datos.ValorActividad | currency): ''}}
+                    {{datos ? (datos.ValorActividad | currency:'$') }}
                 </span>
             </div>
         </div>

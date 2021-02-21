@@ -180,8 +180,20 @@ export class SharedService {
   }
 
   public RetornarAlInicio(store: any, route: any) {
+    console.log(this.state.getValue())
     if (Object.keys(this.state.getValue()).find(key => key === store) === undefined) {
+      
+    }
+  }
+  public RetornarAlInicio2(storeRoute: any, route: any) {
+    console.log(this.state.getValue())
+    const store = storeRoute.split('.');
+    if (this.state.getValue()[store[0]][store[1]] === null ) {
       this.route.navigate([route]);
+    } else {
+      if (this.state.getValue()[store[0]][store[1]] === [] ) {
+        this.route.navigate([route]);
+      } 
     }
   }
 

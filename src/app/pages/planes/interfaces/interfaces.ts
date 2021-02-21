@@ -212,7 +212,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             pipe: {
                 type: 'time-range',
                 config: ['limits'],
-                class: 'text-center align-middle',
+                class: 'text-center align-middle text-capitalize',
             }
         },
         {
@@ -224,7 +224,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             pipe: {
                 type: 'time-range',
                 config: ['range'],
-                class: 'text-center align-middle',
+                class: 'text-center align-middle text-capitalize',
             }
         },
         {
@@ -256,7 +256,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             },
             pipe: {
                 type: 'currency',
-                config: [
+                config: ['$'
                 ],
                 class: 'text-center align-middle',
             }
@@ -303,3 +303,152 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
     sort: true,
     filter: false,
 };
+
+export const COLUMNAS_PLAN = [
+    {
+        text: 'Codigo UNSPSC',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Rubro Presupuestal',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Actividad',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Fecha Estimada de Inicio de Proceso de seleccion',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Duracion Estimada del Contrato',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Modalidad de Seleccion',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Valor Asignado',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Fuente de Recursos',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    }
+]
+
+export const ESPACIO_TABLA = [
+    {
+        text: '',
+        colSpan: 9,
+        border: [false, false, false, false],
+    },
+    {}, {}, {}, {}, {}, {}, {}, {}
+]
+
+export const PLANTILLA_TABLA = {
+    pageSize: 'A4',
+    pageOrientation: 'landscape',
+    pageMargins: [30, 30, 30, 30],
+    content: [
+      {
+        table: {
+          widths: ['auto', 'auto', 'auto', 'auto', 'auto', '*', '*', 'auto', 'auto'],
+          body: [
+          ],
+        },
+      }
+    ],
+    styles: {
+      body: {
+        marginTop: 80,
+      },
+      general_font: {
+        fontSize: 6,
+        alignment: 'justify',
+        margin: [25, 0, 25, 0],
+      },
+      general_list: {
+        fontSize: 6,
+        alignment: 'justify',
+        margin: [35, 0, 25, 0],
+      },
+      topHeader: {
+        margin: [5, 0, 5, 0],
+        alignment: 'justify',
+        fontSize: 6,
+      },
+      table: {
+        margin: [30, 0, 30, 0],
+        border: '0',
+      },
+      tableInfo: {
+        fontSize: 6,
+      },
+      table2: {
+        margin: [25, 0, 25, 0],
+        border: '0',
+        fontSize: 6,
+      },
+      style_1: {
+        fillColor: '#1792CA',
+        color: '#ffffff',
+        bold: true,
+        fontSize: 6,
+      },
+      style_2: {
+        fillColor: '#eeeeee',
+        bold: true,
+        fontSize: 6,
+      },
+      style_3: {
+        fillColor: '#FECE30',
+        bold: true,
+        fontSize: 6,
+      },
+      style_4: {
+        fillColor: '#F09102',
+        bold: true,
+        fontSize: 6,
+      },
+      style_5: {
+        fillColor: '#C0F20C',
+        bold: true,
+        fontSize: 6,
+      },
+      style_6: {
+        fillColor: '#E60077',
+        bold: true,
+        fontSize: 6,
+      },
+      style_7: {
+        // fillColor: '#E60077',
+        // bold: true,
+        fontSize: 6,
+      }
+    }
+}

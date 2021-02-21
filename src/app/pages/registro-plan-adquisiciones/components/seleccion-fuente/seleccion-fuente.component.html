@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <span class="form-control overflow">
                         {{FuenteForm.get('FuenteFinanciamiento').value ?
-                        (FuenteForm.get('FuenteFinanciamiento').value.ValorActual | currency) : '' }}
+                        (FuenteForm.get('FuenteFinanciamiento').value.ValorActual | currency: '$') : '' }}
                     </span>
                 </div>
             </div>

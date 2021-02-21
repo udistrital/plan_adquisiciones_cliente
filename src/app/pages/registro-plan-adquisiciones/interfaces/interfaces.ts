@@ -111,7 +111,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     },
                     pipe: {
                         type: 'currency',
-                        config: [],
+                        config: ['$'],
                         class: '',
                     }
                 },
@@ -169,7 +169,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     },
                     pipe: {
                         type: 'currency',
-                        config: [],
+                        config: ['$'],
                         class: '',
                     }
                 }
@@ -256,7 +256,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
             },
             pipe: {
                 type: 'currency',
-                config: [],
+                config: ['$'],
                 class: 'text-center',
             }
         },

@@ -131,7 +131,9 @@ export class PlanesEffects {
           opciones.Id,
         ).pipe(
           map(data => {
-            return PlanesActions.CargarVersionesPlan([data]);
+            // sort versions
+            const data2 = data.sort((a: any,b: any) => new Date(a.fechacreacion).getTime() - new Date(b.fechacreacion).getTime())
+            return PlanesActions.CargarVersionesPlan([data2]);
           }),
           catchError(data => {
             this.popupManager.showAlert('error', data.status, data.statusText);
