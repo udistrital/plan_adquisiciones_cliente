@@ -15,7 +15,7 @@
         <div class="row border-bottom border-dark my-3 py-3">
             <div class="col-12 col-sm-4">
                 <div class="form-group">
-                    <label>Codigo:</label>
+                    <label>Código:</label>
                     <mat-select class="form-control" formControlName="FuenteSeleccionada">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                             class="example-viewport">
@@ -31,7 +31,8 @@
                 <div class="form-group">
                     <label>Nombre:</label>
                     <span class="form-control overflow">
-                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ? FuenteFinanciamientoForm.get('FuenteSeleccionada').value.Nombre : '' }}
+                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
+                        FuenteFinanciamientoForm.get('FuenteSeleccionada').value.Nombre : '' }}
                     </span>
                 </div>
             </div>
@@ -39,7 +40,9 @@
                 <div class="form-group">
                     <label>Valor Fuente de Financiamiento:</label>
                     <span class="form-control overflow">
-                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ? (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorActual | currency ) : '' }}
+                        {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
+                        (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorActual |
+                        currency:'$':'symbol':'3.2-2':'en-US' ) : '' }}
                     </span>
                 </div>
             </div>
@@ -47,7 +50,7 @@
                 <div class="form-group">
                     <label>Valor Disponible Actividad:</label>
                     <span class="form-control overflow">
-                        {{ ValorDisponible | currency :'$'}}
+                        {{ ValorDisponible | currency:'$':'symbol':'3.2-2':'en-US'}}
                     </span>
                 </div>
             </div>
@@ -59,11 +62,11 @@
                     <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="text"
                         class="form-control text-left" placeholder="" formControlName="Valor">
                     <ng-container *ngIf="FuenteFinanciamientoForm && !(FuenteFinanciamientoForm.controls.Valor.errors)">
-                        <small>Valor Disponible: {{ Valor2 | currency :'$'}}</small>
+                        <small>Valor Disponible: {{ Valor2 | currency:'$':'symbol':'3.2-2':'en-US'}}</small>
                     </ng-container>
                     <ng-container *ngIf="FuenteFinanciamientoForm.controls.Valor.errors">
                         <small *ngIf="FuenteFinanciamientoForm.controls.Valor.errors.max" class="text-danger">
-                            El valor no debe pasar el maximo valor Disponible {{ Valor2 | currency :'$'}}</small>
+                            El valor no debe pasar el maximo valor Disponible {{ Valor2 | currency:'$':'symbol':'3.2-2':'en-US'}}</small>
                     </ng-container>
 
                 </div>
@@ -73,7 +76,8 @@
                     <label>Porcentaje:</label>
                     <div class="input-group">
                         <span class="form-control overflow">
-                            {{FuenteFinanciamientoForm.get('Valor').value ? (FuenteFinanciamientoForm.get('Valor').value / data.Valor | percent : '1.2-2') : '' }}
+                            {{FuenteFinanciamientoForm.get('Valor').value ? (FuenteFinanciamientoForm.get('Valor').value
+                            / data.Valor | percent : '1.2-2') : '' }}
                         </span>
                         <div class="input-group-append">
                             <span class="input-group-text">%</span>

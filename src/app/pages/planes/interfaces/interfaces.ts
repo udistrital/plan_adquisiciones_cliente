@@ -174,7 +174,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'CodigoArka',
             title: {
-                name: 'Codigos UNSPSC',
+                name: 'Códigos UNSPSC',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -256,9 +256,13 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             },
             pipe: {
                 type: 'currency',
-                config: ['$'
+                config: [
+                    '$',
+                    'symbol',
+                    '3.2-2',
+                    'en-US'
                 ],
-                class: 'text-center align-middle',
+                class: 'text-right align-middle px-0',
             }
         },
         {
@@ -297,7 +301,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
             class: 'text-center bg-primary text-light',
         },
         last: {
-            class: 'text-left bg-primary text-light',
+            class: 'text-right bg-primary text-light px-0',
         }
     },
     sort: true,
@@ -306,7 +310,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
 
 export const COLUMNAS_PLAN = [
     {
-        text: 'Codigo UNSPSC',
+        text: 'Código UNSPSC',
         alignment: 'center',
         border: [true, true, true, false],
         style: 'style_2'

@@ -86,7 +86,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Id2',
                     title: {
-                        name: 'Numero',
+                        name: 'Número',
                         class: 'text-center',
                     },
                     pipe: {
@@ -111,7 +111,12 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     },
                     pipe: {
                         type: 'currency',
-                        config: ['$'],
+                        config: [
+                            '$',
+                            'symbol',
+                            '3.2-2',
+                            'en-US'
+                        ],
                         class: '',
                     }
                 },
@@ -169,7 +174,12 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     },
                     pipe: {
                         type: 'currency',
-                        config: ['$'],
+                        config: [
+                            '$',
+                            'symbol',
+                            '3.2-2',
+                            'en-US'
+                        ],
                         class: '',
                     }
                 }
@@ -256,7 +266,12 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
             },
             pipe: {
                 type: 'currency',
-                config: ['$'],
+                config: [
+                    '$',
+                    'symbol',
+                    '3.2-2',
+                    'en-US'
+                ],
                 class: 'text-center',
             }
         },
@@ -483,7 +498,7 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
         {
             key: 'Numero',
             title: {
-                name: 'Numero',
+                name: 'Número',
                 class: 'text-center align-middle',
             },
             pipe: {
