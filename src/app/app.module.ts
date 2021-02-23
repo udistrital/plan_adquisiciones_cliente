@@ -39,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeEs, 'es');
+registerLocaleData(localeEs, 'es-CO');
 
 @NgModule({
   declarations: [AppComponent],
@@ -81,7 +81,7 @@ registerLocaleData(localeEs, 'es');
   bootstrap: [AppComponent],
   providers: [ImplicitAutenticationService,
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: LOCALE_ID, useValue: 'es_CO' },
   ],
 })
 export class AppModule {

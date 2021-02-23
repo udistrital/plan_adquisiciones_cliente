@@ -5,7 +5,7 @@
         </div>
         <div class="col-3">
             <div class="form-group">
-                <label>Codigo:</label>
+                <label>Código:</label>
                 <span class="form-control overflow">
                     {{ Actividad ? Actividad.Numero : ''}}
                 </span>
@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label>Valor:</label>
                 <span class="form-control overflow">
-                    {{datos ? (datos.ValorActividad | currency:'$') : '' }}
+                    {{datos ? (datos.ValorActividad | currency:'$':'symbol':'3.2-2':'en-US') : '' }}
                 </span>
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="col-9 pt-3">
             <div class="form-group">
                 <span class="form-control overflow">
-                    {{Fuente ? (Fuente.ValorActual | currency) : ''}}
+                    {{Fuente ? (Fuente.ValorActual | currency:'$':'symbol':'3.2-2':'en-US') : ''}}
                 </span>
             </div>
         </div>

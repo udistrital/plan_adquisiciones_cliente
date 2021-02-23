@@ -24,7 +24,7 @@ export class DetalleFichaTecnicaComponent implements OnInit, OnDestroy {
     delete this.configuracion.rowActions;
     delete this.configuracion.tableActions;
     this.configuracion.dataConfig[0].pipe.config[0] = (data: any) => {
-      return data.Numero + '.' + data.LineamientoId.Numero;
+      return data.Numero;
     };
     this.Datos = [];
   }

@@ -6,7 +6,7 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label>Codigo:</label>
+                    <label>Código:</label>
                     <mat-select class="form-control" formControlName="Actividad">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                             class="example-viewport">
@@ -69,7 +69,8 @@
                 <div class="form-group">
                     <span class="form-control overflow">
                         {{FuenteForm.get('FuenteFinanciamiento').value ?
-                        (FuenteForm.get('FuenteFinanciamiento').value.ValorActual | currency: '$') : '' }}
+                        (FuenteForm.get('FuenteFinanciamiento').value.ValorActual | 
+                        currency:'$':'symbol':'3.2-2':'en-US') : '' }}
                     </span>
                 </div>
             </div>

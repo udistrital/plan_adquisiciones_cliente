@@ -35,8 +35,10 @@
                         <th scope="col" colspan="7" [class]="config.endSubtotal.first.class">
                             Total {{datos.FuenteData.Nombre}}:
                         </th>
+                        <th scope="col" colspan="1" [class]="config.endSubtotal.last.class">
+                            {{suma | currency:'$':'symbol':'3.2-2':'en-US'}}
+                        </th>
                         <th scope="col" colspan="4" [class]="config.endSubtotal.last.class">
-                            {{suma | currency :'$'}}
                         </th>
                     </tr>
                 </table>

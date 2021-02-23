@@ -8,7 +8,7 @@ export const CONFIGURACION_TABLA_METAS: any = {
         {
             key: 'Numero',
             title: {
-                name: 'Numero',
+                name: 'Número',
                 class: 'text-center',
             },
             pipe: {

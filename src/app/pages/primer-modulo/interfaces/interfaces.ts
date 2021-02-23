@@ -122,7 +122,7 @@ export const CONFIGURACION_PRUEBA_3: any = {
         {
             key: 'id',
             title: {
-                name: 'Numero',
+                name: 'Número',
                 class: 'text-center',
             },
             pipe: {
