@@ -10,8 +10,14 @@
   },
   "MENU": {
     "dashboard": "Inicio",
-    "gestion_lineamientos": "Gestion de Metas y Actividades",
-    "gestion_planes_adquisiciones": "Gestion de Planes",
+    "gestion_parametros": {
+      "gestion_parametros":  "Gestion de Parametros",
+      "gestion_metas_actividades": "Gestion de Metas y Actividades"
+    },
+    "gestion_planes_adquisiciones": {
+      "planes_adquisiciones": "Ver Planes",
+      "gestion_planes_adquisiciones": "Gestion de Planes"
+    },
     "gestion_rubros": {
       "rubros": "Gestión de Rubros",
       "consulta-rubros": "Consulta de Rubros"

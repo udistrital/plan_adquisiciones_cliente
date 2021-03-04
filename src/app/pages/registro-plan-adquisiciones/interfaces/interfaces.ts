@@ -135,7 +135,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Codigo', // object key
                     title: {
-                        name: 'Codigo',
+                        name: 'Código',
                         class: 'text-center',
                     },
                     pipe: {
@@ -227,7 +227,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Codigo',
             title: {
-                name: 'Codigo',
+                name: 'Código',
                 class: 'text-center',
             },
             pipe: {
@@ -237,7 +237,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center',
             },
             pipe: {
@@ -316,7 +316,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
 
 export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     title: {
-        name: 'FICHA DE ESTADISTICAS BASICAS DE INVERSION Y DE METODOLOGIA GENERAL AJUSTADA',
+        name: 'FICHA DE ESTADÍSTICAS BÁSICAS DE INVERSIÓN Y DE METODOLOGÍA GENERAL AJUSTADA',
         class: 'text-center text-light',
     },
     showColumnTitle: true,
@@ -370,7 +370,7 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'Descripcion',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center',
             },
             pipe: {
@@ -439,7 +439,7 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         {
             key: 'PorcentajeDistribucion2',
             title: {
-                name: '% Distribucion',
+                name: '% Distribución',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -508,7 +508,7 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -543,6 +543,42 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
             title: 'Asociar Nueva Meta',
         }
     ],
+    sort: true,
+    filter: false,
+};
+
+export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
+    title: {
+        name: 'Actividades por Asociar',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Numero2',
+            title: {
+                name: 'Número',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'Nombre',
+            title: {
+                name: 'Descripción',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+    ],
+    noData: {
+        name: 'No Existen Actividades Asociadas',
+        class: 'text-center',
+    },
     sort: true,
     filter: false,
 };
