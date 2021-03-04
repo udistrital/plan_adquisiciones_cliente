@@ -66,25 +66,19 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       this.store.select(getActividadSeleccionada),
       this.store.select(getActividades),
     ]).subscribe(([metas, actividad, actividades]) => {
-
       if (this.sharedService.IfStore(metas)) {
         const datos = of(...metas[0]);
-
         datos.pipe(
           mergeMap(
             (value: any) => {
-
               return this.actividadesService.getActividadesAsociadas(value.Id);
             }
           )
         ).subscribe((actividades2: any) => {
-
           if (Object.keys(actividades2[0]).length !== 0) {
             this.ActividadesCapturadas = [...this.ActividadesCapturadas, ...actividades2];
-
           }
         }, () => { }, () => {
-
           if (this.sharedService.IfStore(actividad)) {
             this.Actividades = this.ActividadesCapturadas;
             this.CrearActividadFuentesForm(actividad);
@@ -94,6 +88,9 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
             if (this.sharedService.IfStore(actividades)) {
               this.ActividadesAsociadas = actividades[0];
               this.Actividades = this.MontarActividades(this.ActividadesCapturadas, actividades[0]);
+              if (Object.keys(this.Actividades).length === 0) {
+                this.ActividadesAsociadas()
+              }
             } else {
               this.Actividades = this.ActividadesCapturadas;
             }
@@ -166,6 +163,16 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         });
       }
     }
+  }
+  ActividadesAsociadasModal() {
+    Swal.fire({
+      type: 'info',
+      title: 'Actividades Asociadas',
+      text: `Todas las actividades disponibles estan asociadas`,
+      confirmButtonText: 'Aceptar',
+    }).then(() => {
+      this.OnClose()
+    });
   }
 
   OnClose() {

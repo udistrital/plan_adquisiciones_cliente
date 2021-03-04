@@ -546,3 +546,39 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
     sort: true,
     filter: false,
 };
+
+export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
+    title: {
+        name: 'Actividades por Asociar',
+        class: 'text-center text-light',
+    },
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'Numero2',
+            title: {
+                name: 'Número',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+        {
+            key: 'Nombre',
+            title: {
+                name: 'Descripcion',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+            }
+        },
+    ],
+    noData: {
+        name: 'No Existen Actividades Asociadas',
+        class: 'text-center',
+    },
+    sort: true,
+    filter: false,
+};
