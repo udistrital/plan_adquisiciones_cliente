@@ -19,22 +19,32 @@
             <div class="col-12 col-sm-4">
                 <div class="form-group">
                     <label>Código:</label>
-                    <mat-select class="form-control" formControlName="Actividad">
-                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
-                                [value]="actividad">
-                                {{actividad.Numero}}.{{actividad.MetaId.Numero}}
-                            </mat-option>
-                        </cdk-virtual-scroll-viewport>
-                    </mat-select>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend" *ngIf="boton !== 'Editar'">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#ModalVerActividades">
+                                <i class="fas fa-list-ul"></i>
+                            </button>
+                        </div>
+                        <mat-select class="form-control" formControlName="Actividad">
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                                class="example-viewport">
+                                <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
+                                    [value]="actividad">
+                                    {{actividad.Numero}}.{{actividad.MetaId.Numero}}
+                                </mat-option>
+                            </cdk-virtual-scroll-viewport>
+                        </mat-select>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-8">
                 <div class="form-group">
                     <label>Nombre:</label>
                     <span class="form-control overflow">
-                        {{ActividadFuentesForm.get('Actividad').value ? ActividadFuentesForm.get('Actividad').value.Nombre : '' }}
+                        {{ActividadFuentesForm.get('Actividad').value ?
+                        ActividadFuentesForm.get('Actividad').value.Nombre : '' }}
                     </span>
                 </div>
             </div>
@@ -59,4 +69,19 @@
             </div>
         </div>
     </form>
+</div>
+
+<!-- Modal -->
+<div *ngIf="Actividades" class="modal fade" id="ModalVerActividades" tabindex="-1" role="dialog"
+    aria-labelledby="ModalVerActividadesLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ngx-ver-actividades [datos]="Actividades"></ngx-ver-actividades>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>

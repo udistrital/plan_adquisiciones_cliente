@@ -30,6 +30,7 @@ import { ProductosAsociadosComponent } from './components/productos-asociados/pr
 // import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
 import { FormMetasAsociadasComponent } from './components/form-metas-asociadas/form-metas-asociadas.component';
 import { FormProductosAsociadosComponent } from './components/form-productos-asociados/form-productos-asociados.component';
+import { VerActividadesComponent } from './components/ver-actividades/ver-actividades.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { FormProductosAsociadosComponent } from './components/form-productos-aso
     MetasAsociadasComponent,
     ProductosAsociadosComponent,
     FormMetasAsociadasComponent,
-    FormProductosAsociadosComponent
+    FormProductosAsociadosComponent,
+    VerActividadesComponent
   ],
   imports: [
     CommonModule,
