@@ -16,7 +16,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
             }
         },
         {
-            key: 'Descripción',
+            key: 'Descripcion',
             title: {
                 name: 'Nombre',
                 class: 'text-center',

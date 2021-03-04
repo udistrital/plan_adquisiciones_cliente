@@ -89,7 +89,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
               this.ActividadesAsociadas = actividades[0];
               this.Actividades = this.MontarActividades(this.ActividadesCapturadas, actividades[0]);
               if (Object.keys(this.Actividades).length === 0) {
-                this.ActividadesAsociadas();
+                this.ActividadesAsociadasModal();
               }
             } else {
               this.Actividades = this.ActividadesCapturadas;
