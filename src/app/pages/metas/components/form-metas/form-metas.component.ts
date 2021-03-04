@@ -18,6 +18,7 @@ export class FormMetasComponent implements OnInit, OnDestroy {
 
   MetaForm: FormGroup;
   boton: string;
+  Rubro: any;
 
   constructor(
     private store: Store<any>,
@@ -34,6 +35,7 @@ export class FormMetasComponent implements OnInit, OnDestroy {
     ]).subscribe(([rubro, meta]) => {
       if (rubro && meta) {
         if (Object.keys(meta)[0] === 'type') {
+          this.Rubro = rubro;
           this.CrearMetaForm(null, rubro, null);
         } else {
           this.CrearMetaForm(meta);
@@ -75,8 +77,10 @@ export class FormMetasComponent implements OnInit, OnDestroy {
     const meta: any = this.MetaForm.value;
     if (meta.Id === null) {
       this.store.dispatch(CrearMeta(meta));
+      this.CrearMetaForm(null, this.Rubro, null)
     } else {
       this.store.dispatch(ActualizarMeta(meta));
+      this.CrearMetaForm(null, this.Rubro, null)
     }
   }
   ngOnDestroy(): void {

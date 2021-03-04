@@ -94,7 +94,7 @@ export class MetasEffects {
           Meta,
         ).pipe(
           map((data) => {
-            this.store.dispatch(ConsultarMeta(data));
+            // this.store.dispatch(ConsultarMeta(data));
             this.popupManager.showSuccessAlert('Meta Creada');
             return MetasActions.ConsultarMetas({
               // Lineamiento: this.Lineamiento,
