@@ -69,7 +69,7 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
           if (this.sharedService.IfStore(elementos)) {
             this.Elementos = this.MontarMetasAsociadas(data2, elementos[0]);
             if (Object.keys(this.Elementos).length === 0) {
-              this.CloseModal()
+              this.CloseModal();
             }
           } else {
             this.Elementos = data2;
@@ -120,7 +120,7 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
         this.renderer.selectRootElement(this.contentRef.nativeElement).click();
       }, 0);
     });
-    
+
     // this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
   }
 }

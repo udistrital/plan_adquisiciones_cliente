@@ -76,10 +76,10 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     const actividad: any = this.ActividadesForm.value;
     if (actividad.Id === null) {
       this.store.dispatch(CrearActividad(actividad));
-      this.CrearActividadesForm(null)
+      this.CrearActividadesForm(null);
     } else {
       this.store.dispatch(ActualizarActividad(actividad));
-      this.CrearActividadesForm(null)
+      this.CrearActividadesForm(null);
     }
   }
 }

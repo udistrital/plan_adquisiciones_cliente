@@ -8,9 +8,9 @@ import { CONFIGURACION_TABLA_VER_ACTIVIDADES } from '../../interfaces/interfaces
 })
 export class VerActividadesComponent implements OnInit {
 
-  @Input() datos: any
-  DatosTransformados: any
-  configuracion : any
+  @Input() datos: any;
+  DatosTransformados: any;
+  configuracion: any;
 
   constructor() {
     this.configuracion = CONFIGURACION_TABLA_VER_ACTIVIDADES;
@@ -21,8 +21,8 @@ export class VerActividadesComponent implements OnInit {
       return {
         Numero2: element.Numero + '.' + element.MetaId.Numero,
         ...element
-      }
-    })
+      };
+    });
   }
 
 }

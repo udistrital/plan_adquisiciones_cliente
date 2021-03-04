@@ -77,10 +77,10 @@ export class FormMetasComponent implements OnInit, OnDestroy {
     const meta: any = this.MetaForm.value;
     if (meta.Id === null) {
       this.store.dispatch(CrearMeta(meta));
-      this.CrearMetaForm(null, this.Rubro, null)
+      this.CrearMetaForm(null, this.Rubro, null);
     } else {
       this.store.dispatch(ActualizarMeta(meta));
-      this.CrearMetaForm(null, this.Rubro, null)
+      this.CrearMetaForm(null, this.Rubro, null);
     }
   }
   ngOnDestroy(): void {
