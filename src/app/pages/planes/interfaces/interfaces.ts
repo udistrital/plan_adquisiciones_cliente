@@ -16,7 +16,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
             }
         },
         {
-            key: 'Descripcion',
+            key: 'Descripción',
             title: {
                 name: 'Nombre',
                 class: 'text-center',
@@ -38,7 +38,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
         {
             key: 'FechaCreacion',
             title: {
-                name: 'Fecha de Creacion',
+                name: 'Fecha de Creación',
                 class: 'text-center',
             },
             pipe: {
@@ -52,7 +52,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
         {
             key: 'FechaModificacion',
             title: {
-                name: 'Ultima Modificacion',
+                name: 'Ultima Modificación',
                 class: 'text-center',
             },
             pipe: {
@@ -195,7 +195,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'Actividades',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -206,7 +206,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'FechaEstimada',
             title: {
-                name: 'Fecha Estimada de Inicio de Proceso de Seleccion',
+                name: 'Fecha Estimada de Inicio de Proceso de Selección',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -218,7 +218,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'FechaEstimada',
             title: {
-                name: 'Duracion Estimada de Contrato',
+                name: 'Duración Estimada de Contrato',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -230,7 +230,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'ResponsableNombre',
             title: {
-                name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
+                name: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -240,7 +240,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
         {
             key: 'ModalidadSeleccion',
             title: {
-                name: 'Modalidad de Seleccion',
+                name: 'Modalidad de Selección',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -328,25 +328,25 @@ export const COLUMNAS_PLAN = [
         style: 'style_2'
     },
     {
-        text: 'Fecha Estimada de Inicio de Proceso de seleccion',
+        text: 'Fecha Estimada de Inicio de Proceso de selección',
         alignment: 'center',
         border: [true, true, true, false],
         style: 'style_2'
     },
     {
-        text: 'Duracion Estimada del Contrato',
+        text: 'Duración Estimada del Contrato',
         alignment: 'center',
         border: [true, true, true, false],
         style: 'style_2'
     },
     {
-        text: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
+        text: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
         alignment: 'center',
         border: [true, true, true, false],
         style: 'style_2'
     },
     {
-        text: 'Modalidad de Seleccion',
+        text: 'Modalidad de Selección',
         alignment: 'center',
         border: [true, true, true, false],
         style: 'style_2'

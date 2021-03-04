@@ -5,6 +5,7 @@
 
 # dependencies
 /node_modules
+/.vscode
 
 # IDEs and editors
 /.idea

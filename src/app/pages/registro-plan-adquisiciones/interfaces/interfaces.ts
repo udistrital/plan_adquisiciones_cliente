@@ -135,7 +135,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Codigo', // object key
                     title: {
-                        name: 'Codigo',
+                        name: 'Código',
                         class: 'text-center',
                     },
                     pipe: {
@@ -227,7 +227,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Codigo',
             title: {
-                name: 'Codigo',
+                name: 'Código',
                 class: 'text-center',
             },
             pipe: {
@@ -237,7 +237,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center',
             },
             pipe: {
@@ -316,7 +316,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
 
 export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     title: {
-        name: 'FICHA DE ESTADISTICAS BASICAS DE INVERSION Y DE METODOLOGIA GENERAL AJUSTADA',
+        name: 'FICHA DE ESTADÍSTICAS BÁSICAS DE INVERSIÓN Y DE METODOLOGÍA GENERAL AJUSTADA',
         class: 'text-center text-light',
     },
     showColumnTitle: true,
@@ -370,7 +370,7 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'Descripcion',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center',
             },
             pipe: {
@@ -439,7 +439,7 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         {
             key: 'PorcentajeDistribucion2',
             title: {
-                name: '% Distribucion',
+                name: '% Distribución',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -508,7 +508,7 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center align-middle',
             },
             pipe: {
@@ -567,7 +567,7 @@ export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
+                name: 'Descripción',
                 class: 'text-center align-middle',
             },
             pipe: {
