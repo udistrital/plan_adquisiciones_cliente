@@ -68,9 +68,6 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
         this.metasService.getMetasAsociadas(data.data.Codigo).subscribe((data2: any) => {
           if (this.sharedService.IfStore(elementos)) {
             this.Elementos = this.MontarMetasAsociadas(data2, elementos[0]);
-            if (Object.keys(this.Elementos).length === 0) {
-              this.CloseModal();
-            }
           } else {
             this.Elementos = data2;
           }
