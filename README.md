@@ -10,6 +10,9 @@ Cliente para el **subsistema de Presupuesto** del *Sistema de Gestión Financier
  - Gestión de los certificados de registro presupuestal,
  - Gestión de las vigencias y los reportes financieros
 
+## Informacion de pruebas
+[![Coverage](https://sonarqube.portaloas.udistrital.edu.co/api/project_badges/measure?project=udistrital%3Aplan_cuentas_mid&metric=coverage)](https://sonarqube.portaloas.udistrital.edu.co/dashboard?id=udistrital%3Aplan_cuentas_mid)
+
 ## Especificaciones Técnicas
 
 ### Tecnologías Implementadas y Versiones
