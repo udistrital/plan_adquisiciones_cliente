@@ -30,5 +30,5 @@ export const environment = {
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
     SIGN_OUT_REDIRECT_URL: 'http://10.20.0.254/presupuesto/',
   },
-  PLAN_ADQUISICIONES_APLICACION_NOMBRE: "plan_adquicisiones"
+  PLAN_ADQUISICIONES_APLICACION_NOMBRE: 'plan_adquicisiones'
 };
