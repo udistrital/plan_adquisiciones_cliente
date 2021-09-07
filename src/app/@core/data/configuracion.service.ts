@@ -5,7 +5,12 @@ import { throwError } from 'rxjs';
 
 import { environment } from './../../../environments/environment';
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    //headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    //FIXME: Se agrega la autenticación para que permita hacer las consultas a la API, sin embargo, no debería ser el caso
+    headers: new HttpHeaders({
+      'Accept': 'application/json',
+      'authorization': `Bearer ${window.localStorage.getItem('access_token')}`,
+    }),
 };
 
 const path = environment.CONFIGURACION_SERVICE;
