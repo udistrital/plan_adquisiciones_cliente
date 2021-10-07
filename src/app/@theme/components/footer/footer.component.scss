@@ -1,6 +1,6 @@
-@import '../../styles/themes';
-@import '~@nebular/theme/styles/global/breakpoints';
-@import '~bootstrap/scss/mixins/breakpoints';
+@import "../../styles/themes";
+@import "~@nebular/theme/styles/global/breakpoints";
+@import "~bootstrap/scss/mixins/breakpoints";
 
 @include nb-install-component() {
   width: 100%;
@@ -21,7 +21,7 @@
       }
     }
   }
-  .footer-g{
+  .footer-g {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -35,15 +35,15 @@
     text-decoration: none;
   }
   .logo-ud {
-    width:240px; /* you can use % */
+    width: 240px; /* you can use % */
     height: auto;
   }
   .mat-icon {
     font-size: 10px;
     transform: scale(0.2);
   }
-  .limit{
-    width:80px;
+  .limit {
+    width: 80px;
     word-wrap: break-word;
   }
   .widgets_div {
@@ -54,7 +54,7 @@
   .widgets_div .icon_div {
     width: 50px;
     display: inline-block;
-    vertical-align:middle;
+    vertical-align: middle;
   }
   .widgets_div .icon_div mat-icon {
     color: #faad0b;
@@ -71,8 +71,8 @@
     color: #58666e;
     font-size: 12px;
   }
-  .widgets_div .text_div span+span {
-    color: #747F85;
+  .widgets_div .text_div span + span {
+    color: #747f85;
     font-size: 11px;
   }
 
