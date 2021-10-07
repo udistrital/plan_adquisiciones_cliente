@@ -1,13 +1,13 @@
 {
-  "name": "ngx-admin",
-  "version": "4.0.1",
+  "name": "plan_adquisiciones_cliente",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
+    "url": "git+https://github.com/udistrital/plan_adquisiciones_cliente.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/udistrital/plan_adquisiciones_cliente/issues"
   },
   "scripts": {
     "ng": "ng",
