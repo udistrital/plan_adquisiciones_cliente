@@ -1,8 +1,8 @@
 import { Aplicacion } from './aplicacion';
 
 export interface Parametro {
-    Id: number;
-    Nombre: String;
-    Valor: String;
+    Id: string;
+    Nombre: string;
+    Valor: string;
     Aplicacion: Aplicacion;
 }

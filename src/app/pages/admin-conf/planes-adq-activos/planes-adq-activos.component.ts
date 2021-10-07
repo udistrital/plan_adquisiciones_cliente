@@ -17,14 +17,23 @@ export class PlanesAdqActivosComponent implements OnInit {
   ngOnInit() {
     this.creaPlanesdeAdquisicionActivos();
   }
-
-  private creaPlanesdeAdquisicionActivos() {
+  // FIXME: Ingresar parámetros desde la interfaz de administrabilidad
+  private creaPlanesdeAdquisicionActivos(id_general = '613bbde12b95b39aff6a542a', id_idexud = '613ac16a2b95b39aff6a5429') {
     let QUERY = '?query=Nombre:planes_adquisiciones_activos';
     this.confService.get('parametro' + QUERY).subscribe((p: Parametro[]) => {
       if (p.length >= 0) {
-        if (p[0].Id !== 0 && p[0].Id !== undefined) {
+        if (p[0].Id !== "" && p[0].Id !== undefined) {
           // FIXME: Hacer el Put
-          // console.log('Hacer PUT');
+          const nuevoValor = JSON.stringify({
+            plan_adquisiciones_general: id_general,
+            plan_adquisiciones_idexud: id_idexud,
+          });
+
+          p[0].Valor = nuevoValor;
+
+          this.confService.put('parametro', p[0]).subscribe(res => {
+            console.log("Hice el PUT");
+          });
         } else {
           QUERY = '?query=Nombre:' + this.application_conf;
 
@@ -32,8 +41,8 @@ export class PlanesAdqActivosComponent implements OnInit {
             .get('aplicacion' + QUERY)
             .subscribe((app: Aplicacion[]) => {
               const valor = JSON.stringify({
-                plan_adquisiciones_general: 'Prueba Test Plan de Adquisiciones',
-                plan_adquisiciones_idexud: 'Plan Adquisiciones IDEXUD',
+                plan_adquisiciones_general: '613bbde12b95b39aff6a542a',
+                plan_adquisiciones_idexud: '613ac16a2b95b39aff6a5429',
               });
 
               const nuevoParametro: Parametro = {
