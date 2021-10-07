@@ -93,9 +93,9 @@ Los siguientes mockups representan la estructura general de la aplicación, mód
 
 ## Estado CI
 
-| Develop | Relese 0.0.1 | Master |
+| Develop | Release | Master |
 | -- | -- | -- |
-| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg?ref=refs/heads/release/0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg?ref=refs/heads/release)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/plan_adquisiciones_cliente/status.svg?ref=refs/heads/master)](https://hubci.portaloas.udistrital.edu.co/udistrital/plan_adquisiciones_cliente) |
 
 ## Licencia
 
