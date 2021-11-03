@@ -29,8 +29,8 @@ export class SharedEffects {
   GetArbolRubro$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(SharedActions.GetArbolRubro),
-      exhaustMap((branch) =>
-        this.sharedService.getArbol(branch.branch)
+      exhaustMap((values) =>
+        this.sharedService.getArbol(values.branch, values.validity)
           .pipe(
             map(data => SharedActions.LoadArbolRubro(data)),
             catchError(data => of(SharedActions.CatchError(data))))
