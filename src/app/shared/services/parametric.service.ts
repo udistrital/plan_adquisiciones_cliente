@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetArbolRubro, GetModalidadesSeleccion, GetResponsables } from '../actions/shared.actions';
-import { getArbolRubro, getModalidadesSeleccion, getResponsables } from '../selectors/shared.selectors';
+import { combineLatest } from 'rxjs';
+import { GetArbolRubro, GetModalidadesSeleccion, GetResponsables, GetVigenciaActual } from '../actions/shared.actions';
+import { getArbolRubro, getModalidadesSeleccion, getResponsables, getVigenciaActual } from '../selectors/shared.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ParametricService {
 
+  subscription$: any;
+
   constructor(
     private store: Store<any>,
   ) {
+    this.store.dispatch(GetVigenciaActual({ offset: null }));
   }
 
   CargarArbolRubros(fuente: any) {
-    this.store.select(getArbolRubro).subscribe((arbol: any) => {
-      if (Object.keys(arbol).length === 0) {
-        this.store.dispatch(GetArbolRubro({ branch: fuente }));
+    this.subscription$ = combineLatest([
+      this.store.select(getArbolRubro),
+      this.store.select(getVigenciaActual),
+    ]).subscribe(([arbol, vigencia]) => {
+      if (Object.keys(arbol).length === 0 && vigencia) {
+        this.store.dispatch(GetArbolRubro({ branch: fuente, validity: vigencia }));
       }
     });
   }

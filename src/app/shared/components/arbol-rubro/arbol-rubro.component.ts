@@ -59,12 +59,11 @@ export class ArbolRubroComponent implements OnInit, OnDestroy, OnChanges {
       this.store.select(getArbolRubro),
       this.FuenteRecurso$.asObservable(),
     ]).subscribe(([arbol, fuente]) => {
-
       if (Object.keys(arbol).length !== 0) {
         if (fuente) {
           this.data = this.CargarRubros(fuente, arbol);
         } else {
-          this.data = [arbol[0]];
+          this.data = [arbol[1]];
         }
         this.dataSource = this.dataSourceBuilder.create(this.data, getters);
       } else {
@@ -107,7 +106,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy, OnChanges {
 
   CargarRubros(Fuente: any, Arbol: any) {
     // console.log(Arbol[0]);
-    const ArbolFuenteRecurso = Arbol[0].children.find(
+    const ArbolFuenteRecurso = Arbol[1].children.find(
       hijo => hijo.Codigo === Fuente
     );
 

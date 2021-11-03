@@ -59,7 +59,6 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
         this.FuentesAsociadas = fuentes[0];
         this.valoresFuentes = fuentes[0].reduce((acc: any, value: any) => acc + value.Valor, 0);
       }
-
       if (vigencia && area) {
         const query = {
           Vigencia: vigencia[0].valor,
