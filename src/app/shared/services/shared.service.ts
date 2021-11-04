@@ -46,16 +46,23 @@ export class SharedService {
    * @param [branch] tree's branch to request info from the API
    * @returns  branch information.
    */
-  public getArbol(branch?: string) {
+  public getArbol(branch?: string, validity?: any) {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
     // this.rqManager.setPath('DUMMY_SERVICE');
     // Set the optional branch for the API request.
     // const unidadEjecutora = 1;
     const params = {
       rama: branch,
+      // Actualmente se espera traer el árbol de apropiación que tenga preasignaciones iniciales aprobadas y de la vigencia más reciente
+      vigencia: validity[0].valor,
+      estado: 'aprobada',
     };
     // call request manager for the tree's data.
-    return this.rqManager.get(`arbol_rubro/arbol_reducido/${branch}?nivel=-1`, params);
+    return this.rqManager.get(`arbol_rubro_apropiacion/arbol_por_estado/1/${params.vigencia}/${params.estado}`).pipe(
+      map(res => {
+        return res;
+      })
+    );
 
   }
 
