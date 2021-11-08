@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
+import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { LoadAreaFuncional, LoadCentroGestor } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getCentroGestor } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -29,6 +31,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private location: Location,
+    private pUpManager: PopUpManager,
+    private translate: TranslateService,
   ) {
     this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
@@ -139,7 +143,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.sharedService.IfStore(area) &&
       this.sharedService.IfStore(plan)
     ) {
-      return true;
+      if (data.ActividadFuente.Valor <= data.Rubro.data.ValorActual) {
+        return true;
+      } else {
+        this.pUpManager.showErrorToast(this.translate.instant(`ERROR: El valor asignado a la fuente supera el valor actual del rubro: \$${data.Rubro.data.ValorActual}`));
+        return false;
+      }
     } else {
       return false;
     }

@@ -18,11 +18,13 @@ export class PlanesAdqActivosComponent implements OnInit {
     this.creaPlanesdeAdquisicionActivos();
   }
   // FIXME: Ingresar parámetros desde la interfaz de administrabilidad
-  private creaPlanesdeAdquisicionActivos(id_general = '613bbde12b95b39aff6a542a', id_idexud = '613ac16a2b95b39aff6a5429') {
+  // Plan Inversión: 613bbde12b95b39aff6a542a
+  // Plan Funcionamiento: 617308752b95b39aff6a542d
+  private creaPlanesdeAdquisicionActivos(id_general = '6182f3f72b95b39aff6a5430', id_idexud = '613ac16a2b95b39aff6a5429') {
     let QUERY = '?query=Nombre:planes_adquisiciones_activos';
     this.confService.get('parametro' + QUERY).subscribe((p: Parametro[]) => {
       if (p.length >= 0) {
-        if (p[0].Id !== "" && p[0].Id !== undefined) {
+        if (p[0].Id !== '' && p[0].Id !== undefined) {
           // FIXME: Hacer el Put
           const nuevoValor = JSON.stringify({
             plan_adquisiciones_general: id_general,
@@ -32,7 +34,7 @@ export class PlanesAdqActivosComponent implements OnInit {
           p[0].Valor = nuevoValor;
 
           this.confService.put('parametro', p[0]).subscribe(res => {
-            console.log("Hice el PUT");
+            // console.log('Hice el PUT');
           });
         } else {
           QUERY = '?query=Nombre:' + this.application_conf;
@@ -41,12 +43,12 @@ export class PlanesAdqActivosComponent implements OnInit {
             .get('aplicacion' + QUERY)
             .subscribe((app: Aplicacion[]) => {
               const valor = JSON.stringify({
-                plan_adquisiciones_general: '613bbde12b95b39aff6a542a',
+                plan_adquisiciones_general: '6182f3f72b95b39aff6a5430',
                 plan_adquisiciones_idexud: '613ac16a2b95b39aff6a5429',
               });
 
               const nuevoParametro: Parametro = {
-                Id: 29,
+                Id: '29',
                 Nombre: 'planes_adquisiciones_activos',
                 Valor: valor,
                 Aplicacion: app[0],
