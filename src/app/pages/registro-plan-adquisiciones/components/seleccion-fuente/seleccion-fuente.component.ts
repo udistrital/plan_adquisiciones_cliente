@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, forkJoin } from 'rxjs';
+import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
 import { getAreaFuncional, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -23,6 +25,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   Actividades: any;
   subscription2$: any;
   subscription3$: any;
+  disableFuentes: boolean;
 
   constructor(
     private registroService: RegistroPlanAdquisicionesService,
@@ -30,9 +33,12 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private actividadesService: ActividadesService,
+    private pUpManager: PopUpManager,
+    private translate: TranslateService,
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.Actividades = [];
+    this.disableFuentes = true;
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -102,6 +108,17 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       });
     }
 
+  }
+
+  selectFuentes(event){
+    console.log({event});
+    this.disableFuentes = false;
+  }
+
+  showAlertActividadesFirst(){
+    if(this.disableFuentes === true){
+      this.pUpManager.showErrorAlert(this.translate.instant(`Recuerde seleccionar una actividad en la lista desplegable`));
+    }
   }
 
 }
