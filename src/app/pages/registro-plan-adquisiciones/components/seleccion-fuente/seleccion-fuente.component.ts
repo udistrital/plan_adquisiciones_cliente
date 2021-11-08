@@ -110,13 +110,12 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
 
   }
 
-  selectFuentes(event){
-    console.log({event});
+  selectFuentes(event) {
     this.disableFuentes = false;
   }
 
-  showAlertActividadesFirst(){
-    if(this.disableFuentes === true){
+  showAlertActividadesFirst() {
+    if (this.disableFuentes === true) {
       this.pUpManager.showErrorAlert(this.translate.instant(`Recuerde seleccionar una actividad en la lista desplegable`));
     }
   }

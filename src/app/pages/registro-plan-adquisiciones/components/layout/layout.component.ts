@@ -143,7 +143,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.sharedService.IfStore(area) &&
       this.sharedService.IfStore(plan)
     ) {
-      if(data.ActividadFuente.Valor <= data.Rubro.data.ValorActual) {
+      if (data.ActividadFuente.Valor <= data.Rubro.data.ValorActual) {
         return true;
       } else {
         this.pUpManager.showErrorToast(this.translate.instant(`ERROR: El valor asignado a la fuente supera el valor actual del rubro: \$${data.Rubro.data.ValorActual}`));
