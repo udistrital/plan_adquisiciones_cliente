@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { CONFIGURACION_TABLA_FUENTES } from '../../interfaces/interfaces';
@@ -131,14 +131,13 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     });
   }
   CrearActividadFuentesForm(data: any) {
-
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
         Actividad: [{
-          value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
           disabled: true,
-        }, []],
-        Valor: [data.Valor, []],
+          value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
+        }, [Validators.required]],
+        Valor: [{ value: data.Valor, disabled: false}, [Validators.required]],
       });
     } else {
       this.ActividadFuentesForm = this.fb.group({
@@ -196,17 +195,17 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
   OnSubmit() {
     let Creacion = true;
-    const Actividad = this.ActividadFuentesForm.value;
+    const Actividad = this.ActividadFuentesForm.getRawValue();
     Actividad.Actividad.Id2 = Actividad.Actividad.Numero + '.' +
-      Actividad.Actividad.MetaId.Numero;
+    Actividad.Actividad.MetaId.Numero;
     Actividad.Actividad.Valor = Actividad.Valor;
     this.ActividadesAsociadas.forEach((element: any) => {
       if (Actividad.Actividad.Id === element.ActividadId.Id) {
         element.ActividadId.Valor = Actividad.Valor;
         element.Valor = Actividad.Valor;
         element.FuentesFinanciamiento = this.Datos;
-        Creacion = false;
       }
+      Creacion = false;
     });
     if (Creacion) {
       this.ActividadesAsociadas.push({

@@ -22,12 +22,12 @@ export const initialState: State = {
   AccionTabla: null,
   VigenciaActual: null,
   AreaFuncional: {
-    Id: 1,
-    Nombre: 'Rector',
-    label: '01 - Rector',
+    Id: 1, // !TODO: Parametrizable
+    Nombre: 'Rector', // !TODO: Parametrizable
+    label: '01 - Rector', // !TODO: Parametrizable
   },
   CentroGestor: {
-    CentroGestor: 230,
+    CentroGestor: 230, // !TODO: Parametrizable
   },
   ModalidadesSeleccion: null,
   Responsables: null,
