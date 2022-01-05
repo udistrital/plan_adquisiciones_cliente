@@ -317,17 +317,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
           element.FuentesFinanciamiento
         );
       } else {
-        // actividades.push({
-        //   ActividadId: element.Id,
-        //   Valor: element.Valor,
-        //   Id: element.RegistroActividadId,
-        //   RegistroActividadId: element.RegistroActividadId,
-        //   FuentesFinanciamiento: this.ActualizarFuentes(
-        //     actividades[index].FuentesFinanciamiento,
-        //     element.FuentesFinanciamiento
-        //   ),
-        //   Activo: false,
-        // });
+        actividades.push({
+          ActividadId: element.Id,
+          Valor: element.Valor,
+          Id: element.RegistroActividadId,
+          RegistroActividadId: element.RegistroActividadId,
+          FuentesFinanciamiento: this.ActualizarFuentes(
+            actividades[index].FuentesFinanciamiento,
+            element.FuentesFinanciamiento
+          ),
+          Activo: false,
+        });
       }
     });
     return actividades;
