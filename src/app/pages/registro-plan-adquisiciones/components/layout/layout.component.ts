@@ -1,3 +1,4 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { Location } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -138,7 +139,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.sharedService.IfStore(data.Modalidades) &&
       this.sharedService.IfStore(data.ElementosARKA) &&
       this.sharedService.IfStore(data.ActividadFuente) &&
-      this.sharedService.IfStore(data.Producto) &&
       this.sharedService.IfStore(centro) &&
       this.sharedService.IfStore(area) &&
       this.sharedService.IfStore(plan)
@@ -261,7 +261,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     if (this.TipoDePlan) {
       ActualizarRegistro.ActividadId = data.ActividadFuente.Actividad.Id;
-      ActualizarRegistro.FuenteFinanciamientoId = data.Producto.Codigo;
+      ActualizarRegistro.FuenteFinanciamientoId = data.ActividadFuente.FuenteFinanciamiento.Codigo;
       ActualizarRegistro.ValorActividad = data.ActividadFuente.Valor;
     } else {
       ActualizarRegistro.RegistroPlanAdquisicionActividad = this.ActualizarActividades(data, renglon);
@@ -317,17 +317,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
           element.FuentesFinanciamiento
         );
       } else {
-        actividades.push({
-          ActividadId: element.Id,
-          Valor: element.Valor,
-          Id: element.RegistroActividadId,
-          RegistroActividadId: element.RegistroActividadId,
-          FuentesFinanciamiento: this.ActualizarFuentes(
-            actividades[index].FuentesFinanciamiento,
-            element.FuentesFinanciamiento
-          ),
-          Activo: false,
-        });
+        // ! Se debe evaluar si el actividades[index] es útil en algún momento, por el momento funciona sin este segmento de código
+        // ! se deja para revisar a fondo y eliminar en caso de que no afecte el flujo en pruebas
+        // actividades.push({
+        //   ActividadId: element.Id,
+        //   Valor: element.Valor,
+        //   Id: element.RegistroActividadId,
+        //   RegistroActividadId: element.RegistroActividadId,
+        //   FuentesFinanciamiento: this.ActualizarFuentes(
+        //     actividades[index].FuentesFinanciamiento,
+        //     element.FuentesFinanciamiento
+        //   ),
+        //   Activo: false,
+        // });
       }
     });
     return actividades;
