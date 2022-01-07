@@ -317,6 +317,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
           element.FuentesFinanciamiento
         );
       } else {
+        // ! Se debe evaluar si el actividades[index] es útil en algún momento, por el momento funciona sin este segmento de código
+        // ! se deja para revisar a fondo y eliminar en caso de que no afecte el flujo en pruebas
         // actividades.push({
         //   ActividadId: element.Id,
         //   Valor: element.Valor,
