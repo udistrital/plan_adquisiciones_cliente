@@ -23,13 +23,18 @@ const routes: Routes = [{
       .then(m => m.PlanAdquisicionesModule),
     },
     {
+      path: 'welcome',
+      loadChildren: () => import('./welcome/welcome.module')
+      .then(m => m.WelcomeModule),
+    },
+    {
       path: '',
-      redirectTo: 'plan-adquisiciones',
+      redirectTo: 'welcome',
       pathMatch: 'full',
     },
     {
       path: '**',
-      redirectTo: 'plan-adquisiciones',
+      redirectTo: 'welcome',
       pathMatch: 'full',
     },
   ],

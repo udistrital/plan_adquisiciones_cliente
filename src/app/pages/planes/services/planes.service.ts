@@ -20,7 +20,9 @@ export class PlanesService {
     return this.rqManager.get(
       `Plan_adquisiciones/` +
       `?query=Activo:true` +
-      `&limit=-1`
+      `&limit=-1` +
+      `&sortby=FechaModificacion` +
+      `&order=asc`
     );
   }
 
