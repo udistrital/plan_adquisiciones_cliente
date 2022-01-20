@@ -22,7 +22,7 @@ export class PlanesService {
       `?query=Activo:true` +
       `&limit=-1` +
       `&sortby=FechaModificacion` +
-      `&order=asc`
+      `&order=desc`
     );
   }
 
