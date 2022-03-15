@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { combineLatest } from "rxjs";
-import { map } from "rxjs/operators";
-import { PopUpManager } from "../../../../@core/managers/popUpManager";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import {
   LoadAccionTabla,
   LoadFilaSeleccionada,
-} from "../../../../shared/actions/shared.actions";
+} from '../../../../shared/actions/shared.actions';
 import {
   getArbolRubro,
   getFilaSeleccionada,
-} from "../../../../shared/selectors/shared.selectors";
-import { SharedService } from "../../../../shared/services/shared.service";
-import { ActualizarPublicadoConfiguracionService } from "../../../../utils/common/helpers/actualizar-publicado-configuracion.service";
+} from '../../../../shared/selectors/shared.selectors';
+import { SharedService } from '../../../../shared/services/shared.service';
+import { ActualizarPublicadoConfiguracionService } from '../../../../utils/common/helpers/actualizar-publicado-configuracion.service';
 import {
   CargarElementosARKA,
   CargarMeta,
@@ -29,19 +29,19 @@ import {
   CargarMetasAsociadas,
   CargarProductosAsociados,
   CargarActividadFuente,
-} from "../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions";
-import { ConsultarPlanDetallado } from "../../actions/planes.actions";
-import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from "../../interfaces/interfaces";
+} from '../../../registro-plan-adquisiciones/actions/registro-plan-adquisiciones.actions';
+import { ConsultarPlanDetallado } from '../../actions/planes.actions';
+import { CONFIGURACION_TABLA_DETALLE_PLAN_2 } from '../../interfaces/interfaces';
 import {
   getPlanDetallado,
   getPlanSeleccionado,
-} from "../../selectors/planes.selectors";
-import { PlanesService } from "../../services/planes.service";
+} from '../../selectors/planes.selectors';
+import { PlanesService } from '../../services/planes.service';
 
 @Component({
-  selector: "ngx-detalle-plan",
-  templateUrl: "./detalle-plan.component.html",
-  styleUrls: ["./detalle-plan.component.scss"],
+  selector: 'ngx-detalle-plan',
+  templateUrl: './detalle-plan.component.html',
+  styleUrls: ['./detalle-plan.component.scss'],
 })
 export class DetallePlanComponent implements OnInit, OnDestroy {
   configuracion: any[];
@@ -65,7 +65,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService
   ) {
     // this.parametrics.CargarArbolRubros('3');
-    this.publicar = "Publicar Plan de Adquisiciones";
+    this.publicar = 'Publicar Plan de Adquisiciones';
     this.store.dispatch(CargarRubro(null));
     this.store.dispatch(CargarMeta(null));
     this.store.dispatch(CargarProducto(null));
@@ -86,7 +86,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           this.Plan = plan;
           this.store.dispatch(ConsultarPlanDetallado(plan));
           if (this.Plan.Publicado === true) {
-            this.publicar = "Publicar Nueva Version del Plan de Adquisiciones";
+            this.publicar = 'Publicar Nueva Version del Plan de Adquisiciones';
           }
         }
       });
@@ -103,14 +103,14 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       .select(getFilaSeleccionada)
       .subscribe((accion) => {
         if (this.sharedService.IfStore(accion)) {
-          if (accion.accion.name === "Editar") {
+          if (accion.accion.name === 'Editar') {
             this.ActualizarRenglon(accion.fila);
           }
         }
       });
     this.sharedService.RetornarAlInicio(
-      "planes",
-      "pages/plan-adquisiciones/planes/tabla-general"
+      'planes',
+      'pages/plan-adquisiciones/planes/tabla-general'
     );
   }
 
@@ -124,7 +124,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
   CrearRenglon() {
     this.route
-      .navigate(["pages/plan-adquisiciones/registro-plan-adquisiciones"])
+      .navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones'])
       .then(() => {
         this.store.dispatch(LoadAccionTabla(null));
         this.store.dispatch(CargarRubro(null));
@@ -144,7 +144,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
   ActualizarRenglon(renglon: any) {
     this.route
-      .navigate(["pages/plan-adquisiciones/registro-plan-adquisiciones"])
+      .navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones'])
       .then(() => {
         this.store.dispatch(ConsultarRenglonPlan(renglon));
         this.store.dispatch(LoadFilaSeleccionada(null));
@@ -158,7 +158,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
   OnCancel() {
-    this.route.navigate(["pages/plan-adquisiciones/planes/tabla-general"]);
+    this.route.navigate(['pages/plan-adquisiciones/planes/tabla-general']);
   }
 
   Publicar() {
@@ -174,8 +174,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           );
 
           this.popupService.showSuccessAlert(
-            "Plan de Adquisiciones publicado",
-            "Publicado"
+            'Plan de Adquisiciones publicado',
+            'Publicado'
           );
         }
       });
