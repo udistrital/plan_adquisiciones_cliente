@@ -4,6 +4,9 @@ import { ConfiguracionService } from '../../../@core/data/configuracion.service'
 import { Parametro } from '../../../shared/models/parametro';
 import { Aplicacion } from '../../../shared/models/aplicacion';
 
+const IDPLANGENERAL = '6182f3f72b95b39aff6a5430';
+const IDPLANIDEXUD = '613ac16a2b95b39aff6a5429';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +15,7 @@ export class ActualizarPublicadoConfiguracionService {
 
   constructor(private confService: ConfiguracionService) { }
 
-  public creaPlanesdeAdquisicionActivos(id_general = '6182f3f72b95b39aff6a5430', id_idexud = '613ac16a2b95b39aff6a5429') {
+  public creaPlanesdeAdquisicionActivos(id_general = IDPLANGENERAL, id_idexud = IDPLANIDEXUD) {
     let QUERY = '?query=Nombre:planes_adquisiciones_activos';
     this.confService.get('parametro' + QUERY).subscribe((p: Parametro[]) => {
       if (p.length >= 0) {
@@ -35,8 +38,8 @@ export class ActualizarPublicadoConfiguracionService {
             .get('aplicacion' + QUERY)
             .subscribe((app: Aplicacion[]) => {
               const valor = JSON.stringify({
-                plan_adquisiciones_general: '6182f3f72b95b39aff6a5430',
-                plan_adquisiciones_idexud: '613ac16a2b95b39aff6a5429',
+                plan_adquisiciones_general: IDPLANGENERAL,
+                plan_adquisiciones_idexud: IDPLANIDEXUD,
               });
 
               const nuevoParametro: Parametro = {
