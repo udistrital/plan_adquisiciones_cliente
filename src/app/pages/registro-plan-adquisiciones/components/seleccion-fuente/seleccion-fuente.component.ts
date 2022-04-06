@@ -5,20 +5,33 @@ import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, forkJoin } from 'rxjs';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
-import { getAreaFuncional, getVigenciaActual } from '../../../../shared/selectors/shared.selectors';
+import {
+  getAreaFuncional,
+  getVigenciaActual,
+} from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
-import { CargarActividadFuente, CargarProducto, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
-import { getActividadFuente, getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
+import {
+  CargarActividadFuente,
+  CargarProducto,
+  SeleccionarFuente,
+} from '../../actions/registro-plan-adquisiciones.actions';
+import {
+  getActividadFuente,
+  getRenglonSeleccionado,
+  getRubro,
+} from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material';
+
 
 @Component({
   selector: 'ngx-seleccion-fuente',
   templateUrl: './seleccion-fuente.component.html',
-  styleUrls: ['./seleccion-fuente.component.scss']
+  styleUrls: ['./seleccion-fuente.component.scss'],
 })
 export class SeleccionFuenteComponent implements OnInit, OnDestroy {
-
   FuentesFinanciamiento: any;
   FuenteForm: any;
   subscription$: any;
@@ -26,6 +39,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   subscription2$: any;
   subscription3$: any;
   disableFuentes: boolean;
+  actividadesCargadas: boolean;
 
   constructor(
     private registroService: RegistroPlanAdquisicionesService,
@@ -34,11 +48,12 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private actividadesService: ActividadesService,
     private pUpManager: PopUpManager,
-    private translate: TranslateService,
+    private translate: TranslateService
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
     this.Actividades = [];
     this.disableFuentes = true;
+    this.actividadesCargadas = false;
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -62,11 +77,13 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
           Vigencia: vigencia[0].valor,
           UnidadEjecutora: area.Id,
         };
+        this.actividadesCargadas = false;
         forkJoin({
           fuente: this.registroService.getFuentesFinanciamiento(null, query),
-          actividades: this.actividadesService.getActividadesPorRubro(rubro.data.Codigo)
+          actividades: this.actividadesService.getActividadesPorRubro(
+            rubro.data.Codigo
+          ),
         }).subscribe(({ fuente, actividades }) => {
-
           this.FuentesFinanciamiento = fuente;
           this.Actividades = actividades;
           if (this.sharedService.IfStore(renglon)) {
@@ -78,8 +95,9 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
           } else {
             this.CrearFuenteForm(null);
           }
-        }
-        );
+
+          this.actividadesCargadas = true;
+        });
       }
     });
   }
@@ -87,9 +105,17 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   CrearFuenteForm(data: any) {
     if (data) {
       this.FuenteForm = this.fb.group({
-        Actividad: [this.Actividades.find((x: any) => x.Id === data.ActividadId), [Validators.required]],
+        Actividad: [
+          this.Actividades.find((x: any) => x.Id === data.ActividadId),
+          [Validators.required],
+        ],
         Valor: [data.ValorActividad, [Validators.required]],
-        FuenteFinanciamiento: [this.FuentesFinanciamiento.find((x: any) => x.Codigo === data.FuenteFinanciamientoId), [Validators.required]],
+        FuenteFinanciamiento: [
+          this.FuentesFinanciamiento.find(
+            (x: any) => x.Codigo === data.FuenteFinanciamientoId
+          ),
+          [Validators.required],
+        ],
       });
       this.FuenteForm.valueChanges.subscribe((value: any) => {
         this.store.dispatch(CargarActividadFuente(value));
@@ -103,11 +129,12 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
       this.FuenteForm.valueChanges.subscribe((value: any) => {
         this.store.dispatch(CargarActividadFuente(value));
       });
-      this.FuenteForm.get('FuenteFinanciamiento').valueChanges.subscribe((value: any) => {
-        this.store.dispatch(CargarProducto(value));
-      });
+      this.FuenteForm.get('FuenteFinanciamiento').valueChanges.subscribe(
+        (value: any) => {
+          this.store.dispatch(CargarProducto(value));
+        }
+      );
     }
-
   }
 
   selectFuentes(event) {
@@ -116,8 +143,11 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
 
   showAlertActividadesFirst() {
     if (this.disableFuentes === true) {
-      this.pUpManager.showErrorAlert(this.translate.instant(`Recuerde seleccionar una actividad en la lista desplegable`));
+      this.pUpManager.showErrorAlert(
+        this.translate.instant(
+          `Recuerde seleccionar una actividad en la lista desplegable`
+        )
+      );
     }
   }
-
 }
