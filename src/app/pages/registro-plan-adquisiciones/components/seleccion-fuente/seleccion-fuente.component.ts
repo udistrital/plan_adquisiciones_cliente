@@ -40,6 +40,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   subscription3$: any;
   disableFuentes: boolean;
   actividadesCargadas: boolean;
+  codigoName: string;
 
   constructor(
     private registroService: RegistroPlanAdquisicionesService,
@@ -62,6 +63,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.codigoName = this.translate.instant('ACTIVIDAD.codigo');
     this.subscription$ = combineLatest([
       this.store.select(getVigenciaActual),
       this.store.select(getAreaFuncional),
@@ -144,9 +146,7 @@ export class SeleccionFuenteComponent implements OnInit, OnDestroy {
   showAlertActividadesFirst() {
     if (this.disableFuentes === true) {
       this.pUpManager.showErrorAlert(
-        this.translate.instant(
-          `Recuerde seleccionar una actividad en la lista desplegable`
-        )
+        this.translate.instant('ACTIVIDAD.seleccionar_actividad')
       );
     }
   }

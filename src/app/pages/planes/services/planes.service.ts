@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { RequestManager } from '../../../@core/managers/requestManager';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlanesService {
-  constructor(private rqManager: RequestManager) {}
+  constructor(
+    private rqManager: RequestManager,
+    private translate: TranslateService
+    ) {}
 
   /**
    * Get Planes
@@ -155,7 +159,7 @@ export class PlanesService {
       } else {
         element.FuenteRecursos = [element.FuenteFinanciamientoData.Nombre];
         element.ValorTotalActividades = element.ValorActividad;
-        element.Actividades = ['No Aplica'];
+        element.Actividades = [this.translate.instant('GLOBAL.no_aplica')];
       }
       return element;
     });

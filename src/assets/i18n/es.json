@@ -209,7 +209,8 @@
     "cdp_suspension": "CDP suspensión",
     "cdp_traslado": "CDP traslado",
     "cdp_reduccion": "CDP reducción",
-    "anulation_not_allowed": "Anulación para este documento no permitida."
+    "anulation_not_allowed": "Anulación para este documento no permitida.",
+    "no_aplica": "No Aplica"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
@@ -243,7 +244,9 @@
     "saldo_restante_mov": "Saldo restante del movimiento"
   },
   "ACTIVIDAD":{
-    "comprobacion-diferencia": "El valor de la(s) actividad(es) supera el de la apropiación por un valor de: "
+    "comprobacion-diferencia": "El valor de la(s) actividad(es) supera el de la apropiación por un valor de: ",
+    "codigo": "Código",
+    "seleccionar_actividad": "Recuerde seleccionar una actividad en la lista desplegable"
   },
   "APROPIACION": {
     "consulta-apropiacion-title":"Consulta apropiación inicial",
