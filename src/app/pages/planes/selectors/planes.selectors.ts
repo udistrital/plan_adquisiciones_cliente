@@ -7,7 +7,7 @@ export const selectPlanesState = createFeatureSelector<fromPlanes.State>(
 
 export const getPlanSeleccionado = createSelector(
   selectPlanesState,
-  (state: fromPlanes.State) => state.PlanSeleccionado
+  (state: fromPlanes.State) => state ? state.PlanSeleccionado : undefined
 );
 
 export const getPlanes = createSelector(

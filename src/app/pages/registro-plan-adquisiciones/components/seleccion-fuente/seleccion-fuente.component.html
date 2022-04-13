@@ -6,14 +6,18 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label>Código:</label>
-                    <mat-select class="form-control" formControlName="Actividad" (selectionChange)="selectFuentes($event)">
+                    <label>{{ codigoName }}: </label>
+                    <div class="col-12" *ngIf="!actividadesCargadas">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-grow text-primary" role="status"></div>
+                        </div>
+                    </div>
+                    <mat-select class="form-control" formControlName="Actividad" (selectionChange)="selectFuentes($event)" *ngIf="actividadesCargadas">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
                             class="example-viewport">
-                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
-                                [value]="actividad">
-                                {{ actividad.Numero ? actividad.Numero : ''}}.{{actividad.MetaId ?
-                                actividad.MetaId.Numero : ''}}
+                            <mat-option *ngIf="Actividades.length == 0" class="example-item" [value]="[]">NA</mat-option>
+                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item" [value]="actividad">
+                                {{ actividad.Numero ? actividad.Numero : ''}}.{{actividad.MetaId ? actividad.MetaId.Numero : ''}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
                     </mat-select>
