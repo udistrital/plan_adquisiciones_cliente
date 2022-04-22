@@ -1,6 +1,6 @@
 # plan_adquisiciones_cliente
 
-Cliente para el **subsistema de Presupuesto** del _Sistema de Gestión Financiera KRONOS_.
+Cliente para el **Subsistema del Plan de Adquisiciones** del _Sistema de Gestión Financiera KRONOS_.
 
 Permite centralizar y gestionar el manejo de la información de la Universidad Distrital por medio de diferentes subsistemas, puntualmente se gestionan los siguientes procesos:
 
