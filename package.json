@@ -99,7 +99,7 @@
     "@angular/cli": "^8.3.19",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "8.0.0",
-    "@compodoc/compodoc": "^1.1.15",
+    "@compodoc/compodoc": "^1.1.19",
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@ngrx/store-devtools": "^8.6.1",
     "@types/d3-color": "1.0.5",
