@@ -179,7 +179,7 @@ export class SharedService {
    * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
    */
   public getResponsables() {
-    this.rqManager.setPath('OIKOS_2_SERVICE');
+    this.rqManager.setPath('OIKOS_SERVICE');
     const query_params = {
       query: '?query=Activo:true&limit=-1&sortby=Nombre&order=asc',
     };
