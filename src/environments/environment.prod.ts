@@ -8,6 +8,8 @@ import { SHARED } from './shared';
 export const environment = {
   ...SHARED,
 
+  CLIENTE_PRESUPUESTO: 'https://presupuesto.portaloas.udistrital.edu.co/',
+  CLIENTE_CONTABILIDAD: 'https://contabilidad.portaloas.udistrital.edu.co/',
   production: true,
   NUXEO: {
     PATH: 'https://documental.udistrital.edu.co/nuxeo/',
