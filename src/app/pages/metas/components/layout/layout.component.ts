@@ -19,11 +19,12 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (Object.keys(this.state.getValue()).find(key => key === 'lineamientos') === undefined) {
-      this.route.navigate(['pages/plan-adquisiciones/lineamientos']);
-    } else {
-      this.Mostrar = true;
-    }
+    //   if (Object.keys(this.state.getValue()).find(key => key === 'lineamientos') === undefined) {
+    //     this.route.navigate(['pages/plan-adquisiciones/lineamientos']);
+    //   } else {
+    //     this.Mostrar = true;
+    //   }
+    this.Mostrar = true;
   }
 
 }

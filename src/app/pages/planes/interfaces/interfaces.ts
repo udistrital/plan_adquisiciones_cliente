@@ -38,7 +38,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
         {
             key: 'FechaCreacion',
             title: {
-                name: 'Fecha de Creacion',
+                name: 'Fecha de Creación',
                 class: 'text-center',
             },
             pipe: {
@@ -52,7 +52,7 @@ export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
         {
             key: 'FechaModificacion',
             title: {
-                name: 'Ultima Modificacion',
+                name: 'Ultima Modificación',
                 class: 'text-center',
             },
             pipe: {
@@ -160,13 +160,28 @@ export const CONFIGURACION_TABLA_VERSIONES_PLAN: any = {
     filter: false,
 };
 
-export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
+export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
     title: {
         name: '',
         class: 'text-center text-light',
     },
+    subtitle: {
+        name: '', // name subtitle
+        class: 'text-center bg-primary text-light', // bootstrap class
+    },
     showColumnTitle: true,
     dataConfig: [
+        {
+            key: 'CodigoArka',
+            title: {
+                name: 'Códigos UNSPSC',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
         {
             key: 'RubroId',
             title: {
@@ -177,98 +192,91 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
                 class: 'text-center align-middle',
             }
         },
-        // {
-        //     key: 'Descripcion',
-        //     title: {
-        //         name: 'Descripcion',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-justify align-middle',
-        //     }
-        // },
+        {
+            key: 'Actividades',
+            title: {
+                name: 'Descripción',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-justify align-middle',
+                isArray: true,
+            }
+        },
         {
             key: 'FechaEstimada',
             title: {
-                name: 'Fecha Estimada de Inicio de Proceso de Seleccion',
+                name: 'Fecha Estimada de Inicio de Proceso de Selección',
                 class: 'text-center align-middle',
             },
             pipe: {
                 type: 'time-range',
                 config: ['limits'],
-                class: 'text-center align-middle',
+                class: 'text-center align-middle text-capitalize',
             }
         },
         {
             key: 'FechaEstimada',
             title: {
-                name: 'Duracion Estimada de Contrato',
+                name: 'Duración Estimada de Contrato',
                 class: 'text-center align-middle',
             },
             pipe: {
                 type: 'time-range',
                 config: ['range'],
-                class: 'text-center align-middle',
+                class: 'text-center align-middle text-capitalize',
             }
         },
         {
-            key: 'ResponsableId',
+            key: 'ResponsableNombre',
             title: {
-                name: 'Responsable Formulacion del Estudio de Conveniencia y Oportunidad',
+                name: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
                 class: 'text-center align-middle',
             },
             pipe: {
                 class: 'text-center align-middle',
             }
         },
-        // {
-        //     key: 'ModalidadSeleccion',
-        //     title: {
-        //         name: 'Modalidad de Seleccion',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'd-flex flex-column align-items-center text-center align-middle',
-        //         isArray: true,
-        //     }
-        // },
-        // {
-        //     key: 'Valor',
-        //     title: {
-        //         name: 'Valor Asignado Año Vigente',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         type: 'currency',
-        //         config: [
-        //         ],
-        //         class: 'text-center align-middle',
-        //     }
-        // },
-        // {
-        //     key: 'FuenteRecurso',
-        //     title: {
-        //         name: 'Fuente de Recurso',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-center align-middle',
-        //     }
-        // },{
-        //     key: 'FuenteRecurso',
-        //     title: {
-        //         name: 'Fuente de Recurso',
-        //         class: 'text-center align-middle',
-        //     },
-        //     pipe: {
-        //         class: 'text-center align-middle',
-        //     }
-        // },
+        {
+            key: 'ModalidadSeleccion',
+            title: {
+                name: 'Modalidad de Selección',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
+        {
+            key: 'ValorTotalActividades',
+            title: {
+                name: 'Valor Asignado Año Vigente',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                type: 'currency',
+                config: [
+                    '$',
+                    'symbol',
+                    '3.2-2',
+                    'en-US'
+                ],
+                class: 'text-right align-middle px-0',
+            }
+        },
+        {
+            key: 'FuenteRecursos',
+            title: {
+                name: 'Fuente de Recurso',
+                class: 'text-center align-middle',
+            },
+            pipe: {
+                class: 'text-center align-middle',
+                isArray: true,
+            }
+        },
     ],
-    // subtitle: {
-    //     name: '',
-    //     class: 'text-center text-light',
-    // },
     rowActions: {
         title: {
             name: 'Acciones',
@@ -284,37 +292,167 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN: any = {
             },
         ],
     },
-    tableActions: [
-        {
-            name: 'nuevo',
-            icon: 'fas fa-plus py-1 px-2',
-            class: 'px-2 mx-2',
-            title: 'Agregar Rubro',
-        },
-    ],
     noData: {
         name: 'No Existen Rubros Asociados',
         class: 'text-center',
     },
-    // endSubtotal: {
-    //     property: 'Valor',
-    //     items: [
-    //         {
-    //             colspan: 6,
-    //             name: 'Total Plan',
-    //             class: 'text-center',
-    //         },
-    //     ],
-    //     last: {
-    //         class: 'text-left',
-    //         pipe: {
-    //             type: 'currency',
-    //             config: [
-    //             ],
-    //             class: '',
-    //         }
-    //     }
-    // },
+    endSubtotal: {
+        first: {
+            class: 'text-center bg-primary text-light',
+        },
+        last: {
+            class: 'text-right bg-primary text-light px-0',
+        }
+    },
     sort: true,
     filter: false,
+};
+
+export const COLUMNAS_PLAN = [
+    {
+        text: 'Código UNSPSC',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Rubro Presupuestal',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Actividad',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Fecha Estimada de Inicio de Proceso de selección',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Duración Estimada del Contrato',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Modalidad de Selección',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Valor Asignado',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    },
+    {
+        text: 'Fuente de Recursos',
+        alignment: 'center',
+        border: [true, true, true, false],
+        style: 'style_2'
+    }
+];
+
+export const ESPACIO_TABLA = [
+    {
+        text: '',
+        colSpan: 9,
+        border: [false, false, false, false],
+    },
+    {}, {}, {}, {}, {}, {}, {}, {}
+];
+
+export const PLANTILLA_TABLA = {
+    pageSize: 'A4',
+    pageOrientation: 'landscape',
+    pageMargins: [30, 30, 30, 30],
+    content: [
+      {
+        table: {
+          widths: ['auto', 'auto', 'auto', 'auto', 'auto', '*', '*', 'auto', 'auto'],
+          body: [
+          ],
+        },
+      }
+    ],
+    styles: {
+      body: {
+        marginTop: 80,
+      },
+      general_font: {
+        fontSize: 6,
+        alignment: 'justify',
+        margin: [25, 0, 25, 0],
+      },
+      general_list: {
+        fontSize: 6,
+        alignment: 'justify',
+        margin: [35, 0, 25, 0],
+      },
+      topHeader: {
+        margin: [5, 0, 5, 0],
+        alignment: 'justify',
+        fontSize: 6,
+      },
+      table: {
+        margin: [30, 0, 30, 0],
+        border: '0',
+      },
+      tableInfo: {
+        fontSize: 6,
+      },
+      table2: {
+        margin: [25, 0, 25, 0],
+        border: '0',
+        fontSize: 6,
+      },
+      style_1: {
+        fillColor: '#1792CA',
+        color: '#ffffff',
+        bold: true,
+        fontSize: 6,
+      },
+      style_2: {
+        fillColor: '#eeeeee',
+        bold: true,
+        fontSize: 6,
+      },
+      style_3: {
+        fillColor: '#FECE30',
+        bold: true,
+        fontSize: 6,
+      },
+      style_4: {
+        fillColor: '#F09102',
+        bold: true,
+        fontSize: 6,
+      },
+      style_5: {
+        fillColor: '#C0F20C',
+        bold: true,
+        fontSize: 6,
+      },
+      style_6: {
+        fillColor: '#E60077',
+        bold: true,
+        fontSize: 6,
+      },
+      style_7: {
+        // fillColor: '#E60077',
+        // bold: true,
+        fontSize: 6,
+      }
+    }
 };

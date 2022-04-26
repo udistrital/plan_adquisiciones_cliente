@@ -18,6 +18,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
 
   ActividadesForm: FormGroup;
   boton: string;
+  Meta: any;
 
   constructor(
     private store: Store<any>,
@@ -36,6 +37,7 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     ]).subscribe(([actividad, meta]) => {
       if (actividad && meta) {
         if (Object.keys(actividad)[0] === 'type') {
+          this.Meta = meta;
           this.CrearActividadesForm(null, meta);
         } else {
           this.CrearActividadesForm(actividad);
@@ -76,8 +78,10 @@ export class FormActividadesComponent implements OnInit, OnDestroy {
     const actividad: any = this.ActividadesForm.value;
     if (actividad.Id === null) {
       this.store.dispatch(CrearActividad(actividad));
+      this.CrearActividadesForm(null, this.Meta);
     } else {
       this.store.dispatch(ActualizarActividad(actividad));
+      this.CrearActividadesForm(null, this.Meta);
     }
   }
 }

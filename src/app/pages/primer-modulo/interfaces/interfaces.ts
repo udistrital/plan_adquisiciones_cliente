@@ -112,7 +112,7 @@ export const configTable: any = {
     sort: 'boolean',
     filter: 'boolean',
 };
-export const CONFIGURACION_PRUEBA: any = {
+export const CONFIGURACION_PRUEBA_3: any = {
     title: {
         name: 'Titulo de Prueba',
         class: 'text-center text-light',
@@ -122,7 +122,7 @@ export const CONFIGURACION_PRUEBA: any = {
         {
             key: 'id',
             title: {
-                name: 'Numero',
+                name: 'Número',
                 class: 'text-center',
             },
             pipe: {
@@ -230,7 +230,7 @@ export const CONFIGURACION_PRUEBA: any = {
     sort: true,
     filter: true,
 };
-export const DATOS_PRUEBA: any = [
+export const DATOS_PRUEBA_2: any = [
     {
         id: 1,
         nombre: 'Jhoan',
@@ -290,4 +290,3 @@ export const DATOS_PRUEBA: any = [
         ]
     },
 ];
-

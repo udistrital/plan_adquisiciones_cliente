@@ -109,3 +109,18 @@ export const ActualizarRenglonFicha = createAction(
   '[RegistroPlanAdquisiciones] Actualizar Renglon Ficha Tecnica',
   props(),
 );
+
+export const CargarMetasAsociadas = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Metas Asociadas',
+  props(),
+);
+
+export const CargarProductosAsociados = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Productos Asociados',
+  props(),
+);
+
+export const CargarActividadFuente = createAction(
+  '[RegistroPlanAdquisiciones] Cargar Actividad y Fuente',
+  props(),
+);

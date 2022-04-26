@@ -119,6 +119,7 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
         Descripcion: elemento.Descripcion,
         Nombre: Nombre,
         CodigoArkaId: elemento.Id,
+        Codigo: elemento.Descripcion.split('-')[0]
       };
     });
   }

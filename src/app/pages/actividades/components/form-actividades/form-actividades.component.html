@@ -2,7 +2,7 @@
     <div class="row" *ngIf="!ActividadesForm">
         <div class="col py-2">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item px-1">Por favor selecciona:</li>
+                <li class="list-group-item px-1">Por favor seleccionar:</li>
                 <li class="list-group-item">Meta</li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="col-6 d-flex justify-content-start">
-                <button [disabled]="ActividadesForm.invalid || !ActividadesForm.touched" type="button"
+                <button [disabled]="ActividadesForm.invalid" type="button"
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
             </div>
             <div class="col-6 d-flex justify-content-end">

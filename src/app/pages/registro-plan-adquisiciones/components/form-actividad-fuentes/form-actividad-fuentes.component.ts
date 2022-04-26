@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import Swal from 'sweetalert2';
 import { CONFIGURACION_TABLA_FUENTES } from '../../interfaces/interfaces';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { ActividadesService } from '../../../actividades/services/actividades.service';
-import { getActividades, getActividadSeleccionada, getFuentes, getMeta } from '../../selectors/registro-plan-adquisiciones.selectors';
+import { getActividades, getActividadSeleccionada, getFuentes, getMeta, getMetasAsociadas } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FormFuentesFinanciamientoComponent } from '../form-fuentes-financiamiento/form-fuentes-financiamiento.component';
 import { CargarActividades, CargarFuentes, SeleccionarFuente } from '../../actions/registro-plan-adquisiciones.actions';
-import { combineLatest } from 'rxjs';
+import { combineLatest, forkJoin, from, of } from 'rxjs';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-form-actividad-fuentes',
@@ -31,6 +32,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   display: boolean;
   subscription4$: any;
   ActividadesAsociadas: any;
+  ActividadesCapturadas: any[];
 
 
 
@@ -47,6 +49,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     // this.Datos = DATOS_PRUEBA_4;
     this.configuracion = CONFIGURACION_TABLA_FUENTES;
     this.ActividadesAsociadas = [];
+    this.ActividadesCapturadas = [];
   }
 
   ngOnDestroy(): void {
@@ -59,28 +62,43 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // Traer Actividades y montar Actividad Seleccionada
     this.subscription$ = combineLatest([
-      this.store.select(getMeta),
+      this.store.select(getMetasAsociadas),
       this.store.select(getActividadSeleccionada),
       this.store.select(getActividades),
-    ]).subscribe(([meta, actividad, actividades]) => {
-      if (this.sharedService.IfStore(meta)) {
-        this.actividadesService.getActividadesAsociadas(meta.Id).subscribe((actividades2: any) => {
-          if (Object.keys(actividades2[0]).length !== 0) {
-            this.Actividades = actividades2;
-            if (this.sharedService.IfStore(actividad)) {
-              this.CrearActividadFuentesForm(actividad);
-              this.titulo = 'Editar Actividad';
-              this.boton = 'Editar';
-            } else {
-              this.CrearActividadFuentesForm(null);
-              this.titulo = 'Agregar Actividad';
-              this.boton = 'Crear';
+    ]).subscribe(([metas, actividad, actividades]) => {
+      if (this.sharedService.IfStore(metas)) {
+        const datos = of(...metas[0]);
+        datos.pipe(
+          mergeMap(
+            (value: any) => {
+              return this.actividadesService.getActividadesAsociadas(value.Id);
             }
+          )
+        ).subscribe((actividades2: any) => {
+          if (Object.keys(actividades2[0]).length !== 0) {
+            this.ActividadesCapturadas = [...this.ActividadesCapturadas, ...actividades2];
+          }
+        }, () => { }, () => {
+          if (this.sharedService.IfStore(actividad)) {
+            this.Actividades = this.ActividadesCapturadas;
+            this.CrearActividadFuentesForm(actividad);
+            this.titulo = 'Editar Actividad';
+            this.boton = 'Editar';
+          } else {
+            if (this.sharedService.IfStore(actividades)) {
+              this.ActividadesAsociadas = actividades[0];
+              this.Actividades = this.MontarActividades(this.ActividadesCapturadas, actividades[0]);
+              if (Object.keys(this.Actividades).length === 0) {
+                this.ActividadesAsociadasModal();
+              }
+            } else {
+              this.Actividades = this.ActividadesCapturadas;
+            }
+            this.CrearActividadFuentesForm(null);
+            this.titulo = 'Agregar Actividad';
+            this.boton = 'Crear';
           }
         });
-      }
-      if (this.sharedService.IfStore(actividades)) {
-        this.ActividadesAsociadas = actividades[0];
       }
     });
     // Seleccionar Elemento
@@ -113,14 +131,13 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     });
   }
   CrearActividadFuentesForm(data: any) {
-
     if (data) {
       this.ActividadFuentesForm = this.fb.group({
         Actividad: [{
-          value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
           disabled: true,
-        }, []],
-        Valor: [data.Valor, []],
+          value: this.Actividades.find((element: any) => element.Id === data.ActividadId.Id),
+        }, [Validators.required]],
+        Valor: [{ value: data.Valor, disabled: false}, [Validators.required]],
       });
     } else {
       this.ActividadFuentesForm = this.fb.group({
@@ -146,6 +163,16 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
       }
     }
   }
+  ActividadesAsociadasModal() {
+    Swal.fire({
+      type: 'info',
+      title: 'Actividades Asociadas',
+      text: `Todas las actividades disponibles estan asociadas`,
+      confirmButtonText: 'Aceptar',
+    }).then(() => {
+      this.OnClose();
+    });
+  }
 
   OnClose() {
     this.matDialogRef.close();
@@ -168,10 +195,9 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
   OnSubmit() {
     let Creacion = true;
-    const Actividad = this.ActividadFuentesForm.value;
+    const Actividad = this.ActividadFuentesForm.getRawValue();
     Actividad.Actividad.Id2 = Actividad.Actividad.Numero + '.' +
-      Actividad.Actividad.MetaId.Numero + '.' +
-      Actividad.Actividad.MetaId.LineamientoId.Numero;
+    Actividad.Actividad.MetaId.Numero;
     Actividad.Actividad.Valor = Actividad.Valor;
     this.ActividadesAsociadas.forEach((element: any) => {
       if (Actividad.Actividad.Id === element.ActividadId.Id) {
@@ -191,5 +217,14 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(CargarActividades([this.ActividadesAsociadas]));
     this.OnClose();
+  }
+  MontarActividades(datos: any, actividadesAsociadas: any) {
+    const actividad: any = [];
+    datos.forEach((element: any) => {
+      if (actividadesAsociadas.find((data: any) => data.ActividadId.Id === element.Id) === undefined) {
+        actividad.push(element);
+      }
+    });
+    return actividad;
   }
 }

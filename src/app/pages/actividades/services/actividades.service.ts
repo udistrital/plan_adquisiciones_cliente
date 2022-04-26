@@ -28,6 +28,23 @@ export class ActividadesService {
   }
 
   /**
+   * Get Actividades
+   *  retorna las Actividades asociados a la Meta seleccionada
+   * @param [Meta] Meta Asociada
+   * @returns  Actividades Asociadas.
+   */
+  public getActividadesPorRubro(
+    Rubro: any,
+  ) {
+    this.rqManager.setPath('PLAN_ADQUISICIONES_CRUD_SERVICE');
+    return this.rqManager.get(
+      `Actividad/` +
+      `?query=Activo:true,` +
+      `MetaId.Rubro:${Rubro}`
+    );
+  }
+
+  /**
     * get Actividad
     *  se crea una Actividad nueva
     * @param [Actividad] Actividad por consultar

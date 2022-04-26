@@ -13,18 +13,28 @@ const routes: Routes = [{
       .then(m => m.PrimerModuloModule),
     },
     {
+      path: 'admin-conf',
+      loadChildren: () => import('./admin-conf/admin-conf.module')
+      .then(m => m.AdminConfModule),
+    },
+    {
       path: 'plan-adquisiciones',
       loadChildren: () => import('./plan-adquisiciones/plan-adquisiciones.module')
       .then(m => m.PlanAdquisicionesModule),
     },
     {
+      path: 'welcome',
+      loadChildren: () => import('./welcome/welcome.module')
+      .then(m => m.WelcomeModule),
+    },
+    {
       path: '',
-      redirectTo: 'plan-adquisiciones',
+      redirectTo: 'welcome',
       pathMatch: 'full',
     },
     {
       path: '**',
-      redirectTo: 'plan-adquisiciones',
+      redirectTo: 'welcome',
       pathMatch: 'full',
     },
   ],

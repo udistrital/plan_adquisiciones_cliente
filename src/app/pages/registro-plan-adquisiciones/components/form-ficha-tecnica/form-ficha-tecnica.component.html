@@ -15,7 +15,7 @@
                     <mat-select class="form-control" formControlName="MetaId">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
                             <mat-option *cdkVirtualFor="let meta of Metas" class="example-item" [value]="meta.Id">
-                                {{meta.Numero}}.{{meta.LineamientoId.Numero}}
+                                {{meta.Numero}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
                     </mat-select>
@@ -44,8 +44,8 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Descripcion:</label>
-                    <textarea class="form-control" aria-label="With textarea" formControlName="Descripcion"
+                    <label>Descripción:</label>
+                    <textarea class="form-control" aria-label="With textarea" formControlName="Descripción"
                         rows="2"></textarea>
                 </div>
             </div>

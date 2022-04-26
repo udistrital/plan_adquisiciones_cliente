@@ -1,31 +1,83 @@
 <form [formGroup]="FuenteForm" *ngIf="FuenteForm">
-    <fieldset [attr.disabled]="FuentesFinanciamiento ? null: 'disabled'">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                    <p>Fuente de Financiamiento:</p>
-                </div>
-                <div class="col-3 pt-3">
-                    <ng-container>
-                        <div class="form-group">
-                            <mat-select class="form-control" formControlName="fuenteSeleccionada">
-                                <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-                                    <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item" [value]="fuente">
-                                        {{fuente.Codigo}}
-                                    </mat-option>
-                                </cdk-virtual-scroll-viewport>
-                            </mat-select>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>Actividad:</p>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label>{{ codigoName }}: </label>
+                    <div class="col-12" *ngIf="!actividadesCargadas">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-grow text-primary" role="status"></div>
                         </div>
-                    </ng-container>
-                </div>
-                <div class="col-6 pt-3">
-                    <div class="form-group">
-                        <span class="form-control overflow">
-                            {{FuenteForm.get('fuenteSeleccionada').value ? FuenteForm.get('fuenteSeleccionada').value.Nombre : '' }}
-                        </span>
                     </div>
+                    <mat-select class="form-control" formControlName="Actividad" (selectionChange)="selectFuentes($event)" *ngIf="actividadesCargadas">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *ngIf="Actividades.length == 0" class="example-item" [value]="[]">NA</mat-option>
+                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item" [value]="actividad">
+                                {{ actividad.Numero ? actividad.Numero : ''}}.{{actividad.MetaId ? actividad.MetaId.Numero : ''}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <span class="form-control overflow">
+                        {{FuenteForm.get('Actividad').value ?
+                        FuenteForm.get('Actividad').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            </div>
+            <div class="col-9">
+                <div class="form-group">
+                    <label>Valor:</label>
+                    <input currencyMask type="text" [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }"
+                        class="form-control text-left" placeholder="Valor" formControlName="Valor">
+                </div>
+            </div>
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>Fuente de Financiamiento:</p>
+            </div>
+            <div class="col-5 pt-3">
+                <ng-container>
+                    <div class="form-group">
+                        <mat-select class="form-control" formControlName="FuenteFinanciamiento" [disabled]="disableFuentes" (click)="showAlertActividadesFirst()">
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                                class="example-viewport">
+                                <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item"
+                                    [value]="fuente">
+                                    {{fuente ? fuente.Codigo : ''}} - {{fuente ? fuente.Nombre : ''}}
+                                </mat-option>
+                            </cdk-virtual-scroll-viewport>
+                        </mat-select>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-4 pt-3">
+                <div class="form-group">
+                    <span class="form-control overflow">
+                        {{FuenteForm.get('FuenteFinanciamiento').value ?
+                        FuenteForm.get('FuenteFinanciamiento').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+            </div>
+            <div class="col-9 pt-3">
+                <div class="form-group">
+                    <span class="form-control overflow">
+                        {{FuenteForm.get('FuenteFinanciamiento').value ?
+                        (FuenteForm.get('FuenteFinanciamiento').value.ValorActual |
+                        currency:'$':'symbol':'3.2-2':'en-US') : '' }}
+                    </span>
                 </div>
             </div>
         </div>
-    </fieldset>
+    </div>
 </form>

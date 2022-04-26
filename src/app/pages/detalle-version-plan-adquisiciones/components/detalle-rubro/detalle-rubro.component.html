@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="fuente && rubro">
     <div class="row">
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
             <p>Fuente de Recurso:</p>
@@ -6,14 +6,14 @@
         <div class="col-3 pt-3">
             <div class="form-group">
                 <span class="form-control overflow">
-                    {{fuente}}
+                    {{fuente.FuenteData.Codigo}}
                 </span>
             </div>
         </div>
         <div class="col-6 pt-3">
             <div class="form-group">
                 <span class="form-control overflow">
-
+                    {{fuente.FuenteData.Nombre}}
                 </span>
             </div>
         </div>
@@ -26,14 +26,14 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group">
                             <span class="form-control overflow">
-                                {{datos}}
+                                {{rubro.RubroInfo.Codigo}}
                             </span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group mb-0">
                             <span class="form-control overflow">
-                                
+                                {{rubro.RubroInfo.Nombre}}
                             </span>
                         </div>
                     </div>

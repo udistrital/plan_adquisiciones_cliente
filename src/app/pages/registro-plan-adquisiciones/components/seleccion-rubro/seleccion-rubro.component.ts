@@ -45,7 +45,7 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
       this.store.select(getRenglonSeleccionado),
       this.store.select(getArbolRubro),
     ]).subscribe(([renglon, data]) => {
-      if (this.sharedService.IfStore(data) && Object.keys(data[0]).length !== 0) {
+      if (this.sharedService.IfStore(data) && Object.keys(data).length !== 0) {
         if (this.sharedService.IfStore(renglon)) {
           this.CrearFormularioRubro(data, renglon[0].RubroId);
         } else {
@@ -71,13 +71,11 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
 
   CrearFormularioRubro(arbol: any, rubroId?: string) {
 
-    this.fuentesRecurso = arbol[0].children;
+    this.fuentesRecurso = arbol[1].children;
 
     if (rubroId) {
-
       const info = rubroId.split('-');
-      const rubro = this.sharedService.BuscarNodo(arbol[0].children, rubroId);
-
+      const rubro = this.sharedService.BuscarNodo(arbol[1].children, rubroId);
 
       this.store.dispatch(CargarRubro(rubro));
       this.RubroForm = this.fb.group({

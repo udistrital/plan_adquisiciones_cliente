@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RegistroPlanAdquisicionesRoutingModule } from './registro-plan-adquisiciones-routing.module';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SeleccionRubroComponent } from './components/seleccion-rubro/seleccion-rubro.component';
-import { SeleccionMetaProductoComponent } from './components/seleccion-meta-producto/seleccion-meta-producto.component';
+// import { SeleccionMetaProductoComponent } from './components/seleccion-meta-producto/seleccion-meta-producto.component';
 import { SeleccionFuenteComponent } from './components/seleccion-fuente/seleccion-fuente.component';
 import { SeleccionDatosGeneralesComponent } from './components/seleccion-datos-generales/seleccion-datos-generales.component';
 import { SharedModule } from '../../shared/shared.module';
@@ -25,13 +25,18 @@ import { FormFuentesFinanciamientoComponent } from './components/form-fuentes-fi
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { TablaFichaTecnicaComponent } from './components/tabla-ficha-tecnica/tabla-ficha-tecnica.component';
 import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-ficha-tecnica.component';
+import { MetasAsociadasComponent } from './components/metas-asociadas/metas-asociadas.component';
+import { ProductosAsociadosComponent } from './components/productos-asociados/productos-asociados.component';
+// import { ActividadFuncionamientoComponent } from './components/actividad-funcionamiento/actividad-funcionamiento.component';
+import { FormMetasAsociadasComponent } from './components/form-metas-asociadas/form-metas-asociadas.component';
+import { FormProductosAsociadosComponent } from './components/form-productos-asociados/form-productos-asociados.component';
+import { VerActividadesComponent } from './components/ver-actividades/ver-actividades.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
     SeleccionRubroComponent,
-    SeleccionMetaProductoComponent,
     SeleccionFuenteComponent,
     SeleccionDatosGeneralesComponent,
     ModalidadesSeleccionComponent,
@@ -41,7 +46,12 @@ import { FormFichaTecnicaComponent } from './components/form-ficha-tecnica/form-
     FormActividadFuentesComponent,
     FormFuentesFinanciamientoComponent,
     TablaFichaTecnicaComponent,
-    FormFichaTecnicaComponent
+    FormFichaTecnicaComponent,
+    MetasAsociadasComponent,
+    ProductosAsociadosComponent,
+    FormMetasAsociadasComponent,
+    FormProductosAsociadosComponent,
+    VerActividadesComponent
   ],
   imports: [
     CommonModule,

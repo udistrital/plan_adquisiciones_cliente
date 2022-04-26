@@ -28,13 +28,13 @@ export class MetasEffects {
     private popupManager: PopUpManager,
   ) {
     this.subscription$ = combineLatest([
-      this.store.select(getLineamientoSeleccionado),
+      // this.store.select(getLineamientoSeleccionado),
       this.store.select(getRubroSeleccionado),
-    ]).subscribe(([lineamiento, rubro]) => {
+    ]).subscribe(([rubro]) => {
 
-      if (lineamiento) {
-        this.Lineamiento = lineamiento;
-      }
+      // if (lineamiento) {
+      //   this.Lineamiento = lineamiento;
+      // }
       if (rubro) {
         this.Rubro = rubro;
       }
@@ -55,7 +55,6 @@ export class MetasEffects {
       ofType(MetasActions.ConsultarMetas),
       exhaustMap((opciones: any) =>
         this.metasService.getMetasAsociadas(
-          opciones.Lineamiento.Id,
           opciones.Rubro.data.Codigo,
         ).pipe(
           map(data => {
@@ -95,10 +94,10 @@ export class MetasEffects {
           Meta,
         ).pipe(
           map((data) => {
-            this.store.dispatch(ConsultarMeta(data));
+            // this.store.dispatch(ConsultarMeta(data));
             this.popupManager.showSuccessAlert('Meta Creada');
             return MetasActions.ConsultarMetas({
-              Lineamiento: this.Lineamiento,
+              // Lineamiento: this.Lineamiento,
               Rubro: this.Rubro,
             });
           }),

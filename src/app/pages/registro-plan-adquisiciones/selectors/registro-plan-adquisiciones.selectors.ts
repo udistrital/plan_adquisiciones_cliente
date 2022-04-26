@@ -64,3 +64,20 @@ export const getFichaSeleccionada = createSelector(
   selectRegistroPlanAdquisicionesState,
   (state: fromRegistroPlanAdquisiciones.State) => state.FichaSeleccionada
 );
+
+export const getMetasAsociadas = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.MetasAsociadas
+);
+
+export const getProductosAsociados = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.ProductosAsociados
+);
+
+export const getActividadFuente = createSelector(
+  selectRegistroPlanAdquisicionesState,
+  (state: fromRegistroPlanAdquisiciones.State) => state.ActividadFuente
+);
+
+

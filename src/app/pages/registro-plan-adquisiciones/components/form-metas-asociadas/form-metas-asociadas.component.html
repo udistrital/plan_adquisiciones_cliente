@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="MetasAsociadasForm">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+        </div>
+    </div>
+    <div class="row" *ngIf="MetasAsociadasForm">
+        <div class="col py-2"></div>
+    </div>
+    <form [formGroup]="MetasAsociadasForm" *ngIf="MetasAsociadasForm">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Número:</label>
+                    <mat-select class="form-control" formControlName="Elemento">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                            class="example-viewport">
+                            <mat-option *cdkVirtualFor="let actividad of Elementos" class="example-item"
+                                [value]="actividad">
+                                {{actividad.Numero}}
+                            </mat-option>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-select>
+                    
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <span class="form-control overflow">
+                        {{MetasAsociadasForm.get('Elemento').value ? MetasAsociadasForm.get('Elemento').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div>
+            <!-- <div class="col-12">
+                <div class="form-group">
+                    <label>Descripcion:</label>
+                    <span class="form-control overflow">
+                        {{MetasAsociadasForm.get('Elemento').value ? MetasAsociadasForm.get('Elemento').value.Nombre : '' }}
+                    </span>
+                </div>
+            </div> -->
+            <div class="col-6 d-flex justify-content-start">
+                <button [disabled]="MetasAsociadasForm.invalid || !MetasAsociadasForm.touched" type="button"
+                    class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">
+                    {{boton}}
+                </button>
+            </div>
+            <div class="col-6 d-flex justify-content-end" #exampleModalCloseMetas>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

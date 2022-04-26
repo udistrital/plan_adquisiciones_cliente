@@ -8,7 +8,7 @@ import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
 import { getPlanSeleccionado } from '../../../planes/selectors/planes.selectors';
 import { CargarFichaSeleccionada, ConsultarFichaTecnica } from '../../actions/registro-plan-adquisiciones.actions';
-import { CONFIGURACION_TABLA_FICHA_ESTADISTICA} from '../../interfaces/interfaces';
+import { CONFIGURACION_TABLA_FICHA_ESTADISTICA } from '../../interfaces/interfaces';
 import { getFichaTecnica, getRubro } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { FormFichaTecnicaComponent } from '../form-ficha-tecnica/form-ficha-tecnica.component';
 
@@ -25,7 +25,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   subscription2$: any;
   subscription3$: any;
   subscription4$: any;
-  Metas: any;
+
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
@@ -43,45 +43,27 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
 
-    this.subscription3$ = combineLatest([
+    this.subscription$ = combineLatest([
       this.store.select(getPlanSeleccionado),
       this.store.select(getRubro),
     ]).subscribe(([plan, rubro]) => {
       if (this.sharedService.IfStore(plan) && this.sharedService.IfStore(rubro)) {
         this.store.dispatch(ConsultarFichaTecnica({
           PlanAdquisicionesId: plan,
-          Rubro: rubro.Codigo
+          Rubro: rubro.data.Codigo
         }));
 
       }
     });
 
-    this.subscription4$ = this.subscription3$ = combineLatest([
+    this.subscription2$ = combineLatest([
       this.store.select(getFichaTecnica),
       this.store.select(getRubro),
     ]).subscribe(([ficha, rubro]) => {
       if (this.sharedService.IfStore(ficha) && this.sharedService.IfStore(rubro)) {
         if (Object.keys(ficha[0][0]).length !== 0) {
-          this.metaService.getMetasRubro(rubro.Codigo).subscribe((metas) => {
-            this.Metas = metas;
-            this.datosPrueba = (ficha[0] as Array<any>).map((element: any) => {
-              return {
-                Id: element.Id,
-                MetaId: element.MetaId,
-                Meta: this.Metas.find((x: any) => x.Id === element.MetaId),
-                Proceso: element.Proceso,
-                Magnitud: element.Magnitud,
-                UnidadMedida: element.UnidadMedida,
-                Descripcion: element.Descripcion,
-                Activo: element.Activo,
-                Rubro: element.Rubro,
-                PlanAdquisicionesId: element.PlanAdquisicionesId,
-                FechaCreacion: element.FechaCreacion,
-                FechaModificacion: element.FechaModificacion,
-              };
-
-            });
-
+          this.metaService.getMetasRubro(rubro.data.Codigo).subscribe((metas) => {
+            this.MontarFicha(metas, ficha[0]);
           });
         } else {
           this.datosPrueba = [];
@@ -91,17 +73,16 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
+    this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Editar Ficha') {
           this.store.dispatch(LoadFilaSeleccionada(null));
-
           this.store.dispatch(CargarFichaSeleccionada(accion.fila));
           this.OpenModal();
         }
       }
     });
-    this.subscription2$ = this.store.select(getAccionTabla).subscribe((accion) => {
+    this.subscription4$ = this.store.select(getAccionTabla).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Agregar Nueva Meta Asociada') {
           this.store.dispatch(LoadFilaSeleccionada(null));
@@ -114,6 +95,25 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
   OpenModal() {
     this.matDialog.open(FormFichaTecnicaComponent, {
       width: '500px',
+    });
+  }
+
+  MontarFicha(metas: any, ficha: any) {
+    this.datosPrueba = (ficha as Array<any>).map((element: any) => {
+      return {
+        Id: element.Id,
+        MetaId: element.MetaId,
+        Meta: metas.find((x: any) => x.Id === element.MetaId),
+        Proceso: element.Proceso,
+        Magnitud: element.Magnitud,
+        UnidadMedida: element.UnidadMedida,
+        Descripcion: element.Descripcion,
+        Activo: element.Activo,
+        Rubro: element.Rubro,
+        PlanAdquisicionesId: element.PlanAdquisicionesId,
+        FechaCreacion: element.FechaCreacion,
+        FechaModificacion: element.FechaModificacion,
+      };
     });
   }
 

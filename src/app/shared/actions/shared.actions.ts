@@ -15,7 +15,7 @@ export const CatchError = createAction(
 
 export const GetArbolRubro = createAction(
   '[Shared] Get Arbol Rubro',
-  props<{ branch: any }>()
+  props<{ branch: any, validity: any }>()
 );
 
 export const LoadArbolRubro = createAction(

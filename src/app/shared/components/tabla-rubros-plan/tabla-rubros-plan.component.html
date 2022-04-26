@@ -1,0 +1,17 @@
+<!-- Subtitulo -->
+<th scope="col" colspan="100" [class]="config.subtitle.class">
+    {{datos.RubroInfo ? datos.RubroInfo.Codigo + ' - ' + datos.RubroInfo.Nombre : ''}}
+</th>
+<!-- Datos -->
+<ng-container *ngFor="let items of datos.datos; index as i">
+    <tr ngx-cell-view [items]="items" [config]="config" [rowspanTable]="rowspanTable" [index]="i"></tr>
+</ng-container>
+<!-- Suma -->
+<th scope="col" colspan="7" [class]="config.endSubtotal.first.class">
+    Total {{datos.RubroInfo.Nombre}}:
+</th>
+<th scope="col" colspan="1" [class]="config.endSubtotal.last.class">
+    {{suma | currency:'$':'symbol':'3.2-2':'en-US'}}
+</th>
+<th scope="col" colspan="4" [class]="config.endSubtotal.last.class">
+</th>

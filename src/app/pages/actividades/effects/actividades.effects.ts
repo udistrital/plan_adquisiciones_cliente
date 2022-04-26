@@ -85,7 +85,7 @@ export class ActividadesEffects {
           Actividad,
         ).pipe(
           map((data) => {
-            this.store.dispatch(ConsultarActividad(data));
+            // this.store.dispatch(ConsultarActividad(data));
             this.popupManager.showSuccessAlert('Actividad Creada');
             return ActividadesActions.ConsultarActividades({
               Meta: this.Meta,
