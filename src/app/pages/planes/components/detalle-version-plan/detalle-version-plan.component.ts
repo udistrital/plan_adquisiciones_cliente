@@ -228,7 +228,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
               alignment: 'center',
             },
             {
-              text: renglon.ActividadData.Nombre,
+              text: 'No Aplica',
               style: 'style_7',
               alignment: 'justify',
             },
@@ -270,8 +270,16 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   // Desagregando Actividades
   AjustarActividades(Renglon: any, Actividades: any, Rubro) {
+    let lengthRowsPanCodigosArka = 0;
+    Actividades.forEach(actividad => {
+      lengthRowsPanCodigosArka = lengthRowsPanCodigosArka + actividad.FuentesFinanciamiento.length;
+    });
+    Actividades[0].FuentesFinanciamiento.length;
     Actividades.forEach((actividad: any, index: any) => {
-      const datosArka = this.MontarElementosArka(Renglon, index, Actividades.length);
+      const datosArka = this.MontarElementosArka(Renglon, index, lengthRowsPanCodigosArka);
+      const lenghtFuentes = actividad.FuentesFinanciamiento.length;
+      const valuesFuentes = this.ExtraerFuentesFinanciamiento(actividad, false);
+      const nameFuentes = this.ExtraerFuentesFinanciamiento(actividad, true);
       this.PDFPublicado.content[0].table.body.push(
         [
           datosArka,
@@ -279,44 +287,66 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             text: Rubro.Codigo,
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: actividad.Numero + '.' + actividad.NumeroMeta + ' ' + actividad.Nombre,
             style: 'style_7',
             alignment: 'justify',
+            rowSpan: lenghtFuentes,
           },
           {
             text: Renglon.ResponsableNombre,
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerFecha(Renglon, 'limits'),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerFecha(Renglon, 'range'),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerModalidades(Renglon),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
-            text: this.ExtraerFuentesFinanciamiento(actividad, false),
+            text: valuesFuentes[0],
             style: 'style_7',
             alignment: 'right',
           },
           {
-            text: this.ExtraerFuentesFinanciamiento(actividad, true),
+            text: nameFuentes[0],
             style: 'style_7',
             alignment: 'left',
           },
         ]
       );
+
+      if (valuesFuentes.length > 1) {
+        valuesFuentes.forEach((_, jindex) => {
+          if (jindex > 0 ) {
+            this.PDFPublicado.content[0].table.body.push([{}, {}, {}, {}, {}, {}, {},
+              { text: valuesFuentes[jindex],
+                style: 'style_7',
+                alignment: 'right', },
+              { text: nameFuentes[jindex],
+                style: 'style_7',
+                alignment: 'left',
+              }
+            ]);
+          }
+        });
+      }
     });
   }
   MontarElementosArka(Renglon: any, index: any, length: any) {
@@ -361,7 +391,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         return this.currencyPipe.transform(fuente.ValorAsignado, '$');
       }
     });
-    return datos.reduce((a: any, c: any) => a + '\n' + c);
+    return datos;
   }
   SumaRubro(Renglones: any, Rubro: any) {
     this.PDFPublicado.content[0].table.body.push(
