@@ -169,14 +169,18 @@ export class PlanesService {
     const actividades: any[] = [];
     Actividad.forEach((element: any) => {
       actividades.push(
-      element.NumeroMeta + '.' + element.Numero + '. ' + element.Nombre
+      'Meta: ' + element.NumeroMeta + ' - Actividad: ' + element.Numero + '. ' + element.Nombre
       );
       element.FuentesFinanciamiento.forEach((data: any, index: number) => {
         if (fuentes.find((x: any) => x === data.Nombre) === undefined) {
-          fuentes.push(index + 1 + '. ' + data.Nombre);
+          fuentes.push(data.Nombre);
         }
       });
     });
-    return [fuentes, actividades];
+
+    const fuentesNoRepeated = fuentes.filter((item, index ) => {
+      return fuentes.indexOf(item) === index;
+    });
+    return [fuentesNoRepeated, actividades];
   }
 }
