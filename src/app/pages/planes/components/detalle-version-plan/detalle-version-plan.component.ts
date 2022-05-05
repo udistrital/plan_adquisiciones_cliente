@@ -17,6 +17,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TimeRangePipe } from '../../../../shared/pipes/time-range.pipe';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { OrdinalPipePipe } from '../../../../shared/pipes/ordinal-pipe.pipe';
+import { TranslateService } from '@ngx-translate/core';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -53,6 +54,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private ordinalPipe: OrdinalPipePipe,
     private titlepipe: TitleCasePipe,
     private datePipe: DatePipe,
+    private translate: TranslateService,
   ) {
   }
 
@@ -92,10 +94,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     const conf = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
     conf.rowActions.actions = [
       {
-        name: 'Ver',
+        name: this.translate.instant('GLOBAL.ver'),
         icon: 'fas fa-list',
         class: 'p-2',
-        title: 'Ver Version',
+        title: this.translate.instant('GLOBAL.ver_version'),
       },
     ];
     this.configuracion = conf;
@@ -108,7 +110,6 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
-    // this.subscription4$.unsubscribe();
   }
 
 
@@ -127,7 +128,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: `PLAN DE ADQUISICIONES DE BIENES Y SERVICIOS DE LA UNIVERSIDAD DISTRITAL VIGENCIA ${this.PlanAdquisiciones.Vigencia}`,
+          text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
           colSpan: 9,
           alignment: 'center',
           border: [false, false, false, false],
@@ -147,11 +148,11 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       ],
       [
         {
-          text: this.ordinalPipe.transform(this.index) +
-            ' Edicion\n' +
-            this.titlepipe.transform(
-              this.datePipe.transform(this.Plan.fechacreacion, 'medium')
-            ),
+          text: this.translate.instant('PLAN_ADQUISICIONES.edicion',
+          {
+            INDEX: this.ordinalPipe.transform(this.index),
+            FECHA: this.titlepipe.transform(this.datePipe.transform(this.Plan.fechacreacion, 'medium'))
+          }),
           colSpan: 9,
           alignment: 'right',
           border: [false, false, false, false],
@@ -228,7 +229,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
               alignment: 'center',
             },
             {
-              text: 'No Aplica',
+              text: this.translate.instant('GLOBAL.no_aplica'),
               style: 'style_7',
               alignment: 'justify',
             },
@@ -397,7 +398,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: 'Total Rubro ' + Rubro.Nombre,
+          text: this.translate.instant('RUBRO.total_rubro', { NOMBRE: Rubro.Nombre }),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'
@@ -420,7 +421,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: 'TOTAL PLAN ' + Fuente.Nombre,
+          text: this.translate.instant('PLAN_ADQUISICIONES.total_plan', { NOMBRE: Fuente.Nombre }).toUpperCase(),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'
@@ -442,7 +443,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: `PLAN DE ADQUISICIONES DE BIENES Y SERVICIOS DE LA UNIVERSIDAD DISTRITAL VIGENCIA ${this.PlanAdquisiciones.Vigencia}`,
+          text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'

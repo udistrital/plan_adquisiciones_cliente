@@ -1,33 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col py-2">
-            <h5 class="card-title text-center text-primary">Metas</h5>
+            <h5 class="card-title text-center text-primary">{{ 'META.metas' | translate}}</h5>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Lineamiento:</label>
-                <select class="form-control py-2" id="exampleFormControlSelect1" [(ngModel)]="LineamientoSeleccionado"
-                    (ngModelChange)="SeleccionarLineamiento($event)">
-                    <ng-container *ngFor="let lineamiento of Lineamientos">
-                        <option [ngValue]="lineamiento">{{lineamiento.Numero}}</option>
-                    </ng-container>
-                </select>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="form-group">
-                <label>Nombre:</label>
-                <span class="form-control py-2 overflow">
-                    {{ LineamientoSeleccionado ? LineamientoSeleccionado.Nombre : '' }}
-                </span>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-12">
-            <label>Rubro:</label>
+            <label>{{ 'GLOBAL.rubro' | translate}}:</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <!-- Button trigger modal -->
@@ -41,7 +20,7 @@
         </div>
         <div class="col-12">
             <div class="form-group">
-                <label>Descripción:</label>
+                <label>{{ 'GLOBAL.descripcion' | translate}}:</label>
                 <span class="form-control">{{rubroSeleccionado ? rubroSeleccionado.data.Nombre : ''}}</span>
             </div>
         </div>
@@ -59,7 +38,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Seleccione Rubro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ 'GLOBAL.seleccione' | translate }} {{ 'GLOBAL.rubro' | translate }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,8 +47,8 @@
                 <ngx-arbol-rubro [FuenteRecurso]="fuenteRecurso"></ngx-arbol-rubro>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">{{ 'GLOBAL.cerrar' | translate }}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'GLOBAL.continuar' | translate }}</button>
             </div>
         </div>
     </div>

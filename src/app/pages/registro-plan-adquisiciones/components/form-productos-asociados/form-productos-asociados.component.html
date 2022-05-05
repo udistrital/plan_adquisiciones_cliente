@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
-                    <label>Código:</label>
+                    <label>{{ 'GLOBAL.codigo' | translate}}:</label>
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="Elemento">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
@@ -27,7 +27,7 @@
             </div>
             <div class="col-9">
                 <div class="form-group">
-                    <label>Nombre:</label>
+                    <label>{{ 'GLOBAL.nombre' | translate}}:</label>
                     <span class="form-control overflow">
                         {{ProductosAsociadosForm.get('Elemento').value ? ProductosAsociadosForm.get('Elemento').value.Nombre : '' }}
                     </span>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Porcentaje de Distribución:</label>
+                    <label>{{ 'GLOBAL.porcentaje_distribucion' | translate }}:</label>
                     <div class="input-group">
                         <input type="number" class="form-control text-left" placeholder="" formControlName="PorcentajeDistribucion">
                         <div class="input-group-append">
@@ -51,7 +51,7 @@
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">{{ 'GLOBAL.cancelar' | translate }}</button>
             </div>
         </div>
     </form>

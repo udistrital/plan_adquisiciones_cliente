@@ -1,12 +1,9 @@
 <div class="container">
     <div class="row">
         <div class="col py-2">
-            <h5 class="card-title text-center text-primary">Lineamientos</h5>
+            <h5 class="card-title text-center text-primary">{{ 'GLOBAL.lineamientos' | translate}}</h5>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-5">
             <form [formGroup]="LineamientoForm" *ngIf="LineamientoForm">
@@ -17,7 +14,7 @@
                 </ng-container>
                 <ng-container *ngIf="fuentesRecurso">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Fuente de Recurso:</label>
+                        <label for="exampleFormControlSelect1">{{ 'GLOBAL.fuente_recurso' | translate}}:</label>
                         <select class="form-control py-2" id="exampleFormControlSelect1"
                             formControlName="FuenteSeleccionada" (ngModelChange)="SeleccionarFuente($event)">
                             <ng-container *ngFor="let fuente of fuentesRecurso">
@@ -30,7 +27,7 @@
         </div>
         <div class="col-7">
             <div class="form-group">
-                <label>Descripción:</label>
+                <label>{{ 'GLOBAL.descripcion' | translate}}:</label>
                 <span class="form-control py-2 overflow">
                     {{LineamientoForm.get('FuenteSeleccionada').value ? LineamientoForm.get('FuenteSeleccionada').value.data.Nombre : '' }}
                 </span>

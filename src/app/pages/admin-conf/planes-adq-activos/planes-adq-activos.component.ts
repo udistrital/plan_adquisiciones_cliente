@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
 import { ConfiguracionService } from '../../../@core/data/configuracion.service';
 import { Aplicacion } from '../../../shared/models/aplicacion';
@@ -6,26 +8,29 @@ import { Parametro } from '../../../shared/models/parametro';
 
 @Component({
   selector: 'ngx-planes-adq-activos',
-  templateUrl: './planes-adq-activos.component.html',
+  template: '',
   styleUrls: ['./planes-adq-activos.component.scss'],
 })
 export class PlanesAdqActivosComponent implements OnInit {
   application_conf = environment.PLAN_ADQUISICIONES_APLICACION_NOMBRE;
 
-  constructor(private confService: ConfiguracionService) {}
+  constructor(
+    private confService: ConfiguracionService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.creaPlanesdeAdquisicionActivos();
   }
-  // FIXME: Ingresar parámetros desde la interfaz de administrabilidad
-  // Plan Inversión: 613bbde12b95b39aff6a542a
-  // Plan Funcionamiento: 617308752b95b39aff6a542d
-  private creaPlanesdeAdquisicionActivos(id_general = '6182f3f72b95b39aff6a5430', id_idexud = '613ac16a2b95b39aff6a5429') {
+
+  private creaPlanesdeAdquisicionActivos(
+    id_general = environment.IDPLANADQUISICIONES,
+    id_idexud = environment.IDPLANADQUISICIONESIDEXUD
+  ) {
     let QUERY = '?query=Nombre:planes_adquisiciones_activos';
     this.confService.get('parametro' + QUERY).subscribe((p: Parametro[]) => {
       if (p.length >= 0) {
         if (p[0].Id !== '' && p[0].Id !== undefined) {
-          // FIXME: Hacer el Put
           const nuevoValor = JSON.stringify({
             plan_adquisiciones_general: id_general,
             plan_adquisiciones_idexud: id_idexud,
@@ -33,8 +38,17 @@ export class PlanesAdqActivosComponent implements OnInit {
 
           p[0].Valor = nuevoValor;
 
-          this.confService.put('parametro', p[0]).subscribe(res => {
-            // console.log('Hice el PUT');
+          this.confService.put('parametro', p[0]).subscribe(() => {
+            const messageOptions: any = {
+              title: this.translate.instant(
+                'PLAN_ADQUISICIONES.actualizacion_configuracion_titulo'
+              ),
+              message: this.translate.instant(
+                'PLAN_ADQUISICIONES.actualizacion_configuracion'
+              ),
+              type: this.translate.instant('AVISOS.correcto'),
+            };
+            Swal.fire(messageOptions);
           });
         } else {
           QUERY = '?query=Nombre:' + this.application_conf;
@@ -43,8 +57,9 @@ export class PlanesAdqActivosComponent implements OnInit {
             .get('aplicacion' + QUERY)
             .subscribe((app: Aplicacion[]) => {
               const valor = JSON.stringify({
-                plan_adquisiciones_general: '6182f3f72b95b39aff6a5430',
-                plan_adquisiciones_idexud: '613ac16a2b95b39aff6a5429',
+                plan_adquisiciones_general: environment.IDPLANADQUISICIONES,
+                plan_adquisiciones_idexud:
+                  environment.IDPLANADQUISICIONESIDEXUD,
               });
 
               const nuevoParametro: Parametro = {
@@ -54,9 +69,20 @@ export class PlanesAdqActivosComponent implements OnInit {
                 Aplicacion: app[0],
               };
 
-              this.confService.post('parametro', nuevoParametro).subscribe(res => {
-                // console.log('HICE EL POST');
-              });
+              this.confService
+                .post('parametro', nuevoParametro)
+                .subscribe(() => {
+                  const messageOptions: any = {
+                    title: this.translate.instant(
+                      'PLAN_ADQUISICIONES.creacion_configuracion_titulo'
+                    ),
+                    message: this.translate.instant(
+                      'PLAN_ADQUISICIONES.creacion_configuracion'
+                    ),
+                    type: this.translate.instant('AVISOS.correcto'),
+                  };
+                  Swal.fire(messageOptions);
+                });
             });
         }
       }

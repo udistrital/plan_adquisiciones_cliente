@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>Fuente de Recurso:</p>
+                <p>{{ 'GLOBAL.fuente_recurso' | translate}}:</p>
             </div>
             <div class="col-3 pt-3">
                 <ng-container *ngIf="!fuentesRecurso">
@@ -70,7 +70,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalRubroLabel">Seleccione Rubro</h5>
+                <h5 class="modal-title" id="ModalRubroLabel">{{ 'GLOBAL.seleccione' | translate}} {{ 'GLOBAL.rubro' | translate}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,8 +79,8 @@
                 <ngx-arbol-rubro [FuenteRecurso]="RubroForm.get('FuenteSeleccionada').value.Codigo"></ngx-arbol-rubro>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">{{ 'GLOBAL.cerrar' | translate}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'GLOBAL.continuar' | translate}}</button>
             </div>
         </div>
     </div>

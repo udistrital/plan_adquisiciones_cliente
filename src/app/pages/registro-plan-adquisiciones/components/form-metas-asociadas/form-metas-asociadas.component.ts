@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
@@ -34,14 +35,13 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private store: Store<any>,
-    // private registroPlanService: RegistroPlanAdquisicionesService,
     private metasService: MetasService,
     private sharedService: SharedService,
     private renderer: Renderer2,
+    private translate: TranslateService
   ) {
-    this.titulo = 'Asociar Meta';
-    this.boton = 'Asociar';
-    // this.Elementos = DATOS_PRUEBA_2;
+    this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.meta');
+    this.boton = this.translate.instant('GLOBAL.asociar');
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -50,8 +50,8 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe(() => {
-      this.titulo = 'Asociar Meta';
-      this.boton = 'Asociar';
+      this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.meta');
+      this.boton = this.translate.instant('GLOBAL.asociar');
       this.CrearMetasAsociadasForm();
     });
 
@@ -108,16 +108,14 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
   CloseModal() {
 
     Swal.fire({
-      type: 'info',
-      title: 'Metas Asociadas',
-      text: 'No existen mas metas por asociar',
+      type: this.translate.instant('GLOBAL.info'),
+      title: this.translate.instant('META.metas_asociadas'),
+      text: this.translate.instant('ERROR.sin_metas_asociar'),
       showCancelButton: true,
     }).then((value) => {
       setTimeout(() => {
         this.renderer.selectRootElement(this.contentRef.nativeElement).click();
       }, 0);
     });
-
-    // this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
   }
 }

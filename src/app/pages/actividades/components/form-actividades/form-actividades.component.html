@@ -2,8 +2,8 @@
     <div class="row" *ngIf="!ActividadesForm">
         <div class="col py-2">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item px-1">Por favor seleccionar:</li>
-                <li class="list-group-item">Meta</li>
+                <li class="list-group-item px-1">{{ 'GLOBAL.aviso_seleccionar' | translate }}:</li>
+                <li class="list-group-item">{{ 'APROPIACION.meta' | translate }}</li>
             </ul>
         </div>
     </div>
@@ -22,14 +22,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label>Numero:</label>
+                    <label>{{ 'GLOBAL.numero' | translate }}:</label>
                     <input type="number" class="form-control py-2" aria-describedby="search-table"
                         formControlName="Numero" placeholder="">
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Nombre:</label>
+                    <label>{{ 'GLOBAL.nombre' | translate }}:</label>
                     <textarea class="form-control" aria-label="With textarea" formControlName="Nombre"
                         rows="5"></textarea>
                 </div>
@@ -39,7 +39,7 @@
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border">Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border">{{ 'GLOBAL.cancelar' | translate }}</button>
             </div>
         </div>
     </form>

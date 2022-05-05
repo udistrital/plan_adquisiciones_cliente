@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
@@ -29,11 +30,11 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private renderer: Renderer2,
+    private translate: TranslateService
   ) {
     this.display = false;
     this.configuracion = CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS;
     this.Datos = [];
-    // this.store.dispatch(CargarElementosARKA([]));
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -96,18 +97,17 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
       this.renderer.selectRootElement(this.contentRef.nativeElement).click();
       this.display = false;
     }, 0);
-    // this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
   }
 
 
   LaunchDeleteModal(data: any) {
     Swal.fire({
-      type: 'error',
-      title: 'Esta Seguro de Eliminar',
-      text: `El siguiente elemento?: ${data.Codigo} ${data.Nombre}`,
+      type: this.translate.instant('AVISOS.error'),
+      title: this.translate.instant('AVISOS.eliminar_elemento_titulo'),
+      text: this.translate.instant('AVISOS.eliminar_elemento', { CODIGO: data.Codigo, NOMBRE: data.Nombre }),
       showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento
@@ -122,7 +122,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
         IdRegistro: elemento.Id,
         ActivoRegistro: elemento.Activo,
         PorcentajeDistribucion: elemento.PorcentajeDistribucion,
-        PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
+        PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100.0,
         ...elemento.ProductoData
       };
     });
@@ -137,10 +137,10 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
   }
   LaunchValueNullModal() {
     Swal.fire({
-      type: 'success',
-      title: 'Porcentajes de Distribucion completado',
-      text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
-      confirmButtonText: 'Aceptar',
+      type: this.translate.instant('AVISOS.correcto'),
+      title: this.translate.instant('GLOBAL.porcentaje_distribucion') + ' ' + this.translate.instant('GLOBAL.completado'),
+      text: this.translate.instant('GLOBAL.agregar_mas_productos'),
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     });
   }
 

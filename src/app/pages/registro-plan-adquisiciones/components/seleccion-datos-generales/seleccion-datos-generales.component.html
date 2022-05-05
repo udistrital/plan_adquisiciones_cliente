@@ -2,20 +2,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>Fecha Estimada de Inicio de Proceso de Selección:</p>
+                <p>{{ 'GLOBAL.fecha_inicio_proceso_seleccion' | translate }}:</p>
             </div>
             <div class="col-9 pt-3">
-                <input class="form-control" placeholder="Seleccionar Fecha de Inicio y Fecha de Finalización" [nbDatepicker]="rangepicker" formControlName="FechaInicioSeleccion">
+                <input class="form-control" placeholder="{{ 'GLOBAL.seleccionar_fecha_inicio_fecha_finalizacion' | translate }}" [nbDatepicker]="rangepicker" formControlName="FechaInicioSeleccion">
                 <nb-rangepicker #rangepicker></nb-rangepicker>
             </div>
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>Duracion Estimada del Contrato:</p>
+                <p>{{ 'GLOBAL.duracion_contrato' | translate }}:</p>
             </div>
             <div class="col-9 pt-3">
                 <span class="form-control">{{DatosGeneralesForm.value.FechaInicioSeleccion | timeRange }}</span>
             </div>
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>Responsable Formulación del Estudio de Conveniencia y Oportunidad:</p>
+                <p>{{ 'GLOBAL.responsable_estudio_conveniencia_oportunidad' | translate }}:</p>
             </div>
             <div class="col-9 pt-3">
                 <ng-container *ngIf="Responsables">
@@ -31,7 +31,7 @@
                 </ng-container>
             </div>
             <div class="col-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>Modalidad de Selección:</p>
+                <p>{{ 'GLOBAL.modalidad_seleccion' | translate }}:</p>
             </div>
             <div class="col-9">
                 <ngx-modalidades-seleccion></ngx-modalidades-seleccion>

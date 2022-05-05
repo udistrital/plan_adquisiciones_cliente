@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
@@ -35,10 +36,10 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private registroPlanService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
+    private translate: TranslateService
   ) {
-    this.titulo = 'Asociar Producto';
-    this.boton = 'Asociar';
-    // this.Elementos = DATOS_PRUEBA_2;
+    this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.producto');
+    this.boton = this.translate.instant('GLOBAL.asociar');
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -59,15 +60,15 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
         this.index = null;
         if (this.sharedService.IfStore(fila)) {
           if (fila.accion.title === 'Editar Producto Asociado') {
-            this.titulo = 'Editar Producto';
-            this.boton = 'Editar';
+            this.titulo =  this.translate.instant('GLOBAL.editar') + ' ' + this.translate.instant('GLOBAL.producto');
+            this.boton = this.translate.instant('GLOBAL.editar');
             this.index = fila.index;
             this.CalcularPorcentajeMaximo(fila.fila);
             this.CrearProductosAsociadosForm(fila.fila);
           }
         } else {
-          this.titulo = 'Asociar Producto';
-          this.boton = 'Asociar';
+          this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.producto');
+          this.boton = this.translate.instant('GLOBAL.asociar');
           this.CalcularPorcentajeMaximo(null);
           this.CrearProductosAsociadosForm(null);
         }
@@ -111,7 +112,7 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
       IdRegistro: elemento.Id,
       ActivoRegistro: elemento.Activo,
       PorcentajeDistribucion: elemento.PorcentajeDistribucion,
-      PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100,
+      PorcentajeDistribucion2: elemento.PorcentajeDistribucion / 100.0,
       ...elemento.Elemento
     };
   }
@@ -129,10 +130,10 @@ export class FormProductosAsociadosComponent implements OnInit, OnDestroy {
 
   LaunchValueNullModal() {
     Swal.fire({
-      type: 'success',
-      title: 'Porcentajes de Distribucion completado',
-      text: `Si desea agregar mas productos es necesario reducir los porcentajes asignados previamente`,
-      confirmButtonText: 'Aceptar',
+      type: this.translate.instant('GLOBAL.correcto'),
+      title: this.translate.instant('GLOBAL.porcentaje_distribucion') + ' ' + this.translate.instant('GLOBAL.completado'),
+      text: this.translate.instant('GLOBAL.agregar_mas_productos'),
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     });
   }
 }
