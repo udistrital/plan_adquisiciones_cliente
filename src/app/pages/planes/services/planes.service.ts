@@ -9,7 +9,7 @@ export class PlanesService {
   constructor(
     private rqManager: RequestManager,
     private translate: TranslateService
-    ) {}
+  ) {}
 
   /**
    * Get Planes
@@ -169,7 +169,11 @@ export class PlanesService {
     const actividades: any[] = [];
     Actividad.forEach((element: any) => {
       actividades.push(
-      'Meta: ' + element.NumeroMeta + ' - Actividad: ' + element.Numero + '. ' + element.Nombre
+        this.translate.instant('GLOBAL.acitivdad_vista', {
+          NUMEROMETA: element.NumeroMeta,
+          NUMEROACTIVIDAD: element.Numero,
+          NOMBRE: element.Nombre,
+        })
       );
       element.FuentesFinanciamiento.forEach((data: any, index: number) => {
         if (fuentes.find((x: any) => x === data.Nombre) === undefined) {
@@ -178,7 +182,7 @@ export class PlanesService {
       });
     });
 
-    const fuentesNoRepeated = fuentes.filter((item, index ) => {
+    const fuentesNoRepeated = fuentes.filter((item, index) => {
       return fuentes.indexOf(item) === index;
     });
     return [fuentesNoRepeated, actividades];

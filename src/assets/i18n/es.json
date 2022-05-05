@@ -256,7 +256,8 @@
     "campo_busqueda": "Campo de Búsqueda",
     "total": "Total {{ NOMBRE }}",
     "ver_version": "Ver version",
-    "ver": "ver"
+    "ver": "ver",
+    "acitivdad_vista": "Meta: {{ NUMEROMETA }} - Actividad: {{ NUMEROACTIVIDAD }}. {{ NOMBRE }}"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
@@ -493,7 +494,7 @@
   "PLAN_ADQUISICIONES": {
     "publicar": "Publicar Plan de Adquisiciones",
     "publicar_nueva_version": "Publicar Nueva Versión del Plan de Adquisiciones",
-    "total_plan_adquisiciones": "Total Plan de Adquisiciones de Funcionamiento e Inversión para la Vigencia",
+    "total_plan_adquisiciones": "Total Plan de Adquisiciones de Funcionamiento e Inversión para la Vigencia: {{ VIGENCIA }}",
     "publicado": "Plan de Adquisiciones Publicado",
     "descargar": "Descargar Publicación",
     "creacion_plan": "Creación de Plan de Adquisiciones",

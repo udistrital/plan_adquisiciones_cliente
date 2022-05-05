@@ -55,8 +55,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   subscription2$: any;
   subscription3$: any;
   subscription4$: any;
-  vigenciaPlan: any;
   Plan: any;
+  vigenciaPlan: any;
 
   constructor(
     private store: Store<any>,
@@ -84,6 +84,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           }
         }
       });
+
+    this.vigenciaPlan = this.Plan.Vigencia;
     // lectura de Datos con fuentes de Recurso para renderizacion
     this.subscription$ = this.store
       .select(getPlanDetallado)

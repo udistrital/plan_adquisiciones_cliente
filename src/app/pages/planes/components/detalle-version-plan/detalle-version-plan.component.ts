@@ -42,6 +42,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   PlanAdquisiciones: any;
   PDFPublicado: any;
   index: any;
+  vigenciaPlan: any;
 
 
   constructor(
@@ -76,6 +77,9 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         this.PlanAdquisiciones = plan;
       }
     });
+
+    this.vigenciaPlan = this.PlanAdquisiciones.Vigencia;
+
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Ver') {
