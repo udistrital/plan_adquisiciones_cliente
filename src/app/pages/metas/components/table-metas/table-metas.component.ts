@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { SeleccionarLineamiento } from '../../../lineamientos/actions/lineamientos.actions';
 import { getFuenteRecursoSeleccionada, getLineamientos, getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
@@ -37,12 +38,13 @@ export class TableMetasComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<any>,
-    private route: Router
+    private route: Router,
+    private translateHelper: TranslateFormItemsHelper
   ) {
-    this.configuracion = CONFIGURACION_TABLA_METAS;
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
     // Cargar Metas
     this.subscription$ = this.store.select(getMetas).subscribe((metas) => {
       if (metas) {
@@ -96,6 +98,11 @@ export class TableMetasComponent implements OnInit, OnDestroy {
   }
   SeleccionarRubro(rubro: any) {
     this.store.dispatch(SeleccionarRubro(rubro));
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_METAS;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
   }
 
   ngOnDestroy(): void {

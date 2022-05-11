@@ -14,9 +14,9 @@
                     </div>
                     <mat-select class="form-control" formControlName="Actividad" (selectionChange)="selectFuentes($event)" *ngIf="actividadesCargadas">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *ngIf="Actividades.length == 0" class="example-item" [value]="[]">NA</mat-option>
-                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item" [value]="actividad">
+                            class="example-viewport selector">
+                            <mat-option *ngIf="Actividades.length == 0" class="example-item selector" [value]="[]">NA</mat-option>
+                            <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item selector" [value]="actividad">
                                 {{ actividad.Numero ? actividad.Numero : ''}}.{{actividad.MetaId ? actividad.MetaId.Numero : ''}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
@@ -26,7 +26,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.nombre' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{FuenteForm.get('Actividad').value ?
                         FuenteForm.get('Actividad').value.Nombre : '' }}
                     </span>
@@ -49,8 +49,8 @@
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="FuenteFinanciamiento" [disabled]="disableFuentes" (click)="showAlertActividadesFirst()">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                                <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item"
+                                class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item selector"
                                     [value]="fuente">
                                     {{fuente ? fuente.Codigo : ''}} - {{fuente ? fuente.Nombre : ''}}
                                 </mat-option>
@@ -61,7 +61,7 @@
             </div>
             <div class="col-4 pt-3">
                 <div class="form-group">
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{FuenteForm.get('FuenteFinanciamiento').value ?
                         FuenteForm.get('FuenteFinanciamiento').value.Nombre : '' }}
                     </span>
@@ -71,7 +71,7 @@
             </div>
             <div class="col-9 pt-3">
                 <div class="form-group">
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{FuenteForm.get('FuenteFinanciamiento').value ?
                         (FuenteForm.get('FuenteFinanciamiento').value.ValorActual |
                         currency:'$':'symbol':'3.2-2':'en-US') : '' }}

@@ -16,8 +16,8 @@
                         formControlName="Elemento">
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let fuente of Elementos | async" class="example-item"
+                            class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let fuente of Elementos | async" class="example-item selector"
                                 [value]="fuente">
                                 <span>{{fuente.Codigo}}</span> -
                                 <small>{{fuente.Nombre}}</small>
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.nombre' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{ElementoARKAForm.get('Elemento').value ? ElementoARKAForm.get('Elemento').value.Nombre : '' }}
                     </span>
                 </div>

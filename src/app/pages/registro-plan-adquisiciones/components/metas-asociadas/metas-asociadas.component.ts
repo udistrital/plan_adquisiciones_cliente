@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarMetasAsociadas } from '../../actions/registro-plan-adquisiciones.actions';
@@ -30,10 +31,10 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private renderer: Renderer2,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_TABLA_METAS_ASOCIADAS;
     this.Datos = [];
   }
   ngOnDestroy(): void {
@@ -44,6 +45,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
 
     this.subscription$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
@@ -81,6 +83,11 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_METAS_ASOCIADAS;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
   }
 
   OpenModal() {

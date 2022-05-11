@@ -29,8 +29,8 @@
                         </div>
                         <mat-select class="form-control" formControlName="Actividad">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                                <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
+                                class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item selector"
                                     [value]="actividad">
                                     {{actividad.Numero}}.{{actividad.MetaId.Numero}}
                                 </mat-option>
@@ -42,7 +42,7 @@
             <div class="col-12 col-sm-8">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.nombre' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{ActividadFuentesForm.get('Actividad').value ?
                         ActividadFuentesForm.get('Actividad').value.Nombre : '' }}
                     </span>

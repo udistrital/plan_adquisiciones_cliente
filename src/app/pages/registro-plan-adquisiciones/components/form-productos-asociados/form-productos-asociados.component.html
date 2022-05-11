@@ -15,8 +15,8 @@
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="Elemento">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                                <mat-option *cdkVirtualFor="let producto of Elementos" class="example-item"
+                                class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let producto of Elementos" class="example-item selector"
                                     [value]="producto">
                                     {{producto.Codigo}}
                                 </mat-option>
@@ -28,7 +28,7 @@
             <div class="col-9">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.nombre' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{ProductosAsociadosForm.get('Elemento').value ? ProductosAsociadosForm.get('Elemento').value.Nombre : '' }}
                     </span>
                 </div>

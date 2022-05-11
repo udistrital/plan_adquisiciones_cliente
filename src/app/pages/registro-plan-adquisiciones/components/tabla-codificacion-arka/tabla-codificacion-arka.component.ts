@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { CargarElementosARKA } from '../../actions/registro-plan-adquisiciones.actions';
 import { getElementosARKA, getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 @Component({
   selector: 'ngx-tabla-codificacion-arka',
@@ -28,9 +29,9 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private renderer: Renderer2,
+    private translateHelper: TranslateFormItemsHelper
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_TABLA_ELEMENTOS_ARKA;
     this.store.dispatch(CargarElementosARKA([]));
   }
   ngOnDestroy(): void {
@@ -41,7 +42,7 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.translateTableConfiguracion();
     this.subscription$ = this.store.select(getElementosARKA).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
         this.Datos = elementos[0];
@@ -82,6 +83,11 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_ELEMENTOS_ARKA;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
   }
 
   OpenModal() {

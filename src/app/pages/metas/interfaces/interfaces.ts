@@ -1,64 +1,61 @@
 export const CONFIGURACION_TABLA_METAS: any = {
-    title: {
-        name: 'Metas Asociadas',
-        class: 'text-center text-light',
-    },
-    showColumnTitle: true,
-    dataConfig: [
-        {
-            key: 'Numero',
-            title: {
-                name: 'Número',
-                class: 'text-center',
-            },
-            pipe: {
-                class: '',
-            }
-        },
-        {
-            key: 'Nombre',
-            title: {
-                name: 'Nombre',
-                class: 'text-center',
-            },
-            pipe: {
-                class: 'text-justify',
-            }
-        },
-    ],
-    rowActions: {
-        title: {
-            name: 'Acciones',
-            class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
-        },
-        actions: [
-            {
-                name: 'editar',
-                icon: 'fas fa-pencil-alt',
-                class: 'p-2',
-                title: 'Editar',
-            },
-            {
-                name: 'actividades',
-                icon: 'fas fa-list',
-                class: 'p-2',
-                title: 'Ver Actividades',
-            }
-        ],
-    },
-    tableActions: [
-        {
-            name: 'nuevo',
-            icon: 'fas fa-plus py-1 px-2',
-            class: 'px-2',
-            title: 'Agregar Nueva Meta',
-        }
-    ],
-    noData: {
-        name: 'No Existen Elementos Asociados',
+  title: {
+    class: 'text-center text-light',
+    label_i18n: 'metas_asociadas',
+  },
+  showColumnTitle: true,
+  dataConfig: [
+    {
+      key: 'Numero',
+      title: {
         class: 'text-center',
+        label_i18n: 'numero',
+      },
+      pipe: {
+        class: '',
+      },
     },
-    sort: true,
-    filter: true,
+    {
+      key: 'Nombre',
+      title: {
+        class: 'text-center',
+        label_i18n: 'nombre',
+      },
+      pipe: {
+        class: 'text-justify',
+      },
+    },
+  ],
+  rowActions: {
+    title: {
+      class: 'text-center',
+      actionClass: 'd-flex flex-row justify-content-around align-middle',
+      label_i18n: 'acciones',
+    },
+    actions: [
+      {
+        icon: 'fas fa-pencil-alt',
+        class: 'p-2',
+        label_i18n: 'editar',
+      },
+      {
+        icon: 'fas fa-list',
+        class: 'p-2',
+        label_i18n: 'ver_actividades',
+      },
+    ],
+  },
+  tableActions: [
+    {
+      icon: 'fas fa-plus py-1 px-2',
+      class: 'px-2',
+      label_i18n: 'agregar_nueva_meta',
+    },
+  ],
+  noData: {
+    class: 'text-center',
+    label_i18n: 'sin_elementos_asociados',
+  },
+  sort: true,
+  filter: true,
 };

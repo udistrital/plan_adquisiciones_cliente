@@ -1,458 +1,456 @@
 export const CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES: any = {
-    title: {
-        name: 'PLANES DE ADQUISICIONES',
-        class: 'text-center text-light',
-    },
-    showColumnTitle: true,
-    dataConfig: [
-        {
-            key: 'Id',
-            title: {
-                name: 'Consecutivo',
-                class: 'text-center',
-            },
-            pipe: {
-                class: '',
-            }
-        },
-        {
-            key: 'Descripcion',
-            title: {
-                name: 'Nombre',
-                class: 'text-center',
-            },
-            pipe: {
-                class: 'text-justify',
-            }
-        },
-        {
-            key: 'Vigencia',
-            title: {
-                name: 'Vigencia',
-                class: 'text-center',
-            },
-            pipe: {
-                class: 'text-center',
-            }
-        },
-        {
-            key: 'FechaCreacion',
-            title: {
-                name: 'Fecha de Creación',
-                class: 'text-center',
-            },
-            pipe: {
-                type: 'date',
-                config: [
-                    'shortDate'
-                ],
-                class: 'text-center',
-            }
-        },
-        {
-            key: 'FechaModificacion',
-            title: {
-                name: 'Ultima Modificación',
-                class: 'text-center',
-            },
-            pipe: {
-                type: 'date',
-                config: [
-                    'shortDate',
-                ],
-                class: 'text-center',
-            }
-        },
-        {
-            key: 'Publicado',
-            title: {
-                name: 'Publicado',
-                class: 'text-center',
-            },
-            pipe: {
-                isBoolean: true,
-                class: 'text-center',
-            }
-        },
-    ],
-    rowActions: {
-        title: {
-            name: 'Acciones',
-            class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
-        },
-        actions: [
-            {
-                name: 'Editar',
-                icon: 'fas fa-pencil-alt',
-                class: 'p-2',
-                title: 'Editar Datos Iniciales',
-            },
-            {
-                name: 'Ver',
-                icon: 'fas fa-list',
-                class: 'p-2',
-                title: 'Ver Plan de Adquisiciones',
-            },
-            {
-                name: 'Versiones',
-                icon: 'fas fa-code-branch',
-                class: 'p-2',
-                title: 'Ver Versiones',
-            },
-        ],
-    },
-    tableActions: [
-        {
-            name: 'nuevo',
-            icon: 'fas fa-plus py-1 px-2',
-            class: 'px-2 mx-2',
-            title: 'Agregar Nuevo Plan de Adquisiciones',
-        },
-    ],
-    noData: {
-        name: 'No Existen Planes Creados',
+  title: {
+    class: 'text-center text-light',
+    label_i18n: 'planes_adquisiciones',
+  },
+  showColumnTitle: true,
+  dataConfig: [
+    {
+      key: 'Id',
+      title: {
         class: 'text-center',
+        label_i18n: 'consecutivo',
+      },
+      pipe: {
+        class: '',
+      },
     },
-    sort: true,
-    filter: true,
+    {
+      key: 'Descripcion',
+      title: {
+        class: 'text-center',
+        label_i18n: 'nombre',
+      },
+      pipe: {
+        class: 'text-justify',
+      },
+    },
+    {
+      key: 'Vigencia',
+      title: {
+        class: 'text-center',
+        label_i18n: 'vigencia',
+      },
+      pipe: {
+        class: 'text-center',
+      },
+    },
+    {
+      key: 'FechaCreacion',
+      title: {
+        class: 'text-center',
+        label_i18n: 'fecha_creacion',
+      },
+      pipe: {
+        type: 'date',
+        config: ['shortDate'],
+        class: 'text-center',
+      },
+    },
+    {
+      key: 'FechaModificacion',
+      title: {
+        class: 'text-center',
+        label_i18n: 'ultima_modificacion',
+      },
+      pipe: {
+        type: 'date',
+        config: ['shortDate'],
+        class: 'text-center',
+      },
+    },
+    {
+      key: 'Publicado',
+      title: {
+        class: 'text-center',
+        label_i18n: 'publicado',
+      },
+      pipe: {
+        isBoolean: true,
+        class: 'text-center',
+      },
+    },
+  ],
+  rowActions: {
+    title: {
+      class: 'text-center',
+      actionClass: 'd-flex flex-row justify-content-around align-middle',
+      label_i18n: 'acciones',
+    },
+    actions: [
+      {
+        icon: 'fas fa-pencil-alt',
+        class: 'p-2',
+        label_i18n: 'editar_datos_iniciales',
+      },
+      {
+        icon: 'fas fa-list',
+        class: 'p-2',
+        label_i18n: 'ver_plan_adquisiciones',
+      },
+      {
+        icon: 'fas fa-code-branch',
+        class: 'p-2',
+        label_i18n: 'ver_versiones',
+      },
+    ],
+  },
+  tableActions: [
+    {
+      icon: 'fas fa-plus py-1 px-2',
+      class: 'px-2 mx-2',
+      label_i18n: 'agregar_nuevo_plan_adquisiciones',
+    },
+  ],
+  noData: {
+    class: 'text-center',
+    label_i18n: 'sin_planes_creados',
+  },
+  sort: true,
+  filter: true,
 };
 
 export const CONFIGURACION_TABLA_VERSIONES_PLAN: any = {
-    title: {
-        name: '',
-        class: 'text-center text-light',
-    },
-    showColumnTitle: true,
-    dataConfig: [
-        {
-            key: 'index',
-            title: {
-                name: 'Version',
-                class: 'text-center',
-            },
-            pipe: {
-                class: 'text-center',
-            }
-        },
-
-    ],
-    rowActions: {
-        title: {
-            name: 'Acciones',
-            class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
-        },
-        actions: [
-            {
-                name: 'Ver',
-                icon: 'fas fa-list',
-                class: 'p-2',
-                title: 'Ver Plan de Adquisiciones',
-            },
-        ],
-    },
-    noData: {
-        name: 'No Existen Versiones',
+  title: {
+    class: 'text-center text-light',
+  },
+  showColumnTitle: true,
+  dataConfig: [
+    {
+      key: 'index',
+      title: {
         class: 'text-center',
+        label_i18n: 'version',
+      },
+      pipe: {
+        class: 'text-center',
+      },
     },
-    sort: true,
-    filter: false,
+  ],
+  rowActions: {
+    title: {
+      class: 'text-center',
+      actionClass: 'd-flex flex-row justify-content-around align-middle',
+      label_i18n: 'acciones',
+    },
+    actions: [
+      {
+        icon: 'fas fa-list',
+        class: 'p-2',
+        label_i18n: 'ver_plan_adquisiciones',
+      },
+    ],
+  },
+  noData: {
+    class: 'text-center',
+    label_i18n: 'sin_versiones',
+  },
+  sort: true,
+  filter: false,
 };
 
 export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
+  title: {
+    class: 'text-center text-light',
+  },
+  subtitle: {
+    class: 'text-center bg-primary text-light', // bootstrap class
+  },
+  showColumnTitle: true,
+  dataConfig: [
+    {
+      key: 'CodigoArka',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'codigos_unspsc',
+      },
+      pipe: {
+        class: 'text-center align-middle',
+        isArray: true,
+      },
+    },
+    {
+      key: 'RubroId',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'rubro_presupuestal',
+      },
+      pipe: {
+        class: 'text-center align-middle',
+      },
+    },
+    {
+      key: 'Actividades',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'descripcion',
+      },
+      pipe: {
+        class: 'text-justify align-middle',
+        isArray: true,
+      },
+    },
+    {
+      key: 'FechaEstimada',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'fecha_estimada_inicio_proceso_seleccion',
+      },
+      pipe: {
+        type: 'time-range',
+        config: ['limits'],
+        class: 'text-center align-middle text-capitalize',
+      },
+    },
+    {
+      key: 'FechaEstimada',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'duracion_estimada_contrato',
+      },
+      pipe: {
+        type: 'time-range',
+        config: ['range'],
+        class: 'text-center align-middle text-capitalize',
+      },
+    },
+    {
+      key: 'ResponsableNombre',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'responsable_formulacion_estudio_conveniencia_oportunidad',
+      },
+      pipe: {
+        class: 'text-center align-middle',
+      },
+    },
+    {
+      key: 'ModalidadSeleccion',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'modalidad_seleccion',
+      },
+      pipe: {
+        class: 'text-center align-middle',
+        isArray: true,
+      },
+    },
+    {
+      key: 'ValorTotalActividades',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'valor_asignado_año_vigente',
+      },
+      pipe: {
+        type: 'currency',
+        config: ['$', 'symbol', '3.2-2', 'en-US'],
+        class: 'text-right align-middle px-0',
+      },
+    },
+    {
+      key: 'FuenteRecursos',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'fuente_recurso',
+      },
+      pipe: {
+        class: 'text-center align-middle',
+        isArray: true,
+      },
+    },
+  ],
+  rowActions: {
     title: {
-        name: '',
-        class: 'text-center text-light',
+      name: 'Acciones',
+      class: 'text-center align-middle',
+      actionClass: 'd-flex flex-row justify-content-around align-middle',
+      label_i18n: 'acciones',
     },
-    subtitle: {
-        name: '', // name subtitle
-        class: 'text-center bg-primary text-light', // bootstrap class
-    },
-    showColumnTitle: true,
-    dataConfig: [
-        {
-            key: 'CodigoArka',
-            title: {
-                name: 'Códigos UNSPSC',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-                isArray: true,
-            }
-        },
-        {
-            key: 'RubroId',
-            title: {
-                name: 'Rubro Presupuestal',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-            }
-        },
-        {
-            key: 'Actividades',
-            title: {
-                name: 'Descripción',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-justify align-middle',
-                isArray: true,
-            }
-        },
-        {
-            key: 'FechaEstimada',
-            title: {
-                name: 'Fecha Estimada de Inicio de Proceso de Selección',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                type: 'time-range',
-                config: ['limits'],
-                class: 'text-center align-middle text-capitalize',
-            }
-        },
-        {
-            key: 'FechaEstimada',
-            title: {
-                name: 'Duración Estimada de Contrato',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                type: 'time-range',
-                config: ['range'],
-                class: 'text-center align-middle text-capitalize',
-            }
-        },
-        {
-            key: 'ResponsableNombre',
-            title: {
-                name: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-            }
-        },
-        {
-            key: 'ModalidadSeleccion',
-            title: {
-                name: 'Modalidad de Selección',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-                isArray: true,
-            }
-        },
-        {
-            key: 'ValorTotalActividades',
-            title: {
-                name: 'Valor Asignado Año Vigente',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                type: 'currency',
-                config: [
-                    '$',
-                    'symbol',
-                    '3.2-2',
-                    'en-US'
-                ],
-                class: 'text-right align-middle px-0',
-            }
-        },
-        {
-            key: 'FuenteRecursos',
-            title: {
-                name: 'Fuente de Recurso',
-                class: 'text-center align-middle',
-            },
-            pipe: {
-                class: 'text-center align-middle',
-                isArray: true,
-            }
-        },
+    actions: [
+      {
+        icon: 'fas fa-pencil-alt',
+        class: 'p-2',
+        label_i18n: 'editar_datos_rubro',
+      },
     ],
-    rowActions: {
-        title: {
-            name: 'Acciones',
-            class: 'text-center align-middle',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
-        },
-        actions: [
-            {
-                name: 'Editar',
-                icon: 'fas fa-pencil-alt',
-                class: 'p-2',
-                title: 'Editar Datos Rubro',
-            },
-        ],
+  },
+  noData: {
+    class: 'text-center',
+    label_i18n: 'sin_rubros_asociados',
+  },
+  endSubtotal: {
+    first: {
+      class: 'text-center bg-primary text-light',
     },
-    noData: {
-        name: 'No Existen Rubros Asociados',
-        class: 'text-center',
+    last: {
+      class: 'text-right bg-primary text-light px-0',
     },
-    endSubtotal: {
-        first: {
-            class: 'text-center bg-primary text-light',
-        },
-        last: {
-            class: 'text-right bg-primary text-light px-0',
-        }
-    },
-    sort: true,
-    filter: false,
+  },
+  sort: true,
+  filter: false,
 };
 
 export const COLUMNAS_PLAN = [
-    {
-        text: 'Código UNSPSC',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Rubro Presupuestal',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Actividad',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Fecha Estimada de Inicio de Proceso de selección',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Duración Estimada del Contrato',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Responsable Formulación del Estudio de Conveniencia y Oportunidad',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Modalidad de Selección',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Valor Asignado',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    },
-    {
-        text: 'Fuente de Recursos',
-        alignment: 'center',
-        border: [true, true, true, false],
-        style: 'style_2'
-    }
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'codigo_unspsc',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'rubro_presupuestal',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'actividad',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'responsable_formulacion_estudio_conveniencia_oportunidad',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'fecha_estimada_inicio_proceso_seleccion',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'duracion_estimada_contrato',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'modalidad_seleccion',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'valor_asignado',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'fuente_recurso',
+  },
 ];
 
 export const ESPACIO_TABLA = [
-    {
-        text: '',
-        colSpan: 9,
-        border: [false, false, false, false],
-    },
-    {}, {}, {}, {}, {}, {}, {}, {}
+  {
+    text: '',
+    colSpan: 9,
+    border: [false, false, false, false],
+  },
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
 ];
 
 export const PLANTILLA_TABLA = {
-    pageSize: 'A4',
-    pageOrientation: 'landscape',
-    pageMargins: [30, 30, 30, 30],
-    content: [
-      {
-        table: {
-          widths: ['auto', 'auto', 'auto', 'auto', 'auto', '*', '*', 'auto', 'auto'],
-          body: [
-          ],
-        },
-      }
-    ],
-    styles: {
-      body: {
-        marginTop: 80,
-      },
-      general_font: {
-        fontSize: 6,
-        alignment: 'justify',
-        margin: [25, 0, 25, 0],
-      },
-      general_list: {
-        fontSize: 6,
-        alignment: 'justify',
-        margin: [35, 0, 25, 0],
-      },
-      topHeader: {
-        margin: [5, 0, 5, 0],
-        alignment: 'justify',
-        fontSize: 6,
-      },
+  pageSize: 'A4',
+  pageOrientation: 'landscape',
+  pageMargins: [30, 30, 30, 30],
+  content: [
+    {
       table: {
-        margin: [30, 0, 30, 0],
-        border: '0',
+        widths: [
+          'auto',
+          'auto',
+          'auto',
+          'auto',
+          'auto',
+          '*',
+          '*',
+          'auto',
+          'auto',
+        ],
+        body: [],
       },
-      tableInfo: {
-        fontSize: 6,
-      },
-      table2: {
-        margin: [25, 0, 25, 0],
-        border: '0',
-        fontSize: 6,
-      },
-      style_1: {
-        fillColor: '#1792CA',
-        color: '#ffffff',
-        bold: true,
-        fontSize: 6,
-      },
-      style_2: {
-        fillColor: '#eeeeee',
-        bold: true,
-        fontSize: 6,
-      },
-      style_3: {
-        fillColor: '#FECE30',
-        bold: true,
-        fontSize: 6,
-      },
-      style_4: {
-        fillColor: '#F09102',
-        bold: true,
-        fontSize: 6,
-      },
-      style_5: {
-        fillColor: '#C0F20C',
-        bold: true,
-        fontSize: 6,
-      },
-      style_6: {
-        fillColor: '#E60077',
-        bold: true,
-        fontSize: 6,
-      },
-      style_7: {
-        // fillColor: '#E60077',
-        // bold: true,
-        fontSize: 6,
-      }
-    }
+    },
+  ],
+  styles: {
+    body: {
+      marginTop: 80,
+    },
+    general_font: {
+      fontSize: 6,
+      alignment: 'justify',
+      margin: [25, 0, 25, 0],
+    },
+    general_list: {
+      fontSize: 6,
+      alignment: 'justify',
+      margin: [35, 0, 25, 0],
+    },
+    topHeader: {
+      margin: [5, 0, 5, 0],
+      alignment: 'justify',
+      fontSize: 6,
+    },
+    table: {
+      margin: [30, 0, 30, 0],
+      border: '0',
+    },
+    tableInfo: {
+      fontSize: 6,
+    },
+    table2: {
+      margin: [25, 0, 25, 0],
+      border: '0',
+      fontSize: 6,
+    },
+    style_1: {
+      fillColor: '#1792CA',
+      color: '#ffffff',
+      bold: true,
+      fontSize: 6,
+    },
+    style_2: {
+      fillColor: '#eeeeee',
+      bold: true,
+      fontSize: 6,
+    },
+    style_3: {
+      fillColor: '#FECE30',
+      bold: true,
+      fontSize: 6,
+    },
+    style_4: {
+      fillColor: '#F09102',
+      bold: true,
+      fontSize: 6,
+    },
+    style_5: {
+      fillColor: '#C0F20C',
+      bold: true,
+      fontSize: 6,
+    },
+    style_6: {
+      fillColor: '#E60077',
+      bold: true,
+      fontSize: 6,
+    },
+    style_7: {
+      // fillColor: '#E60077',
+      // bold: true,
+      fontSize: 6,
+    },
+  },
 };

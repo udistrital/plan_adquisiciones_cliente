@@ -9,6 +9,7 @@ import {
   LoadAccionTabla,
   LoadFilaSeleccionada,
 } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import {
   getArbolRubro,
   getFilaSeleccionada,
@@ -65,7 +66,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private planesService: PlanesService,
     private popupService: PopUpManager,
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper
   ) {
     // this.parametrics.CargarArbolRubros('3');
     this.DispatchActions();
@@ -111,11 +113,18 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
   AjustarDatos(datos: any) {
-    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
+    this.translateTableConfiguracion();
     if (datos.length > 0) {
       this.datos = datos;
       this.TotalPlan = this.planesService.SacarTotalPlan(datos);
     }
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(
+      this.configuracion
+    );
   }
 
   CrearRenglon() {

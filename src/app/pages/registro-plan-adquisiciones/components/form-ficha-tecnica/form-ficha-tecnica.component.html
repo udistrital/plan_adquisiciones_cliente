@@ -13,8 +13,8 @@
                 <div class="form-group">
                     <label>{{ 'GLOBAL.meta' | translate}}:</label>
                     <mat-select class="form-control" formControlName="MetaId">
-                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-                            <mat-option *cdkVirtualFor="let meta of Metas" class="example-item" [value]="meta.Id">
+                        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let meta of Metas" class="example-item selector" [value]="meta.Id">
                                 {{meta.Numero}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>

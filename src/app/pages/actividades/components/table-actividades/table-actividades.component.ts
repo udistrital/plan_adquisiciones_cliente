@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { getMetaSeleccionada } from '../../../metas/selectors/metas.selectors';
 import { ConsultarActividades, SeleccionarActividad } from '../../actions/actividades.actions';
@@ -22,11 +23,12 @@ export class TableActividadesComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<any>,
+    private translateHelper: TranslateFormItemsHelper
   ) {
-    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES;
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
     // Consultar Actividades
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta) => {
       if (meta) {
@@ -66,5 +68,10 @@ export class TableActividadesComponent implements OnInit, OnDestroy {
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
     this.subscription4$.unsubscribe();
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
   }
 }

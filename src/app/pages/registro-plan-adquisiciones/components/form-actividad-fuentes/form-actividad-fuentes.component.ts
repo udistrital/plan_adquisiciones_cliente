@@ -13,6 +13,7 @@ import { combineLatest, forkJoin, from, of } from 'rxjs';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { mergeMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 @Component({
   selector: 'ngx-form-actividad-fuentes',
@@ -44,12 +45,12 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     private matDialogRef: MatDialogRef<FormActividadFuentesComponent>,
     private matDialog: MatDialog,
     private sharedService: SharedService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper
   ) {
     this.titulo = this.translate.instant('GLOBAL.agregar') + this.translate.instant('GLOBAL.actividad');
     this.boton = this.translate.instant('GLOBAL.crear');
     // this.Datos = DATOS_PRUEBA_4;
-    this.configuracion = CONFIGURACION_TABLA_FUENTES;
     this.ActividadesAsociadas = [];
     this.ActividadesCapturadas = [];
   }
@@ -62,6 +63,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
     // Traer Actividades y montar Actividad Seleccionada
     this.subscription$ = combineLatest([
       this.store.select(getMetasAsociadas),
@@ -149,6 +151,11 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     }
   }
 
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_FUENTES;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+  }
+
   OpenModal() {
     if (this.ActividadFuentesForm) {
       if (this.ActividadFuentesForm.value.Valor) {
@@ -167,7 +174,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
   ActividadesAsociadasModal() {
     Swal.fire({
-      type: this.translate.instant('GLOBAL.info'),
+      type: this.translate.instant('AVISOS.info'),
       title: this.translate.instant('ACTIVIDAD.actividades_asociadas'),
       text: this.translate.instant('ACTIVIDAD.todas_actividades_asociadas'),
       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),

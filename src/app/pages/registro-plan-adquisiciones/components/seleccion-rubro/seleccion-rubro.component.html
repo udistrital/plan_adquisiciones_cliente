@@ -13,8 +13,8 @@
                 <ng-container *ngIf="fuentesRecurso">
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="FuenteSeleccionada">
-                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-                                <mat-option *cdkVirtualFor="let fuente of fuentesRecurso" class="example-item" [value]="fuente">
+                            <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let fuente of fuentesRecurso" class="example-item selector" [value]="fuente">
                                     {{fuente.Codigo}}
                                 </mat-option>
                             </cdk-virtual-scroll-viewport>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-6 pt-3">
                 <div class="form-group">
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{RubroForm.get('FuenteSeleccionada').value ? RubroForm.get('FuenteSeleccionada').value.data.Nombre : '' }}
                     </span>
                 </div>
@@ -44,14 +44,14 @@
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                <span class="form-control overflow">
+                                <span class="form-control overflow selector">
                                     {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Codigo: ''}}
                                 </span>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-lg-6">
                             <div class="form-group mb-0">
-                                <span class="form-control overflow">
+                                <span class="form-control overflow selector">
                                     {{RubroForm.get('RubroSeleccionado').value ? RubroForm.get('RubroSeleccionado').value.data.Nombre: ''}}
                                 </span>
                             </div>

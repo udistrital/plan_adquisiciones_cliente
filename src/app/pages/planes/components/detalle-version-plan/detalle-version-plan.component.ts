@@ -18,6 +18,7 @@ import { TimeRangePipe } from '../../../../shared/pipes/time-range.pipe';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { OrdinalPipePipe } from '../../../../shared/pipes/ordinal-pipe.pipe';
 import { TranslateService } from '@ngx-translate/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -56,6 +57,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private titlepipe: TitleCasePipe,
     private datePipe: DatePipe,
     private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper
   ) {
   }
 
@@ -104,9 +106,18 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         title: this.translate.instant('GLOBAL.ver_version'),
       },
     ];
-    this.configuracion = conf;
+    this.configuracion = this.translateTableConfiguracion(conf);
     this.datos = datos;
     this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+  }
+
+  private translateTableConfiguracion(conf: any): any {
+    let configuracion = conf;
+    configuracion = this.translateHelper.translateItemTableConfiguration(
+      configuracion
+    );
+
+    return configuracion;
   }
 
 
@@ -174,6 +185,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   }
   // Agregando Fuentes
   AgregarFuentes() {
+    const columnas_plan = this.translateTableConfiguracion(COLUMNAS_PLAN);
     this.datos.forEach((fuente: any) => {
       this.PDFPublicado.content[0].table.body.push(
         [
@@ -186,7 +198,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           },
           {}, {}, {}, {}, {}, {}, {}, {}
         ],
-        JSON.parse(JSON.stringify(COLUMNAS_PLAN))
+        JSON.parse(JSON.stringify(columnas_plan))
       );
       this.AgregarRubros(fuente.datos);
       this.SumaFuente(fuente.datos, fuente.FuenteData);

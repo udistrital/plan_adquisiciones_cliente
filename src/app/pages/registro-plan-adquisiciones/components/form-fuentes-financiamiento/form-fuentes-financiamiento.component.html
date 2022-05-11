@@ -18,8 +18,8 @@
                     <label>{{ 'GLOBAL.codigo' | translate}}:</label>
                     <mat-select class="form-control" formControlName="FuenteSeleccionada">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item"
+                            class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item selector"
                                 [value]="fuente">
                                 {{fuente.Codigo}}
                             </mat-option>
@@ -30,7 +30,7 @@
             <div class="col-12 col-sm-8">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.nombre' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
                         FuenteFinanciamientoForm.get('FuenteSeleccionada').value.Nombre : '' }}
                     </span>
@@ -39,7 +39,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.valor' | translate}} {{ 'GLOBAL.fuente_financiamiento' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
                         (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorActual |
                         currency:'$':'symbol':'3.2-2':'en-US' ) : '' }}
@@ -49,7 +49,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>{{ 'GLOBAL.valor_disponible_texto' | translate}} {{ 'GLOBAL.actividad' | translate}}:</label>
-                    <span class="form-control overflow">
+                    <span class="form-control overflow selector">
                         {{ ValorDisponible | currency:'$':'symbol':'3.2-2':'en-US'}}
                     </span>
                 </div>
@@ -75,7 +75,7 @@
                 <div class="form-group">
                     <label>{{'GLOBAL.porcentaje' | translate}}:</label>
                     <div class="input-group">
-                        <span class="form-control overflow">
+                        <span class="form-control overflow selector">
                             {{FuenteFinanciamientoForm.get('Valor').value ? (FuenteFinanciamientoForm.get('Valor').value
                             / data.Valor | percent : '1.2-2') : '' }}
                         </span>

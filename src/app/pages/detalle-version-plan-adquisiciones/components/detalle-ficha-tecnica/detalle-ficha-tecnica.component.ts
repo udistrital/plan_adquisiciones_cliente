@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { MetasService } from '../../../metas/services/metas.service';
 import { getVersionPlan } from '../../../planes/selectors/planes.selectors';
 import { CONFIGURACION_TABLA_FICHA_ESTADISTICA } from '../../../registro-plan-adquisiciones/interfaces/interfaces';
@@ -19,19 +20,21 @@ export class DetalleFichaTecnicaComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<any>,
     private metaService: MetasService,
-  ) {
-    this.configuracion = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_FICHA_ESTADISTICA));
+    private translateHelper: TranslateFormItemsHelper
+  ) { }
+  ngOnDestroy(): void {
+    this.suscription$.unsubscribe();
+  }
+  ngOnInit() {
+    const configuracion_tabla_ficha_estadistica = this.translateTableConfiguracion(CONFIGURACION_TABLA_FICHA_ESTADISTICA);
+    this.configuracion = JSON.parse(JSON.stringify(configuracion_tabla_ficha_estadistica));
     delete this.configuracion.rowActions;
     delete this.configuracion.tableActions;
     this.configuracion.dataConfig[0].pipe.config[0] = (data: any) => {
       return data.Numero;
     };
     this.Datos = [];
-  }
-  ngOnDestroy(): void {
-    this.suscription$.unsubscribe();
-  }
-  ngOnInit() {
+
     this.suscription$ = this.store.select(getVersionPlan).subscribe((version: any) => {
       this.metaService.getMetasRubro(this.datos.RubroId).subscribe((metas: any) => {
         this.MontarFicha(
@@ -40,6 +43,12 @@ export class DetalleFichaTecnicaComponent implements OnInit, OnDestroy {
         );
       });
     });
+  }
+
+  private translateTableConfiguracion(conf: any): any {
+    let configuracion = conf;
+    configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    return configuracion;
   }
 
   MontarFicha(metas: any, ficha: any) {

@@ -22,8 +22,8 @@
                     <div class="form-group">
                         <mat-select class="form-control" formControlName="Responsable">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                                <mat-option *cdkVirtualFor="let state of Responsables" class="example-item"
+                                class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let state of Responsables" class="example-item selector"
                                     [value]="state">{{state.Nombre}}</mat-option>
                             </cdk-virtual-scroll-viewport>
                         </mat-select>

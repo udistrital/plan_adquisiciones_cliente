@@ -146,7 +146,7 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
 
   LaunchValueNullModal() {
     Swal.fire({
-      type: this.translate.instant('GLOBAL.correcto'),
+      type: this.translate.instant('AVISOS.correcto'),
       title: this.translate.instant('GLOBAL.fuentes_asignadas'),
       text: this.translate.instant('ERROR.agregar_mas_fuentes'),
       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),

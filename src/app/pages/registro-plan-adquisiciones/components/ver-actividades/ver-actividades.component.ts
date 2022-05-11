@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { CONFIGURACION_TABLA_VER_ACTIVIDADES } from '../../interfaces/interfaces';
 
 @Component({
@@ -12,17 +13,23 @@ export class VerActividadesComponent implements OnInit {
   DatosTransformados: any;
   configuracion: any;
 
-  constructor() {
-    this.configuracion = CONFIGURACION_TABLA_VER_ACTIVIDADES;
+  constructor(private translateHelper: TranslateFormItemsHelper) {
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
+
     this.DatosTransformados = this.datos.map((element: any) => {
       return {
         Numero2: element.Numero + '.' + element.MetaId.Numero,
         ...element
       };
     });
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = CONFIGURACION_TABLA_VER_ACTIVIDADES;
+    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
   }
 
 }
