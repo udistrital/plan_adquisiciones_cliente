@@ -258,7 +258,8 @@
     "ver_version": "Ver version",
     "ver": "ver",
     "acitivdad_vista": "Meta: {{ NUMEROMETA }} - Actividad: {{ NUMEROACTIVIDAD }}. {{ NOMBRE }}",
-    "fuentes_asignadas": "Fuentes Asignadas"
+    "fuentes_asignadas": "Fuentes Asignadas",
+    "asociar_meta": "Asociar Meta"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",

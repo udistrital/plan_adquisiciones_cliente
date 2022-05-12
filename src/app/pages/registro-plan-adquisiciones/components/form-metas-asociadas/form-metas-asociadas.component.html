@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" *ngIf="MetasAsociadasForm">
         <div class="col py-2">
-            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+            <h5 class="card-title text-center text-primary">{{ 'GLOBAL.asociar_meta' | translate }}</h5>
         </div>
     </div>
     <div class="row" *ngIf="MetasAsociadasForm">
@@ -35,7 +35,7 @@
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="MetasAsociadasForm.invalid || !MetasAsociadasForm.touched" type="button"
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">
-                    {{boton}}
+                    {{ 'GLOBAL.asociar' | translate }}
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end" #exampleModalCloseMetas>

@@ -19,7 +19,6 @@ import { getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-
 })
 export class LayoutComponent implements OnInit, OnDestroy {
 
-  titulo: any;
   TipoDePlan: any;
   Guardar: boolean;
   Registro: any;
@@ -45,7 +44,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.titulo = this.translate.instant('PLAN_ADQUISICIONES.creacion_plan');
     this.subscription2$ = this.store.select(getRenglonSeleccionado).subscribe((renglon: any) => {
       if (this.sharedService.IfStore(renglon)) {
         if ((renglon[0].RubroId as string).split('-')[1] === '01') {

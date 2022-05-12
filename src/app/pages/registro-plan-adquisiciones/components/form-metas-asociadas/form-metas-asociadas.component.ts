@@ -20,8 +20,6 @@ import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-a
 })
 export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
 
-  titulo: string;
-  boton: string;
   Elementos: any;
   MetasAsociadasForm: FormGroup;
   subscription$: any;
@@ -40,8 +38,6 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private translate: TranslateService
   ) {
-    this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.meta');
-    this.boton = this.translate.instant('GLOBAL.asociar');
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -50,8 +46,6 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe(() => {
-      this.titulo = this.translate.instant('GLOBAL.asociar') + ' ' + this.translate.instant('GLOBAL.meta');
-      this.boton = this.translate.instant('GLOBAL.asociar');
       this.CrearMetasAsociadasForm();
     });
 
