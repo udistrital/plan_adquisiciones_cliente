@@ -36,9 +36,7 @@ export class DetalleElementosArkaComponent implements OnInit {
   }
 
   private translateTableConfiguracion(conf: any): any {
-    let configuracion = conf;
-    configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
-    return configuracion;
+    return this.translateHelper.translateItemTableConfiguration(conf);
   }
 
   MontarElementosARKA(elementos: any[]) {

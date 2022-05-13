@@ -112,12 +112,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(conf: any): any {
-    let configuracion = conf;
-    configuracion = this.translateHelper.translateItemTableConfiguration(
-      configuracion
-    );
-
-    return configuracion;
+    return this.translateHelper.translateItemTableConfiguration(conf);
   }
 
 

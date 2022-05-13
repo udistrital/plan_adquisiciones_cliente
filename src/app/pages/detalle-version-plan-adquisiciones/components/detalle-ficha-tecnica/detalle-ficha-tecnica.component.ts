@@ -46,9 +46,7 @@ export class DetalleFichaTecnicaComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(conf: any): any {
-    let configuracion = conf;
-    configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
-    return configuracion;
+    return this.translateHelper.translateItemTableConfiguration(conf);
   }
 
   MontarFicha(metas: any, ficha: any) {
