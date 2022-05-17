@@ -39,7 +39,7 @@ export class TableMetasComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<any>,
     private route: Router,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
   }
 
@@ -101,8 +101,8 @@ export class TableMetasComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_METAS;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_METAS);
   }
 
   ngOnDestroy(): void {

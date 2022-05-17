@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import {
   LoadAccionTabla,
@@ -41,7 +42,8 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private parametrics: ParametricService,
     private popupManager: PopUpManager,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
+    private translate: TranslateService,
   ) {
     this.store.dispatch(LoadAccionTabla(null));
     this.store.dispatch(ConsultarPlanes({}));
@@ -60,7 +62,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
       .select(getPlanes)
       .subscribe((planes: any) => {
         if (this.sharedService.IfStore(planes)) {
-          if (Object.keys(planes[0][0]).length !== 0) {
+          if (Object.keys(planes[0][0]).length) {
             this.datosPrueba = planes[0];
           } else {
             this.datosPrueba = [];
@@ -102,15 +104,14 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
             if (accion.fila.Publicado === true) {
               this.store.dispatch(SeleccionarPlan(accion.fila));
               this.store.dispatch(ConsultarVersionesPlan(accion.fila));
-              // this.store.dispatch(CargarVersionesPlan([DATOS_PRUEBA_3]));
               this.route.navigate([
                 'pages/plan-adquisiciones/planes/versiones-plan-adquisiciones',
               ]);
               this.store.dispatch(LoadFilaSeleccionada(null));
             } else {
               this.popupManager.showInfoAlert(
-                'Este Plan de Adquisiciones no se ha Publicado',
-                'No Hay Publicaciones'
+                this.translate.instant('AVISOS.plan_adquisiciones_no_publicado'),
+                this.translate.instant('AVISOS.sin_publicaciones')
               );
             }
           }
@@ -124,9 +125,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(
-      this.configuracion
-    );
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_PLANES_DE_ADQUISICIONES);
   }
 }

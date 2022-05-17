@@ -304,7 +304,9 @@
     "actividades": "Actividades",
     "valor_actividad_error": "Es necesario el valor de la actividad",
     "actividades_asociadas": "Actividades Asociadas",
-    "todas_actividades_asociadas": "Todas las actividades disponibles están asociadas"
+    "todas_actividades_asociadas": "Todas las actividades disponibles están asociadas",
+    "agregar_actividad": "Agregar Actividad",
+    "": "Editar Actividad"
   },
   "APROPIACION": {
     "consulta-apropiacion-title":"Consulta apropiación inicial",
@@ -516,7 +518,9 @@
     "eliminar_elemento_titulo": "Confirmación de eliminar",
     "timpo_duracion_estimada_error": "La duración estimada no debe superar un (1) año",
     "seleccione_centro_gestor_area_funcional_meta": "Seleccione el centro gestor, el área funcional y al menos una meta",
-    "codigo_nombre": "{{ CODIGO }} - {{ NOMBRE }}"
+    "codigo_nombre": "{{ CODIGO }} - {{ NOMBRE }}",
+    "plan_adquisiciones_no_publicado": "Este Plan de Adquisiciones No Se Ha Publicado",
+    "sin_publicaciones": "No Hay Publicaciones"
   },
   "FORMULARIO": {
     "NOMBRE": {

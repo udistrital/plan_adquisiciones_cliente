@@ -25,10 +25,8 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
     private route: Router,
     private store: Store<any>,
     private sharedService: SharedService,
-    private translateHelper: TranslateFormItemsHelper
-  ) {
-    this.configuracion = CONFIGURACION_TABLA_VERSIONES_PLAN;
-  }
+    private translateHelper: TranslateFormItemsHelper,
+  ) { }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
@@ -68,9 +66,7 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_VERSIONES_PLAN;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(
-      this.configuracion
-    );
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_VERSIONES_PLAN);
   }
 }

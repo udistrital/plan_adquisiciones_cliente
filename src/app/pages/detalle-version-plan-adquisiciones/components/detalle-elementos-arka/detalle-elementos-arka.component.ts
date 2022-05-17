@@ -24,7 +24,8 @@ export class DetalleElementosArkaComponent implements OnInit {
   }
 
   ngOnInit() {
-    const configuracion_tabla_elementos_arka = this.translateTableConfiguracion(CONFIGURACION_TABLA_ELEMENTOS_ARKA);
+    const configuracion_tabla_elementos_arka = this
+      .translateTableConfiguracion(CONFIGURACION_TABLA_ELEMENTOS_ARKA);
     const formatoTabla = JSON.parse(JSON.stringify(configuracion_tabla_elementos_arka));
     formatoTabla.dataConfig[0].pipe.config[0] = (data: any) => {
       return data.split('-')[0];

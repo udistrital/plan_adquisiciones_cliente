@@ -44,7 +44,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     private actividadesService: ActividadesService,
     private popupService: PopUpManager,
     private translate: TranslateService,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
     this.display = false;
     this.Datos = [];
@@ -137,8 +137,8 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES_FUENTES;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES);
   }
 
   OpenModal() {

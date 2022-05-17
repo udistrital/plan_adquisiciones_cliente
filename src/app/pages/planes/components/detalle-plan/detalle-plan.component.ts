@@ -67,9 +67,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private popupService: PopUpManager,
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
     private translate: TranslateService,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
-    // this.parametrics.CargarArbolRubros('3');
     this.DispatchActions();
   }
 
@@ -121,10 +120,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(
-      this.configuracion
-    );
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_DETALLE_PLAN_2);
   }
 
   CrearRenglon() {
@@ -171,7 +168,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
 
           this.popupService.showSuccessAlert(
             this.translate.instant('PLAN_ADQUISICIONES.publicado'),
-            this.translate.instant('GLOBAL.publicado')
+            this.translate.instant('GLOBAL.publicado'),
           );
         }
       });

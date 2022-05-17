@@ -20,20 +20,24 @@ export class DetalleFichaTecnicaComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<any>,
     private metaService: MetasService,
-    private translateHelper: TranslateFormItemsHelper
-  ) { }
+    private translateHelper: TranslateFormItemsHelper,
+    ) {
+      this.Datos = [];
+    }
+
   ngOnDestroy(): void {
     this.suscription$.unsubscribe();
   }
+
   ngOnInit() {
-    const configuracion_tabla_ficha_estadistica = this.translateTableConfiguracion(CONFIGURACION_TABLA_FICHA_ESTADISTICA);
+    const configuracion_tabla_ficha_estadistica = this
+      .translateTableConfiguracion(CONFIGURACION_TABLA_FICHA_ESTADISTICA);
     this.configuracion = JSON.parse(JSON.stringify(configuracion_tabla_ficha_estadistica));
     delete this.configuracion.rowActions;
     delete this.configuracion.tableActions;
     this.configuracion.dataConfig[0].pipe.config[0] = (data: any) => {
       return data.Numero;
     };
-    this.Datos = [];
 
     this.suscription$ = this.store.select(getVersionPlan).subscribe((version: any) => {
       this.metaService.getMetasRubro(this.datos.RubroId).subscribe((metas: any) => {

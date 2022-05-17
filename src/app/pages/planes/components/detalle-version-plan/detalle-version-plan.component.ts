@@ -57,7 +57,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private titlepipe: TitleCasePipe,
     private datePipe: DatePipe,
     private translate: TranslateService,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
   }
 

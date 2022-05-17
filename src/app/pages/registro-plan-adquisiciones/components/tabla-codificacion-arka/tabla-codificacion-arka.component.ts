@@ -29,7 +29,7 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private renderer: Renderer2,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
     this.display = false;
     this.store.dispatch(CargarElementosARKA([]));
@@ -86,8 +86,8 @@ export class TablaCodificacionArkaComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_ELEMENTOS_ARKA;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_ELEMENTOS_ARKA);
   }
 
   OpenModal() {

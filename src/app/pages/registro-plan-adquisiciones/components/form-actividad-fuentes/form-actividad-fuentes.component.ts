@@ -48,9 +48,8 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private translateHelper: TranslateFormItemsHelper
   ) {
-    this.titulo = this.translate.instant('GLOBAL.agregar') + this.translate.instant('GLOBAL.actividad');
+    this.titulo = this.translate.instant('ACTIVIDAD.agregar_actividad');
     this.boton = this.translate.instant('GLOBAL.crear');
-    // this.Datos = DATOS_PRUEBA_4;
     this.ActividadesAsociadas = [];
     this.ActividadesCapturadas = [];
   }
@@ -86,7 +85,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
           if (this.sharedService.IfStore(actividad)) {
             this.Actividades = this.ActividadesCapturadas;
             this.CrearActividadFuentesForm(actividad);
-            this.titulo = this.translate.instant('GLOBAL.editar') + this.translate.instant('GLOBAL.actividad');
+            this.titulo = this.translate.instant('ACTIVIDAD.editar_actividad');
             this.boton = this.translate.instant('GLOBAL.editar');
           } else {
             if (this.sharedService.IfStore(actividades)) {
@@ -99,7 +98,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
               this.Actividades = this.ActividadesCapturadas;
             }
             this.CrearActividadFuentesForm(null);
-            this.titulo = this.translate.instant('GLOBAL.agregar') + this.translate.instant('GLOBAL.actividad');
+            this.titulo = this.translate.instant('ACTIVIDAD.agregar_actividad');
             this.boton = this.translate.instant('GLOBAL.crear');
           }
         });
@@ -152,8 +151,8 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_FUENTES;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_FUENTES);
   }
 
   OpenModal() {

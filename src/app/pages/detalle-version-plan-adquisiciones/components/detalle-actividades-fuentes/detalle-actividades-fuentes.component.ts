@@ -13,12 +13,14 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   configuracion: any;
   DatosTabla: any[];
 
-  constructor(private translateHelper: TranslateFormItemsHelper
+  constructor(
+    private translateHelper: TranslateFormItemsHelper,
   ) {
   }
 
   ngOnInit() {
-    const configuracion_tabla_activiades_fuentes = this.translateTableConfiguracion(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES);
+    const configuracion_tabla_activiades_fuentes = this
+      .translateTableConfiguracion(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES);
     const formatoTabla = JSON.parse(JSON.stringify(configuracion_tabla_activiades_fuentes));
     delete formatoTabla.tableActions;
     delete formatoTabla.rowActions;

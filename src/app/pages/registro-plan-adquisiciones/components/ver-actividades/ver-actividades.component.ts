@@ -13,8 +13,9 @@ export class VerActividadesComponent implements OnInit {
   DatosTransformados: any;
   configuracion: any;
 
-  constructor(private translateHelper: TranslateFormItemsHelper) {
-  }
+  constructor(
+    private translateHelper: TranslateFormItemsHelper,
+  ) { }
 
   ngOnInit() {
     this.translateTableConfiguracion();
@@ -28,8 +29,8 @@ export class VerActividadesComponent implements OnInit {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_VER_ACTIVIDADES;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_VER_ACTIVIDADES);
   }
 
 }

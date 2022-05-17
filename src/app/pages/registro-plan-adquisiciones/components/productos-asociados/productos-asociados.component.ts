@@ -32,7 +32,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private renderer: Renderer2,
     private translate: TranslateService,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) {
     this.display = false;
     this.Datos = [];
@@ -94,8 +94,8 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
   }
 
   private translateTableConfiguracion(): void {
-    this.configuracion = CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS;
-    this.configuracion = this.translateHelper.translateItemTableConfiguration(this.configuracion);
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS);
   }
 
   OpenModal() {

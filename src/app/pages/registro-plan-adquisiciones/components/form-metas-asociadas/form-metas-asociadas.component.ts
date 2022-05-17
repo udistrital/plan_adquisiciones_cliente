@@ -36,7 +36,7 @@ export class FormMetasAsociadasComponent implements OnInit, OnDestroy {
     private metasService: MetasService,
     private sharedService: SharedService,
     private renderer: Renderer2,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
   }
   ngOnDestroy(): void {

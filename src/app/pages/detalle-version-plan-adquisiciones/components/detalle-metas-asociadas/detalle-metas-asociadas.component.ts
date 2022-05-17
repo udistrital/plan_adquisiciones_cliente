@@ -17,11 +17,12 @@ export class DetalleMetasAsociadasComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private sharedService: SharedService,
-    private translateHelper: TranslateFormItemsHelper
+    private translateHelper: TranslateFormItemsHelper,
   ) { }
 
   ngOnInit() {
-    const configuracion_tabla_metas_asociadas = this.translateTableConfiguracion(CONFIGURACION_TABLA_METAS_ASOCIADAS);
+    const configuracion_tabla_metas_asociadas = this
+      .translateTableConfiguracion(CONFIGURACION_TABLA_METAS_ASOCIADAS);
     const formatoTabla = JSON.parse(JSON.stringify(configuracion_tabla_metas_asociadas));
     delete formatoTabla.tableActions;
     delete formatoTabla.rowActions;
