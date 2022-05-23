@@ -2,9 +2,9 @@ export const SHARED = {
   NUXEO: {
     PATH: 'https://documental.udistrital.edu.co/nuxeo/',
   },
-  CLIENTE_PRESUPUESTO: '/pages/plan-cuentas',
+  CLIENTE_PRESUPUESTO: 'https://pruebaspresupuesto.portaloas.udistrital.edu.co/pages',
   CLIENTE_CONTABILIDAD:
-  'https://pruebascontabilidad.portaloas.udistrital.edu.co/pages',
+    'https://pruebascontabilidad.portaloas.udistrital.edu.co/pages',
   WSO2_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/',
   PLAN_ADQUISICIONES_CRUD_SERVICE:
     'https://autenticacion.portaloas.udistrital.edu.co/apioas/plan_adquisiciones_crud/v1/',

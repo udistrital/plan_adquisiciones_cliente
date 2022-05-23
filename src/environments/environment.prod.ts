@@ -8,6 +8,8 @@ import { SHARED } from './shared';
 export const environment = {
   ...SHARED,
 
+  CLIENTE_PRESUPUESTO: 'https://presupuesto.portaloas.udistrital.edu.co/',
+  CLIENTE_CONTABILIDAD: 'https://contabilidad.portaloas.udistrital.edu.co/',
   production: true,
   IDPLANADQUISICIONES: '',
   IDPLANADQUISICIONESIDEXUD: '',
@@ -16,8 +18,8 @@ export const environment = {
     CLIENTE_ID: 'TJ43YHyy3T29GrlTx9l0j7J7Cl8a',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
-    REDIRECT_URL: 'http://10.20.0.254/presupuesto_cliente/',
-    SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
+    REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co/',
+    SIGN_OUT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co/',
     SIGN_OUT_REDIRECT_URL: 'http://10.20.0.254/presupuesto_cliente/',
   },
 };

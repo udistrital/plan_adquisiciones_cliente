@@ -9,12 +9,6 @@ export const environment = {
   ...SHARED,
 
   production: true,
-  // PLAN_ADQUISICIONES_CRUD_SERVICE: 'http://localhost:8081/v1/',
-  // PLAN_ADQUISICIONES_MID_SERVICE: 'http://localhost:8083/v1/',
-  // ADMINISTRATIVA_PRUEBAS_SERVICE: 'http://pruebasapi.intranetoas.udistrital.edu.co:8104/v1/',
-  // PLAN_CUENTAS_MONGO_SERVICE: 'http://localhost:8082/v1/',
-  // PLAN_CUENTAS_MID_SERVICE: 'http://localhost:8080/v1/',
-  // PLAN_CUENTAS_MID_SERVICE: 'http://pruebasapi.intranetoas.udistrital.edu.co:8204/v1/',
   IDPLANADQUISICIONES: '625e10947e642dc1653e121b',
   IDPLANADQUISICIONESIDEXUD: '61ef760a6d6ad467ee92e2aa',
   KNOWAGE: {
