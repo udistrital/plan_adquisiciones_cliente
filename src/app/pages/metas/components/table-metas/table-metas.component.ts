@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { SeleccionarLineamiento } from '../../../lineamientos/actions/lineamientos.actions';
 import { getFuenteRecursoSeleccionada, getLineamientos, getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
@@ -37,12 +38,13 @@ export class TableMetasComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<any>,
-    private route: Router
+    private route: Router,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
-    this.configuracion = CONFIGURACION_TABLA_METAS;
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
     // Cargar Metas
     this.subscription$ = this.store.select(getMetas).subscribe((metas) => {
       if (metas) {
@@ -94,46 +96,13 @@ export class TableMetasComponent implements OnInit, OnDestroy {
       this.store.dispatch(SeleccionarMeta(null));
     });
   }
-
-  // Cargar Lineamientos y fuente de recurso
-  // this.subscription2$ = combineLatest([
-  //   this.store.select(getFuenteRecursoSeleccionada),
-  //   this.store.select(getLineamientos),
-  // ]).subscribe(([fuente, lineamientos]) => {
-  //   if (fuente && lineamientos) {
-  //     this.fuenteRecurso = fuente.Codigo;
-  //     if (Object.keys(lineamientos[0][0]).length !== 0) {
-  //       this.Lineamientos = lineamientos[0];
-  //     } else {
-  //       this.Lineamientos = [];
-  //     }
-  //   }
-  // });
-  // Consultar Metas, Cargar rubro y lineamiento seleccionado
-  // this.subscription3$ = combineLatest([
-  //   this.store.select(getRubroSeleccionado),
-  //   this.store.select(getLineamientoSeleccionado),
-  // ]).subscribe(([rubro, lineamiento]) => {
-  //   if (rubro && lineamiento) {
-  //     this.store.dispatch(ConsultarMetas({
-  //       Lineamiento: lineamiento,
-  //       Rubro: rubro,
-  //     }));
-  //   }
-  //   if (rubro) {
-  //     this.rubroSeleccionado = rubro;
-  //   }
-  //   if (lineamiento) {
-  //     this.LineamientoSeleccionado = this.Lineamientos.find((elemento) => lineamiento.Id === elemento.Id);
-  //   }
-  // });
-
-
-  // SeleccionarLineamiento(lineamiento: any) {
-  //   this.store.dispatch(SeleccionarLineamiento(lineamiento));
-  // }
   SeleccionarRubro(rubro: any) {
     this.store.dispatch(SeleccionarRubro(rubro));
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_METAS);
   }
 
   ngOnDestroy(): void {

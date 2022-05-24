@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="form-group mt-3" *ngIf="config.filter">
         <input type="text" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
-          placeholder="Campo de Búsqueda" [(ngModel)]="stringBusqueda">
+          placeholder="{{ 'GLOBAL.campo_busqueda' | translate }}" [(ngModel)]="stringBusqueda">
       </div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">

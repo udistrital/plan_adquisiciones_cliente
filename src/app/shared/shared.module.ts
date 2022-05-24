@@ -43,7 +43,8 @@ import { OrdinalPipePipe } from './pipes/ordinal-pipe.pipe';
     ReactiveFormsModule,
     NbTreeGridModule,
     StoreModule.forFeature(fromShared.sharedFeatureKey, fromShared.reducer),
-    EffectsModule.forFeature([SharedEffects])
+    EffectsModule.forFeature([SharedEffects]),
+    TranslateModule
   ],
   declarations: [
     GeneralTableComponent,

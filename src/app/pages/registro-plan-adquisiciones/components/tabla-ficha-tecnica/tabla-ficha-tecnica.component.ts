@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { MetasService } from '../../../metas/services/metas.service';
@@ -31,9 +32,9 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private matDialog: MatDialog,
     private metaService: MetasService,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
 
-    this.configuracion = CONFIGURACION_TABLA_FICHA_ESTADISTICA;
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -42,6 +43,7 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
     this.subscription4$.unsubscribe();
   }
   ngOnInit() {
+    this.translateTableConfiguracion();
 
     this.subscription$ = combineLatest([
       this.store.select(getPlanSeleccionado),
@@ -92,6 +94,12 @@ export class TablaFichaTecnicaComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_FICHA_ESTADISTICA);
+  }
+
   OpenModal() {
     this.matDialog.open(FormFichaTecnicaComponent, {
       width: '500px',

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { CONFIGURACION_TABLA_ACTIVIDADES_FUENTES } from '../../../registro-plan-adquisiciones/interfaces/interfaces';
 
 @Component({
@@ -13,17 +14,22 @@ export class DetalleActividadesFuentesComponent implements OnInit {
   DatosTabla: any[];
 
   constructor(
+    private translateHelper: TranslateFormItemsHelper,
   ) {
-    const formatoTabla = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES));
-    delete formatoTabla.tableActions;
-    delete formatoTabla.rowActions;
-    this.configuracion = formatoTabla;
-    this.DatosTabla = [];
   }
 
   ngOnInit() {
-
+    const configuracion_tabla_activiades_fuentes = this
+      .translateTableConfiguracion(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES);
+    const formatoTabla = JSON.parse(JSON.stringify(configuracion_tabla_activiades_fuentes));
+    delete formatoTabla.tableActions;
+    delete formatoTabla.rowActions;
+    this.configuracion = formatoTabla;
     this.DatosTabla = this.MontarActividades(this.datos['registro_plan_adquisiciones-actividad']);
+  }
+
+  private translateTableConfiguracion(conf: any): any {
+    return this.translateHelper.translateItemTableConfiguration(conf);
   }
 
   MontarActividades(actividades: any[]) {

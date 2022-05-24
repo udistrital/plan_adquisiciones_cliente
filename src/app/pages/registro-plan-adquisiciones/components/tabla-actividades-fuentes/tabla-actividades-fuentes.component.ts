@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import Swal from 'sweetalert2';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 import { getAccionTabla, getAreaFuncional, getCentroGestor, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
@@ -41,9 +43,10 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private actividadesService: ActividadesService,
     private popupService: PopUpManager,
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_TABLA_ACTIVIDADES_FUENTES;
     this.Datos = [];
   }
   ngOnDestroy(): void {
@@ -56,7 +59,7 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.translateTableConfiguracion();
 
     this.subscription$ = this.store.select(getMetasAsociadas).subscribe((metas: any) => {
       if (this.sharedService.IfStore(metas)) {
@@ -121,33 +124,38 @@ export class TablaActividadesFuentesComponent implements OnInit, OnDestroy {
         this.sharedService.IfStore(area) &&
         this.sharedService.IfStore(centro) &&
         this.sharedService.IfStore(metas)
-      ) {
-        this.AreaFuncional = area;
-        this.CentroGestor = centro.CentroGestor;
-        this.Meta = metas[0];
-      } else {
-        this.AreaFuncional = undefined;
-        this.CentroGestor = undefined;
-        this.Meta = undefined;
+        ) {
+          this.AreaFuncional = area;
+          this.CentroGestor = centro.CentroGestor;
+          this.Meta = metas[0];
+        } else {
+          this.AreaFuncional = undefined;
+          this.CentroGestor = undefined;
+          this.Meta = undefined;
       }
     });
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_ACTIVIDADES_FUENTES);
   }
 
   OpenModal() {
     this.matDialog.open(FormActividadFuentesComponent);
   }
   FaltanDatos() {
-    this.popupService.showInfoAlert('Selecciona el centro gestor, el area funcional, y al menos una meta', 'Info');
+    this.popupService.showInfoAlert(this.translate.instant('AVISOS.seleccione_centro_gestor_area_funcional_meta'), this.translate.instant('GLOBAL.info'));
   }
 
   LaunchDeleteModal(data: any) {
     Swal.fire({
-      type: 'error',
-      title: 'Eliminar?',
-      text: `${data.Codigo} - ${data.Nombre}`,
+      type: this.translate.instant('AVISOS.error'),
+      title: this.translate.instant('AVISOS.eliminar_elemento_titulo'),
+      text: this.translate.instant('AVISOS.codigo_nombre', { CODIGO: data.Codigo, NOMBRE: data.Nombre }),
       showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento

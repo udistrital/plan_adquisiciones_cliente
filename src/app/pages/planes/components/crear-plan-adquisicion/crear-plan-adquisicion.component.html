@@ -12,14 +12,14 @@
 
             <div class="col-12">
                 <div class="form-group">
-                    <label>Descripción:</label>
+                    <label>{{ 'GLOBAL.descripcion' | translate}}:</label>
                     <textarea class="form-control" aria-label="With textarea" formControlName="Descripcion"
                         rows="2"></textarea>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Vigencia:</label>
+                    <label>{{'GLOBAL.vigencia' | translate}}:</label>
                     <input type="number" class="form-control py-2" id="buscador-tabla" aria-describedby="search-table"
                         formControlName="Vigencia" placeholder="">
                 </div>
@@ -35,7 +35,7 @@
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()">{{boton}}</button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnCancel()">{{'GLOBAL.cancelar' | translate}}</button>
             </div>
         </div>
     </form>

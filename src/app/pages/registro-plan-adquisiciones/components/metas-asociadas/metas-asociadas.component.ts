@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { CargarMetasAsociadas } from '../../actions/registro-plan-adquisiciones.actions';
@@ -29,11 +31,11 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private sharedService: SharedService,
     private renderer: Renderer2,
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
     this.display = false;
-    this.configuracion = CONFIGURACION_TABLA_METAS_ASOCIADAS;
     this.Datos = [];
-    // this.store.dispatch(CargarElementosARKA([]));
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -43,6 +45,7 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
 
     this.subscription$ = this.store.select(getMetasAsociadas).subscribe((elementos: any) => {
       if (this.sharedService.IfStore(elementos)) {
@@ -82,24 +85,28 @@ export class MetasAsociadasComponent implements OnInit, OnDestroy {
     });
   }
 
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_METAS_ASOCIADAS);
+  }
+
   OpenModal() {
     this.display = true;
     setTimeout(() => {
       this.renderer.selectRootElement(this.contentRef.nativeElement).click();
       this.display = false;
     }, 0);
-    // this.modalService.open(this.contentRef,{windowClass: 'modal-holder'})
   }
 
 
   LaunchDeleteModal(data: any) {
     Swal.fire({
-      type: 'error',
-      title: 'Esta Seguro de Eliminar',
-      text: `El siguiente elemento?: ${data.Codigo} ${data.Nombre}`,
+      type: this.translate.instant('AVISOS.error'),
+      title: this.translate.instant('AVISOS.eliminar_elemento_titulo'),
+      text: this.translate.instant('AVISOS.eliminar_elemento', { CODIGO: data.Numero, NOMBRE: data.Nombre }),
       showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     }).then((value) => {
       if (value.value) {
         // Quitar Elemento

@@ -9,11 +9,8 @@ export const environment = {
   ...SHARED,
 
   production: true,
-  NUXEO: {
-    PATH: 'https://documental.udistrital.edu.co/nuxeo/',
-  },
-  CLIENTE_PRESUPUESTO: 'https://pruebaspresupuesto.portaloas.udistrital.edu.co/',
-  CLIENTE_CONTABILIDAD: 'https://pruebascontabilidad.portaloas.udistrital.edu.co/',
+  IDPLANADQUISICIONES: '625e10947e642dc1653e121b',
+  IDPLANADQUISICIONESIDEXUD: '61ef760a6d6ad467ee92e2aa',
   KNOWAGE: {
     PROTOCOL: 'https',
     HOST: 'tuleap.udistrital.edu.co',

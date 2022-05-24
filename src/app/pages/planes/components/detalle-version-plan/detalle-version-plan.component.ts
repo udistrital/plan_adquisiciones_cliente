@@ -17,6 +17,8 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TimeRangePipe } from '../../../../shared/pipes/time-range.pipe';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { OrdinalPipePipe } from '../../../../shared/pipes/ordinal-pipe.pipe';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -41,6 +43,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   PlanAdquisiciones: any;
   PDFPublicado: any;
   index: any;
+  vigenciaPlan: any;
 
 
   constructor(
@@ -53,6 +56,8 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     private ordinalPipe: OrdinalPipePipe,
     private titlepipe: TitleCasePipe,
     private datePipe: DatePipe,
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
   }
 
@@ -74,6 +79,9 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         this.PlanAdquisiciones = plan;
       }
     });
+
+    this.vigenciaPlan = this.PlanAdquisiciones.Vigencia;
+
     this.subscription3$ = this.store.select(getFilaSeleccionada).subscribe((accion) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.name === 'Ver') {
@@ -92,15 +100,19 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     const conf = JSON.parse(JSON.stringify(CONFIGURACION_TABLA_DETALLE_PLAN_2));
     conf.rowActions.actions = [
       {
-        name: 'Ver',
+        name: this.translate.instant('GLOBAL.ver'),
         icon: 'fas fa-list',
         class: 'p-2',
-        title: 'Ver Version',
+        title: this.translate.instant('GLOBAL.ver_version'),
       },
     ];
-    this.configuracion = conf;
+    this.configuracion = this.translateTableConfiguracion(conf);
     this.datos = datos;
     this.TotalPlan = this.planesService.SacarTotalPlan(datos);
+  }
+
+  private translateTableConfiguracion(conf: any): any {
+    return this.translateHelper.translateItemTableConfiguration(conf);
   }
 
 
@@ -108,7 +120,6 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
     this.subscription3$.unsubscribe();
-    // this.subscription4$.unsubscribe();
   }
 
 
@@ -127,7 +138,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: `PLAN DE ADQUISICIONES DE BIENES Y SERVICIOS DE LA UNIVERSIDAD DISTRITAL VIGENCIA ${this.PlanAdquisiciones.Vigencia}`,
+          text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
           colSpan: 9,
           alignment: 'center',
           border: [false, false, false, false],
@@ -147,11 +158,11 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       ],
       [
         {
-          text: this.ordinalPipe.transform(this.index) +
-            ' Edicion\n' +
-            this.titlepipe.transform(
-              this.datePipe.transform(this.Plan.fechacreacion, 'medium')
-            ),
+          text: this.translate.instant('PLAN_ADQUISICIONES.edicion',
+          {
+            INDEX: this.ordinalPipe.transform(this.index),
+            FECHA: this.titlepipe.transform(this.datePipe.transform(this.Plan.fechacreacion, 'medium'))
+          }),
           colSpan: 9,
           alignment: 'right',
           border: [false, false, false, false],
@@ -169,6 +180,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
   }
   // Agregando Fuentes
   AgregarFuentes() {
+    const columnas_plan = this.translateTableConfiguracion(COLUMNAS_PLAN);
     this.datos.forEach((fuente: any) => {
       this.PDFPublicado.content[0].table.body.push(
         [
@@ -181,7 +193,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
           },
           {}, {}, {}, {}, {}, {}, {}, {}
         ],
-        JSON.parse(JSON.stringify(COLUMNAS_PLAN))
+        JSON.parse(JSON.stringify(columnas_plan))
       );
       this.AgregarRubros(fuente.datos);
       this.SumaFuente(fuente.datos, fuente.FuenteData);
@@ -228,7 +240,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
               alignment: 'center',
             },
             {
-              text: renglon.ActividadData.Nombre,
+              text: this.translate.instant('GLOBAL.no_aplica'),
               style: 'style_7',
               alignment: 'justify',
             },
@@ -270,8 +282,16 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
 
   // Desagregando Actividades
   AjustarActividades(Renglon: any, Actividades: any, Rubro) {
+    let lengthRowsPanCodigosArka = 0;
+    Actividades.forEach(actividad => {
+      lengthRowsPanCodigosArka = lengthRowsPanCodigosArka + actividad.FuentesFinanciamiento.length;
+    });
+    Actividades[0].FuentesFinanciamiento.length;
     Actividades.forEach((actividad: any, index: any) => {
-      const datosArka = this.MontarElementosArka(Renglon, index, Actividades.length);
+      const datosArka = this.MontarElementosArka(Renglon, index, lengthRowsPanCodigosArka);
+      const lenghtFuentes = actividad.FuentesFinanciamiento.length;
+      const valuesFuentes = this.ExtraerFuentesFinanciamiento(actividad, false);
+      const nameFuentes = this.ExtraerFuentesFinanciamiento(actividad, true);
       this.PDFPublicado.content[0].table.body.push(
         [
           datosArka,
@@ -279,44 +299,66 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             text: Rubro.Codigo,
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: actividad.Numero + '.' + actividad.NumeroMeta + ' ' + actividad.Nombre,
             style: 'style_7',
             alignment: 'justify',
+            rowSpan: lenghtFuentes,
           },
           {
             text: Renglon.ResponsableNombre,
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerFecha(Renglon, 'limits'),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerFecha(Renglon, 'range'),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
             text: this.ExtraerModalidades(Renglon),
             style: 'style_7',
             alignment: 'center',
+            rowSpan: lenghtFuentes,
           },
           {
-            text: this.ExtraerFuentesFinanciamiento(actividad, false),
+            text: valuesFuentes[0],
             style: 'style_7',
             alignment: 'right',
           },
           {
-            text: this.ExtraerFuentesFinanciamiento(actividad, true),
+            text: nameFuentes[0],
             style: 'style_7',
             alignment: 'left',
           },
         ]
       );
+
+      if (valuesFuentes.length > 1) {
+        valuesFuentes.forEach((_, jindex) => {
+          if (jindex > 0 ) {
+            this.PDFPublicado.content[0].table.body.push([{}, {}, {}, {}, {}, {}, {},
+              { text: valuesFuentes[jindex],
+                style: 'style_7',
+                alignment: 'right', },
+              { text: nameFuentes[jindex],
+                style: 'style_7',
+                alignment: 'left',
+              }
+            ]);
+          }
+        });
+      }
     });
   }
   MontarElementosArka(Renglon: any, index: any, length: any) {
@@ -361,13 +403,13 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         return this.currencyPipe.transform(fuente.ValorAsignado, '$');
       }
     });
-    return datos.reduce((a: any, c: any) => a + '\n' + c);
+    return datos;
   }
   SumaRubro(Renglones: any, Rubro: any) {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: 'Total Rubro ' + Rubro.Nombre,
+          text: this.translate.instant('RUBRO.total_rubro', { NOMBRE: Rubro.Nombre }),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'
@@ -390,7 +432,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: 'TOTAL PLAN ' + Fuente.Nombre,
+          text: this.translate.instant('PLAN_ADQUISICIONES.total_plan', { NOMBRE: Fuente.Nombre }).toUpperCase(),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'
@@ -412,7 +454,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     this.PDFPublicado.content[0].table.body.push(
       [
         {
-          text: `PLAN DE ADQUISICIONES DE BIENES Y SERVICIOS DE LA UNIVERSIDAD DISTRITAL VIGENCIA ${this.PlanAdquisiciones.Vigencia}`,
+          text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
           alignment: 'center',
           colSpan: 7,
           style: 'style_1'

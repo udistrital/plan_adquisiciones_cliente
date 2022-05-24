@@ -15,11 +15,11 @@
         <div class="row border-bottom border-dark my-3 py-3">
             <div class="col-12 col-sm-4">
                 <div class="form-group">
-                    <label>Código:</label>
+                    <label>{{ 'GLOBAL.codigo' | translate}}:</label>
                     <mat-select class="form-control" formControlName="FuenteSeleccionada">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item"
+                            class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let fuente of FuentesFinanciamiento" class="example-item selector"
                                 [value]="fuente">
                                 {{fuente.Codigo}}
                             </mat-option>
@@ -29,8 +29,8 @@
             </div>
             <div class="col-12 col-sm-8">
                 <div class="form-group">
-                    <label>Nombre:</label>
-                    <span class="form-control overflow">
+                    <label>{{ 'GLOBAL.nombre' | translate}}:</label>
+                    <span class="form-control overflow selector">
                         {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
                         FuenteFinanciamientoForm.get('FuenteSeleccionada').value.Nombre : '' }}
                     </span>
@@ -38,8 +38,8 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label>Valor Fuente de Financiamiento:</label>
-                    <span class="form-control overflow">
+                    <label>{{ 'GLOBAL.valor' | translate}} {{ 'GLOBAL.fuente_financiamiento' | translate}}:</label>
+                    <span class="form-control overflow selector">
                         {{FuenteFinanciamientoForm.get('FuenteSeleccionada').value ?
                         (FuenteFinanciamientoForm.get('FuenteSeleccionada').value.ValorActual |
                         currency:'$':'symbol':'3.2-2':'en-US' ) : '' }}
@@ -48,8 +48,8 @@
             </div>
             <div class="col-6">
                 <div class="form-group">
-                    <label>Valor Disponible Actividad:</label>
-                    <span class="form-control overflow">
+                    <label>{{ 'GLOBAL.valor_disponible_texto' | translate}} {{ 'GLOBAL.actividad' | translate}}:</label>
+                    <span class="form-control overflow selector">
                         {{ ValorDisponible | currency:'$':'symbol':'3.2-2':'en-US'}}
                     </span>
                 </div>
@@ -58,24 +58,24 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <label>Valor a Asignar:</label>
+                    <label>{{ 'GLOBAL.valor_asignar' | translate}}:</label>
                     <input currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" type="text"
                         class="form-control text-left" placeholder="" formControlName="Valor">
                     <ng-container *ngIf="FuenteFinanciamientoForm && !(FuenteFinanciamientoForm.controls.Valor.errors)">
-                        <small>Valor Disponible: {{ Valor2 | currency:'$':'symbol':'3.2-2':'en-US'}}</small>
+                        <small>{{ 'GLOBAL.valor_disponible' | translate: { VALOR: Valor2 | currency:'$':'symbol':'3.2-2':'en-US'} }}: </small>
                     </ng-container>
                     <ng-container *ngIf="FuenteFinanciamientoForm.controls.Valor.errors">
                         <small *ngIf="FuenteFinanciamientoForm.controls.Valor.errors.max" class="text-danger">
-                            El valor no debe pasar el máximo valor Disponible {{ Valor2 | currency:'$':'symbol':'3.2-2':'en-US'}}</small>
+                            {{ 'ERROR.valor_maximo_error' | translate: {VALOR: Valor2 | currency:'$':'symbol':'3.2-2':'en-US'} }}</small>
                     </ng-container>
 
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Porcentaje:</label>
+                    <label>{{'GLOBAL.porcentaje' | translate}}:</label>
                     <div class="input-group">
-                        <span class="form-control overflow">
+                        <span class="form-control overflow selector">
                             {{FuenteFinanciamientoForm.get('Valor').value ? (FuenteFinanciamientoForm.get('Valor').value
                             / data.Valor | percent : '1.2-2') : '' }}
                         </span>
@@ -92,7 +92,7 @@
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)=OnClose()>Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)=OnClose()>{{'GLOBAL.cancelar' | translate}}</button>
             </div>
         </div>
     </form>

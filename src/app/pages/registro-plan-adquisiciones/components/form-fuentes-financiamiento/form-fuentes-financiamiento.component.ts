@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import Swal from 'sweetalert2';
 import { GetVigenciaActual } from '../../../../shared/actions/shared.actions';
@@ -36,10 +37,11 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
     private matDialogRef: MatDialogRef<FormFuentesFinanciamientoComponent>,
     private registroService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
+    private translate: TranslateService,
   ) {
     this.store.dispatch(GetVigenciaActual({ offset: null }));
-    this.titulo = 'Agregar Fuente de Financiamiento';
-    this.boton = 'Crear';
+    this.titulo = this.translate.instant('GLOBAL.agregar') + ' ' + this.translate.instant('GLOBAL.fuente_financiamiento');
+    this.boton = this.translate.instant('GLOBAL.crear');
     this.FuentesAsociadas = [];
   }
 
@@ -70,12 +72,12 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);
-            this.titulo = 'Editar Fuente de Financiamiento';
-            this.boton = 'Editar';
+            this.titulo = this.translate.instant('GLOBAL.editar') + ' ' + this.translate.instant('GLOBAL.fuente_financiamiento');
+            this.boton = this.translate.instant('GLOBAL.editar');
           } else {
             this.CrearFuenteFinanciamientoForm(null);
-            this.titulo = 'Agregar Fuente de Financiamiento';
-            this.boton = 'Crear';
+            this.titulo = this.translate.instant('GLOBAL.agregar') + ' ' + this.translate.instant('GLOBAL.fuente_financiamiento');
+            this.boton = this.translate.instant('GLOBAL.crear');
           }
         });
       }
@@ -144,10 +146,10 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
 
   LaunchValueNullModal() {
     Swal.fire({
-      type: 'success',
-      title: 'Fuentes Asignadas',
-      text: `Si desea agregar mas fuentes es necesario reducir los valores asignados previamente`,
-      confirmButtonText: 'Aceptar',
+      type: this.translate.instant('AVISOS.correcto'),
+      title: this.translate.instant('GLOBAL.fuentes_asignadas'),
+      text: this.translate.instant('ERROR.agregar_mas_fuentes'),
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     }).then(() => {
       this.OnClose();
     });

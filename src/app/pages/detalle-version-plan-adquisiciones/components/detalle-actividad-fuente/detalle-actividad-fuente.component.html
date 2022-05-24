@@ -1,11 +1,11 @@
 <div class="container-fluid" *ngIf="Actividad">
     <div class="row">
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-            <p>Actividad:</p>
+            <p>{{ 'ACTIVIDAD.actividad' | translate }}:</p>
         </div>
         <div class="col-3">
             <div class="form-group">
-                <label>Código:</label>
+                <label>{{ 'ACTIVIDAD.codigo' | translate }}:</label>
                 <span class="form-control overflow">
                     {{ Actividad ? Actividad.Numero : ''}}
                 </span>
@@ -13,7 +13,7 @@
         </div>
         <div class="col-6">
             <div class="form-group">
-                <label>Nombre:</label>
+                <label>{{ 'GLOBAL.nombre' | translate }}:</label>
                 <span class="form-control overflow">
                     {{ Actividad ? Actividad.Nombre : ''}}
                 </span>
@@ -23,14 +23,14 @@
         </div>
         <div class="col-9">
             <div class="form-group">
-                <label>Valor:</label>
+                <label>{{ 'GLOBAL.valor' | translate }}:</label>
                 <span class="form-control overflow">
                     {{datos ? (datos.ValorActividad | currency:'$':'symbol':'3.2-2':'en-US') : '' }}
                 </span>
             </div>
         </div>
         <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-            <p>Fuente de Financiamiento:</p>
+            <p>{{ 'GLOBAL.fuente_financiamiento' | translate }}:</p>
         </div>
         <div class="col-3 pt-3">
             <div class="form-group">

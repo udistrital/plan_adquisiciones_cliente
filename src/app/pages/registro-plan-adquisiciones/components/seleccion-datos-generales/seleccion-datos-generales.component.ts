@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { getModalidadesSeleccion, getResponsables } from '../../../../shared/selectors/shared.selectors';
@@ -29,6 +30,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private parametricService: ParametricService,
     private popUpService: PopUpManager,
+    private translate: TranslateService
   ) {
     this.parametricService.CargarResponsables();
   }
@@ -77,7 +79,7 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
         if (this.sharedService.DuracionLimite(value)) {
           this.store.dispatch(SeleccionarFechaSeleccion(value));
         } else {
-          this.popUpService.showInfoAlert('La duracion estimada no debe superar un (1) año', 'Error');
+          this.popUpService.showInfoAlert(this.translate.instant('AVISOS.timpo_duracion_estimada_error'), this.translate.instant('GLOBAL.error'));
           this.store.dispatch(SeleccionarFechaSeleccion(null));
           this.DatosGeneralesForm.get('FechaInicioSeleccion').setValue(null, {emitEvent: false});
         }
