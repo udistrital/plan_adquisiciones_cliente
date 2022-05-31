@@ -15,7 +15,7 @@ export const environment = {
   IDPLANADQUISICIONESIDEXUD: '',
   TOKEN: {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
-    CLIENTE_ID: 'TJ43YHyy3T29GrlTx9l0j7J7Cl8a',
+    CLIENTE_ID: 'SXty5ffr_efm_n2HcCdwk8hh9Wka',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
     REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co/',
