@@ -16,16 +16,16 @@
                             <div class="col-12">
                                 <mat-vertical-stepper>
                                     <mat-step>
-                                        <ng-template matStepLabel>Rubro Asociado</ng-template>
+                                        <ng-template matStepLabel>{{ 'RUBRO.rubro_asociado' | translate}}</ng-template>
                                         <div class="pt-2">
                                             <ngx-detalle-rubro [datos]="Info" ></ngx-detalle-rubro>
                                         </div>
                                         <div class="d-flex justify-content-end p-3">
-                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>{{ 'GLOBAL.siguiente' | translate}}</button>
                                         </div>
                                     </mat-step>
                                     <mat-step *ngIf="!TipoDePlan">
-                                        <ng-template matStepLabel>Metas Asociadas</ng-template>
+                                        <ng-template matStepLabel>{{ 'META.metas_asociadas' | translate }}</ng-template>
                                         <div class="pt-2">
                                             <ngx-detalle-metas-asociadas [datos]="Info" ></ngx-detalle-metas-asociadas>
                                         </div>
@@ -35,7 +35,7 @@
                                         </div>
                                     </mat-step>
                                     <mat-step *ngIf="!TipoDePlan">
-                                        <ng-template matStepLabel>Productos Asociados</ng-template>
+                                        <ng-template matStepLabel>{{ 'PRODUCTOS.productos_asociados' | translate}}</ng-template>
                                         <div class="pt-2">
                                             <ngx-detalle-productos-asociadas [datos]="Info"></ngx-detalle-productos-asociadas>
                                         </div>
@@ -45,54 +45,44 @@
                                         </div>
                                     </mat-step>
                                     <mat-step>
-                                        <ng-template matStepLabel>Datos de Responsable</ng-template>
+                                        <ng-template matStepLabel>{{ 'GLOBAL.datos_responsable' | translate}}</ng-template>
                                         <div class="pt-2">
                                             <ngx-detalle-datos-generales [datos]="Info"></ngx-detalle-datos-generales>
                                         </div>
                                         <div class="d-flex justify-content-between p-3">
-                                            <button class="btn btn-primary text-light" matStepperPrevious>Atrás</button>
-                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                            <button class="btn btn-primary text-light" matStepperPrevious>{{ 'GLOBAL.atras' | translate}}</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>{{ 'GLOBAL.siguiente' | translate}}</button>
                                         </div>
                                     </mat-step>
                                     <mat-step>
-                                        <ng-template matStepLabel>Codificación UNSPSC</ng-template>
+                                        <ng-template matStepLabel>{{ 'GLOBAL.codificacion_unspsc' | translate}}</ng-template>
                                         <div class="py-2">
                                             <ngx-detalle-elementos-arka [datos]="Info"></ngx-detalle-elementos-arka>
                                         </div>
                                         <div class="d-flex justify-content-between p-3">
-                                            <button class="btn btn-primary text-light" matStepperPrevious>Atrás</button>
-                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                            <button class="btn btn-primary text-light" matStepperPrevious>{{ 'GLOBAL.atras' | translate}}</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>{{ 'GLOBAL.siguiente' | translate}}</button>
                                         </div>
                                     </mat-step>
                                     <mat-step *ngIf="TipoDePlan">
-                                        <ng-template matStepLabel>Actividad y Fuente de Financiamiento</ng-template>
+                                        <ng-template matStepLabel>{{ 'ACTIVIDAD.actividad' | translate }} y {{ 'GLOBAL.fuente_financiamiento' | translate}}</ng-template>
                                         <div class="pt-2">
                                             <ngx-detalle-actividad-fuente [datos]="Info"></ngx-detalle-actividad-fuente>
                                         </div>
                                         <div class="d-flex justify-content-between p-3">
-                                            <button class="btn btn-primary text-light" matStepperPrevious>Atrás</button>
-                                            <button class="btn btn-primary text-light" matStepperNext>Siguiente</button>
+                                            <button class="btn btn-primary text-light" matStepperPrevious>{{ 'GLOBAL.atras' | translate}}</button>
+                                            <button class="btn btn-primary text-light" matStepperNext>{{ 'GLOBAL.siguiente' | translate}}</button>
                                         </div>
                                     </mat-step>
                                     <mat-step *ngIf="!TipoDePlan">
-                                        <ng-template matStepLabel>Actividades y Fuentes de Financiamiento</ng-template>
+                                        <ng-template matStepLabel>{{ 'ACTIVIDAD.actividades' | translate }} y {{ 'GLOBAL.fuente_financiamiento' | translate}}</ng-template>
                                         <div class="py-2">
                                             <ngx-detalle-actividades-fuentes [datos]="Info"></ngx-detalle-actividades-fuentes>
                                         </div>
                                         <div class="d-flex justify-content-between p-3">
-                                            <button class="btn btn-primary text-light" matStepperPrevious>Atrás</button>
-                                            <!-- <button class="btn btn-primary text-light" matStepperNext>Siguiente</button> -->
+                                            <button class="btn btn-primary text-light" matStepperPrevious>{{ 'GLOBAL.atras' | translate}}</button>
                                         </div>
                                     </mat-step>
-                                    <!-- <mat-step *ngIf="!TipoDePlan">
-                                        <ng-template matStepLabel>Ficha de Estadísticas Básicas de Inversión y Metodología General Ajustada</ng-template>
-                                        <div class="py-2">
-                                            <ngx-detalle-ficha-tecnica [datos]="Info"></ngx-detalle-ficha-tecnica>
-                                        </div>
-                                        <div class="d-flex justify-content-between p-3">
-                                            <button class="btn btn-primary text-light" matStepperPrevious>Atrás</button>
-                                        </div>
-                                    </mat-step> -->
                                 </mat-vertical-stepper>
                                 <ngx-btn-volver></ngx-btn-volver>
                             </div>

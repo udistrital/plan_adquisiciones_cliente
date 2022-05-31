@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
@@ -31,10 +32,10 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
     private store: Store<any>,
     private registroPlanService: RegistroPlanAdquisicionesService,
     private sharedService: SharedService,
+    private translate: TranslateService
   ) {
-    this.titulo = 'Agregar Elemento';
-    this.boton = 'Crear';
-    // this.Elementos = DATOS_PRUEBA_2;
+    this.titulo = this.translate.instant('GLOBAL.agregar') + ' ' + this.translate.instant('GLOBAL.elemento');
+    this.boton = this.translate.instant('GLOBAL.crear');
   }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
@@ -46,13 +47,13 @@ export class FormCodificacionArkaComponent implements OnInit, OnDestroy {
 
       this.index = null;
       if (this.sharedService.IfStore(fila) && fila.accion.title === 'Editar Elemento') {
-        this.titulo = 'Editar Elemento';
-        this.boton = 'Editar';
+        this.titulo = this.translate.instant('GLOBAL.editar') + ' ' + this.translate.instant('GLOBAL.elemento');
+        this.boton = this.translate.instant('GLOBAL.editar');
         this.index = fila.index;
         this.CrearElementoARKAForm(fila.fila);
       } else {
-        this.titulo = 'Agregar Elemento';
-        this.boton = 'Crear';
+        this.titulo = this.translate.instant('GLOBAL.agregar') + ' ' + this.translate.instant('GLOBAL.elemento');
+        this.boton = this.translate.instant('GLOBAL.crear');
         this.CrearElementoARKAForm(null);
       }
     });

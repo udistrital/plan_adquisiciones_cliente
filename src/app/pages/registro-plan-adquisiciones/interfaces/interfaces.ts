@@ -1,15 +1,15 @@
 export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
     title: {
-        name: 'Codificacion UNSPSC',
         class: 'text-center text-light',
+        label_i18n: 'codificacion_unspsc'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Descripcion',
             title: {
-                name: 'Codigo',
                 class: 'text-center',
+                label_i18n: 'codigo'
             },
             pipe: {
                 type: 'custom',
@@ -24,8 +24,8 @@ export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripcion',
                 class: 'text-center',
+                label_i18n: 'descripcion'
             },
             pipe: {
                 class: 'text-center',
@@ -35,36 +35,33 @@ export const CONFIGURACION_TABLA_ELEMENTOS_ARKA: any = {
     ],
     rowActions: {
         title: {
-            name: 'Acciones',
             class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: 'p-2',
-                title: 'Editar Elemento',
+                label_i18n: 'editar_elemento'
             },
             {
-                name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Eliminar Elemento',
+                label_i18n: 'eliminar_elemento'
             }
         ],
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2 mx-2',
-            title: 'Agregar Elemento',
+            label_i18n: 'agregar_elemento'
         },
     ],
     noData: {
-        name: 'No Existen Productos Asociados',
         class: 'text-center',
+        label_i18n: 'sin_productos_asociados'
     },
     sort: true,
     filter: false,
@@ -76,8 +73,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
         {
             key: 'ActividadId',
             title: {
-                name: 'Actividades',
                 class: 'text-center',
+                label_i18n: 'actividades'
             },
             pipe: {
                 class: '',
@@ -86,8 +83,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Id2',
                     title: {
-                        name: 'Número',
                         class: 'text-center',
+                        label_i18n: 'numero'
                     },
                     pipe: {
                         class: '',
@@ -96,8 +93,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Nombre',
                     title: {
-                        name: 'Nombre',
                         class: 'text-center',
+                        label_i18n: 'nombre'
                     },
                     pipe: {
                         class: '',
@@ -106,8 +103,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Valor',
                     title: {
-                        name: 'Valor',
                         class: 'text-center',
+                        label_i18n: 'valor'
                     },
                     pipe: {
                         type: 'currency',
@@ -125,8 +122,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
         {
             key: 'FuentesFinanciamiento',
             title: {
-                name: 'Fuentes de Funcionamiento',
                 class: 'text-center',
+                label_i18n: 'fuentes_financiamiento'
             },
             pipe: {
                 class: '',
@@ -137,6 +134,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     title: {
                         name: 'Código',
                         class: 'text-center',
+                        label_i18n: 'codigo'
                     },
                     pipe: {
                         class: ''
@@ -147,6 +145,7 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                     title: {
                         name: 'Nombre',
                         class: 'text-center',
+                        label_i18n: 'nombre'
                     },
                     pipe: {
                         class: ''
@@ -155,8 +154,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Porcentaje', // object key
                     title: {
-                        name: '%',
                         class: 'text-center',
+                        label_i18n: 'porcentaje'
                     },
                     pipe: {
                         type: 'percent',
@@ -169,8 +168,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
                 {
                     key: 'Valor', // object key
                     title: {
-                        name: 'Valor',
                         class: 'text-center',
+                        label_i18n: 'valor'
                     },
                     pipe: {
                         type: 'currency',
@@ -188,30 +187,28 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
     ],
     rowActions: {
         title: {
-            name: 'Acciones',
             class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: '',
-                title: 'Editar Actividad y Fuentes Asociadas',
+                label_i18n: 'editar_actividades_fuentes_asociadas'
             },
         ],
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Actividad y Fuentes Asociadas',
+            label_i18n: 'agregar_actividades_fuentes_asociadas'
         }
     ],
     noData: {
-        name: 'No Existen Elementos Asociados',
         class: 'text-center',
+        label_i18n: 'sin_elementos_asociados'
     },
     sort: true,
     filter: false,
@@ -219,16 +216,16 @@ export const CONFIGURACION_TABLA_ACTIVIDADES_FUENTES: any = {
 
 export const CONFIGURACION_TABLA_FUENTES: any = {
     title: {
-        name: 'Fuentes de Financiamiento',
         class: 'text-center text-light',
+        label_i18n: 'fuentes_financiamiento'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Codigo',
             title: {
-                name: 'Código',
                 class: 'text-center',
+                label_i18n: 'codigo'
             },
             pipe: {
                 class: 'text-center',
@@ -237,8 +234,8 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripción',
                 class: 'text-center',
+                label_i18n: 'descripcion'
             },
             pipe: {
                 class: 'text-center',
@@ -247,8 +244,8 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Porcentaje',
             title: {
-                name: '%',
                 class: 'text-center',
+                label_i18n: 'porcentaje'
             },
             pipe: {
                 type: 'percent',
@@ -261,8 +258,8 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         {
             key: 'Valor',
             title: {
-                name: 'Valor',
                 class: 'text-center',
+                label_i18n: 'valor'
             },
             pipe: {
                 type: 'currency',
@@ -281,34 +278,32 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
         title: {
             name: 'Acciones',
             class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: 'p-2',
-                title: 'Editar Fuente de Financiamiento',
+                label_i18n: 'editar_fuente_financiamiento'
             },
             {
-                name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Eliminar Fuente de Financiamiento',
+                label_i18n: 'editar_fuente_financiamiento'
             }
         ],
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2 mx-2',
-            title: 'Agregar Fuente de Financiamiento',
+            label_i18n: 'agregar_fuente_financiamiento'
         },
     ],
     noData: {
-        name: 'No Existen Fuentes Asociados',
         class: 'text-center',
+        label_i18n: 'sin_fuentes_asociadas'
     },
     sort: true,
     filter: false,
@@ -316,16 +311,16 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
 
 export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     title: {
-        name: 'FICHA DE ESTADÍSTICAS BÁSICAS DE INVERSIÓN Y DE METODOLOGÍA GENERAL AJUSTADA',
         class: 'text-center text-light',
+        label_i18n: 'fiha_estadisticas_basicas_inversion_metodologia_general_ajustada'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Meta',
             title: {
-                name: 'Meta',
                 class: 'text-center',
+                label_i18n: 'meta'
             },
             pipe: {
                 type: 'custom',
@@ -340,8 +335,8 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'Proceso',
             title: {
-                name: 'Proceso',
                 class: 'text-center',
+                label_i18n: 'proceso'
             },
             pipe: {
                 class: '',
@@ -350,8 +345,8 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'Magnitud',
             title: {
-                name: 'Magnitud',
                 class: 'text-center',
+                label_i18n: 'magnitud'
             },
             pipe: {
                 class: '',
@@ -360,8 +355,8 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'UnidadMedida',
             title: {
-                name: 'Unidad de Medida',
                 class: 'text-center',
+                label_i18n: 'unidad_medida'
             },
             pipe: {
                 class: '',
@@ -370,8 +365,8 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
         {
             key: 'Descripcion',
             title: {
-                name: 'Descripción',
                 class: 'text-center',
+                label_i18n: 'descripcion'
             },
             pipe: {
                 class: '',
@@ -380,30 +375,28 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
     ],
     rowActions: {
         title: {
-            name: 'Acciones',
             class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'editar',
                 icon: 'fas fa-pencil-alt',
                 class: '',
-                title: 'Editar Ficha',
+                label_i18n: 'editar_ficha'
             },
         ],
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Meta Asociada',
+            label_i18n: 'agregar_nueva_meta_asociada'
         }
     ],
     noData: {
-        name: 'No Existen Elementos Asociados',
         class: 'text-center',
+        label_i18n: 'sin_elementos_asociados'
     },
     sort: true,
     filter: false,
@@ -411,16 +404,16 @@ export const CONFIGURACION_TABLA_FICHA_ESTADISTICA: any = {
 
 export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
     title: {
-        name: 'Productos Asociados',
         class: 'text-center text-light',
+        label_i18n: 'productos_asociados'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Codigo',
             title: {
-                name: 'Codigo',
                 class: 'text-center align-middle',
+                label_i18n: 'codigo'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -429,8 +422,8 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Nombre',
                 class: 'text-center align-middle',
+                label_i18n: 'nombre'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -439,8 +432,8 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         {
             key: 'PorcentajeDistribucion2',
             title: {
-                name: '% Distribución',
                 class: 'text-center align-middle',
+                label_i18n: 'procentaje_distribucion'
             },
             pipe: {
                 type: 'percent',
@@ -455,33 +448,31 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
         title: {
             name: 'Acciones',
             class: 'text-center align-middle',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'Editar',
                 icon: 'fas fa-pencil-alt',
                 class: 'p-2',
-                title: 'Editar Producto Asociado',
+                label_i18n: 'editar_producto_asociado'
             },
             {
-                name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Eliminar Producto Asociado',
+                label_i18n: 'eliminar_producto_asociado'
             },
         ],
     },
     noData: {
-        name: 'No Existen Productos Asociados',
         class: 'text-center',
+        label_i18n: 'sin_productos_asociados'
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Asociar Nuevo Producto',
+            label_i18n: 'asociar_nuevo_producto'
         }
     ],
     sort: true,
@@ -490,16 +481,16 @@ export const CONFIGURACION_TABLA_PRODUCTOS_ASOCIADOS: any = {
 
 export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
     title: {
-        name: 'Metas Asociadas',
         class: 'text-center text-light',
+        label_i18n: 'metas_asociadas'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Numero',
             title: {
-                name: 'Número',
                 class: 'text-center align-middle',
+                label_i18n: 'numero'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -508,8 +499,8 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripción',
                 class: 'text-center align-middle',
+                label_i18n: 'descripcion'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -518,29 +509,27 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
     ],
     rowActions: {
         title: {
-            name: 'Acciones',
             class: 'text-center align-middle',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'Eliminar',
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                title: 'Eliminar Meta Asociada',
+                label_i18n: 'eliminar_meta_asociada'
             },
         ],
     },
     noData: {
-        name: 'No Existen Metas Asociadas',
         class: 'text-center',
+        label_i18n: 'sin_metas_asociadas'
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Asociar Nueva Meta',
+            label_i18n: 'asociar_nueva_meta'
         }
     ],
     sort: true,
@@ -549,16 +538,16 @@ export const CONFIGURACION_TABLA_METAS_ASOCIADAS: any = {
 
 export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
     title: {
-        name: 'Actividades por Asociar',
         class: 'text-center text-light',
+        label_i18n: 'actividades_asociar'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Numero2',
             title: {
-                name: 'Número',
                 class: 'text-center align-middle',
+                label_i18n: 'numero'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -567,8 +556,8 @@ export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Descripción',
                 class: 'text-center align-middle',
+                label_i18n: 'descripcion'
             },
             pipe: {
                 class: 'text-center align-middle',
@@ -576,8 +565,8 @@ export const CONFIGURACION_TABLA_VER_ACTIVIDADES: any = {
         },
     ],
     noData: {
-        name: 'No Existen Actividades Asociadas',
         class: 'text-center',
+        label_i18n: 'sin_actividades_asociadas'
     },
     sort: true,
     filter: false,

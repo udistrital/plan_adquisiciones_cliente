@@ -12,6 +12,8 @@ import { CargarActividades, CargarFuentes, SeleccionarFuente } from '../../actio
 import { combineLatest, forkJoin, from, of } from 'rxjs';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { mergeMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 
 @Component({
   selector: 'ngx-form-actividad-fuentes',
@@ -43,11 +45,11 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     private matDialogRef: MatDialogRef<FormActividadFuentesComponent>,
     private matDialog: MatDialog,
     private sharedService: SharedService,
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper
   ) {
-    this.titulo = 'Agregar Actividad';
-    this.boton = 'Crear';
-    // this.Datos = DATOS_PRUEBA_4;
-    this.configuracion = CONFIGURACION_TABLA_FUENTES;
+    this.titulo = this.translate.instant('ACTIVIDAD.agregar_actividad');
+    this.boton = this.translate.instant('GLOBAL.crear');
     this.ActividadesAsociadas = [];
     this.ActividadesCapturadas = [];
   }
@@ -60,6 +62,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.translateTableConfiguracion();
     // Traer Actividades y montar Actividad Seleccionada
     this.subscription$ = combineLatest([
       this.store.select(getMetasAsociadas),
@@ -82,8 +85,8 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
           if (this.sharedService.IfStore(actividad)) {
             this.Actividades = this.ActividadesCapturadas;
             this.CrearActividadFuentesForm(actividad);
-            this.titulo = 'Editar Actividad';
-            this.boton = 'Editar';
+            this.titulo = this.translate.instant('ACTIVIDAD.editar_actividad');
+            this.boton = this.translate.instant('GLOBAL.editar');
           } else {
             if (this.sharedService.IfStore(actividades)) {
               this.ActividadesAsociadas = actividades[0];
@@ -95,8 +98,8 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
               this.Actividades = this.ActividadesCapturadas;
             }
             this.CrearActividadFuentesForm(null);
-            this.titulo = 'Agregar Actividad';
-            this.boton = 'Crear';
+            this.titulo = this.translate.instant('ACTIVIDAD.agregar_actividad');
+            this.boton = this.translate.instant('GLOBAL.crear');
           }
         });
       }
@@ -147,6 +150,11 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
     }
   }
 
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_FUENTES);
+  }
+
   OpenModal() {
     if (this.ActividadFuentesForm) {
       if (this.ActividadFuentesForm.value.Valor) {
@@ -155,20 +163,20 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
         });
       } else {
         Swal.fire({
-          type: 'error',
-          title: 'No Existen Datos',
-          text: `Es necesario el valor de la actividad`,
-          confirmButtonText: 'Aceptar',
+          type: this.translate.instant('GLOBAL.error'),
+          title: this.translate.instant('ERROR.sin_datos'),
+          text: this.translate.instant('ACTIVIDAD.valor_actividad_error'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       }
     }
   }
   ActividadesAsociadasModal() {
     Swal.fire({
-      type: 'info',
-      title: 'Actividades Asociadas',
-      text: `Todas las actividades disponibles estan asociadas`,
-      confirmButtonText: 'Aceptar',
+      type: this.translate.instant('AVISOS.info'),
+      title: this.translate.instant('ACTIVIDAD.actividades_asociadas'),
+      text: this.translate.instant('ACTIVIDAD.todas_actividades_asociadas'),
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     }).then(() => {
       this.OnClose();
     });
@@ -179,12 +187,12 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
   }
   LaunchDeleteModal(index: any) {
     Swal.fire({
-      type: 'error',
-      title: 'Esta Seguro de Eliminar',
-      text: `El siguiente elemento?:`,
+      type: this.translate.instant('GLOBAL.error'),
+      title: this.translate.instant('ERROR.titulo_confirmacion_eliminar'),
+      text: this.translate.instant('ERROR.confirmacion_eliminar'),
       showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     }).then((value) => {
       if (value.value) {
 

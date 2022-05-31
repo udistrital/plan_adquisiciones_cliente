@@ -28,13 +28,8 @@ export class MetasEffects {
     private popupManager: PopUpManager,
   ) {
     this.subscription$ = combineLatest([
-      // this.store.select(getLineamientoSeleccionado),
       this.store.select(getRubroSeleccionado),
     ]).subscribe(([rubro]) => {
-
-      // if (lineamiento) {
-      //   this.Lineamiento = lineamiento;
-      // }
       if (rubro) {
         this.Rubro = rubro;
       }
@@ -93,11 +88,9 @@ export class MetasEffects {
         this.metasService.crearMeta(
           Meta,
         ).pipe(
-          map((data) => {
-            // this.store.dispatch(ConsultarMeta(data));
+          map(() => {
             this.popupManager.showSuccessAlert('Meta Creada');
             return MetasActions.ConsultarMetas({
-              // Lineamiento: this.Lineamiento,
               Rubro: this.Rubro,
             });
           }),

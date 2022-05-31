@@ -19,7 +19,6 @@ import { getRenglonSeleccionado, getRubro } from '../../selectors/registro-plan-
 })
 export class LayoutComponent implements OnInit, OnDestroy {
 
-  titulo: any;
   TipoDePlan: any;
   Guardar: boolean;
   Registro: any;
@@ -35,7 +34,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private pUpManager: PopUpManager,
     private translate: TranslateService,
   ) {
-    this.titulo = 'Creacion Plan de Adquisiciones';
     this.TipoDePlan = true;
     this.Guardar = false;
     this.Registro = {};
@@ -71,7 +69,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this.store.select(getCentroGestor),
       this.store.select(getAreaFuncional),
       this.store.select(getPlanSeleccionado),
-      // this.store.select(getPlanDetallado),
       this.store.select(getRenglonSeleccionado),
     ]).subscribe(([data, centro, area, plan, renglon]) => {
       if (this.sharedService.IfStore(renglon)) {
@@ -113,17 +110,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   RevisarRegistroInversion(data: any, centro: any, area: any, plan: any) {
     if (
-      this.sharedService.IfStore(data.Rubro) &&
       this.sharedService.IfStore(data.MetasAsociadas) &&
       this.sharedService.IfStore(data.ProductosAsociados) &&
-      this.sharedService.IfStore(data.Responsable) &&
-      this.sharedService.IfStore(data.FechaSeleccion) &&
-      this.sharedService.IfStore(data.Modalidades) &&
-      this.sharedService.IfStore(data.ElementosARKA) &&
       this.sharedService.IfStore(data.Actividades) &&
-      this.sharedService.IfStore(centro) &&
-      this.sharedService.IfStore(area) &&
-      this.sharedService.IfStore(plan)
+      this.CheckStoreInfo(data, centro, area, plan)
     ) {
       return true;
     } else {
@@ -133,26 +123,35 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   RevisarRegistroFuncionamiento(data: any, centro: any, area: any, plan: any) {
     if (
-      this.sharedService.IfStore(data.Rubro) &&
-      this.sharedService.IfStore(data.Responsable) &&
-      this.sharedService.IfStore(data.FechaSeleccion) &&
-      this.sharedService.IfStore(data.Modalidades) &&
-      this.sharedService.IfStore(data.ElementosARKA) &&
       this.sharedService.IfStore(data.ActividadFuente) &&
-      this.sharedService.IfStore(centro) &&
-      this.sharedService.IfStore(area) &&
-      this.sharedService.IfStore(plan)
+      this.CheckStoreInfo(data, centro, area, plan)
     ) {
       if (data.ActividadFuente.Valor <= data.Rubro.data.ValorActual) {
         return true;
       } else {
-        this.pUpManager.showErrorToast(this.translate.instant(`ERROR: El valor asignado a la fuente supera el valor actual del rubro: \$${data.Rubro.data.ValorActual}`));
+        const errorMessage = this.translate.instant('GLOBAL.error') + ': '
+          + this.translate.instant('GLOBAL.valor_fuente_mayor_valor_rubro', { VALOR: data.Rubro.data.ValorActual });
+        this.pUpManager.showErrorToast(errorMessage);
         return false;
       }
     } else {
       return false;
     }
   }
+
+  private CheckStoreInfo(data: any, centro: any, area: any, plan: any): boolean {
+    return (
+      this.sharedService.IfStore(data.Rubro) &&
+      this.sharedService.IfStore(data.Responsable) &&
+      this.sharedService.IfStore(data.FechaSeleccion) &&
+      this.sharedService.IfStore(data.Modalidades) &&
+      this.sharedService.IfStore(data.ElementosARKA) &&
+      this.sharedService.IfStore(centro) &&
+      this.sharedService.IfStore(area) &&
+      this.sharedService.IfStore(plan)
+      );
+  }
+
 
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
 
@@ -316,20 +315,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
           actividades[index].FuentesFinanciamiento,
           element.FuentesFinanciamiento
         );
-      } else {
-        // ! Se debe evaluar si el actividades[index] es útil en algún momento, por el momento funciona sin este segmento de código
-        // ! se deja para revisar a fondo y eliminar en caso de que no afecte el flujo en pruebas
-        // actividades.push({
-        //   ActividadId: element.Id,
-        //   Valor: element.Valor,
-        //   Id: element.RegistroActividadId,
-        //   RegistroActividadId: element.RegistroActividadId,
-        //   FuentesFinanciamiento: this.ActualizarFuentes(
-        //     actividades[index].FuentesFinanciamiento,
-        //     element.FuentesFinanciamiento
-        //   ),
-        //   Activo: false,
-        // });
       }
     });
     return actividades;

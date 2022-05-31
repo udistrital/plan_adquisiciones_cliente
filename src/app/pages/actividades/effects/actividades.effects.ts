@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { getMetaSeleccionada } from '../../metas/selectors/metas.selectors';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
 import { ConsultarActividad } from '../actions/actividades.actions';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
@@ -23,6 +24,7 @@ export class ActividadesEffects {
     private store: Store<any>,
     private actividadesService: ActividadesService,
     private popupManager: PopUpManager,
+    private translate: TranslateService,
   ) {
     this.subscription$ = this.store.select(getMetaSeleccionada).subscribe((meta) => {
       if (meta) {
@@ -84,15 +86,14 @@ export class ActividadesEffects {
         this.actividadesService.crearActividad(
           Actividad,
         ).pipe(
-          map((data) => {
-            // this.store.dispatch(ConsultarActividad(data));
-            this.popupManager.showSuccessAlert('Actividad Creada');
+          map(() => {
+            this.popupManager.showSuccessAlert(this.translate.instant('ACTIVIDAD.actividad_creada'));
             return ActividadesActions.ConsultarActividades({
               Meta: this.Meta,
             });
           }),
           catchError(data => {
-            this.popupManager.showAlert('error', data.status, data.statusText);
+            this.popupManager.showAlert(this.translate.instant('ERROR.error'), data.status, data.statusText);
             return of(ActividadesActions.CatchError(data));
           }))
       )

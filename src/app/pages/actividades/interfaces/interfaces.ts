@@ -1,15 +1,15 @@
 export const CONFIGURACION_TABLA_ACTIVIDADES: any = {
     title: {
-        name: 'Actividades Asociadas',
         class: 'text-center text-light',
+        label_i18n: 'actividades_asociadas'
     },
     showColumnTitle: true,
     dataConfig: [
         {
             key: 'Numero',
             title: {
-                name: 'Número',
                 class: 'text-center',
+                label_i18n: 'numero'
             },
             pipe: {
                 class: '',
@@ -18,8 +18,8 @@ export const CONFIGURACION_TABLA_ACTIVIDADES: any = {
         {
             key: 'Nombre',
             title: {
-                name: 'Nombre',
                 class: 'text-center',
+                label_i18n: 'nombre'
             },
             pipe: {
                 class: 'text-justify',
@@ -28,30 +28,28 @@ export const CONFIGURACION_TABLA_ACTIVIDADES: any = {
     ],
     rowActions: {
         title: {
-            name: 'Acciones',
             class: 'text-center',
-            actionClass: 'd-flex flex-row justify-content-around align-middle'
+            actionClass: 'd-flex flex-row justify-content-around align-middle',
+            label_i18n: 'acciones'
         },
         actions: [
             {
-                name: 'editar',
                 icon: 'fas fa-pencil-alt',
                 class: 'p-2',
-                title: 'Editar',
+                label_i18n: 'editar'
             },
         ],
     },
     tableActions: [
         {
-            name: 'nuevo',
             icon: 'fas fa-plus py-1 px-2',
             class: 'px-2',
-            title: 'Agregar Nueva Actividad',
+            label_i18n: 'agregar_nueva_actividad'
         }
     ],
     noData: {
-        name: 'No Existen Elementos Asociados',
         class: 'text-center',
+        label_i18n: 'sin_elementos_asociados'
     },
     sort: true,
     filter: true,

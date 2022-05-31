@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { LoadFilaSeleccionada } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import { getAccionTabla, getFilaSeleccionada } from '../../../../shared/selectors/shared.selectors';
 import { SharedService } from '../../../../shared/services/shared.service';
 import { ConsultarVersion } from '../../actions/planes.actions';
@@ -24,14 +25,14 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
     private route: Router,
     private store: Store<any>,
     private sharedService: SharedService,
-  ) {
-    this.configuracion = CONFIGURACION_TABLA_VERSIONES_PLAN;
-  }
+    private translateHelper: TranslateFormItemsHelper,
+  ) { }
   ngOnDestroy(): void {
     this.subscription$.unsubscribe();
     this.subscription2$.unsubscribe();
   }
   ngOnInit() {
+    this.translateTableConfiguracion();
     this.subscription$ = this.store.select(getFilaSeleccionada).subscribe((accion: any) => {
       if (this.sharedService.IfStore(accion)) {
         if (accion.accion.title === 'Ver Plan de Adquisiciones') {
@@ -62,5 +63,10 @@ export class TablaVersionesComponent implements OnInit, OnDestroy {
       }
     });
     this.sharedService.RetornarAlInicio('planes', 'pages/plan-adquisiciones/planes/tabla-general');
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_VERSIONES_PLAN);
   }
 }

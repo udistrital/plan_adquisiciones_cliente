@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" *ngIf="MetasAsociadasForm">
         <div class="col py-2">
-            <h5 class="card-title text-center text-primary">{{titulo}}</h5>
+            <h5 class="card-title text-center text-primary">{{ 'GLOBAL.asociar_meta' | translate }}</h5>
         </div>
     </div>
     <div class="row" *ngIf="MetasAsociadasForm">
@@ -11,43 +11,35 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <label>Número:</label>
+                    <label>{{'GLOBAL.numero' | translate}}:</label>
                     <mat-select class="form-control" formControlName="Elemento">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let actividad of Elementos" class="example-item"
+                            class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let actividad of Elementos" class="example-item selector"
                                 [value]="actividad">
                                 {{actividad.Numero}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>
                     </mat-select>
-                    
+
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Nombre:</label>
-                    <span class="form-control overflow">
+                    <label>{{'GLOBAL.nombre' | translate}}:</label>
+                    <span class="form-control overflow selector">
                         {{MetasAsociadasForm.get('Elemento').value ? MetasAsociadasForm.get('Elemento').value.Nombre : '' }}
                     </span>
                 </div>
             </div>
-            <!-- <div class="col-12">
-                <div class="form-group">
-                    <label>Descripcion:</label>
-                    <span class="form-control overflow">
-                        {{MetasAsociadasForm.get('Elemento').value ? MetasAsociadasForm.get('Elemento').value.Nombre : '' }}
-                    </span>
-                </div>
-            </div> -->
             <div class="col-6 d-flex justify-content-start">
                 <button [disabled]="MetasAsociadasForm.invalid || !MetasAsociadasForm.touched" type="button"
                     class="btn btn-primary px-3 py-2 my-3 text-light" (click)="OnSubmit()" data-dismiss="modal">
-                    {{boton}}
+                    {{ 'GLOBAL.asociar' | translate }}
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end" #exampleModalCloseMetas>
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" data-dismiss="modal">{{'GLOBAL.cancelar' | translate}}</button>
             </div>
         </div>
     </form>

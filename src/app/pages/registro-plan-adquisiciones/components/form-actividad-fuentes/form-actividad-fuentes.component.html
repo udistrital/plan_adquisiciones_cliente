@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12 col-sm-4">
                 <div class="form-group">
-                    <label>Código:</label>
+                    <label>{{ 'GLOBAL.codigo' | translate}}:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend" *ngIf="boton !== 'Editar'">
                             <!-- Button trigger modal -->
@@ -29,8 +29,8 @@
                         </div>
                         <mat-select class="form-control" formControlName="Actividad">
                             <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                                <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item"
+                                class="example-viewport selector">
+                                <mat-option *cdkVirtualFor="let actividad of Actividades" class="example-item selector"
                                     [value]="actividad">
                                     {{actividad.Numero}}.{{actividad.MetaId.Numero}}
                                 </mat-option>
@@ -41,8 +41,8 @@
             </div>
             <div class="col-12 col-sm-8">
                 <div class="form-group">
-                    <label>Nombre:</label>
-                    <span class="form-control overflow">
+                    <label>{{ 'GLOBAL.nombre' | translate}}:</label>
+                    <span class="form-control overflow selector">
                         {{ActividadFuentesForm.get('Actividad').value ?
                         ActividadFuentesForm.get('Actividad').value.Nombre : '' }}
                     </span>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Valor:</label>
+                    <label>{{ 'GLOBAL.valor' | translate}}:</label>
                     <input currencyMask type="text" [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }"
                         class="form-control text-left" placeholder="Valor" formControlName="Valor">
                 </div>
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnClose()">Cancelar</button>
+                <button type="button" class="btn btn-light px-3 py-2 my-3 border" (click)="OnClose()">{{ 'GLOBAL.cancelar' | translate}}</button>
             </div>
         </div>
     </form>
@@ -80,7 +80,7 @@
                 <ngx-ver-actividades [datos]="Actividades"></ngx-ver-actividades>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">{{ 'GLOBAL.cerrar' | translate}}</button>
             </div>
         </div>
     </div>

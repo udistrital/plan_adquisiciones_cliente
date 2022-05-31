@@ -2,7 +2,7 @@
     <ng-container *ngIf="Datos">
         <div class="row py-2" *ngFor="let item of Datos; index as i">
             <div class="col-9">
-                <span class="form-control overflow">{{item.Nombre}}</span>
+                <span class="form-control overflow selector">{{item.Nombre}}</span>
             </div>
             <div class="col-3">
                 <div class="d-flex justify-content-center">
@@ -22,8 +22,8 @@
                 <div class="form-group">
                     <mat-select class="form-control" formControlName="Valor">
                         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                            class="example-viewport">
-                            <mat-option *cdkVirtualFor="let state of Parametros" class="example-item" [value]="state">
+                            class="example-viewport selector">
+                            <mat-option *cdkVirtualFor="let state of Parametros" class="example-item selector" [value]="state">
                                 {{state.Nombre}}
                             </mat-option>
                         </cdk-virtual-scroll-viewport>

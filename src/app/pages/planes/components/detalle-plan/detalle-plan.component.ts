@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
@@ -8,6 +9,7 @@ import {
   LoadAccionTabla,
   LoadFilaSeleccionada,
 } from '../../../../shared/actions/shared.actions';
+import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFormItems';
 import {
   getArbolRubro,
   getFilaSeleccionada,
@@ -55,6 +57,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   subscription3$: any;
   subscription4$: any;
   Plan: any;
+  vigenciaPlan: any;
 
   constructor(
     private store: Store<any>,
@@ -62,23 +65,15 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private planesService: PlanesService,
     private popupService: PopUpManager,
-    private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService
+    private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
+    private translate: TranslateService,
+    private translateHelper: TranslateFormItemsHelper,
   ) {
-    // this.parametrics.CargarArbolRubros('3');
-    this.publicar = 'Publicar Plan de Adquisiciones';
-    this.store.dispatch(CargarRubro(null));
-    this.store.dispatch(CargarMeta(null));
-    this.store.dispatch(CargarProducto(null));
-    this.store.dispatch(CargarModalidades(null));
-    this.store.dispatch(CargarElementosARKA(null));
-    this.store.dispatch(CargarActividades(null));
-    this.store.dispatch(SeleccionarResponsable(null));
-    this.store.dispatch(CargarRenglonPlan(null));
-    this.store.dispatch(SeleccionarFechaSeleccion(null));
-    this.store.dispatch(SeleccionarFuente(null));
+    this.DispatchActions();
   }
 
   ngOnInit() {
+    this.publicar = this.translate.instant('PLAN_ADQUISICIONES.publicar');
     this.subscription4$ = this.store
       .select(getPlanSeleccionado)
       .subscribe((plan: any) => {
@@ -86,10 +81,12 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           this.Plan = plan;
           this.store.dispatch(ConsultarPlanDetallado(plan));
           if (this.Plan.Publicado === true) {
-            this.publicar = 'Publicar Nueva Version del Plan de Adquisiciones';
+            this.publicar = this.translate.instant('PLAN_ADQUISICIONES.publicar_nueva_version');
           }
         }
       });
+
+    this.vigenciaPlan = this.Plan.Vigencia;
     // lectura de Datos con fuentes de Recurso para renderizacion
     this.subscription$ = this.store
       .select(getPlanDetallado)
@@ -115,11 +112,16 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
   AjustarDatos(datos: any) {
-    this.configuracion = CONFIGURACION_TABLA_DETALLE_PLAN_2;
+    this.translateTableConfiguracion();
     if (datos.length > 0) {
       this.datos = datos;
       this.TotalPlan = this.planesService.SacarTotalPlan(datos);
     }
+  }
+
+  private translateTableConfiguracion(): void {
+    this.configuracion = this.translateHelper
+      .translateItemTableConfiguration(CONFIGURACION_TABLA_DETALLE_PLAN_2);
   }
 
   CrearRenglon() {
@@ -127,19 +129,10 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       .navigate(['pages/plan-adquisiciones/registro-plan-adquisiciones'])
       .then(() => {
         this.store.dispatch(LoadAccionTabla(null));
-        this.store.dispatch(CargarRubro(null));
-        this.store.dispatch(CargarMeta(null));
-        this.store.dispatch(CargarProducto(null));
-        this.store.dispatch(CargarModalidades(null));
-        this.store.dispatch(CargarElementosARKA(null));
         this.store.dispatch(CargarMetasAsociadas(null));
         this.store.dispatch(CargarProductosAsociados(null));
         this.store.dispatch(CargarActividadFuente(null));
-        this.store.dispatch(CargarActividades(null));
-        this.store.dispatch(SeleccionarResponsable(null));
-        this.store.dispatch(CargarRenglonPlan(null));
-        this.store.dispatch(SeleccionarFechaSeleccion(null));
-        this.store.dispatch(SeleccionarFuente(null));
+        this.DispatchActions();
       });
   }
   ActualizarRenglon(renglon: any) {
@@ -174,10 +167,23 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           );
 
           this.popupService.showSuccessAlert(
-            'Plan de Adquisiciones publicado',
-            'Publicado'
+            this.translate.instant('PLAN_ADQUISICIONES.publicado'),
+            this.translate.instant('GLOBAL.publicado'),
           );
         }
       });
+  }
+
+  private DispatchActions(): void {
+    this.store.dispatch(CargarRubro(null));
+    this.store.dispatch(CargarMeta(null));
+    this.store.dispatch(CargarProducto(null));
+    this.store.dispatch(CargarModalidades(null));
+    this.store.dispatch(CargarElementosARKA(null));
+    this.store.dispatch(CargarActividades(null));
+    this.store.dispatch(SeleccionarResponsable(null));
+    this.store.dispatch(CargarRenglonPlan(null));
+    this.store.dispatch(SeleccionarFechaSeleccion(null));
+    this.store.dispatch(SeleccionarFuente(null));
   }
 }
