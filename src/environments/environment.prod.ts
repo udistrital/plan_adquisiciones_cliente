@@ -18,8 +18,8 @@ export const environment = {
     CLIENTE_ID: 'SXty5ffr_efm_n2HcCdwk8hh9Wka',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
-    REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co/',
+    REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co',
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
-    SIGN_OUT_REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co/',
+    SIGN_OUT_REDIRECT_URL: 'https://planadquisiciones.portaloas.udistrital.edu.co',
   },
 };
