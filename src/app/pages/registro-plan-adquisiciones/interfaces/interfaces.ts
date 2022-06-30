@@ -290,7 +290,7 @@ export const CONFIGURACION_TABLA_FUENTES: any = {
             {
                 icon: 'fas fa-trash',
                 class: 'p-2',
-                label_i18n: 'editar_fuente_financiamiento'
+                label_i18n: 'eliminar_fuente_financiamiento'
             }
         ],
     },
