@@ -62,7 +62,7 @@ export class TablaPlanesAdquisicionesComponent implements OnInit, OnDestroy {
       .select(getPlanes)
       .subscribe((planes: any) => {
         if (this.sharedService.IfStore(planes)) {
-          if (Object.keys(planes[0][0]).length) {
+          if (planes[0][0] && Object.keys(planes[0][0]).length) {
             this.datosPrueba = planes[0];
           } else {
             this.datosPrueba = [];
