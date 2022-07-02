@@ -72,8 +72,8 @@ export class FormFuentesFinanciamientoComponent implements OnInit, OnDestroy {
           this.FuentesFinanciamiento = fuentesAsociadas;
           if (this.sharedService.IfStore(fuente)) {
             this.CrearFuenteFinanciamientoForm(fuente);
-            this.titulo = this.translate.instant('GLOBAL.editar') + ' ' + this.translate.instant('GLOBAL.fuente_financiamiento');
-            this.boton = this.translate.instant('GLOBAL.editar');
+            this.titulo = this.translate.instant('GLOBAL.editar_fuente_financiamiento');
+            this.boton = this.translate.instant('GLOBAL.aceptar');
           } else {
             this.CrearFuenteFinanciamientoForm(null);
             this.titulo = this.translate.instant('GLOBAL.agregar') + ' ' + this.translate.instant('GLOBAL.fuente_financiamiento');
