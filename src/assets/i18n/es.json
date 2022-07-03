@@ -259,7 +259,8 @@
     "ver": "ver",
     "acitivdad_vista": "Meta: {{ NUMEROMETA }} - Actividad: {{ NUMEROACTIVIDAD }}. {{ NOMBRE }}",
     "fuentes_asignadas": "Fuentes Asignadas",
-    "asociar_meta": "Asociar Meta"
+    "asociar_meta": "Asociar Meta",
+    "editar_fuente_financiamiento": "Editar Fuente de Financiamiento"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
