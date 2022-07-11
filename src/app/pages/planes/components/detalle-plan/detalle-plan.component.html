@@ -25,7 +25,7 @@
                     <span class="text-light px-2 mx-2">{{ 'GLOBAL.agregar' | translate }} {{ 'GLOBAL.rubro' | translate }}</span>
                 </div>
             </button>
-            <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="Publicar()">
+            <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" [disabled]="desactivarPublicar" (click)="Publicar()">
                 <div class="d-flex flex-row justify-content-around align-middle">
                     <i class="fas fa-check text-light py-1 px-2"></i>
                     <span class="text-light px-2 mx-2">{{publicar}}</span>

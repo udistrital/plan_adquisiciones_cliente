@@ -93,7 +93,7 @@ export class PlanesEffects {
           Plan,
         ).pipe(
           map(() => {
-            this.popupManager.showSuccessAlert('Plan Actualizada');
+            this.popupManager.showSuccessAlert('Plan Actualizado');
             return PlanesActions.ConsultarPlanes({});
           }),
           catchError(data => {
