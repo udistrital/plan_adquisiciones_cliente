@@ -65,7 +65,6 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private route: Router,
     private sharedService: SharedService,
     private planesService: PlanesService,
-    private popupService: PopUpManager,
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
     private translate: TranslateService,
     private translateHelper: TranslateFormItemsHelper,
@@ -165,12 +164,8 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
       .subscribe((resultado: any) => {
         if (resultado && resultado.Body && resultado.Body.PlanAdquisiciones && resultado.Body.PlanAdquisiciones.IdMongo) {
           this.actualizarPlanAdquisicionesService.creaPlanesdeAdquisicionActivos(
-            resultado.Body.IdMongo
+            resultado.Body.PlanAdquisiciones.IdMongo
           );
-          this.popupService.showSuccessAlert(
-            this.translate.instant('PLAN_ADQUISICIONES.publicado'),
-            this.translate.instant('GLOBAL.publicado'),
-            );
         }
         this.desactivarPublicar = false;
       });
