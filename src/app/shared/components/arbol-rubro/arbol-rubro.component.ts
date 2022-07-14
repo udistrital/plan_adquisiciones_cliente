@@ -63,7 +63,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy, OnChanges {
         if (fuente) {
           this.data = this.CargarRubros(fuente, arbol);
         } else {
-          this.data = [arbol[1]];
+          this.data = [arbol[0]];
         }
         this.dataSource = this.dataSourceBuilder.create(this.data, getters);
       } else {
@@ -105,8 +105,7 @@ export class ArbolRubroComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   CargarRubros(Fuente: any, Arbol: any) {
-    // console.log(Arbol[0]);
-    const ArbolFuenteRecurso = Arbol[1].children.find(
+    const ArbolFuenteRecurso = Arbol[0].children.find(
       hijo => hijo.Codigo === Fuente
     );
 
