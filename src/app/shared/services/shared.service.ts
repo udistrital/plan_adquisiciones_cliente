@@ -56,7 +56,7 @@ export class SharedService {
       estado: 'aprobada',
     };
     // call request manager for the tree's data.
-    return this.rqManager.get(`arbol_rubro_apropiacion/arbol_por_estado/${unidadEjecutora}/${params.vigencia}/${params.estado}`).pipe(
+    return this.rqManager.get(`arbol_rubro_apropiacion/arbol_por_estado/${unidadEjecutora}/${params.vigencia}/${params.estado}?query=Codigo:${branch}`).pipe(
       map(res => {
         return res;
       })
