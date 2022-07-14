@@ -5,6 +5,7 @@ import { Parametro } from '../../../shared/models/parametro';
 import { Aplicacion } from '../../../shared/models/aplicacion';
 import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
+import { PopUpManager } from '../../../@core/managers/popUpManager';
 
 const IDPLANGENERAL = environment.IDPLANADQUISICIONES;
 const IDPLANIDEXUD = environment.IDPLANADQUISICIONESIDEXUD;
@@ -17,7 +18,8 @@ export class ActualizarPublicadoConfiguracionService {
 
   constructor(
     private confService: ConfiguracionService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private popupService: PopUpManager
   ) {}
 
   public creaPlanesdeAdquisicionActivos(
@@ -37,15 +39,14 @@ export class ActualizarPublicadoConfiguracionService {
 
           this.confService.put('parametro', p[0]).subscribe((res) => {
             const messageOptions: any = {
-              title: this.translate.instant(
-                'PLAN_ADQUISICIONES.actualizacion_configuracion_titulo'
+              tittle: this.translate.instant(
+                'PLAN_ADQUISICIONES.publicado'
               ),
-              message: this.translate.instant(
+              text: this.translate.instant(
                 'PLAN_ADQUISICIONES.actualizacion_configuracion'
               ),
-              type: this.translate.instant('AVISOS.correcto'),
             };
-            Swal.fire(messageOptions);
+            this.popupService.showSuccessAlert(messageOptions.text, messageOptions.tittle);
           });
         } else {
           QUERY = '?query=Nombre:' + this.application_conf;
@@ -69,15 +70,14 @@ export class ActualizarPublicadoConfiguracionService {
                 .post('parametro', nuevoParametro)
                 .subscribe((res) => {
                   const messageOptions: any = {
-                    title: this.translate.instant(
-                      'PLAN_ADQUISICIONES.creacion_configuracion_titulo'
+                    tittle: this.translate.instant(
+                      'PLAN_ADQUISICIONES.publicado'
                     ),
-                    message: this.translate.instant(
+                    text: this.translate.instant(
                       'PLAN_ADQUISICIONES.creacion_configuracion'
                     ),
-                    type: this.translate.instant('AVISOS.correcto'),
                   };
-                  Swal.fire(messageOptions);
+                  this.popupService.showSuccessAlert(messageOptions.text, messageOptions.tittle);
                 });
             });
         }

@@ -70,8 +70,7 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
   }
 
   CrearFormularioRubro(arbol: any, rubroId?: string) {
-
-    this.fuentesRecurso = arbol[1].children;
+    this.fuentesRecurso = arbol[0].children;
 
     if (rubroId) {
       const info = rubroId.split('-');

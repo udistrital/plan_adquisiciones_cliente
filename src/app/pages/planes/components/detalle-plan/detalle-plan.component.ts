@@ -58,13 +58,13 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   subscription4$: any;
   Plan: any;
   vigenciaPlan: any;
+  desactivarPublicar: boolean = false;
 
   constructor(
     private store: Store<any>,
     private route: Router,
     private sharedService: SharedService,
     private planesService: PlanesService,
-    private popupService: PopUpManager,
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
     private translate: TranslateService,
     private translateHelper: TranslateFormItemsHelper,
@@ -155,22 +155,19 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
   }
 
   Publicar() {
+    this.desactivarPublicar = true;
     this.planesService
       .publicarPlan({
         Id: this.Plan.Id,
         Publicado: true,
       })
       .subscribe((resultado: any) => {
-        if (resultado.Body.IdMongo) {
+        if (resultado && resultado.Body && resultado.Body.PlanAdquisiciones && resultado.Body.PlanAdquisiciones.IdMongo) {
           this.actualizarPlanAdquisicionesService.creaPlanesdeAdquisicionActivos(
-            resultado.Body.IdMongo
-          );
-
-          this.popupService.showSuccessAlert(
-            this.translate.instant('PLAN_ADQUISICIONES.publicado'),
-            this.translate.instant('GLOBAL.publicado'),
+            resultado.Body.PlanAdquisiciones.IdMongo
           );
         }
+        this.desactivarPublicar = false;
       });
   }
 

@@ -86,7 +86,7 @@ export class FormActividadFuentesComponent implements OnInit, OnDestroy {
             this.Actividades = this.ActividadesCapturadas;
             this.CrearActividadFuentesForm(actividad);
             this.titulo = this.translate.instant('ACTIVIDAD.editar_actividad');
-            this.boton = this.translate.instant('GLOBAL.editar');
+            this.boton = this.translate.instant('GLOBAL.cerrar');
           } else {
             if (this.sharedService.IfStore(actividades)) {
               this.ActividadesAsociadas = actividades[0];
