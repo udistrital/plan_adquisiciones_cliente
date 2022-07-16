@@ -74,7 +74,7 @@ export class SeleccionRubroComponent implements OnInit, OnDestroy {
 
     if (rubroId) {
       const info = rubroId.split('-');
-      const rubro = this.sharedService.BuscarNodo(arbol[1].children, rubroId);
+      const rubro = this.sharedService.BuscarNodo(arbol[0].children, rubroId);
 
       this.store.dispatch(CargarRubro(rubro));
       this.RubroForm = this.fb.group({
