@@ -48,12 +48,14 @@ export class TableMetasComponent implements OnInit, OnDestroy {
     // Cargar Metas
     this.subscription$ = this.store.select(getMetas).subscribe((metas) => {
       if (metas) {
-        if (Object.keys(metas).length !== 0) {
-          if (Object.keys(metas[0][0]).length !== 0) {
+        if (metas.length !== 0) {
+          if (metas[0].length !== 0) {
             this.Metas = metas[0];
           } else {
             this.Metas = [];
           }
+        } else {
+          this.Metas = [];
         }
       }
     });
