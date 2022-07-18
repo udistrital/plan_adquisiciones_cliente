@@ -46,7 +46,7 @@ export class TableActividadesComponent implements OnInit, OnDestroy {
           } else {
             this.Actividades = [];
           }
-        } else{
+        } else {
           this.Actividades = [];
         }
       }
