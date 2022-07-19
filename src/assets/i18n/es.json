@@ -509,7 +509,9 @@
     "creacion_configuracion": "Se creó el parámetro para los planes en configuración",
     "pdf_publicacion": "Plan de Adquisiciones de Bienes y Servicios de la Universidad Distrital Vigencia {{ VIGENCIA }}",
     "total_plan": "Total Plan {{ NOMBRE }}",
-    "edicion": "{{ INDEX }} Edición\n {{ FECHA }}"
+    "edicion": "{{ INDEX }} Edición\n {{ FECHA }}",
+    "no_publicado": "No Publicado",
+    "sin_cambios": "El Plan de Adquisiciones no cambió con respecto al anterior publicado"
   },
   "AVISOS": {
     "error": "error",
