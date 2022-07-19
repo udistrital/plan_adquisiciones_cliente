@@ -68,6 +68,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     private actualizarPlanAdquisicionesService: ActualizarPublicadoConfiguracionService,
     private translate: TranslateService,
     private translateHelper: TranslateFormItemsHelper,
+    private popupService: PopUpManager,
   ) {
     this.DispatchActions();
   }
@@ -166,6 +167,17 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
           this.actualizarPlanAdquisicionesService.creaPlanesdeAdquisicionActivos(
             resultado.Body.PlanAdquisiciones.IdMongo
           );
+        }
+        if (resultado && resultado.Body && resultado.Body.Movimientos && resultado.Body.Movimientos.length === 0) {
+          const messageOptions: any = {
+            text: this.translate.instant(
+              'PLAN_ADQUISICIONES.sin_cambios'
+            ),
+            title: this.translate.instant(
+              'PLAN_ADQUISICIONES.no_publicado'
+            ),
+          };
+          this.popupService.showInfoAlert(messageOptions.text, messageOptions.title);
         }
         this.desactivarPublicar = false;
       });
