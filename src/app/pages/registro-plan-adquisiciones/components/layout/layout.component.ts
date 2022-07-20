@@ -154,7 +154,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
 
   CrearRegistroNuevo(data: any, centro: any, area: any, plan: any) {
-
     const NuevoRegistro: any = {};
 
     NuevoRegistro.AreaFuncional = area.Id;
@@ -165,6 +164,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     NuevoRegistro.FuenteFinanciamientoId = '';
     NuevoRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start);
     NuevoRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end);
+    NuevoRegistro.FechaEstimadaOfertasInicio = this.sharedService.ConvertirFecha(data.FechasOfertas.start);
+    NuevoRegistro.FechaEstimadaOfertasFin = this.sharedService.ConvertirFecha(data.FechasOfertas.end);
     NuevoRegistro.PlanAdquisicionesId = plan.Id;
     NuevoRegistro.ModalidadSeleccion = this.CrearModalidades(data);
     NuevoRegistro.CodigoArka = this.CrearElementosARKA(data);
@@ -254,6 +255,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     ActualizarRegistro.FuenteFinanciamientoId = '';
     ActualizarRegistro.FechaEstimadaInicio = this.sharedService.ConvertirFecha(data.FechaSeleccion.start);
     ActualizarRegistro.FechaEstimadaFin = this.sharedService.ConvertirFecha(data.FechaSeleccion.end);
+    ActualizarRegistro.FechaEstimadaOfertasInicio = this.sharedService.ConvertirFecha(data.FechasOfertas.start);
+    ActualizarRegistro.FechaEstimadaOfertasFin = this.sharedService.ConvertirFecha(data.FechasOfertas.end);
     ActualizarRegistro.PlanAdquisicionesId = plan.Id;
     ActualizarRegistro.ModalidadSeleccion = this.ActualizarModalidades(data, renglon);
     ActualizarRegistro.CodigoArka = this.ActualizarElementosARKA(data, renglon);

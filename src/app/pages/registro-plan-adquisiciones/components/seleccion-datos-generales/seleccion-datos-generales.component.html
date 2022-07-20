@@ -2,17 +2,30 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
-                <p>{{ 'GLOBAL.fecha_inicio_proceso_seleccion' | translate }}:</p>
+                <p>{{ 'GLOBAL.fecha_inicio_fin_proceso_seleccion' | translate }}:</p>
             </div>
             <div class="col-9 pt-3">
-                <input class="form-control" placeholder="{{ 'GLOBAL.seleccionar_fecha_inicio_fecha_finalizacion' | translate }}" [nbDatepicker]="rangepicker" formControlName="FechaInicioSeleccion">
-                <nb-rangepicker #rangepicker></nb-rangepicker>
+                <input class="form-control" placeholder="{{ 'GLOBAL.seleccionar_fecha_inicio_fecha_finalizacion' | translate }}" [nbDatepicker]="rangePickerFechaInicioSeleccion" formControlName="FechaInicioSeleccion">
+                <nb-rangepicker #rangePickerFechaInicioSeleccion></nb-rangepicker>
             </div>
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
                 <p>{{ 'GLOBAL.duracion_contrato' | translate }}:</p>
             </div>
             <div class="col-9 pt-3">
                 <span class="form-control">{{DatosGeneralesForm.value.FechaInicioSeleccion | timeRange }}</span>
+            </div>
+            <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>{{ 'GLOBAL.fecha_inicio_fin_ofertas' | translate }}:</p>
+            </div>
+            <div class="col-9 pt-3">
+                <input class="form-control" placeholder="{{ 'GLOBAL.seleccionar_fecha_inicio_fecha_finalizacion_ofertas' | translate }}" [nbDatepicker]="rangePickerFechasEntregaOfertas" formControlName="FechasEntregaOfertas">
+                <nb-rangepicker #rangePickerFechasEntregaOfertas></nb-rangepicker>
+            </div>
+                        <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
+                <p>{{ 'GLOBAL.duracion_ofertas' | translate }}:</p>
+            </div>
+            <div class="col-9 pt-3">
+                <span class="form-control">{{DatosGeneralesForm.value.FechasEntregaOfertas | timeRange }}</span>
             </div>
             <div class="col-3 pt-3 border-right border-dark d-flex align-items-center justify-content-end text-right">
                 <p>{{ 'GLOBAL.responsable_estudio_conveniencia_oportunidad' | translate }}:</p>
