@@ -62,16 +62,16 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
         start: new Date(renglon[0].FechaEstimadaInicio),
         end: new Date(renglon[0].FechaEstimadaFin)
       };
-      const fechaEntregaOfertas = {
-        start: new Date(renglon[0].FechaEstimadaInicioOfertas),
-        end: new Date(renglon[0].FechaEstimadaFinOfertas)
+      const fechasEntregaOfertas = {
+        start: new Date(renglon[0].FechaEstimadaOfertasInicio),
+        end: new Date(renglon[0].FechaEstimadaOfertasFin)
       };
       this.store.dispatch(SeleccionarFechaSeleccion(fechaSeleccion));
-      this.store.dispatch(SeleccionarFechasOfertas(fechaEntregaOfertas));
+      this.store.dispatch(SeleccionarFechasOfertas(fechasEntregaOfertas));
       this.store.dispatch(SeleccionarResponsable(responsable));
       this.DatosGeneralesForm = this.fb.group({
         FechaInicioSeleccion: [fechaSeleccion, [Validators.required]],
-        FechasEntregaOfertas: [fechaEntregaOfertas, [Validators.required]],
+        FechasEntregaOfertas: [fechasEntregaOfertas, [Validators.required]],
         Responsable: [responsable, [Validators.required]],
       });
     } else {
