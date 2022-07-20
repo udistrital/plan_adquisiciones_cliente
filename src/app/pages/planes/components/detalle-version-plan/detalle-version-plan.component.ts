@@ -139,22 +139,22 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       [
         {
           text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
-          colSpan: 9,
+          colSpan: 11,
           alignment: 'center',
           border: [false, false, false, false],
           style: 'style_1'
         },
-        {}, {}, {}, {}, {}, {}, {}, {}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
       ],
       [
         {
           text: '',
-          colSpan: 9,
+          colSpan: 11,
           alignment: 'center',
           border: [false, false, false, false],
           style: 'style_1'
         },
-        {}, {}, {}, {}, {}, {}, {}, {}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
       ],
       [
         {
@@ -163,12 +163,12 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             INDEX: this.ordinalPipe.transform(this.index),
             FECHA: this.titlepipe.transform(this.datePipe.transform(this.Plan.fechacreacion, 'medium'))
           }),
-          colSpan: 9,
+          colSpan: 11,
           alignment: 'right',
           border: [false, false, false, false],
           style: 'style_1'
         },
-        {}, {}, {}, {}, {}, {}, {}, {}
+        {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
       ],
       ESPACIO_TABLA
     );
@@ -186,12 +186,12 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         [
           {
             text: fuente.FuenteData.Nombre,
-            colSpan: 9,
+            colSpan: 11,
             alignment: 'center',
             border: [true, true, true, false],
             style: 'style_2'
           },
-          {}, {}, {}, {}, {}, {}, {}, {}
+          {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
         ],
         JSON.parse(JSON.stringify(columnas_plan))
       );
@@ -209,12 +209,12 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         [
           {
             text: rubro.RubroInfo.Descripcion,
-            colSpan: 9,
+            colSpan: 11,
             alignment: 'center',
             border: [true, true, true, false],
             style: 'style_3'
           },
-          {}, {}, {}, {}, {}, {}, {}, {}
+          {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
         ]
       );
       this.AgregarRenglones(rubro.datos, rubro.RubroInfo);
@@ -256,6 +256,16 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             },
             {
               text: this.ExtraerFecha(renglon, 'range'),
+              style: 'style_7',
+              alignment: 'center',
+            },
+            {
+              text: this.ExtraerFechaOfertas(renglon, 'limits'),
+              style: 'style_7',
+              alignment: 'center',
+            },
+            {
+              text: this.ExtraerFechaOfertas(renglon, 'range'),
               style: 'style_7',
               alignment: 'center',
             },
@@ -326,6 +336,18 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
             rowSpan: lenghtFuentes,
           },
           {
+            text: this.ExtraerFechaOfertas(Renglon, 'limits'),
+            style: 'style_7',
+            alignment: 'center',
+            rowSpan: lenghtFuentes,
+          },
+          {
+            text: this.ExtraerFechaOfertas(Renglon, 'range'),
+            style: 'style_7',
+            alignment: 'center',
+            rowSpan: lenghtFuentes,
+          },
+          {
             text: this.ExtraerModalidades(Renglon),
             style: 'style_7',
             alignment: 'center',
@@ -347,7 +369,7 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
       if (valuesFuentes.length > 1) {
         valuesFuentes.forEach((_, jindex) => {
           if (jindex > 0 ) {
-            this.PDFPublicado.content[0].table.body.push([{}, {}, {}, {}, {}, {}, {},
+            this.PDFPublicado.content[0].table.body.push([{}, {}, {}, {}, {}, {}, {}, {}, {},
               { text: valuesFuentes[jindex],
                 style: 'style_7',
                 alignment: 'right', },
@@ -389,6 +411,13 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
     };
     return this.titlepipe.transform(this.timeRangePipe.transform(datos, type));
   }
+  ExtraerFechaOfertas(Renglon: any, type: any) {
+    const datos = {
+      start: new Date(Renglon.FechaEstimadaOfertasInicio),
+      end: new Date(Renglon.FechaEstimadaOfertasFin),
+    };
+    return this.titlepipe.transform(this.timeRangePipe.transform(datos, type));
+  }
   ExtraerModalidades(Renglon: any) {
     const datos: any = Renglon['registro_funcionamiento-modalidad_seleccion'].map((codigo: any) => {
       return codigo.Nombre;
@@ -411,10 +440,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         {
           text: this.translate.instant('RUBRO.total_rubro', { NOMBRE: Rubro.Nombre }),
           alignment: 'center',
-          colSpan: 7,
+          colSpan: 9,
           style: 'style_1'
 
-        }, {}, {}, {}, {}, {}, {},
+        }, {}, {}, {}, {}, {}, {}, {}, {},
         {
           text: this.currencyPipe.transform(this.planesService.SacarSumaRubro(Renglones), '$'),
           alignment: 'right',
@@ -434,10 +463,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         {
           text: this.translate.instant('PLAN_ADQUISICIONES.total_plan', { NOMBRE: Fuente.Nombre }).toUpperCase(),
           alignment: 'center',
-          colSpan: 7,
+          colSpan: 9,
           style: 'style_1'
 
-        }, {}, {}, {}, {}, {}, {},
+        }, {}, {}, {}, {}, {}, {}, {}, {},
         {
           text: this.currencyPipe.transform(this.planesService.SacarSumaFuente(Rubros), '$'),
           alignment: 'right',
@@ -456,10 +485,10 @@ export class DetalleVersionPlanComponent implements OnInit, OnDestroy {
         {
           text: this.translate.instant('PLAN_ADQUISICIONES.pdf_publicacion', { VIGENCIA: this.PlanAdquisiciones.Vigencia}).toUpperCase(),
           alignment: 'center',
-          colSpan: 7,
+          colSpan: 9,
           style: 'style_1'
 
-        }, {}, {}, {}, {}, {}, {},
+        }, {}, {}, {}, {}, {}, {}, {}, {},
         {
           text: this.currencyPipe.transform(this.TotalPlan, '$'),
           alignment: 'right',
