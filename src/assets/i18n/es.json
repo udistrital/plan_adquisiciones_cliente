@@ -602,7 +602,8 @@
       "sin_metas_asociadas": "No Existen Metas Asociadas",
       "asociar_nueva_meta": "nuevo",
       "actividades_asociar": "Actividades por Asociar",
-      "sin_actividades_asociadas": "No Existen Actividades Asociadas"
+      "sin_actividades_asociadas": "No Existen Actividades Asociadas",
+      "duracion_ofertas": "Duración Estimada de Entrega de Orfertas"
     },
     "TITULO":{
       "actividades_asociadas": "Actividades Asociadas",
@@ -632,6 +633,8 @@
       "descripcion": "Descripción",
       "fecha_estimada_inicio_proceso_seleccion": "Fecha Estimada de Inicio Proceso de Selección",
       "duracion_estimada_contrato": "Duración Estimada de Contrato",
+      "fecha_estimada_inicio_fin_proceso_seleccion": "Rango de Fechas Proceso de Selección",
+      "fecha_estimada_inicio_fin_entrega_ofertas": "Rango de Fechas Entrega de Ofertas",
       "responsable_formulacion_estudio_conveniencia_oportunidad": "Responsable Formulación del Estudio de Conveniencia y Oportunidad",
       "modalidad_seleccion": "Modalidad de Selección",
       "valor_asignado_año_vigente": "Valor Asignado Año Vigente",
@@ -673,7 +676,8 @@
       "sin_metas_asociadas": "No Existen Metas Asociadas",
       "asociar_nueva_meta": "Asociar Nueva Meta",
       "actividades_asociar": "Actividades por Asociar",
-      "sin_actividades_asociadas": "No Existen Actividades Asociadas"
+      "sin_actividades_asociadas": "No Existen Actividades Asociadas",
+      "duracion_ofertas": "Duración Estimada de Entrega de Orfertas"
     }
   },
   "_id": "ID",

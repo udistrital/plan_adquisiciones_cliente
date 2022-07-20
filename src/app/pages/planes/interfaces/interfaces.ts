@@ -215,7 +215,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
       },
     },
     {
-      key: 'FechaEstimada',
+      key: 'FechaOfertas',
       title: {
         class: 'text-center align-middle',
         label_i18n: 'fecha_estimada_inicio_fin_entrega_ofertas',
@@ -227,7 +227,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
       },
     },
     {
-      key: 'FechaEstimada',
+      key: 'FechaOfertas',
       title: {
         class: 'text-center align-middle',
         label_i18n: 'duracion_estimada_ofertas',
@@ -343,13 +343,25 @@ export const COLUMNAS_PLAN = [
     alignment: 'center',
     border: [true, true, true, false],
     style: 'style_2',
-    label_i18n: 'fecha_estimada_inicio_proceso_seleccion',
+    label_i18n: 'fecha_estimada_inicio_fin_proceso_seleccion',
   },
   {
     alignment: 'center',
     border: [true, true, true, false],
     style: 'style_2',
     label_i18n: 'duracion_estimada_contrato',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'fecha_estimada_inicio_fin_entrega_ofertas',
+  },
+  {
+    alignment: 'center',
+    border: [true, true, true, false],
+    style: 'style_2',
+    label_i18n: 'duracion_ofertas',
   },
   {
     alignment: 'center',
@@ -374,17 +386,10 @@ export const COLUMNAS_PLAN = [
 export const ESPACIO_TABLA = [
   {
     text: '',
-    colSpan: 9,
+    colSpan: 11,
     border: [false, false, false, false],
   },
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
+  {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
 ];
 
 export const PLANTILLA_TABLA = {
@@ -399,6 +404,8 @@ export const PLANTILLA_TABLA = {
           'auto',
           'auto',
           'auto',
+          'auto',
+          '*',
           'auto',
           '*',
           '*',

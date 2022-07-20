@@ -140,6 +140,10 @@ export class PlanesService {
         start: new Date(element.FechaEstimadaInicio),
         end: new Date(element.FechaEstimadaFin),
       };
+      element.FechaOfertas = {
+        start: new Date(element.FechaEstimadaOfertasInicio),
+        end: new Date(element.FechaEstimadaOfertasFin),
+      };
       element.ModalidadSeleccion = (
         element['registro_funcionamiento-modalidad_seleccion'] as Array<any>
       ).map((data: any) => {
