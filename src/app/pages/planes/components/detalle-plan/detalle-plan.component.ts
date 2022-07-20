@@ -26,6 +26,7 @@ import {
   CargarActividades,
   ConsultarRenglonPlan,
   SeleccionarFechaSeleccion,
+  SeleccionarFechasOfertas,
   SeleccionarFuente,
   SeleccionarResponsable,
   CargarMetasAsociadas,
@@ -193,6 +194,7 @@ export class DetallePlanComponent implements OnInit, OnDestroy {
     this.store.dispatch(SeleccionarResponsable(null));
     this.store.dispatch(CargarRenglonPlan(null));
     this.store.dispatch(SeleccionarFechaSeleccion(null));
+    this.store.dispatch(SeleccionarFechasOfertas(null));
     this.store.dispatch(SeleccionarFuente(null));
   }
 }

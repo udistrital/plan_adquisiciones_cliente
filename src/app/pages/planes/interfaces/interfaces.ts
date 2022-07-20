@@ -194,7 +194,7 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
       key: 'FechaEstimada',
       title: {
         class: 'text-center align-middle',
-        label_i18n: 'fecha_estimada_inicio_proceso_seleccion',
+        label_i18n: 'fecha_estimada_inicio_fin_proceso_seleccion',
       },
       pipe: {
         type: 'time-range',
@@ -207,6 +207,30 @@ export const CONFIGURACION_TABLA_DETALLE_PLAN_2: any = {
       title: {
         class: 'text-center align-middle',
         label_i18n: 'duracion_estimada_contrato',
+      },
+      pipe: {
+        type: 'time-range',
+        config: ['range'],
+        class: 'text-center align-middle text-capitalize',
+      },
+    },
+    {
+      key: 'FechaEstimada',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'fecha_estimada_inicio_fin_entrega_ofertas',
+      },
+      pipe: {
+        type: 'time-range',
+        config: ['limits'],
+        class: 'text-center align-middle text-capitalize',
+      },
+    },
+    {
+      key: 'FechaEstimada',
+      title: {
+        class: 'text-center align-middle',
+        label_i18n: 'duracion_estimada_ofertas',
       },
       pipe: {
         type: 'time-range',

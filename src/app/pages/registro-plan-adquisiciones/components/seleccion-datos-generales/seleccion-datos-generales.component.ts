@@ -7,7 +7,7 @@ import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { getModalidadesSeleccion, getResponsables } from '../../../../shared/selectors/shared.selectors';
 import { ParametricService } from '../../../../shared/services/parametric.service';
 import { SharedService } from '../../../../shared/services/shared.service';
-import { SeleccionarFechaSeleccion, SeleccionarResponsable } from '../../actions/registro-plan-adquisiciones.actions';
+import { SeleccionarFechaSeleccion, SeleccionarFechasOfertas, SeleccionarResponsable } from '../../actions/registro-plan-adquisiciones.actions';
 import { getRenglonSeleccionado } from '../../selectors/registro-plan-adquisiciones.selectors';
 import { RegistroPlanAdquisicionesService } from '../../services/registro-plan-adquisiciones.service';
 
@@ -62,15 +62,22 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
         start: new Date(renglon[0].FechaEstimadaInicio),
         end: new Date(renglon[0].FechaEstimadaFin)
       };
+      const fechaEntregaOfertas = {
+        start: new Date(renglon[0].FechaEstimadaInicioOfertas),
+        end: new Date(renglon[0].FechaEstimadaFinOfertas)
+      };
       this.store.dispatch(SeleccionarFechaSeleccion(fechaSeleccion));
+      this.store.dispatch(SeleccionarFechasOfertas(fechaEntregaOfertas));
       this.store.dispatch(SeleccionarResponsable(responsable));
       this.DatosGeneralesForm = this.fb.group({
         FechaInicioSeleccion: [fechaSeleccion, [Validators.required]],
+        FechasEntregaOfertas: [fechaEntregaOfertas, [Validators.required]],
         Responsable: [responsable, [Validators.required]],
       });
     } else {
       this.DatosGeneralesForm = this.fb.group({
         FechaInicioSeleccion: [null, [Validators.required]],
+        FechasEntregaOfertas: [null, [Validators.required]],
         Responsable: [null, [Validators.required]],
       });
     }
@@ -82,6 +89,17 @@ export class SeleccionDatosGeneralesComponent implements OnInit, OnDestroy {
           this.popUpService.showInfoAlert(this.translate.instant('AVISOS.timpo_duracion_estimada_error'), this.translate.instant('GLOBAL.error'));
           this.store.dispatch(SeleccionarFechaSeleccion(null));
           this.DatosGeneralesForm.get('FechaInicioSeleccion').setValue(null, {emitEvent: false});
+        }
+      }
+    });
+    this.DatosGeneralesForm.get('FechasEntregaOfertas').valueChanges.subscribe((value: any) => {
+      if (value && value.start && value.end) {
+        if (this.sharedService.DuracionLimite(value)) {
+          this.store.dispatch(SeleccionarFechasOfertas(value));
+        } else {
+          this.popUpService.showInfoAlert(this.translate.instant('AVISOS.timpo_duracion_estimada_ofertas_error'), this.translate.instant('GLOBAL.error'));
+          this.store.dispatch(SeleccionarFechasOfertas(null));
+          this.DatosGeneralesForm.get('FechasEntregaOfertas').setValue(null, {emitEvent: false});
         }
       }
     });

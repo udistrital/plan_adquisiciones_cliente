@@ -9,6 +9,7 @@ export interface State {
   Producto: any;
   Responsable: any;
   FechaSeleccion: any;
+  FechasOfertas: any;
   Modalidades: any;
   ElementosARKA: any;
   Actividades: any;
@@ -29,6 +30,7 @@ export const initialState: State = {
   Producto: null,
   Responsable: null,
   FechaSeleccion: null,
+  FechasOfertas: null,
   Modalidades: null,
   ElementosARKA: null,
   Actividades: null,
@@ -79,6 +81,9 @@ const registroPlanAdquisicionesReducer = createReducer(
   })),
   on(RegistroPlanAdquisicionesActions.SeleccionarFechaSeleccion, (state, action) => ({
     ...state, FechaSeleccion: state.FechaSeleccion = action
+  })),
+  on(RegistroPlanAdquisicionesActions.SeleccionarFechasOfertas, (state, action) => ({
+    ...state, FechasOfertas: state.FechasOfertas = action
   })),
   on(RegistroPlanAdquisicionesActions.CargarRenglonPlan, (state, action) => ({
     ...state, RenglonSeleccionado: state.RenglonSeleccionado = action
