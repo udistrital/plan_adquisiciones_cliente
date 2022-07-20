@@ -60,6 +60,11 @@ export const SeleccionarResponsable = createAction(
   props(),
 );
 
+export const SeleccionarFechasOfertas = createAction(
+  '[RegistroPlanAdquisiciones] Seleccionar Fechas de Ofertas',
+  props(),
+);
+
 export const SeleccionarFechaSeleccion = createAction(
   '[RegistroPlanAdquisiciones] Seleccionar Fechas de Seleccion',
   props(),
