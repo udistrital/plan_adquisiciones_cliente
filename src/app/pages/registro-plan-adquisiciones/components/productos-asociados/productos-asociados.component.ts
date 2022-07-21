@@ -146,7 +146,7 @@ export class ProductosAsociadosComponent implements OnInit, OnDestroy {
     Swal.fire({
       type: this.translate.instant('AVISOS.correcto'),
       title: this.translate.instant('GLOBAL.porcentaje_distribucion') + ' ' + this.translate.instant('GLOBAL.completado'),
-      text: this.translate.instant('GLOBAL.agregar_mas_productos'),
+      text: this.translate.instant('ERROR.agregar_mas_productos'),
       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     });
   }
