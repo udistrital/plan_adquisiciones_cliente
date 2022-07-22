@@ -84,9 +84,11 @@
     "agregar_mas_fuentes": "Si desea agregar más Fuentes es necesario reducir los valores asignados previamente",
     "sin_metas_asociar": "No existen más metas por asociar",
     "agregar_mas_productos": "Si desea agregar más productos es necesario reducir los porcentajes asignados previamente",
-    "valor_fuente_mayor_valor_rubro": "El valor asignado a la fuente supera el valor actual del rubro: ${{ VALOR }}"
+    "valor_fuente_mayor_valor_rubro": "El valor asignado a la fuente supera el valor actual del rubro: ${{ VALOR }}",
+    "meta_rubro_funcionamiento": "No se pueden agregar metas a un rubro de funcionamiento"
   },
   "GLOBAL": {
+    "rubro_funcionamiento": "Rubro de Funcionamiento",
     "gestion-titulo": "Gestión de",
     "consulta-vigencia-actual": "Consultar Vigencia Actual",
     "solicitud-crp": "Solicitar un CRP",
@@ -494,7 +496,9 @@
   "META": {
     "meta_asociada": "Meta Asociada",
     "metas_asociadas": "Metas Asociadas",
-    "metas": "Metas"
+    "metas": "Metas",
+    "crear_meta": "Crear Meta",
+    "editar_meta": "Editar Meta"
   },
   "PRODUCTOS": {
     "productos_asociados": "Productos Asociados"
