@@ -1,34 +1,41 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { combineLatest } from 'rxjs';
 import { getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
 import { CrearMeta, ActualizarMeta } from '../../actions/metas.actions';
-import { getMetaSeleccionada, getRubroSeleccionado } from '../../selectors/metas.selectors';
+import {
+  getDeactivateForm,
+  getMetaSeleccionada,
+  getRubroSeleccionado,
+} from '../../selectors/metas.selectors';
 
 @Component({
   selector: 'ngx-form-metas',
   templateUrl: './form-metas.component.html',
-  styleUrls: ['./form-metas.component.scss']
+  styleUrls: ['./form-metas.component.scss'],
 })
 export class FormMetasComponent implements OnInit, OnDestroy {
-
   titulo: any;
   subscription$: any;
+  subscription2$: any;
 
   MetaForm: FormGroup;
   boton: string;
   Rubro: any;
 
+  deactivateForm: boolean;
+
   constructor(
     private store: Store<any>,
     private fb: FormBuilder,
+    private translate: TranslateService
   ) {
-    this.titulo = 'Crear Meta';
+    this.titulo = this.translate.instant('META.editar_meta');
   }
 
   ngOnInit() {
-
     this.subscription$ = combineLatest([
       this.store.select(getRubroSeleccionado),
       this.store.select(getMetaSeleccionada),
@@ -42,12 +49,18 @@ export class FormMetasComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.subscription2$ = this.store
+      .select(getDeactivateForm)
+      .subscribe((deactivateForm) => {
+        if (deactivateForm) {
+          this.deactivateForm = deactivateForm.deactivateForm;
+        }
+      });
   }
-
   CrearMetaForm(meta: any, rubro?: any, lineamiento?: any) {
     if (meta) {
-      this.titulo = 'Editar Meta';
-      this.boton = 'Editar';
+      this.titulo = this.translate.instant('META.editar_meta');
+      this.boton = this.translate.instant('GLOBAL.editar');
       this.MetaForm = this.fb.group({
         Activo: [meta.Activo, []],
         FechaCreacion: [meta.FechaCreacion, []],
@@ -59,8 +72,8 @@ export class FormMetasComponent implements OnInit, OnDestroy {
         LineamientoId: [meta.LineamientoId, []],
       });
     } else {
-      this.titulo = 'Crear Meta';
-      this.boton = 'Crear';
+      this.titulo = this.translate.instant('META.crear_meta');
+      this.boton = this.translate.instant('GLOBAL.crear');
       this.MetaForm = this.fb.group({
         Activo: [true, []],
         FechaCreacion: ['', []],

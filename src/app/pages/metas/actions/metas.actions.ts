@@ -19,6 +19,11 @@ export const SeleccionarMeta = createAction(
   props()
 );
 
+export const SeleccionarDeactivateForm = createAction(
+  '[Metas] Seleccionar DeactivateForm',
+  props()
+);
+
 export const CargarMetas = createAction(
   '[Metas] Cargar Metas',
   props()
@@ -41,5 +46,10 @@ export const CrearMeta = createAction(
 
 export const ActualizarMeta = createAction(
   '[Metas] Actualizar Meta',
+  props()
+);
+
+export const ChangeDeactivateForm = createAction(
+  '[Metas] Actualizar DeactivateForm',
   props()
 );

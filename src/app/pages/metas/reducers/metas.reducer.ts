@@ -7,12 +7,14 @@ export interface State {
   RubroSeleccionado: any;
   MetaSeleccionada: any;
   Metas: any;
+  DeactivateForm: any;
 }
 
 export const initialState: State = {
   RubroSeleccionado: null,
   MetaSeleccionada: null,
-  Metas: []
+  Metas: [],
+  DeactivateForm: null,
 };
 
 const metasReducer = createReducer(
@@ -28,6 +30,12 @@ const metasReducer = createReducer(
   on(MetasActions.CargarMetas, (state, action) => ({
     ...state, Metas: state.Metas = action
   })),
+  on(MetasActions.SeleccionarDeactivateForm, (state, action) => ({
+    ...state, Metas: state.DeactivateForm = action
+  })),
+  on(MetasActions.ChangeDeactivateForm, (state, action) => ({
+    ...state, Metas: state.DeactivateForm = action
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

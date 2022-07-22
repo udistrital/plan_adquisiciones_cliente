@@ -18,3 +18,8 @@ export const getMetas = createSelector(
   selectMetasState,
   (state: fromMetas.State) => state.Metas
 );
+
+export const getDeactivateForm = createSelector(
+  selectMetasState,
+  (state: fromMetas.State) => state.DeactivateForm
+);

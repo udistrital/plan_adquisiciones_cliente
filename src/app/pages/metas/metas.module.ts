@@ -11,6 +11,7 @@ import * as fromMetas from './reducers/metas.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { MetasEffects } from './effects/metas.effects';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     StoreModule.forFeature(fromMetas.metasFeatureKey, fromMetas.reducer),
     EffectsModule.forFeature([MetasEffects]),
+    MatTooltipModule
   ]
 })
 export class MetasModule { }

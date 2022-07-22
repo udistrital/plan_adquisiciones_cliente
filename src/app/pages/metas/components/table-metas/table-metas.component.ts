@@ -1,3 +1,5 @@
+import { TranslateService } from '@ngx-translate/core';
+import { PopUpManager } from './../../../../@core/managers/popUpManager';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,9 +9,9 @@ import { TranslateFormItemsHelper } from '../../../../shared/helpers/translateFo
 import { getAccionTabla, getFilaSeleccionada, getNodoSeleccionado } from '../../../../shared/selectors/shared.selectors';
 import { SeleccionarLineamiento } from '../../../lineamientos/actions/lineamientos.actions';
 import { getFuenteRecursoSeleccionada, getLineamientos, getLineamientoSeleccionado } from '../../../lineamientos/selectors/lineamientos.selectors';
-import { ConsultarMetas, SeleccionarMeta, SeleccionarRubro } from '../../actions/metas.actions';
+import { ChangeDeactivateForm, ConsultarMetas, SeleccionarMeta, SeleccionarRubro } from '../../actions/metas.actions';
 import { CONFIGURACION_TABLA_METAS } from '../../interfaces/interfaces';
-import { getMetas, getRubroSeleccionado } from '../../selectors/metas.selectors';
+import { getDeactivateForm, getMetas, getRubroSeleccionado } from '../../selectors/metas.selectors';
 
 @Component({
   selector: 'ngx-table-metas',
@@ -34,12 +36,15 @@ export class TableMetasComponent implements OnInit, OnDestroy {
   subscription4$: any;
   subscription5$: any;
   subscription6$: any;
+  subscription7$: any;
 
 
   constructor(
     private store: Store<any>,
     private route: Router,
     private translateHelper: TranslateFormItemsHelper,
+    private popUpManager: PopUpManager,
+    private translate: TranslateService
   ) {
   }
 
@@ -60,13 +65,21 @@ export class TableMetasComponent implements OnInit, OnDestroy {
       }
     });
     this.subscription2$ = this.store.select(getRubroSeleccionado).subscribe((rubro: any) => {
-      if (rubro) {
+      if (rubro && rubro.data && rubro.data.Codigo && rubro.data.Codigo.startsWith('3-01')) {
         this.store.dispatch(ConsultarMetas({
           Rubro: rubro,
         }));
-      }
-      if (rubro) {
-        this.rubroSeleccionado = rubro;
+        this.rubroSeleccionado = null;
+        this.popUpManager.showInfoAlert(this.translate.instant('ERROR.meta_rubro_funcionamiento'), this.translate.instant('GLOBAL.rubro_funcionamiento'));
+        this.store.dispatch(ChangeDeactivateForm({ deactivateForm: true }));
+      } else {
+        if (rubro) {
+          this.store.dispatch(ConsultarMetas({
+            Rubro: rubro,
+          }));
+          this.rubroSeleccionado = rubro;
+          this.store.dispatch(ChangeDeactivateForm({ deactivateForm: false }));
+        }
       }
     });
 
