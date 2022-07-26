@@ -34,11 +34,8 @@ const metasReducer = createReducer(
   on(MetasActions.CargarMetas, (state, action) => ({
     ...state, Metas: state.Metas = action
   })),
-  on(MetasActions.SeleccionarDeactivateForm, (state, action) => ({
-    ...state, MetasSeleccionar: state.DeactivateForm = action
-  })),
   on(MetasActions.ChangeDeactivateForm, (state, action) => ({
-    ...state, MetasChange: state.DeactivateForm = action
+    ...state, DeactivateForm: state.DeactivateForm = action
   }))
 );
 
